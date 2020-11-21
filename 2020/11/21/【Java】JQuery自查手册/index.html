@@ -1,0 +1,667 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201120210029.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="北渡">
+  <meta name="keywords" content="">
+  <title>jQuery基础自查手册 - 北渡</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.staticfile.org/prism/1.22.0/themes/prism.min.css" />
+      
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>北渡</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201121211851.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="jQuery基础自查手册">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-11-21 20:13" pubdate>
+        2020年11月21日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      31
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">jQuery基础自查手册</h1>
+            
+            <div class="markdown-body">
+              <p><a target="_blank" rel="noopener" href="https://www.runoob.com/try/try.php?filename=tryhtml_link_test">在线编辑器</a></p>
+<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h2><p>jQuery即Java和Query，是辅助JavaScript开发的js类库</p>
+<ul>
+<li>使用jQuery必须先引入jQuery库：<code>&lt;script type=&quot;text/javascript&quot; src=&quot;../script/jquery-1.7.2.js&quot;&gt;&lt;/script&gt;</code></li>
+<li>示例：为按钮添加响应函数<ul>
+<li>先使用jQuery查询到标签对象</li>
+<li>再使用<code>标签对象.click(function()&#123;&#125;);</code>进行绑定</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201121141337.png" srcset="/img/loading.gif" alt="image-20201121141337284"></p>
+<h2 id="2-jQuery的核心函数"><a href="#2-jQuery的核心函数" class="headerlink" title="2.jQuery的核心函数"></a>2.jQuery的核心函数</h2><p><code>$</code> 是 jQuery 的核心函数，能完成 jQuery 的很多功能。<code>$()</code>就是调用<code>$这个函数</code></p>
+<ul>
+<li>传入参数为<strong>函数</strong> ：在文档加载完成后执行这个函数。相当于 <code>window.onload = function()&#123;&#125;</code></li>
+<li>传入参数为<strong>HTML 字符串</strong>：根据这个字符串创建元素节点对象</li>
+<li>传入参数为<strong>选择器字符串</strong>：<ul>
+<li><code>$(“#id 属性值”);</code>    id 选择器，根据 <strong>id</strong> 查询标签对象</li>
+<li><code>$(“标签名”);</code>             标签名选择器，根据指定的<strong>标签名</strong>查询标签对象</li>
+<li><code>$(“.class 属性值”);</code>    类型选择器，可以根据 <strong>class 属性</strong>查询标签对象</li>
+</ul>
+</li>
+<li>传入参数为  <strong>DOM 对象</strong> 时：将DOM对象包装为jQuery对象返回</li>
+</ul>
+<h2 id="3-jQuery对象和DOM对象"><a href="#3-jQuery对象和DOM对象" class="headerlink" title="3.jQuery对象和DOM对象"></a>3.jQuery对象和DOM对象</h2><h3 id="（1）概念"><a href="#（1）概念" class="headerlink" title="（1）概念"></a>（1）概念</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Dom对象</th>
+<th style="text-align:center">jQuery对象</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1.通过 getElementById()查询出来的标签对象是 Dom 对象<br/>2.通过 getElementsByName()查询出来的标签对象是 Dom 对象<br/>3.通过 getElementsByTagName()查询出来的标签对象是 Dom 对象<br/>4.通过 createElement() 方法创建的对象，是 Dom 对象</td>
+<td style="text-align:center">5.通过 JQuery 提供的 API 创建的对象，是 JQuery 对象<br/>6.通过 JQuery 包装的 Dom 对象，也是 JQuery 对象<br/>7.通过 JQuery 提供的 API 查询到的对象，是 JQuery 对象</td>
+</tr>
+<tr>
+<td style="text-align:center">DOM 对象 Alert 出来的效果是：<strong>[object HTML 标签名 Element]</strong></td>
+<td style="text-align:center">jQuery 对象 Alert 出来的效果是：<strong>[object Object]</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="（2）jQuery对象的本质"><a href="#（2）jQuery对象的本质" class="headerlink" title="（2）jQuery对象的本质"></a>（2）jQuery对象的本质</h3><p>jQuery 对象是 <strong>dom 对象的数组</strong> + <strong>jQuery 提供的一系列功能函数</strong>。</p>
+<h3 id="（3）对象使用区别"><a href="#（3）对象使用区别" class="headerlink" title="（3）对象使用区别"></a>（3）对象使用区别</h3><ul>
+<li>jQuery 对象不能使用 DOM 对象的属性和方法，如innerHTML</li>
+<li>DOM 对象也不能使用 jQuery 对象的属性和方法，如click.function(){}</li>
+</ul>
+<h3 id="（4）对象互转"><a href="#（4）对象互转" class="headerlink" title="（4）对象互转"></a>（4）对象互转</h3><ul>
+<li>Dom对象转换为jQuery对象：<code>var $obj = $(Dom 对象)</code></li>
+<li>jQuery对象转换为Dom对象：<code>var dom = jQuery对象[下标]</code></li>
+</ul>
+<h2 id="4-jQuery选择器"><a href="#4-jQuery选择器" class="headerlink" title="4.jQuery选择器"></a>4.jQuery选择器</h2><h3 id="（1）基本选择器"><a href="#（1）基本选择器" class="headerlink" title="（1）基本选择器"></a>（1）基本选择器</h3><ul>
+<li><p><code>#id</code>：根据给定的ID匹配一个元素。如<code>$(&quot;#myDiv&quot;);</code></p>
+</li>
+<li><p><code>element</code>：根据给定的元素名匹配所有元素。如<code>$(&quot;div&quot;);</code></p>
+</li>
+<li><code>.class</code>：根据给定的类匹配元素。如<code>$(&quot;.myClass&quot;);</code></li>
+<li><code>*</code>：返回所有元素</li>
+<li><code>selector1，selector2 组合选择器</code>：将每一个选择器匹配到的元素合并后一起返回。<code>$(&quot;div,span,p.myClass&quot;)</code></li>
+</ul>
+<blockquote>
+<p><strong>p.myClass</strong>表示标签名必须是 p 标签，而且 class 类型还要是 myClass</p>
+</blockquote>
+<h3 id="（2）层级选择器"><a href="#（2）层级选择器" class="headerlink" title="（2）层级选择器"></a>（2）层级选择器</h3><ul>
+<li><code>ancestor descendant</code><br>后代选择器 ：在给定的祖先元素下匹配所有的后代元素。如<code>$(&quot;form input&quot;)</code>可用来找到表单中所有的 input 元素。</li>
+<li><code>parent &gt; child</code><br>子元素选择器：在给定的父元素下匹配所有的子元素。如<code>$(&quot;form &gt; input&quot;)</code>可用来匹配表单中所有的子级input元素</li>
+<li><code>prev + next</code><br>相邻元素选择器：匹配所有紧接在 prev 元素后的 next 元素</li>
+<li><code>prev ~ sibings</code><br>之后的兄弟元素选择器：匹配 prev 元素之后的所有 siblings 元素</li>
+</ul>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span><span class="token punctuation">></span></span>Name:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>name<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>fieldset</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span><span class="token punctuation">></span></span>Newsletter:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>newsletter<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>fieldset</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>none<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+
+
+$("form input")     // [<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span><span class="token punctuation">></span></span> name ="name"/>, <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>newsletter<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>]
+$("form > input")   // [ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>name<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span> ]
+$("label + input")  // [<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>name<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>, <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>newsletter<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>]
+$("form ~ input")   // [<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>none<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>]</code></pre>
+<h3 id="（3）过滤选择器"><a href="#（3）过滤选择器" class="headerlink" title="（3）过滤选择器"></a>（3）过滤选择器</h3><h4 id="🏄‍♂️-基本过滤器"><a href="#🏄‍♂️-基本过滤器" class="headerlink" title="🏄‍♂️ 基本过滤器"></a>🏄‍♂️ 基本过滤器</h4><ul>
+<li><code>:first</code> ：获取第一个元素，如<code>$(&#39;li:first&#39;);</code></li>
+<li><code>:last</code> ：获取最后个元素</li>
+<li><code>:not(selector)</code>：去除所有与给定选择器匹配的元素，如<code>$(&quot;input:not(:checked)&quot;)</code></li>
+<li><code>:even</code> ：匹配所有索引值为偶数的元素，从 0 开始计数，如<code>$(&quot;tr:even&quot;)</code></li>
+<li><code>:odd</code> ：匹配所有索引值为奇数的元素，从 0 开始计数</li>
+<li><code>:eq(index)</code>： 匹配一个给定索引值的元素，如<code>$(&quot;tr:eq(1)&quot;)</code>（索引从0开始）</li>
+<li><code>:gt(index)</code> ：匹配<strong>所有</strong>大于给定索引值的元素</li>
+<li><code>:lt(index)</code> ：匹配所有小于给定索引值的元素</li>
+<li><code>:header</code> ：匹配如 h1, h2, h3 之类的标题元素，如<code>$(&quot;:header&quot;).css(&quot;background&quot;, &quot;#EEE&quot;);</code></li>
+<li><code>:animated</code> ：匹配所有正在执行动画效果的元素，如<code>$(&quot;div:not(:animated)&quot;)</code>.</li>
+</ul>
+<h4 id="🏄‍♂️-内容过滤器"><a href="#🏄‍♂️-内容过滤器" class="headerlink" title="🏄‍♂️ 内容过滤器"></a>🏄‍♂️ 内容过滤器</h4><ul>
+<li><code>:contains(text)</code> ：匹配包含给定文本的元素，如<code>$(&quot;div:contains(&#39;John&#39;)&quot;)</code></li>
+<li><code>:empty</code>：匹配所有不包含子元素或者文本的空元素，如<code>$(&quot;td:empty&quot;)</code></li>
+<li><code>:parent</code> ：匹配含有子元素或者文本的元素，如<code>$(&quot;td:parent&quot;)</code></li>
+<li><code>:has(selector)</code>  ：匹配含有选择器所匹配的元素的元素，如<code>$(&quot;div:has(p)&quot;).addClass(&quot;test&quot;);</code>会给所有包含 p 元素的 div 元素添加一个 text 类</li>
+</ul>
+<h4 id="🏄‍♂️-属性过滤器"><a href="#🏄‍♂️-属性过滤器" class="headerlink" title="🏄‍♂️ 属性过滤器"></a>🏄‍♂️ 属性过滤器</h4><ul>
+<li><code>[attribute]</code>  匹配包含给定属性的元素。如<code>$(&quot;div[id]&quot;)</code>查找所有含有 id 属性的 div 元素</li>
+<li><code>[attribute=value]</code>  匹配给定的属性是某个特定值的元素。如<code>$(&quot;input[name=&#39;newsletter&#39;]&quot;).</code></li>
+<li><code>[attribute!=value]</code> 匹配所有不含有指定的属性，或者属性不等于特定值的元素。如<code>$(&quot;input[name!=&#39;newsletter&#39;]&quot;).</code></li>
+<li><code>[attribute^=value]</code> 匹配给定的属性是以某些值开始的元素</li>
+<li><code>[attribute$=value]</code> 匹配给定的属性是以某些值结尾的元素</li>
+<li><code>[attribute*=value]</code> 匹配给定的属性是以包含某些值的元素</li>
+<li><code>[attrSel1][attrSel2][attrSelN]</code> 复合属性选择器，需要同时满足多个条件时使用，如<code>$(&quot;input[id][name$=&#39;man&#39;]&quot;)</code></li>
+</ul>
+<h4 id="🏄‍♂️-表单过滤器"><a href="#🏄‍♂️-表单过滤器" class="headerlink" title="🏄‍♂️ 表单过滤器"></a>🏄‍♂️ 表单过滤器</h4><ul>
+<li><code>:input</code>：匹配所有 input, textarea, select 和 button 元素</li>
+<li><code>:text</code>：匹配所有文本输入框</li>
+<li><code>:password</code>：匹配所有的密码输入框</li>
+<li><code>:radio</code>：匹配所有的单选框</li>
+<li><code>:checkbox</code>：匹配所有的复选框</li>
+<li><code>:submit</code>：匹配所有提交按钮</li>
+<li><code>:image</code>：匹配所有 img 标签</li>
+<li><code>:reset</code>：匹配所有重置按钮</li>
+<li><code>:button</code>：匹配所有 <code>input type=button &lt;button&gt;</code>按钮</li>
+<li><code>:file</code>：匹配所有 input type=file 文件上传</li>
+<li><code>:hidden</code>：匹配所有不可见元素 display:none 或 input type=hidden</li>
+</ul>
+<h4 id="🏄‍♂️-表单过滤器-1"><a href="#🏄‍♂️-表单过滤器-1" class="headerlink" title="🏄‍♂️ 表单过滤器"></a>🏄‍♂️ 表单过滤器</h4><ul>
+<li><code>:enabled</code>：匹配所有可用元素，如<code>$(&quot;input:enabled&quot;)</code></li>
+<li><code>:disabled</code>：匹配所有不可用元素，如<code>$(&quot;input:disabled&quot;)</code></li>
+<li><code>:checked</code>： 匹配所有选中的被选中元素(复选框、单选框等，不包括select中的option)</li>
+<li><code>:selected</code>： 匹配所有选中的 option元素，如<code>$(&quot;select option:selected&quot;)</code></li>
+</ul>
+<h2 id="5-jQuery元素筛选"><a href="#5-jQuery元素筛选" class="headerlink" title="5.jQuery元素筛选"></a>5.jQuery元素筛选</h2><ul>
+<li><code>eq(index)</code> ：获取给定索引的元素，功能跟 :eq() 一样</li>
+<li><code>first()</code> ：获取第一个元素，功能跟 :first 一样</li>
+<li><code>last()</code> ：获取最后一个元素，功能跟 :last 一样</li>
+<li><code>filter(exp)</code>： 留下匹配的元素</li>
+<li><code>is(exp)</code> ：判断是否匹配给定的选择器，只要有一个匹配就返回，true</li>
+<li><code>has(exp)</code> ：返回包含有匹配选择器的元素的元素，功能跟 :has 一样</li>
+<li><code>not(exp)</code> ：删除匹配选择器的元素，功能跟 :not 一样</li>
+<li><code>children(exp)</code>： 返回匹配给定选择器的子元素，功能跟 parent&gt;child 一样</li>
+<li><code>find(exp)</code> ：返回匹配给定选择器的后代元素，功能跟 ancestor descendant 一样</li>
+<li><code>next()</code>：返回当前元素的下一个兄弟元素，功能跟 prev + next 功能一样</li>
+<li><code>nextAll()</code>：返回当前元素后面所有的兄弟元素，功能跟 prev ~ siblings 功能一样</li>
+<li><code>nextUntil()</code>：返回当前元素到指定匹配的元素为止的后面元素</li>
+<li><code>parent()</code>：返回父元素</li>
+<li><code>prev(exp)</code>：返回当前元素的上一个兄弟元素</li>
+<li><code>prevAll()</code>：返回当前元素前面所有的兄弟元素</li>
+<li><code>prevUnit(exp)</code>： 返回当前元素到指定匹配的元素为止的前面元素</li>
+<li><code>siblings(exp)</code>：返回所有兄弟元素</li>
+<li><code>add()</code>：把 add 匹配的选择器的元素添加到当前 jquery 对象中，如<code>$(&quot;p&quot;).add(document.getElementById(&quot;a&quot;))</code></li>
+</ul>
+<h2 id="6-jQuery属性操作"><a href="#6-jQuery属性操作" class="headerlink" title="6.jQuery属性操作"></a>6.jQuery属性操作</h2><ul>
+<li><p><code>html()</code></p>
+<p>可以设置和获取起始标签和结束标签中的<strong>内容</strong>，跟dom 属性innerHTML 一样。</p>
+</li>
+<li><p><code>text()</code> </p>
+<p>它可以设置和获取起始标签和结束标签中的<strong>文本</strong>，跟dom 属性innerText 一样。</p>
+</li>
+<li><p><code>val()</code> ：</p>
+<p>它可以设置和获取<strong>表单项</strong>的<strong>value 属性值</strong>，跟dom 属性value 一样</p>
+<p>val方法可以同时设置多个表单项的选中状态，如<code>$(&quot;#multiple,#single,:radio,:checkbox&quot;).val([&quot;radio2&quot;,&quot;checkbox1&quot;,&quot;checkbox3&quot;,&quot;mul1&quot;,&quot;mul4&quot;,&quot;sin3&quot;]
+);</code></p>
+</li>
+</ul>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span><span class="token operator">!</span><span class="token constant">DOCTYPE</span> html<span class="token operator">></span>
+<span class="token operator">&lt;</span>html lang<span class="token operator">=</span><span class="token string">"zh_CN"</span><span class="token operator">></span>
+<span class="token operator">&lt;</span>head<span class="token operator">></span>
+    <span class="token operator">&lt;</span>meta charset<span class="token operator">=</span><span class="token string">"UTF-8"</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>title<span class="token operator">></span>Title<span class="token operator">&lt;</span><span class="token operator">/</span>title<span class="token operator">></span>
+    <span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">"text/javascript"</span> src<span class="token operator">=</span><span class="token string">"script/jquery-1.7.2.js"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span>
+    <span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">"text/javascript"</span><span class="token operator">></span>
+
+        <span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">// 不传参数，是获取，传递参数是设置</span>
+            <span class="token function">alert</span><span class="token punctuation">(</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"div"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">html</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 获取</span>
+            <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"div"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">html</span><span class="token punctuation">(</span><span class="token string">"&lt;h1>我是div中的标题 1&lt;/h1>"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 设置</span>
+
+            <span class="token comment">// 不传参数，是获取，传递参数是设置</span>
+            <span class="token function">alert</span><span class="token punctuation">(</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"div"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">text</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 获取文本（会去掉标签信息，如&lt;span>这种）</span>
+            <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"div"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">text</span><span class="token punctuation">(</span><span class="token string">"&lt;h1>我是div中的标题 1&lt;/h1>"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 设置</span>
+
+            <span class="token comment">// // 不传参数，是获取，传递参数是设置</span>
+            <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"button"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token function">alert</span><span class="token punctuation">(</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#username"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">val</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//获取</span>
+                <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#username"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">val</span><span class="token punctuation">(</span><span class="token string">"超级程序猿"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 获取之后再设置（上一步未运行，不会运行这一步）</span>
+            <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>head<span class="token operator">></span>
+<span class="token operator">&lt;</span>body<span class="token operator">></span>
+    <span class="token operator">&lt;</span>div<span class="token operator">></span>我是div标签 <span class="token operator">&lt;</span>span<span class="token operator">></span>我是div中的span<span class="token operator">&lt;</span><span class="token operator">/</span>span<span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+    <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"text"</span> name<span class="token operator">=</span><span class="token string">"username"</span> id<span class="token operator">=</span><span class="token string">"username"</span> <span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>button<span class="token operator">></span>操作输入框<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>body<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>html<span class="token operator">></span></code></pre>
+<ul>
+<li><p><code>attr()/prop()</code> </p>
+<ul>
+<li><p>两者均可以设置和获取属性的<strong>值</strong>，</p>
+</li>
+<li><p>不推荐<code>attr()</code>操作checked、readOnly、selected、disabled 等等。（没选中返回undefined，选中返回checked）</p>
+</li>
+<li>只推荐<code>prop()</code>操作checked、readOnly、selected、disabled 等等。（没选中返回false，选中了返回true）</li>
+<li>attr 方法还可以操作非标准的属性。比如自定义属性：abc,bbj</li>
+</ul>
+</li>
+</ul>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">//attr</span>
+    <span class="token comment">// alert( $(":checkbox:first").attr("name") ); // 获取</span>
+    <span class="token comment">// $(":checkbox:first").attr("name","abc") ; // 设置</span>
+
+    <span class="token comment">// $(":checkbox").prop("checked",false );// 官方觉得返回undefined是一个错误</span>
+			
+    <span class="token comment">// 自定义属性</span>
+    <span class="token comment">// $(":checkbox:first").attr("abc","abcValue");</span>
+    <span class="token comment">// alert( $(":checkbox:first").attr("abc") );</span>
+
+    <span class="token comment">// $("&lt;h1>标题&lt;/h1>").prependTo( $("div") );</span>
+    <span class="token comment">// $("&lt;h1>标题&lt;/h1>").insertAfter("div");</span>
+
+    <span class="token comment">// $("&lt;h1>标题&lt;/h1>").insertBefore( $("div") );</span>
+
+    <span class="token comment">// $("&lt;h1>标题&lt;/h1>").replaceWith("div");</span>
+
+    <span class="token comment">// $("div").replaceWith( $("&lt;h1>标题&lt;/h1>") );</span>
+
+    <span class="token comment">// $("&lt;h1>标题&lt;/h1>").replaceAll( "div" );</span>
+
+
+    <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"div"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Java/">Java</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/jQuery/">jQuery</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/11/20/%E3%80%90Java%E3%80%91HTML_CCS_JS%E5%9F%BA%E7%A1%80%E8%87%AA%E6%9F%A5%E6%89%8B%E5%86%8C/">
+                        <span class="hidden-mobile">HTML+CSS+Javascript基础自查手册</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://www.jngwl.top" target="_blank" rel="nofollow noopener"><span>北渡</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鲁ICP备19062448号</a>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

@@ -216,10 +216,10 @@
 <p>​    Maven在企业中使用非常的广泛，虽然用的很多，但是有些人对于Maven的发音任然不标准。Maven 读音是 [ˈmeɪvn]。可以读作“霉文”或者”麦文”，但是不能读成”妈文”、”某文”等。</p>
 <p>（1）项目构建</p>
 <p>​    我们首先要区别的是，项目构建并不是项目创建的意思，项目创建只是一个工程的创建过程，而项目构建过程包括：【<strong>清理→编译→测试→报告→打包→部署</strong>】这几个步骤，这六个步骤就是一个项目的完整构建过程。</p>
-<p><img src="https://img2020.cnblogs.com/blog/1745215/202006/1745215-20200604222750297-462699054.png" srcset="/img/loading.gif" alt="image"></p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124102831.png" srcset="/img/loading.gif" alt=""></p>
 <p>（2）依赖管理</p>
 <p>​    依赖指的是<strong>项目与jar包之间的相互依赖</strong>，比如我们在使用Spring框架的时候，需要用到Spring依赖的jar包。而依赖管理指的就是使用Maven来管理项目中使用到的jar包，Maven管理的方式就是“<strong>自动下载项目所需要的jar包，统一管理jar包之间的依赖关系</strong>”。比如在文件上传的时候，光光有common-fileupload这个jar包是不行的，common-fileupload还依赖于common-io这个包jar包，此时由于Maven的依赖管理机制，都会帮我们自动下载这些包，我们并不需要管。</p>
-<p><img src="https://img2020.cnblogs.com/blog/1745215/202006/1745215-20200604222952995-2134047131.png" srcset="/img/loading.gif" alt="image"></p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124102837.png" srcset="/img/loading.gif" alt=""></p>
 <h2 id="2-下载"><a href="#2-下载" class="headerlink" title="2.下载"></a>2.下载</h2><p>下载地址：<a target="_blank" rel="noopener" href="https://maven.apache.org/download.cgi">https://maven.apache.org/download.cgi</a></p>
 <p>下载的zip文件夹目录分别为：</p>
 <ul>
@@ -236,24 +236,24 @@
 </blockquote>
 <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124090315.png" srcset="/img/loading.gif" alt=""></p>
 <h3 id="（1）maven环境变量"><a href="#（1）maven环境变量" class="headerlink" title="（1）maven环境变量"></a>（1）maven环境变量</h3><p>首先右击此电脑—&gt;属性—&gt;高级系统设置—&gt;高级—&gt;环境变量。</p>
-<p><img src="https://img2020.cnblogs.com/blog/1745215/202006/1745215-20200603181253004-1293802607.png" srcset="/img/loading.gif" alt="image"></p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124102944.png" srcset="/img/loading.gif" alt=""></p>
 <p>①、新建系统变量：MAVEN_HOME。变量值：D:\Maven\apache-maven-3.6.3（这是你Maven的存储路径）</p>
-<p><img src="https://img2020.cnblogs.com/blog/1745215/202006/1745215-20200603181253527-1576610843.png" srcset="/img/loading.gif" alt="image"></p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124102954.png" srcset="/img/loading.gif" alt=""></p>
 <p>②、编辑系统变量：Path。添加变量值：%MAVEN_HOME%\bin。其中“%MAVEN_HOME%\bin”代表的就是”D:\Maven\apache-maven-3.6.3\bin“目录。</p>
-<p><img src="https://img2020.cnblogs.com/blog/1745215/202006/1745215-20200603204242002-1250718692.png" srcset="/img/loading.gif" alt="image"></p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124103028.png" srcset="/img/loading.gif" alt=""></p>
 <p>③、检验配置是否成功：用win键+R，输入cmd进入dos命令，输入mvn -v，出现如下信息则表明成功！</p>
-<p><img src="https://img2020.cnblogs.com/blog/1745215/202006/1745215-20200603181254315-355897872.png" srcset="/img/loading.gif" alt="image"></p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124103034.png" srcset="/img/loading.gif" alt=""></p>
 <p>④、配置运行参数环境变量（可选配置）：MAVEN_OPTS。变量值：-Xms128m -Xmx512m。</p>
-<p><img src="https://img2020.cnblogs.com/blog/1745215/202006/1745215-20200603205926782-488711446.png" srcset="/img/loading.gif" alt="image"></p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124103041.png" srcset="/img/loading.gif" alt=""></p>
 <p>因为Maven使用来Java来启动的，所以依赖于JVM。所以可以通过JAVA命令参数的方式来设置MAVEN运行参数。</p>
 <h3 id="（2）自定义"><a href="#（2）自定义" class="headerlink" title="（2）自定义"></a>（2）自定义</h3><h4 id="🔎-修改本地仓库位置"><a href="#🔎-修改本地仓库位置" class="headerlink" title="🔎 修改本地仓库位置"></a>🔎 修改本地仓库位置</h4><p>  Maven管理的jar包默认是存储在C盘用户目录下的 .m2 下的repository中。</p>
-<p><img src="https://img2020.cnblogs.com/blog/1745215/202006/1745215-20200603173807469-1198909465.png" srcset="/img/loading.gif" alt="image"></p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124103050.png" srcset="/img/loading.gif" alt=""></p>
 <p>  如果你和我一样有强迫症的话（不喜欢把无关系统的东西放在C盘），可以更改Maven的存储位置。</p>
 <p>  首先我们找到解压的Maven文件，然后打开conf目录下的setting.xml。</p>
 <p>  大概在55行左右我们加入如下配置文件：</p>
 <pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>localRepository</span><span class="token punctuation">></span></span>D:/Maven/maven-repository<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>localRepository</span><span class="token punctuation">></span></span></code></pre>
 <p>  我把它存放在D盘下。</p>
-<p><img src="https://img2020.cnblogs.com/blog/1745215/202006/1745215-20200603173807842-598208370.png" srcset="/img/loading.gif" alt="image"></p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124103056.png" srcset="/img/loading.gif" alt=""></p>
 <h4 id="🔎-修改镜像源"><a href="#🔎-修改镜像源" class="headerlink" title="🔎 修改镜像源"></a>🔎 修改镜像源</h4><p>  Maven默认下载jar包是从中央仓库下载的，所以我们在国内下载jar包是非常非常的慢，所以我们需要改一下，这里推荐阿里云的仓库。</p>
 <p>  大概在setting.xml中的第159行左右我们加入如下配置文件：</p>
 <pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mirror</span><span class="token punctuation">></span></span>
@@ -262,7 +262,7 @@
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>url</span><span class="token punctuation">></span></span>http://maven.aliyun.com/nexus/content/groups/public<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>url</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mirrorOf</span><span class="token punctuation">></span></span>central<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mirrorOf</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mirror</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124091134.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124103104.png" srcset="/img/loading.gif" alt=""></p>
 <h4 id="🔎-修改Maven默认的JDK版本"><a href="#🔎-修改Maven默认的JDK版本" class="headerlink" title="🔎 修改Maven默认的JDK版本"></a>🔎 修改Maven默认的JDK版本</h4><p>  我们在使用编辑软件开发时，编辑软件总是默认给我们设置奇奇怪怪的JDK版本，导致程序总是莫名的报错，这一点我是采过坑的。自己电脑上安装的什么版本的JDK我们就设置对应的JDK版本就可以了。</p>
 <p>  大概在setting.xml中的第218行左右我们加入如下配置文件：</p>
 <pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>profile</span><span class="token punctuation">></span></span>
@@ -426,7 +426,7 @@
 <p>第二条路径是离项目A最近的，也就是路径最短的。所以<strong>项目A最后用的是B依赖的D的jar包</strong>。</p>
 <p>但是我们思考一下，如果传递依赖的路径相同那么它们会怎么选择呢？我们接着往下看。</p>
 <p>  ②、声明优先：就是谁先声明的就先选择谁呗。</p>
-<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124094328.png" srcset="/img/loading.gif" alt="image"></p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124094328.png" srcset="/img/loading.gif" alt=""></p>
 <p>通过上面的图片我们可以分析出：</p>
 <ul>
 <li>项目A——&gt;B——&gt;C</li>
@@ -434,7 +434,7 @@
 </ul>
 <p>可以发现它们的路径是一样的，那此时就是按照<strong>谁先声明的就选择谁</strong>。在pom.xml的依赖 <code>&lt;dependencies &gt; &lt;/dependencies &gt;</code> 里面， 先放置哪一个，就用哪一个。你先放置B, 那么C就是 B里面的，你先放置D，那么C就是D里面的。 所以<strong>在放置依赖时，有一定的顺序</strong>。</p>
 <h3 id="（8）依赖的排除"><a href="#（8）依赖的排除" class="headerlink" title="（8）依赖的排除"></a>（8）依赖的排除</h3><p>依赖的排除：就是<strong>排除掉我们不想要的依赖</strong>。比如：项目A依赖于B，B依赖于C，但有可能C依赖是不兼容的，会对项目造成一定的影响。此时，我们可以使用关键字<code>exclusion</code>排除C依赖。我们以spring-aop依赖为例：spring-aop是依赖于spring-beans和spring-core的。</p>
-<p><img src="https://img2020.cnblogs.com/blog/1745215/202006/1745215-20200612153600887-1595778967.png" srcset="/img/loading.gif" alt="image"></p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124103145.png" srcset="/img/loading.gif" alt=""></p>
 <p>假如我们需要排除掉spring-beans：</p>
 <pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
@@ -448,7 +448,7 @@
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>exclusions</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
 <p>排除后的结果为；</p>
-<p><img src="https://img2020.cnblogs.com/blog/1745215/202006/1745215-20200612153601599-10617847.png" srcset="/img/loading.gif" alt="image"></p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124103150.png" srcset="/img/loading.gif" alt=""></p>
 <h3 id="（9）版本的管理"><a href="#（9）版本的管理" class="headerlink" title="（9）版本的管理"></a>（9）版本的管理</h3><p>我们对版本的管理暂且有两种方式：①、版本锁定；②、版本常量。</p>
 <p>  <strong>①、版本锁定</strong></p>
 <p>  版本锁定：指的是锁定项目中依赖的版本。这种是目前实际项目中使用的最多的。版本锁定需要使用到dependencyManagement元素。需要说明的是dependencyManagement仅仅起到指锁定依赖版本的作用，其它的作用它什么都没有。而真正依赖包的下载任然要定义在dependencie元素中。</p>

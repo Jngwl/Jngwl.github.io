@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="北渡">
   <meta name="keywords" content="">
-  <title>Windows安装多个版本的Java - 北渡</title>
+  <title>北渡</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
@@ -156,7 +156,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Windows安装多个版本的Java">
+            <span class="h2" id="subtitle" title="">
               
             </span>
 
@@ -166,8 +166,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-11-26 10:13" pubdate>
-        2020年11月26日 上午
+      <time datetime="2020-11-27 09:07" pubdate>
+        2020年11月27日 上午
       </time>
     </span>
   
@@ -178,7 +178,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      155 字
+      126 字
     </span>
   
 
@@ -218,54 +218,28 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Windows安装多个版本的Java</h1>
+            <h1 style="display: none"></h1>
             
             <div class="markdown-body">
-              <ul>
-<li>下载安装包：<a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/java-se-glance.html">https://www.oracle.com/java/technologies/java-se-glance.html</a></li>
-</ul>
-<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201126134300.png" srcset="/img/loading.gif" alt=""></p>
+              <p><strong>?</strong> 通配符：匹配文件名中的 0 个或 1 个字符</p>
+<p><strong>*</strong> 通配符：匹配零个或多个字符</p>
+<p>示例：</p>
+<pre class="language-正则" data-language="正则"><code class="language-正则">^[0-9]+abc$</code></pre>
 <ul>
-<li>依次安装jdk1.8和jdk11，安装目录为java文件夹下的两个子文件夹，如图所示</li>
+<li><code>^</code>表示开始匹配，<code>$</code>表示结束</li>
+<li><code>[0-9]+</code>匹配多个数字， <code>[0-9]</code> 匹配单个数字，<code>+</code> 匹配一个或者多个。</li>
+<li>因此，该正则表达式会匹配以数字开头并以<code>abc</code>结尾的字符串</li>
 </ul>
-<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201126135751.png" srcset="/img/loading.gif" alt=""></p>
+<pre class="language-none"><code class="language-none">^[a-z0-9_-]&#123;3,15&#125;$</code></pre>
 <ul>
-<li>配置系统变量：<ul>
-<li>JAVA_HOME11：<code>D:\Java\jdk-11.0.8</code></li>
-<li>JAVA_HOME8：<code>D:\Java\jdk1.8.0_271</code></li>
-<li>Path：<code>%JAVA_HOME8%\bin</code></li>
-<li>安装jdk1.8时，会自动在Path顶部添加<code>C:/Program%20Files%20(x86)/Common%20Files/Oracle/Java/javapath</code>，将其删掉就可以自由地切换java8和java11了</li>
-<li>Path的第一行路径尽量不要以%开头，否则，点编辑时弹出的是路径字符串，而不是右图那种界面了。</li>
+<li>匹配字母、数字、下划线和连接字符，且字符串长度须在3~15之间</li>
 </ul>
-</li>
-</ul>
-<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201126140152.png" srcset="/img/loading.gif" alt=""></p>
-<ul>
-<li>切换时，直接调java8和java11的顺序即可。</li>
-</ul>
-<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201126141048.png" srcset="/img/loading.gif" alt=""></p>
-<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201126140626.png" srcset="/img/loading.gif" alt=""></p>
-<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201126140947.png" srcset="/img/loading.gif" alt=""></p>
 
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/Java/">Java</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
-                    
-                  </div>
                 
               </div>
               
@@ -276,9 +250,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/11/27/%E3%80%90Java%E3%80%91%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+                      <a href="/2020/12/09/%E3%80%90Java%E3%80%91Servlet%E5%9F%BA%E7%A1%80/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile"></span>
+                        <span class="hidden-mobile">Servlet基础</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -286,8 +260,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/11/25/%E3%80%90Java%E3%80%91SpringBoot%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">
-                        <span class="hidden-mobile">SpringBoot快速入门</span>
+                      <a href="/2020/11/26/%E3%80%90Java%E3%80%91%E5%AE%89%E8%A3%85%E5%A4%9A%E4%B8%AA%E7%89%88%E6%9C%ACJDK/">
+                        <span class="hidden-mobile">Windows安装多个版本的Java</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

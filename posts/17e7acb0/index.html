@@ -1,0 +1,538 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201120210029.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="清风与归_G">
+  <meta name="keywords" content="">
+  <title>frp内网穿透搭建指南 - 清风与归_G</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.staticfile.org/prism/1.22.0/themes/prism.min.css" />
+      
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>清风与归_G</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201121211851.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="frp内网穿透搭建指南">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-04-30 12:51" pubdate>
+        2020年4月30日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      424 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      6
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">frp内网穿透搭建指南</h1>
+            
+            <div class="markdown-body">
+              <h3 id="🍥-阿里云服务器端"><a href="#🍥-阿里云服务器端" class="headerlink" title="🍥 阿里云服务器端"></a>🍥 阿里云服务器端</h3><ul>
+<li><p>Ubuntu16.04系统</p>
+</li>
+<li><p>下载文件：<code>frp_0.24.1_linux_amd64.tar.gz</code></p>
+</li>
+<li><p>解压：<code>tar -zxvf frp_0.24.1_linux_amd64.tar.gz</code></p>
+</li>
+<li><p>重命名：<code>mv frp_0.24.1_linux_amd64 frp</code></p>
+</li>
+<li><p>配置文件，<code>cd frp &amp;&amp; vim frps.ini</code></p>
+<ul>
+<li><code>Esc</code>+<code>:wq</code>退出vim</li>
+</ul>
+</li>
+</ul>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>common<span class="token punctuation">]</span>
+<span class="token comment">#服务器开放的端口</span>
+bind_port <span class="token operator">=</span> <span class="token number">7000</span></code></pre>
+<ul>
+<li>在阿里云网页版端设置端口<strong>入站</strong>规则</li>
+</ul>
+<ul>
+<li>启动服务：</li>
+</ul>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">nohup</span> ./frps -c frps.ini <span class="token operator">&amp;</span></code></pre>
+<ul>
+<li>查看启动成功与否：</li>
+</ul>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">tail</span> -f nohup.out
+<span class="token number">2020</span>/04/29 <span class="token number">20</span>:17:33 <span class="token punctuation">[</span>I<span class="token punctuation">]</span> <span class="token punctuation">[</span>service.go:124<span class="token punctuation">]</span> frps tcp listen on <span class="token number">0.0</span>.0.0:7000
+<span class="token number">2020</span>/04/29 <span class="token number">20</span>:17:33 <span class="token punctuation">[</span>I<span class="token punctuation">]</span> <span class="token punctuation">[</span>root.go:204<span class="token punctuation">]</span> Start frps success</code></pre>
+<h3 id="📟-实验室Ubuntu服务器端"><a href="#📟-实验室Ubuntu服务器端" class="headerlink" title="📟 实验室Ubuntu服务器端"></a>📟 实验室Ubuntu服务器端</h3><ul>
+<li><p>Ubuntu14.04、Ubuntu16.04</p>
+</li>
+<li><p>安装<code>ssh</code>服务，并启动服务</p>
+</li>
+</ul>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 安装ssh服务</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> openssh-server openssh-client
+<span class="token function">sudo</span> <span class="token function">apt-get</span> update
+<span class="token function">sudo</span> <span class="token function">apt-get</span> upgrade
+
+<span class="token comment"># 查看ssh是否启动</span>
+<span class="token function">ps</span> -ef<span class="token operator">|</span><span class="token function">grep</span> <span class="token function">ssh</span>
+
+<span class="token comment"># 如果没启动，执行启动命令</span>
+/etc/init.d/ssh stop
+/etc/init.d/ssh start
+/etc/init.d/ssh restart
+
+<span class="token comment"># 22端口设为防火墙例外</span>
+<span class="token function">sudo</span> ufw allow <span class="token number">22</span>/tcp</code></pre>
+<ul>
+<li>下载文件：<code>frp_0.24.1_linux_amd64.tar.gz</code></li>
+<li>解压：<code>tar -zxvf frp_0.24.1_linux_amd64.tar.gz</code></li>
+<li>重命名：<code>mv frp_0.24.1_linux_amd64 frp</code></li>
+<li>配置文件，<code>cd frp &amp;&amp; vim frps.ini</code><ul>
+<li><code>Esc</code>+<code>:wq</code>退出vim</li>
+</ul>
+</li>
+</ul>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>common<span class="token punctuation">]</span>
+server_addr <span class="token operator">=</span> xxx.xxx.xxx.xxx
+server_port <span class="token operator">=</span> <span class="token number">7000</span>
+
+<span class="token punctuation">[</span>ssh_6_TitanXp*4<span class="token punctuation">]</span>  <span class="token comment"># 每台服务器下面不一样</span>
+<span class="token builtin class-name">type</span> <span class="token operator">=</span> tcp
+local_ip <span class="token operator">=</span> <span class="token number">127.0</span>.0.1
+local_port <span class="token operator">=</span> <span class="token number">22</span>
+remote_port <span class="token operator">=</span> <span class="token number">6006</span> <span class="token comment"># 每台服务器下面不一样</span></code></pre>
+<ul>
+<li>启动frp服务</li>
+</ul>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">nohup</span> ./frpc -c frpc.ini <span class="token operator">&amp;</span></code></pre>
+<ul>
+<li>设置SSH和frp服务自启动</li>
+</ul>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">vim</span> /etc/rc.local
+<span class="token comment"># 在exit 0语句前加入一下语句</span>
+
+/etc/init.d/ssh start
+<span class="token function">nohup</span> /home/gwl/Software/frp/frpc -c /home/gwl/Software/frp/frpc.ini <span class="token operator">&amp;</span></code></pre>
+<h3 id="💻个人PC端"><a href="#💻个人PC端" class="headerlink" title="💻个人PC端"></a>💻个人PC端</h3><ul>
+<li>下载Xshell等ssh工具</li>
+<li>新建链接即可，主机为<code>阿里云服务器的公网ip地址</code>，端口为<code>你要连的实验室服务器的remote_port</code></li>
+</ul>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiaofanke/p/10428409.html">https://www.cnblogs.com/xiaofanke/p/10428409.html</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Linux/">Linux</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/frp/">frp</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">内网穿透</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/89cba579/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Faster RCNN代码解析</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/89b4b8f3/">
+                        <span class="hidden-mobile">Pycharm 配置远程服务器</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://www.jngwl.top" target="_blank" rel="nofollow noopener"><span>清风与归_G</span></a> <i class="iconfont icon-codeforces"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鲁ICP备19062448号</a>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

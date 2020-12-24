@@ -1,0 +1,531 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201120210029.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="清风与归_G">
+  <meta name="keywords" content="">
+  <title>Pytorch中hook - 清风与归_G</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.staticfile.org/prism/1.22.0/themes/prism.min.css" />
+      
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>清风与归_G</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201121211851.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Pytorch中hook">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-05-11 10:57" pubdate>
+        2020年5月11日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      738 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      9
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Pytorch中hook</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>hook相当于<strong>插件</strong>。可以实现一些额外的功能，而又不用修改主体代码。把这些额外功能实现了挂在主代码上，所以叫钩子，很形象。</p>
+</blockquote>
+<p>Pytorch中常见的hook有：</p>
+<ul>
+<li><p><a href="https://link.zhihu.com/?target=http%3A//pytorch.org/docs/autograd.html%3Fhighlight%3Dhook%23torch.autograd.Variable.register_hook">torch.autograd.Variable.register_hook</a> (Python method, in Automatic differentiation package</p>
+</li>
+<li><p><a href="https://link.zhihu.com/?target=http%3A//pytorch.org/docs/nn.html%3Fhighlight%3Dhook%23torch.nn.Module.register_backward_hook">torch.nn.Module.register_backward_hook</a> (Python method, in torch.nn)</p>
+</li>
+<li><p><a href="https://link.zhihu.com/?target=http%3A//pytorch.org/docs/nn.html%3Fhighlight%3Dhook%23torch.nn.Module.register_forward_hook">torch.nn.Module.register_forward_hook</a></p>
+</li>
+</ul>
+<p>第一个是register_hook，是针对Variable对象的，后面的两个：register_backward_hook和register_forward_hook是针对nn.Module这个对象的。</p>
+<p>由于Pytorch当初开发时设计的是，对于中间变量，一旦它们完成了自身反传的使命，就会被释放掉；当我们需要求中间变量的梯度等时，hook应运而生。</p>
+<h3 id="🔎-register-hook-hook"><a href="#🔎-register-hook-hook" class="headerlink" title="🔎 register_hook(hook)"></a>🔎 register_hook(hook)</h3><h3 id="🍥-register-forward-hook-hook"><a href="#🍥-register-forward-hook-hook" class="headerlink" title="🍥 register_forward_hook(hook)"></a>🍥 register_forward_hook(hook)</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pytorch-cn.readthedocs.io/zh/latest/package_references/torch-nn/#register_forward_hookhook">官方文档</a>解释：</p>
+<p>在<code>module</code>上注册一个<code>forward hook</code>。 每次调用<code>forward()</code>计算输出的时候，这个<code>hook</code>就会被调用。它应该拥有以下签名：</p>
+<pre class="language-none"><code class="language-none">hook(module, input, output) -&gt; None</code></pre>
+<p><code>hook</code>不应该修改 <code>input</code>和<code>output</code>的值。 这个函数返回一个 句柄(<code>handle</code>)。它有一个方法 <code>handle.remove()</code>，可以用这个方法将<code>hook</code>从<code>module</code>移除。</p>
+</blockquote>
+<p>看这个解释可能有点蒙逼，但是如果要看一下nn.Module的源码怎么使用hook的话，那就乌云尽散了。<br>先看 register_forward_hook</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># 在此module上注册一个hook</span>
+<span class="token keyword">def</span> <span class="token function">register_forward_hook</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> hook<span class="token punctuation">)</span><span class="token punctuation">:</span>
+       handle <span class="token operator">=</span> hooks<span class="token punctuation">.</span>RemovableHandle<span class="token punctuation">(</span>self<span class="token punctuation">.</span>_forward_hooks<span class="token punctuation">)</span>
+       <span class="token comment"># 把注册的hook保存在_forward_hooks字典里。 </span>
+       self<span class="token punctuation">.</span>_forward_hooks<span class="token punctuation">[</span>handle<span class="token punctuation">.</span><span class="token builtin">id</span><span class="token punctuation">]</span> <span class="token operator">=</span> hook
+       <span class="token comment"># 返回句柄 </span>
+       <span class="token keyword">return</span> handle</code></pre>
+<p>再看 nn.Module 的<strong>call</strong>方法（被阉割了，只留下需要关注的部分）：</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">__call__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> <span class="token operator">*</span><span class="token builtin">input</span><span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+   result <span class="token operator">=</span> self<span class="token punctuation">.</span>forward<span class="token punctuation">(</span><span class="token operator">*</span><span class="token builtin">input</span><span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span>
+   <span class="token keyword">for</span> hook <span class="token keyword">in</span> self<span class="token punctuation">.</span>_forward_hooks<span class="token punctuation">.</span>values<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+       <span class="token comment">#将注册的hook拿出来用</span>
+       hook_result <span class="token operator">=</span> hook<span class="token punctuation">(</span>self<span class="token punctuation">,</span> <span class="token builtin">input</span><span class="token punctuation">,</span> result<span class="token punctuation">)</span>
+   <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+   <span class="token keyword">return</span> result</code></pre>
+<p>可以看到，当我们执行<code>model(x)</code>的时候，底层干了以下几件事：</p>
+<ul>
+<li><p>调用 <code>forward</code> 方法计算结果</p>
+</li>
+<li><p>判断有没有注册 <code>forward_hook</code>，有的话，就将 <code>forward</code> 的输入及结果作为<code>hook</code>的实参。然后让hook自己干一些不可告人的事情。</p>
+</li>
+</ul>
+<p>看到这，我们就明白hook签名的意思了，还有为什么hook不能修改input的output的原因。</p>
+<p>小例子：</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
+<span class="token keyword">from</span> torch <span class="token keyword">import</span> nn
+<span class="token keyword">import</span> torch<span class="token punctuation">.</span>functional <span class="token keyword">as</span> F
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>autograd <span class="token keyword">import</span> Variable
+
+<span class="token keyword">def</span> <span class="token function">for_hook</span><span class="token punctuation">(</span>module<span class="token punctuation">,</span> <span class="token builtin">input</span><span class="token punctuation">,</span> output<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>module<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> val <span class="token keyword">in</span> <span class="token builtin">input</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"input val:"</span><span class="token punctuation">,</span>val<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> out_val <span class="token keyword">in</span> output<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"output val:"</span><span class="token punctuation">,</span> out_val<span class="token punctuation">)</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Model</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token builtin">super</span><span class="token punctuation">(</span>Model<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        <span class="token keyword">return</span> x<span class="token operator">+</span><span class="token number">1</span>
+
+model <span class="token operator">=</span> Model<span class="token punctuation">(</span><span class="token punctuation">)</span>
+x <span class="token operator">=</span> Variable<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>FloatTensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+handle <span class="token operator">=</span> model<span class="token punctuation">.</span>register_forward_hook<span class="token punctuation">(</span>for_hook<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>model<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span>
+handle<span class="token punctuation">.</span>remove<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<h3 id="📟-register-backward-hook"><a href="#📟-register-backward-hook" class="headerlink" title="📟 register_backward_hook"></a>📟 register_backward_hook</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pytorch-cn.readthedocs.io/zh/latest/package_references/torch-nn/#register_backward_hookhook">官方文档</a>解释：</p>
+<p>在<code>module</code>上注册一个<code>bachward hook</code>。</p>
+<p>每次计算<code>module</code>的<code>inputs</code>的梯度的时候，这个<code>hook</code>会被调用。<code>hook</code>应该拥有下面的<code>signature</code>。</p>
+<pre class="language-none"><code class="language-none">hook(module, grad_input, grad_output) -&gt; Variable or None</code></pre>
+<p>如果<code>module</code>有多个输入输出的话，那么<code>grad_input</code> <code>grad_output</code>将会是个<code>tuple</code>。 <code>hook</code>不应该修改它的<code>arguments</code>，但是它可以选择性的返回关于输入的梯度，这个返回的梯度在后续的计算中会替代<code>grad_input</code>。</p>
+<p>这个函数返回一个 句柄(<code>handle</code>)。它有一个方法 <code>handle.remove()</code>，可以用这个方法将<code>hook</code>从<code>module</code>移除。</p>
+</blockquote>
+<p>参考链接</p>
+<p>【1】<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/61044004/answer/183682138">https://www.zhihu.com/question/61044004/answer/183682138</a></p>
+<p>【2】<a target="_blank" rel="noopener" href="https://blog.csdn.net/u012436149/article/details/69230136">pytorch 的 hook 机制</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/PyTorch/">PyTorch</a>
+                    
+                      <a class="hover-with-bg" href="/tags/hook/">hook</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/d3cdb8b1/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Distilling Knowledge from Refinement in MLDN</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/e8b3ed83/">
+                        <span class="hidden-mobile">Grad-CAM解析</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://www.jngwl.top" target="_blank" rel="nofollow noopener"><span>清风与归_G</span></a> <i class="iconfont icon-codeforces"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鲁ICP备19062448号</a>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

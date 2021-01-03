@@ -169,6 +169,62 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/posts/45021/">Ubuntu自动检测ip地址变化并邮件告知用户</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/posts/45021/">
+          
+          
+            
+          
+          
+实验室多了新的服务器（目前单卡最强），但并没有显示器，想通过ssh进行远程连接。但通过拨号连接时，ip地址是动态的，每次重连都会发生改变。
+我开始的想法是将动态ip修改为静态ip，参考了一堆教程，并不行o(╯□╰)o
+百度了下，最终思路是 服务器每分钟检测本地ip地址，若发生了变化，则将改变后的ip地址 通过邮件发送给我。
+
+安装相关依赖sudo apt-get install mutt
+sud
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-10-11 15:14" pubdate>
+              2019-10-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Linux/">Linux</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Ubuntu/">Ubuntu</a>
+            
+              <a href="/tags/IP%E5%9C%B0%E5%9D%80/">IP地址</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/posts/9a7b326b/">Attention机制</a>
       </h1>
 
@@ -656,66 +712,6 @@ An LSTM has 4 gates: feature, input, output, forget. We m
               <a href="/tags/%E9%87%87%E6%A0%B7/">采样</a>
             
               <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">图像处理</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/posts/d46e3328/">1*1卷积核的作用</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/posts/d46e3328/">
-          
-          
-            
-          
-          
-1*1卷积核可实现改变模型维度、减少模型参数、增加模型深度等功能
-
-1.改变模型维度
-
-二维的输入数据（如$66$）和$11$的卷积核 卷积，相当于原输入数据直接做乘法
-三维的输入数据（如$6632$）和$1132$的卷积核卷积，相当于卷积核的32个数对原输入数据的32个数加权求和，结果填到最右侧对应方框中
-升维还是降维取决于卷积核的个数
-
-
-2.减少模型参数，增加模型深度
-
-图(a)中，参数个
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2019-03-13 18:59" pubdate>
-              2019-03-13
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/1-1%E5%8D%B7%E7%A7%AF%E6%A0%B8/">1*1卷积核</a>
             
           </div>
         

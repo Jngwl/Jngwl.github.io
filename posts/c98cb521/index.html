@@ -221,7 +221,8 @@
             <h1 style="display: none">Mybatis的使用</h1>
             
             <div class="markdown-body">
-              <h2 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h2><h3 id="1）什么是Mybatis"><a href="#1）什么是Mybatis" class="headerlink" title="1）什么是Mybatis"></a>1）什么是Mybatis</h3><p>【官网介绍】：MyBatis 是一款优秀的<strong>持久层</strong>框架，它支持自定义 SQL、存储过程以及高级映射。</p>
+              <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210103163723.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h2><h3 id="1）什么是Mybatis"><a href="#1）什么是Mybatis" class="headerlink" title="1）什么是Mybatis"></a>1）什么是Mybatis</h3><p>【官网介绍】：MyBatis 是一款优秀的<strong>持久层</strong>框架，它支持自定义 SQL、存储过程以及高级映射。</p>
 <ul>
 <li>MyBatis <strong>免除了几乎所有的 JDBC 代码以及设置参数和获取结果集的工作</strong>。</li>
 <li><p>MyBatis 可以通过<strong>简单的 XML 或注解</strong>来配置和映射<strong>原始类型</strong>、接口和 Java <strong>POJO</strong>（Plain Old Java Objects，普通老式 Java 对象）为数据库中的记录。</p>
@@ -431,24 +432,25 @@ INSERT  INTO &#96;user&#96;(&#96;id&#96;,&#96;name&#96;,&#96;pwd&#96;) VALUES (1
 <li><strong>返回类型不对</strong>：UserMapper中的resultType</li>
 <li><strong>Maven导出资源</strong>：静态资源过滤问题。加上下面语句后，更手动更新下！！！</li>
 </ul>
-<pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resources</span><span class="token punctuation">></span></span>
-   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resource</span><span class="token punctuation">></span></span>
-       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>directory</span><span class="token punctuation">></span></span>src/main/java<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>directory</span><span class="token punctuation">></span></span>
-       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>includes</span><span class="token punctuation">></span></span>
-           <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>include</span><span class="token punctuation">></span></span>**/*.properties<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>include</span><span class="token punctuation">></span></span>
-           <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>include</span><span class="token punctuation">></span></span>**/*.xml<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>include</span><span class="token punctuation">></span></span>
-       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>includes</span><span class="token punctuation">></span></span>
-       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>filtering</span><span class="token punctuation">></span></span>false<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>filtering</span><span class="token punctuation">></span></span>
-   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resource</span><span class="token punctuation">></span></span>
-   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resource</span><span class="token punctuation">></span></span>
-       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>directory</span><span class="token punctuation">></span></span>src/main/resources<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>directory</span><span class="token punctuation">></span></span>
-       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>includes</span><span class="token punctuation">></span></span>
-           <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>include</span><span class="token punctuation">></span></span>**/*.properties<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>include</span><span class="token punctuation">></span></span>
-           <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>include</span><span class="token punctuation">></span></span>**/*.xml<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>include</span><span class="token punctuation">></span></span>
-       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>includes</span><span class="token punctuation">></span></span>
-       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>filtering</span><span class="token punctuation">></span></span>false<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>filtering</span><span class="token punctuation">></span></span>
-   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resource</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resources</span><span class="token punctuation">></span></span></code></pre>
+<pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>build</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resources</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resource</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>directory</span><span class="token punctuation">></span></span>src/main/resources<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>directory</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>includes</span><span class="token punctuation">></span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>include</span><span class="token punctuation">></span></span>**/*.properties<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>include</span><span class="token punctuation">></span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>include</span><span class="token punctuation">></span></span>**/*.xml<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>include</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>includes</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resource</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resource</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>directory</span><span class="token punctuation">></span></span>src/main/java<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>directory</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>includes</span><span class="token punctuation">></span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>include</span><span class="token punctuation">></span></span>**/*.properties<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>include</span><span class="token punctuation">></span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>include</span><span class="token punctuation">></span></span>**/*.xml<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>include</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>includes</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>filtering</span><span class="token punctuation">></span></span>true<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>filtering</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resource</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resources</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>build</span><span class="token punctuation">></span></span></code></pre>
 <h2 id="三、CRUD操作"><a href="#三、CRUD操作" class="headerlink" title="三、CRUD操作"></a>三、CRUD操作</h2><h3 id="1）select等语句"><a href="#1）select等语句" class="headerlink" title="1）select等语句"></a>1）select等语句</h3><ul>
 <li>路径：<code>UserMapper.xml</code>中，<code>&lt;select id=“ ” resultType=“ ”&gt;   具体sql语句 &lt;/select&gt;</code><ul>
 <li><code>id</code>：对应的namespace中的方法名</li>
@@ -1199,7 +1201,7 @@ id   name   password</code></pre>
 <li>引用类型的数据，如Map，则不需要加</li>
 <li>如果只有一个基本类型的话，可以忽略该注解，但建议不要忽略的好</li>
 <li>在SQL中引用的就是@Param中设置的属性名，比如uid</li>
-<li><h1 id="取值（预编译，可以很大程度上防止sql注入）"><a href="#取值（预编译，可以很大程度上防止sql注入）" class="headerlink" title="{ } 取值（预编译，可以很大程度上防止sql注入）"></a>{ } 取值（预编译，可以很大程度上防止sql注入）</h1></li>
+<li><code>#&#123; &#125;</code> 取值（预编译，可以很大程度上防止sql注入）</li>
 </ul>
 </li>
 </ul>
@@ -1979,6 +1981,12 @@ INSERT INTO &#96;student&#96; (&#96;id&#96;, &#96;name&#96;, &#96;tid&#96;) VALU
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/posts/0/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

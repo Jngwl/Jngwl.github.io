@@ -63,7 +63,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"www.jngwl.top","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"ViwB1XmjsmmXpFx2gikUmM5V-gzGzoHsz","app_key":"7r6Y8CzBkl8MJwPNmCqSdLWW","server_url":"https://viwb1xmj.lc-cn-n1-shared.com"}}};
+    var CONFIG = {"hostname":"www.jngwl.top","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"ViwB1XmjsmmXpFx2gikUmM5V-gzGzoHsz","app_key":"7r6Y8CzBkl8MJwPNmCqSdLWW","server_url":"https://viwb1xmj.lc-cn-n1-shared.com"}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -180,7 +180,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.4k 字
+      4.4k 字
     </span>
   
 
@@ -190,7 +190,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      32
+      67
        分钟
     </span>
   
@@ -611,7 +611,247 @@
 <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210110172950.png" srcset="/img/loading.gif" alt="image-20210110172948420" style="zoom:50%;" align="left" /></p>
 </li>
 </ul>
-<h3 id="4）员工管理系统"><a href="#4）员工管理系统" class="headerlink" title="4）员工管理系统"></a>4）员工管理系统</h3><h2 id="六、整合数据库"><a href="#六、整合数据库" class="headerlink" title="六、整合数据库"></a>六、整合数据库</h2><h3 id="1）整合JDBC"><a href="#1）整合JDBC" class="headerlink" title="1）整合JDBC"></a>1）整合JDBC</h3><h3 id="2）整合Druid"><a href="#2）整合Druid" class="headerlink" title="2）整合Druid"></a>2）整合Druid</h3><h3 id="3）整合Mybatis"><a href="#3）整合Mybatis" class="headerlink" title="3）整合Mybatis"></a>3）整合Mybatis</h3><h2 id="七、Spring-Security"><a href="#七、Spring-Security" class="headerlink" title="七、Spring Security"></a>七、Spring Security</h2>
+<h3 id="4）员工管理系统"><a href="#4）员工管理系统" class="headerlink" title="4）员工管理系统"></a>4）员工管理系统</h3><h2 id="六、整合数据库"><a href="#六、整合数据库" class="headerlink" title="六、整合数据库"></a>六、整合数据库</h2><h3 id="1）整合JDBC"><a href="#1）整合JDBC" class="headerlink" title="1）整合JDBC"></a>1）整合JDBC</h3><h3 id="2）整合Druid"><a href="#2）整合Druid" class="headerlink" title="2）整合Druid"></a>2）整合Druid</h3><h3 id="3）整合Mybatis"><a href="#3）整合Mybatis" class="headerlink" title="3）整合Mybatis"></a>3）整合Mybatis</h3><h2 id="七、Spring-Security"><a href="#七、Spring-Security" class="headerlink" title="七、Spring Security"></a>七、Spring Security</h2><p>官网介绍：Spring Security是一个功能强大且高度可定制的身份验证（Authentication）和访问控制（授权，Authorization）框架，其侧重于为Java应用程序提供身份验证和授权。与所有Spring项目一样，Spring安全性的真正强大之处在于它可以轻松地扩展以满足定制需求。</p>
+<ul>
+<li><code>WebSecurityConfigurerAdapter</code>：自定义Security策略</li>
+<li><code>AuthenticationManagerBuilder</code>：自定义认证策略</li>
+<li><code>@EnableWebSecurity</code>：开启WebSecurity模式</li>
+</ul>
+<h3 id="1）导入相关依赖项"><a href="#1）导入相关依赖项" class="headerlink" title="1）导入相关依赖项"></a>1）导入相关依赖项</h3><ul>
+<li>spring-boot-starter-security</li>
+<li>spring-boot-starter-thymeleaf</li>
+<li>thymeleaf-extras-springsecurity5</li>
+<li>…</li>
+</ul>
+<pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-security<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+
+<span class="token comment">&lt;!-- 模板引擎 --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-thymeleaf<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+
+<span class="token comment">&lt;!-- 基于SpringSecurity对模板引擎进行增强 --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.thymeleaf.extras<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>thymeleaf-extras-springsecurity5<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
+<h3 id="2）自定义安全策略"><a href="#2）自定义安全策略" class="headerlink" title="2）自定义安全策略"></a>2）自定义安全策略</h3><ul>
+<li>在config文件夹下创建<code>SecurityConfig</code>类自定义安全策略<ul>
+<li>通过注解<code>@EnableWebSecurity</code>开启安全模式</li>
+<li>其继承自<code>WebSecurityConfigurerAdapter</code>类，并重写<code>configure</code>方法：<ul>
+<li>定制请求的授权规则</li>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>gaowl<span class="token punctuation">.</span>config</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>security<span class="token punctuation">.</span>config<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>authentication<span class="token punctuation">.</span>builders<span class="token punctuation">.</span></span><span class="token class-name">AuthenticationManagerBuilder</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>security<span class="token punctuation">.</span>config<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>web<span class="token punctuation">.</span>builders<span class="token punctuation">.</span></span><span class="token class-name">HttpSecurity</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>security<span class="token punctuation">.</span>config<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>web<span class="token punctuation">.</span>configuration<span class="token punctuation">.</span></span><span class="token class-name">EnableWebSecurity</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>security<span class="token punctuation">.</span>config<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>web<span class="token punctuation">.</span>configuration<span class="token punctuation">.</span></span><span class="token class-name">WebSecurityConfigurerAdapter</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>security<span class="token punctuation">.</span>crypto<span class="token punctuation">.</span>bcrypt<span class="token punctuation">.</span></span><span class="token class-name">BCryptPasswordEncoder</span><span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@EnableWebSecurity</span> <span class="token comment">// 开启WebSecurity模式</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SecurityConfig</span> <span class="token keyword">extends</span> <span class="token class-name">WebSecurityConfigurerAdapter</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token comment">// 重写Http的安全规则</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">configure</span><span class="token punctuation">(</span><span class="token class-name">HttpSecurity</span> http<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span> <span class="token punctuation">&#123;</span>
+
+        <span class="token comment">// 定制请求的授权规则，此时写完了大家都木得权限，因此，需要重写认证规则，设置用户的权限</span>
+        http<span class="token punctuation">.</span><span class="token function">authorizeRequests</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">antMatchers</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">permitAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span>   <span class="token comment">// 首页所有人可以访问</span>
+               <span class="token punctuation">.</span><span class="token function">antMatchers</span><span class="token punctuation">(</span><span class="token string">"/level1/**"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">hasRole</span><span class="token punctuation">(</span><span class="token string">"vip1"</span><span class="token punctuation">)</span>   <span class="token comment">// level1下的界面，只有拥有vip1权限才可访问</span>
+               <span class="token punctuation">.</span><span class="token function">antMatchers</span><span class="token punctuation">(</span><span class="token string">"/level2/**"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">hasRole</span><span class="token punctuation">(</span><span class="token string">"vip2"</span><span class="token punctuation">)</span>
+               <span class="token punctuation">.</span><span class="token function">antMatchers</span><span class="token punctuation">(</span><span class="token string">"/level3/**"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">hasRole</span><span class="token punctuation">(</span><span class="token string">"vip3"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	   
+        <span class="token comment">// 开启登录功能，控制器处理"/toLogin"请求，来到自定义的登陆页</span>
+        <span class="token comment">// 登陆页传递参数username和password</span>
+        <span class="token comment">// 登陆页中的&lt;form th:action="@&#123;/login&#125;" method="post">表明提交请求为login，因此加一个loginProcessingUrl鉴权</span>
+        <span class="token comment">// 若其action为toLogin，后面的loginProcessingUrl可以删掉。</span>
+        http<span class="token punctuation">.</span><span class="token function">formLogin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">usernameParameter</span><span class="token punctuation">(</span><span class="token string">"username"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">passwordParameter</span><span class="token punctuation">(</span><span class="token string">"password"</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">loginPage</span><span class="token punctuation">(</span><span class="token string">"/toLogin"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">loginProcessingUrl</span><span class="token punctuation">(</span><span class="token string">"/login"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   
+        
+		
+        <span class="token comment">// 关闭csrf功能：跨站请求伪造,默认只能通过post方式提交logout请求</span>
+        http<span class="token punctuation">.</span><span class="token function">csrf</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+        
+        <span class="token comment">// 开启账户注销功能，账号成功注销后跳转到首页</span>
+        http<span class="token punctuation">.</span><span class="token function">logout</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">logoutSuccessUrl</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
+        
+        <span class="token comment">// 开始记住用户名及密码功能，cookie</span>
+        http<span class="token punctuation">.</span><span class="token function">rememberMe</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">rememberMeParameter</span><span class="token punctuation">(</span><span class="token string">"remember"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 重写定义认证规则：</span>
+    <span class="token comment">// 为不同的用户设置权限，且对密码进行bcrypt加密</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">configure</span><span class="token punctuation">(</span><span class="token class-name">AuthenticationManagerBuilder</span> auth<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 在内存中定义，也可以在jdbc中去拿....</span>
+        <span class="token comment">// Spring security 5.0中之后，将前端传过来的密码进行某种方式加密，spring security 官方推荐的是使用bcrypt加密方式。</span>
+
+        auth<span class="token punctuation">.</span><span class="token function">inMemoryAuthentication</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">passwordEncoder</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">BCryptPasswordEncoder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">withUser</span><span class="token punctuation">(</span><span class="token string">"ks"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">password</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">BCryptPasswordEncoder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">encode</span><span class="token punctuation">(</span><span class="token string">"123456"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">roles</span><span class="token punctuation">(</span><span class="token string">"vip2"</span><span class="token punctuation">,</span><span class="token string">"vip3"</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">and</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">withUser</span><span class="token punctuation">(</span><span class="token string">"root"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">password</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">BCryptPasswordEncoder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">encode</span><span class="token punctuation">(</span><span class="token string">"123456"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">roles</span><span class="token punctuation">(</span><span class="token string">"vip1"</span><span class="token punctuation">,</span><span class="token string">"vip2"</span><span class="token punctuation">,</span><span class="token string">"vip3"</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">and</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">withUser</span><span class="token punctuation">(</span><span class="token string">"guest"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">password</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">BCryptPasswordEncoder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">encode</span><span class="token punctuation">(</span><span class="token string">"123456"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">roles</span><span class="token punctuation">(</span><span class="token string">"vip1"</span><span class="token punctuation">,</span><span class="token string">"vip2"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<h3 id="3）自定义主页等"><a href="#3）自定义主页等" class="headerlink" title="3）自定义主页等"></a>3）自定义主页等</h3><ul>
+<li>控制器代码：</li>
+</ul>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>gaowl<span class="token punctuation">.</span>controller</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>stereotype<span class="token punctuation">.</span></span><span class="token class-name">Controller</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">PathVariable</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">RequestMapping</span><span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@Controller</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">RouterController</span> <span class="token punctuation">&#123;</span>
+    <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token string">"/"</span><span class="token punctuation">,</span><span class="token string">"/index"</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">index</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token string">"index"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+	
+    <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">"/toLogin"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">toLogin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token string">"views/login"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">"/level1/&#123;id&#125;"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">level1</span><span class="token punctuation">(</span><span class="token annotation punctuation">@PathVariable</span><span class="token punctuation">(</span><span class="token string">"id"</span><span class="token punctuation">)</span> <span class="token keyword">int</span> id<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token string">"views/level1/"</span><span class="token operator">+</span>id<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">"/level2/&#123;id&#125;"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">level2</span><span class="token punctuation">(</span><span class="token annotation punctuation">@PathVariable</span><span class="token punctuation">(</span><span class="token string">"id"</span><span class="token punctuation">)</span> <span class="token keyword">int</span> id<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token string">"views/level2/"</span><span class="token operator">+</span>id<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">"/level3/&#123;id&#125;"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">level3</span><span class="token punctuation">(</span><span class="token annotation punctuation">@PathVariable</span><span class="token punctuation">(</span><span class="token string">"id"</span><span class="token punctuation">)</span> <span class="token keyword">int</span> id<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token string">"views/level3/"</span><span class="token operator">+</span>id<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<pre class="language-none"><code class="language-none">&lt;!DOCTYPE html&gt;
+&lt;html lang&#x3D;&quot;en&quot; xmlns:th&#x3D;&quot;http:&#x2F;&#x2F;www.thymeleaf.org&quot;
+      xmlns:sec&#x3D;&quot;http:&#x2F;&#x2F;www.thymeleaf.org&#x2F;extras&#x2F;spring-security&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;
+    &lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, initial-scale&#x3D;1, maximum-scale&#x3D;1&quot;&gt;
+    &lt;title&gt;首页&lt;&#x2F;title&gt;
+    &lt;!--semantic-ui--&gt;
+    &lt;link href&#x3D;&quot;https:&#x2F;&#x2F;cdn.bootcss.com&#x2F;semantic-ui&#x2F;2.4.1&#x2F;semantic.min.css&quot; rel&#x3D;&quot;stylesheet&quot;&gt;
+    &lt;link th:href&#x3D;&quot;@&#123;&#x2F;qinjiang&#x2F;css&#x2F;qinstyle.css&#125;&quot; rel&#x3D;&quot;stylesheet&quot;&gt;
+&lt;&#x2F;head&gt;
+&lt;body&gt;
+
+&lt;!--主容器--&gt;
+&lt;div class&#x3D;&quot;ui container&quot;&gt;
+
+    &lt;div class&#x3D;&quot;ui segment&quot; id&#x3D;&quot;index-header-nav&quot; th:fragment&#x3D;&quot;nav-menu&quot;&gt;
+        &lt;div class&#x3D;&quot;ui secondary menu&quot;&gt;
+            &lt;a class&#x3D;&quot;item&quot;  th:href&#x3D;&quot;@&#123;&#x2F;index&#125;&quot;&gt;首页&lt;&#x2F;a&gt;
+
+            &lt;!--登录注销--&gt;
+            &lt;div class&#x3D;&quot;right menu&quot;&gt;
+                &lt;!-- 如果未登录，显示登陆按钮 --&gt;
+                &lt;div sec:authorize&#x3D;&quot;!isAuthenticated()&quot;&gt;
+                    &lt;a class&#x3D;&quot;item&quot; th:href&#x3D;&quot;@&#123;&#x2F;toLogin&#125;&quot;&gt;
+                        &lt;i class&#x3D;&quot;address card icon&quot;&gt;&lt;&#x2F;i&gt; 登录
+                    &lt;&#x2F;a&gt;
+                &lt;&#x2F;div&gt;
+
+                &lt;!--如果已登录，显示用户名及其权限--&gt;
+                &lt;div sec:authorize&#x3D;&quot;isAuthenticated()&quot;&gt;
+                    &lt;a class&#x3D;&quot;item&quot;&gt;
+                        &lt;i class&#x3D;&quot;address card icon&quot;&gt;&lt;&#x2F;i&gt;
+                        用户名：&lt;span sec:authentication&#x3D;&quot;principal.username&quot;&gt;&lt;&#x2F;span&gt;
+                        &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;i class&#x3D;&quot;address card icon&quot;&gt;&lt;&#x2F;i&gt;
+                        权限：&lt;span sec:authentication&#x3D;&quot;principal.authorities&quot;&gt;&lt;&#x2F;span&gt;
+                    &lt;&#x2F;a&gt;
+                &lt;&#x2F;div&gt;
+
+                &lt;!-- 如果已登录，显示注销按钮 --&gt;
+                &lt;div sec:authorize&#x3D;&quot;isAuthenticated()&quot;&gt;
+                    &lt;a class&#x3D;&quot;item&quot; th:href&#x3D;&quot;@&#123;&#x2F;logout&#125;&quot;&gt;
+                        &lt;i class&#x3D;&quot;address card icon&quot;&gt;&lt;&#x2F;i&gt; 注销
+                    &lt;&#x2F;a&gt;
+                &lt;&#x2F;div&gt;
+
+            &lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+    &lt;&#x2F;div&gt;
+
+    &lt;div class&#x3D;&quot;ui segment&quot; style&#x3D;&quot;text-align: center&quot;&gt;
+        &lt;h3&gt;Spring Security Study by 秦疆&lt;&#x2F;h3&gt;
+    &lt;&#x2F;div&gt;
+
+    &lt;div&gt;
+        &lt;br&gt;
+        &lt;div class&#x3D;&quot;ui three column stackable grid&quot;&gt;
+            &lt;div class&#x3D;&quot;column&quot; sec:authorize&#x3D;&quot;hasRole(&#39;vip1&#39;)&quot;&gt;
+                &lt;div class&#x3D;&quot;ui raised segment&quot;&gt;
+                    &lt;div class&#x3D;&quot;ui&quot;&gt;
+                        &lt;div class&#x3D;&quot;content&quot;&gt;
+                            &lt;h5 class&#x3D;&quot;content&quot;&gt;Level 1&lt;&#x2F;h5&gt;
+                            &lt;hr&gt;
+                            &lt;div&gt;&lt;a th:href&#x3D;&quot;@&#123;&#x2F;level1&#x2F;1&#125;&quot;&gt;&lt;i class&#x3D;&quot;bullhorn icon&quot;&gt;&lt;&#x2F;i&gt; Level-1-1&lt;&#x2F;a&gt;&lt;&#x2F;div&gt;
+                            &lt;div&gt;&lt;a th:href&#x3D;&quot;@&#123;&#x2F;level1&#x2F;2&#125;&quot;&gt;&lt;i class&#x3D;&quot;bullhorn icon&quot;&gt;&lt;&#x2F;i&gt; Level-1-2&lt;&#x2F;a&gt;&lt;&#x2F;div&gt;
+                            &lt;div&gt;&lt;a th:href&#x3D;&quot;@&#123;&#x2F;level1&#x2F;3&#125;&quot;&gt;&lt;i class&#x3D;&quot;bullhorn icon&quot;&gt;&lt;&#x2F;i&gt; Level-1-3&lt;&#x2F;a&gt;&lt;&#x2F;div&gt;
+                        &lt;&#x2F;div&gt;
+                    &lt;&#x2F;div&gt;
+                &lt;&#x2F;div&gt;
+            &lt;&#x2F;div&gt;
+
+            &lt;div class&#x3D;&quot;column&quot; sec:authorize&#x3D;&quot;hasRole(&#39;vip2&#39;)&quot;&gt;
+                &lt;div class&#x3D;&quot;ui raised segment&quot;&gt;
+                    &lt;div class&#x3D;&quot;ui&quot;&gt;
+                        &lt;div class&#x3D;&quot;content&quot;&gt;
+                            &lt;h5 class&#x3D;&quot;content&quot;&gt;Level 2&lt;&#x2F;h5&gt;
+                            &lt;hr&gt;
+                            &lt;div&gt;&lt;a th:href&#x3D;&quot;@&#123;&#x2F;level2&#x2F;1&#125;&quot;&gt;&lt;i class&#x3D;&quot;bullhorn icon&quot;&gt;&lt;&#x2F;i&gt; Level-2-1&lt;&#x2F;a&gt;&lt;&#x2F;div&gt;
+                            &lt;div&gt;&lt;a th:href&#x3D;&quot;@&#123;&#x2F;level2&#x2F;2&#125;&quot;&gt;&lt;i class&#x3D;&quot;bullhorn icon&quot;&gt;&lt;&#x2F;i&gt; Level-2-2&lt;&#x2F;a&gt;&lt;&#x2F;div&gt;
+                            &lt;div&gt;&lt;a th:href&#x3D;&quot;@&#123;&#x2F;level2&#x2F;3&#125;&quot;&gt;&lt;i class&#x3D;&quot;bullhorn icon&quot;&gt;&lt;&#x2F;i&gt; Level-2-3&lt;&#x2F;a&gt;&lt;&#x2F;div&gt;
+                        &lt;&#x2F;div&gt;
+                    &lt;&#x2F;div&gt;
+                &lt;&#x2F;div&gt;
+            &lt;&#x2F;div&gt;
+
+            &lt;div class&#x3D;&quot;column&quot; sec:authorize&#x3D;&quot;hasRole(&#39;vip3&#39;)&quot;&gt;
+                &lt;div class&#x3D;&quot;ui raised segment&quot;&gt;
+                    &lt;div class&#x3D;&quot;ui&quot;&gt;
+                        &lt;div class&#x3D;&quot;content&quot;&gt;
+                            &lt;h5 class&#x3D;&quot;content&quot;&gt;Level 3&lt;&#x2F;h5&gt;
+                            &lt;hr&gt;
+                            &lt;div&gt;&lt;a th:href&#x3D;&quot;@&#123;&#x2F;level3&#x2F;1&#125;&quot;&gt;&lt;i class&#x3D;&quot;bullhorn icon&quot;&gt;&lt;&#x2F;i&gt; Level-3-1&lt;&#x2F;a&gt;&lt;&#x2F;div&gt;
+                            &lt;div&gt;&lt;a th:href&#x3D;&quot;@&#123;&#x2F;level3&#x2F;2&#125;&quot;&gt;&lt;i class&#x3D;&quot;bullhorn icon&quot;&gt;&lt;&#x2F;i&gt; Level-3-2&lt;&#x2F;a&gt;&lt;&#x2F;div&gt;
+                            &lt;div&gt;&lt;a th:href&#x3D;&quot;@&#123;&#x2F;level3&#x2F;3&#125;&quot;&gt;&lt;i class&#x3D;&quot;bullhorn icon&quot;&gt;&lt;&#x2F;i&gt; Level-3-3&lt;&#x2F;a&gt;&lt;&#x2F;div&gt;
+                        &lt;&#x2F;div&gt;
+                    &lt;&#x2F;div&gt;
+                &lt;&#x2F;div&gt;
+            &lt;&#x2F;div&gt;
+
+        &lt;&#x2F;div&gt;
+    &lt;&#x2F;div&gt;
+    
+&lt;&#x2F;div&gt;
+
+
+&lt;script th:src&#x3D;&quot;@&#123;&#x2F;qinjiang&#x2F;js&#x2F;jquery-3.1.1.min.js&#125;&quot;&gt;&lt;&#x2F;script&gt;
+&lt;script th:src&#x3D;&quot;@&#123;&#x2F;qinjiang&#x2F;js&#x2F;semantic.min.js&#125;&quot;&gt;&lt;&#x2F;script&gt;
+
+&lt;&#x2F;body&gt;
+&lt;&#x2F;html&gt;</code></pre>
+<h2 id="八、shiro"><a href="#八、shiro" class="headerlink" title="八、shiro"></a>八、shiro</h2>
             </div>
             <hr>
             <div>
@@ -715,10 +955,35 @@
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
-     <i class="iconfont icon-tags-fill"></i>&nbsp;<a href="http://www.beian.miit.gov.cn/" target="_blank">鲁ICP 19062448</a>&nbsp&nbsp;| &nbsp&nbsp <i class="iconfont icon-addrcard"></i>&nbsp; 2021<a href="https://www.jngwl.top/" target="_blank"> 清风与归_G</a>&nbsp&nbsp;|&nbsp&nbsp;  <i class="iconfont icon-docker"></i> <a href="https://hexo.io/" target="_blank">&nbsp Hexo</a>&nbsp & &nbsp <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank">Fluid</a><br> 少し焦点を合わせて、トップに到達します
+     <i class="iconfont icon-tags-fill"></i>&nbsp;<a href="http://www.beian.miit.gov.cn/" target="_blank">鲁ICP备19062448号</a>&nbsp&nbsp;| &nbsp&nbsp <i class="iconfont icon-addrcard"></i>&nbsp; 2021<a href="https://www.jngwl.top/" target="_blank"> 清风与归_G</a>&nbsp&nbsp;|&nbsp&nbsp;  <i class="iconfont icon-docker"></i> <a href="https://hexo.io/" target="_blank">&nbsp Hexo</a>&nbsp & &nbsp <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank">Fluid</a><br> 少し焦点を合わせて、トップに到達します
 
   </div>
   
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
 
   
 
@@ -779,6 +1044,8 @@
 
 
 
+  <script defer src="/js/leancloud.js" ></script>
+
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
@@ -815,6 +1082,19 @@
 
 
 
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
 
 

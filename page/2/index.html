@@ -169,6 +169,137 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/posts/4ea1809c/" target="_self">
+          <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124104122.jpg" srcset="/img/loading.gif" alt="Java正则表达式">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/posts/4ea1809c/">Java正则表达式</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/posts/4ea1809c/">
+          
+          
+            
+          
+          ? 通配符：匹配文件名中的 0 个或 1 个字符
+* 通配符：匹配零个或多个字符
+示例：
+^[0-9]+abc$
+
+^表示开始匹配，$表示结束
+[0-9]+匹配多个数字， [0-9] 匹配单个数字，+ 匹配一个或者多个。
+因此，该正则表达式会匹配以数字开头并以abc结尾的字符串
+
+^[a-z0-9_-]&#123;3,15&#125;$
+
+匹配字母、数字、下划线和连接字符，且字符串长度须在3~15
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-12-05 10:13" pubdate>
+              2020-12-05
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Java/">Java</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/posts/478bec9a/" target="_self">
+          <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124105153.jpg" srcset="/img/loading.gif" alt="Windows安装多个版本的Java">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/posts/478bec9a/">Windows安装多个版本的Java</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/posts/478bec9a/">
+          
+          
+            
+          
+          
+下载安装包：https://www.oracle.com/java/technologies/java-se-glance.html
+
+
+
+依次安装jdk1.8和jdk11，安装目录为java文件夹下的两个子文件夹，如图所示
+
+
+
+配置系统变量：
+JAVA_HOME11：D:\Java\jdk-11.0.8
+JAVA_HOME8：D:\Java\jdk1.8.0_271
+Path：%JAVA_H
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-11-26 10:13" pubdate>
+              2020-11-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Java/">Java</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/posts/4ccc97e8/" target="_self">
           <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124105153.jpg" srcset="/img/loading.gif" alt="SpringBoot快速入门">
         </a>
@@ -675,149 +806,6 @@ HTML的语言特征：HTML代码由头和体组成，如
               <a href="/tags/JavaWeb/">JavaWeb</a>
             
               <a href="/tags/bootstrap/">bootstrap</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/posts/e1fa0be1/" target="_self">
-          <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124104122.jpg" srcset="/img/loading.gif" alt="Java基础自查手册">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/posts/e1fa0be1/">Java基础自查手册</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/posts/e1fa0be1/">
-          
-          
-            
-          
-          一、注释
-1. 单行注释
-格式： // 注释文字
-    
-2. 多行注释
-格式： /* 注释文字 */
-    
-3. 文档注释
-格式： /** 注释文字 */
-二、关键字被Java语言赋予特定含义的单词，组成关键字的字母全部小写。
-
-
-三、常量1.概念:在程序的运行过程中, 其值不会发生改变的量.
-2.字面值常量的分类:
-字符串常量:  “abc”   值必须用””括起来
-字符常量:  ‘a’
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-05 10:13" pubdate>
-              2020-11-05
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/posts/6fc0dc2c/" target="_self">
-          <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124103439.jpg" srcset="/img/loading.gif" alt="MySQL基础自查手册">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/posts/6fc0dc2c/">MySQL基础自查手册</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/posts/6fc0dc2c/">
-          
-          
-            
-          
-          前言
-
-查看Mysql版本：mysql --version
-
-1.基本规范
-SQL语句可以单行或多行书写，以分号结尾；
-可以用空格和缩进来来增强语句的可读性；
-关键字不区别大小写，建议使用大写；
-
-2.注释
-单行注释(两种)
-#
--- 此种注释需要加空格
-
-多行注释
-&#x2F;* 不可嵌套注释 *&#x2F;
-
-
-3.基础查询
-语法：  select 查询列表 from 表名;
-特点：     
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-27 22:38" pubdate>
-              2020-10-27
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/MySQL/">MySQL</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/MySQL/">MySQL</a>
             
           </div>
         

@@ -1,0 +1,730 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" type="image/png" href="/img/favicon.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="清风与归_G">
+  <meta name="keywords" content="">
+  <title>JVM基础自查手册 - 清风与归_G</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.staticfile.org/prism/1.22.0/themes/prism.min.css" />
+      
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.jngwl.top","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"ViwB1XmjsmmXpFx2gikUmM5V-gzGzoHsz","app_key":"7r6Y8CzBkl8MJwPNmCqSdLWW","server_url":"https://viwb1xmj.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>清风与归_G</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201121211851.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JVM基础自查手册">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-19 08:13" pubdate>
+        2021年1月19日 早上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      57
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JVM基础自查手册</h1>
+            
+            <div class="markdown-body">
+              <h2 id="一、JVM与Java体系结构"><a href="#一、JVM与Java体系结构" class="headerlink" title="一、JVM与Java体系结构"></a>一、JVM与Java体系结构</h2><h3 id="1）JVM的位置"><a href="#1）JVM的位置" class="headerlink" title="1）JVM的位置"></a>1）JVM的位置</h3><p>JVM是运行在操作系统之上的，它与硬件没有直接的交互</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210119085246.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="2）JVM整体结构"><a href="#2）JVM整体结构" class="headerlink" title="2）JVM整体结构"></a>2）JVM整体结构</h3><p>执行引擎包含三部分：<strong>解释器</strong>，<strong>即时编译</strong>，<strong>垃圾回收器</strong></p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210119085603.png" srcset="/img/loading.gif" alt="image-20200704183436495"></p>
+<h3 id="3）Java代码执行流程"><a href="#3）Java代码执行流程" class="headerlink" title="3）Java代码执行流程"></a>3）Java代码执行流程</h3><p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210119090028.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="二、类加载子系统"><a href="#二、类加载子系统" class="headerlink" title="二、类加载子系统"></a>二、类加载子系统</h2><h3 id="1）类加载子系统的作用"><a href="#1）类加载子系统的作用" class="headerlink" title="1）类加载子系统的作用"></a>1）类加载子系统的作用</h3><p>类加载器子系统<strong>负责从文件系统或者网络中加载Class文件</strong>。其只负责文件的加载，至于它是否可以运行，则由Execution Engine决定。</p>
+<p>加载的类信息存放于一块称为<strong>方法区</strong>的内存空间。除了类的信息外，方法区中还会存放运行时<strong>常量池</strong>信息，可能还包括字符串变量和数字常量（这部分常量信息是Class文件中常量池部分的内存映射）</p>
+<p><img src="http://moxi159753.gitee.io/learningnotes/JVM/1_内存与垃圾回收篇/2_类加载子系统/images/image-20200705081813409.png" srcset="/img/loading.gif" alt=""></p>
+<p>class 字节码文件位于本地硬盘上，可以理解为设计师画在纸上的<strong>模板</strong>，该模板被类装载器Class Loader加载到JVM的<strong>方法区</strong>中，成为<strong>元数据模板</strong>；之后可以通过实例化（也就是new操作）得到多个一模一样的实例，而该实例也可以通过<code>getClass</code>回退得到元数据模板，元数据模板也可以通过<code>getClassloader</code>得到类加载器</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210119091850.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="2）类加载器分类"><a href="#2）类加载器分类" class="headerlink" title="2）类加载器分类"></a>2）类加载器分类</h3><p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210119103017.png" srcset="/img/loading.gif" alt=""></p>
+<h4 id="引导类加载器（Bootstrap-ClassLoader）"><a href="#引导类加载器（Bootstrap-ClassLoader）" class="headerlink" title="引导类加载器（Bootstrap ClassLoader）"></a>引导类加载器（Bootstrap ClassLoader）</h4><ul>
+<li>虚拟机自带，由C/C++编写实现，嵌套在JVM内部</li>
+<li>出于安全考虑，引导类加载器只加载包名为java、javax、sun等开头的类</li>
+<li>并不继承自<code>java.lang.ClassLoader</code>，没有父加载器。</li>
+</ul>
+<h4 id="扩展类加载器（Extension-ClassLoader）"><a href="#扩展类加载器（Extension-ClassLoader）" class="headerlink" title="扩展类加载器（Extension ClassLoader）"></a>扩展类加载器（Extension ClassLoader）</h4><ul>
+<li>Java语言编写，由<code>sun.misc.Launcher$ExtClassLoader</code>实现。</li>
+<li>派生于ClassLoader类，父类加载器为引导类加载器</li>
+<li>从<code>java.ext.dirs</code>系统属性所指定的目录中加载类库，或从JDK的安装目录的jre/lib/ext子目录（扩展目录）下加载类库；如果用户创建的JAR放在此目录下，也会自动由扩展类加载器加载。</li>
+</ul>
+<h4 id="系统类加载器（AppClassLoader）"><a href="#系统类加载器（AppClassLoader）" class="headerlink" title="系统类加载器（AppClassLoader）"></a>系统类加载器（AppClassLoader）</h4><ul>
+<li>java语言编写，由<code>sun.misc.LaunchersAppClassLoader</code>实现</li>
+<li>派生于ClassLoader类，父类加载器为扩展类加载器</li>
+<li>它负责加载<strong>环境变量classpath</strong>或<strong>系统属性java.class.path</strong>指定路径下的类库</li>
+<li>该类加载是<strong>程序中默认的类加载器</strong>，一般来说，Java应用的类都是由它来完成加载</li>
+<li>通过<code>classLoader.getSystemclassLoader（）</code>方法可以获取到该类加载器</li>
+</ul>
+<h4 id="用户自定义类加载器"><a href="#用户自定义类加载器" class="headerlink" title="用户自定义类加载器"></a>用户自定义类加载器</h4><ul>
+<li>在Java的日常应用程序开发中，类的加载几乎是由上述3种类加载器相互配合执行的，在必要时，我们还可以自定义类加载器，来定制类的加载方式。</li>
+<li>原因：隔离加载类、修改类加载的方式、扩展加载源、防止源码泄漏</li>
+<li>实现步骤：<ul>
+<li>开发人员可以通过继承抽象类<code>java.lang.ClassLoader</code>类的方式，实现自己的类加载器，以满足一些特殊的需求</li>
+<li>在JDK1.2之前，在自定义类加载器时，总会去继承ClassLoader类并重写loadClass（）方法，从而实现自定义的类加载类，但是在JDK1.2之后已不再建议用户去覆盖loadclass（）方法，而是建议把自定义的类加载逻辑写在<code>findclass（）</code>方法中</li>
+<li>在编写自定义类加载器时，如果没有太过于复杂的需求，可以直接继承<code>URIClassLoader</code>类，这样就可以避免自己去编写findclass（）方法及其获取字节码流的方式，使自定义类加载器编写更加简洁。</li>
+</ul>
+</li>
+</ul>
+<h4 id="根加载器"><a href="#根加载器" class="headerlink" title="根加载器"></a>根加载器</h4><p>根加载器只能够加载 java /lib目录下的class</p>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ClassLoaderTest1</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"*********启动类加载器************"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 获取BootstrapClassLoader 能够加载的API的路径</span>
+        URL<span class="token punctuation">[</span><span class="token punctuation">]</span> urls <span class="token operator">=</span> sun<span class="token punctuation">.</span>misc<span class="token punctuation">.</span><span class="token class-name">Launcher</span><span class="token punctuation">.</span><span class="token function">getBootstrapClassPath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getURLs</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>URL url <span class="token operator">:</span> urls<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>url<span class="token punctuation">.</span><span class="token function">toExternalForm</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token comment">// 从上面路径中，随意选择一个类，来看看他的类加载器是什么：得到的是null，说明是  根加载器</span>
+        <span class="token class-name">ClassLoader</span> classLoader <span class="token operator">=</span> <span class="token class-name">Provider</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">.</span><span class="token function">getClassLoader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>结果</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">*********启动类加载器************
+file:/E:/Software/JDK1.8/Java/jre/lib/resources.jar
+file:/E:/Software/JDK1.8/Java/jre/lib/rt.jar
+file:/E:/Software/JDK1.8/Java/jre/lib/sunrsasign.jar
+file:/E:/Software/JDK1.8/Java/jre/lib/jsse.jar
+file:/E:/Software/JDK1.8/Java/jre/lib/jce.jar
+file:/E:/Software/JDK1.8/Java/jre/lib/charsets.jar
+file:/E:/Software/JDK1.8/Java/jre/lib/jfr.jar
+file:/E:/Software/JDK1.8/Java/jre/classes
+null</code></pre>
+<h3 id="3）双亲委派机制"><a href="#3）双亲委派机制" class="headerlink" title="3）双亲委派机制"></a>3）双亲委派机制</h3><p>Java虚拟机对class文件采用的是<strong>按需加载</strong>的方式，也就是说当需要使用该类时才会将它的class文件加载到内存生成class对象。而且加载某个类的class文件时，Java虚拟机采用的是双亲委派模式，即<strong>把请求交由父类处理</strong>，它是一种任务委派模式。</p>
+<h4 id="🌏-工作原理"><a href="#🌏-工作原理" class="headerlink" title="🌏 工作原理"></a>🌏 工作原理</h4><p>如果一个类加载器收到了类加载请求，它并不会自己先去加载，而是把这个请求委托给父类的加载器去执行；如果父类加载器还存在其父类加载器，则进一步向上委托，依次递归，请求最终将到达顶层的启动类加载器；如果父类加载器可以完成类加载任务，就成功返回，倘若父类加载器无法完成此加载任务，子加载器才会尝试自己去加载，这就是双亲委派模式</p>
+<h4 id="🌏-沙箱安全机制"><a href="#🌏-沙箱安全机制" class="headerlink" title="🌏 沙箱安全机制"></a>🌏 沙箱安全机制</h4><p>自定义string类，但是在加载自定义String类的时候会率先使用引导类加载器加载，而引导类加载器在加载的过程中会先加载jdk自带的文件（rt.jar包中java\lang\String.class），报错信息说没有main方法，就是因为加载的是rt.jar包中的string类。这样可以保证对java核心源代码的保护，这就是沙箱安全机制。</p>
+<h4 id="🌏-双亲委派机制的优点"><a href="#🌏-双亲委派机制的优点" class="headerlink" title="🌏 双亲委派机制的优点"></a>🌏 双亲委派机制的优点</h4><ul>
+<li>避免类的重复加载</li>
+<li>保护程序安全，防止核心API被随意篡改<ul>
+<li>自定义类：java.lang.String</li>
+<li>自定义类：java.lang.ShkStart（报错：阻止创建 java.lang开头的类）</li>
+</ul>
+</li>
+</ul>
+<h2 id="三、运行时数据区"><a href="#三、运行时数据区" class="headerlink" title="三、运行时数据区"></a>三、运行时数据区</h2><h2 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h2><h2 id="虚拟机栈"><a href="#虚拟机栈" class="headerlink" title="虚拟机栈"></a>虚拟机栈</h2><h2 id="本地方法接口"><a href="#本地方法接口" class="headerlink" title="本地方法接口"></a>本地方法接口</h2><h2 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h2><h2 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h2><h2 id="垃圾回收概述"><a href="#垃圾回收概述" class="headerlink" title="垃圾回收概述"></a>垃圾回收概述</h2><h3 id="1）相关面试题"><a href="#1）相关面试题" class="headerlink" title="1）相关面试题"></a>1）相关面试题</h3><h4 id="蚂蚁金服"><a href="#蚂蚁金服" class="headerlink" title="蚂蚁金服"></a>蚂蚁金服</h4><ul>
+<li>你知道哪几种垃圾回收器，各自的优缺点，重点讲一下cms和G1？</li>
+<li>JVM GC算法有哪些，目前的JDK版本采用什么回收算法？</li>
+<li>G1回收器讲下回收过程GC是什么？为什么要有GC？</li>
+<li>GC的两种判定方法？CMS收集器与G1收集器的特点</li>
+</ul>
+<h4 id="百度"><a href="#百度" class="headerlink" title="百度"></a>百度</h4><ul>
+<li>说一下GC算法，分代回收说下</li>
+<li>垃圾收集策略和算法</li>
+</ul>
+<h4 id="天猫"><a href="#天猫" class="headerlink" title="天猫"></a>天猫</h4><ul>
+<li>JVM GC原理，JVM怎么回收内存</li>
+<li>CMS特点，垃圾回收算法有哪些？各自的优缺点，他们共同的缺点是什么？</li>
+</ul>
+<h4 id="滴滴"><a href="#滴滴" class="headerlink" title="滴滴"></a>滴滴</h4><p>Java的垃圾回收器都有哪些，说下g1的应用场景，平时你是如何搭配使用垃圾回收器的</p>
+<h4 id="京东"><a href="#京东" class="headerlink" title="京东"></a>京东</h4><ul>
+<li>你知道哪几种垃圾收集器，各自的优缺点，重点讲下cms和G1，</li>
+<li>包括原理，流程，优缺点。垃圾回收算法的实现原理</li>
+</ul>
+<h4 id="阿里"><a href="#阿里" class="headerlink" title="阿里"></a>阿里</h4><ul>
+<li>讲一讲垃圾回收算法。</li>
+<li>什么情况下触发垃圾回收？</li>
+<li>如何选择合适的垃圾收集算法？</li>
+<li>JVM有哪三种垃圾回收器？</li>
+</ul>
+<h4 id="字节跳动"><a href="#字节跳动" class="headerlink" title="字节跳动"></a>字节跳动</h4><ul>
+<li>常见的垃圾回收器算法有哪些，各有什么优劣？</li>
+<li>System.gc（）和Runtime.gc（）会做什么事情？</li>
+<li>Java GC机制？GC Roots有哪些？</li>
+<li>Java对象的回收方式，回收算法。</li>
+<li>CMS和G1了解么，CMS解决什么问题，说一下回收的过程。</li>
+<li>CMS回收停顿了几次，为什么要停顿两次?</li>
+</ul>
+<h3 id="2）概述"><a href="#2）概述" class="headerlink" title="2）概述"></a>2）概述</h3><p>垃圾是指在运行程序中没有任何指针指向的对象，这个对象就是需要被回收的垃圾。</p>
+<p>如果不及时对内存中的垃圾进行清理，那么，这些垃圾对象所占的内存空间会一直保留到应用程序的结束，被保留的空间无法被其它对象使用，甚至可能导致内存溢出。</p>
+<p>在早期的C/C++时代，垃圾回收基本上是手工进行的。开发人员可以使用new关键字进行内存申请，并使用delete关键字进行内存释放</p>
+<p>这种方式可以灵活控制内存释放的时间，但是会给开发人员带来频繁申请和释放内存的管理负担。倘若有一处内存区间由于程序员编码的问题忘记被回收，那么就会产生内存泄漏，垃圾对象永远无法被清除，随着系统运行时间的不断增长，垃圾对象所耗内存可能持续上升，直到出现内存溢出并造成应用程序崩溃</p>
+<p>Java的垃圾回收GC主要关注于<strong>方法区和堆中的垃圾收集</strong>。其中，Java堆是垃圾收集器的工作重点。</p>
+<p>从次数上讲：</p>
+<ul>
+<li>频繁收集Young区</li>
+<li>较少收集Old区</li>
+<li>基本不收集Perm区（元空间）</li>
+</ul>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210119101047.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="垃圾回收相关算法"><a href="#垃圾回收相关算法" class="headerlink" title="垃圾回收相关算法"></a>垃圾回收相关算法</h2><h3 id="1）标记阶段"><a href="#1）标记阶段" class="headerlink" title="1）标记阶段"></a>1）标记阶段</h3><p>在堆中存放着几乎所有的Java对象实例，在GC执行垃圾回收之前，首先要区分出哪些是需要被清除的死亡对象。当一个对象已经不再被任何的存活对象继续引用时，其被宣判死亡。（老寻梦环游记了…）判断对象是否存活，一般有引用计数算法和可达性分析算法两种方式：</p>
+<p>⚡ 引用计数算法（Reference Counting）</p>
+<ul>
+<li>原理：为每个对象保存一个整型的引用计数器属性，用于记录对象被引用的情况。对于一个对象A，只要有任何一个对象引用了A，则A的引用计数器就加1；当引用失效时，引用计数器就减1。只要对象A的引用计数器的值为0，即表示对象A不可能再被使用，可进行回收。</li>
+<li>优点：实现简单，垃圾对象便于辨识；判定效率高，回收没有延迟性</li>
+<li>缺点：它需要单独的字段存储计数器，这样的做法增加了存储空间的开销；每次赋值都需要更新计数器，伴随着加法和减法操作，这增加了时间开销；引用计数器有一个严重的问题，即<strong>无法处理循环引用的情况</strong>。这是一条致命缺陷，导致在<strong>Java的垃圾回收器中没有使用这类算法</strong>。</li>
+<li>Python在使用引用计数算法，其在处理循环引用时，用两种方案：在合适的时机，手动解除引用关系；采用Python的弱引用库weakref</li>
+</ul>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210119110611.png" srcset="/img/loading.gif" alt=""></p>
+<p>⚡ 可达性分析算法</p>
+<ul>
+<li>可达性分析算法，也称为根搜索算法、追踪性垃圾收集。其有效解决了引用计数算法中的循环引用问题，防止内存泄漏</li>
+<li>原理：以根对象集合（GC Root Set）为起始点，<strong>向下搜索被根对象集合直接或间接连接到的对象</strong>被标记为存活对象，无法建立连接的对象被标记为可回收对象。参考官场的裙带关系</li>
+</ul>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210119144541.png" srcset="/img/loading.gif" alt=""></p>
+<ul>
+<li>Java语言中，GC Roots是一组活跃的引用，其主要包含以下几类元素：<ul>
+<li><strong>虚拟机栈</strong>中引用的对象，比如：各个线程被调用的方法中使用到的参数、局部变量等。</li>
+<li><strong>本地方法栈</strong>内JNI（通常说的本地方法）引用的对象</li>
+<li><strong>方法区</strong>中类静态属性引用的对象，比如：Java类的引用类型静态变量；常量引用的对象，比如：字符串常量池（StringTable）里的引用</li>
+<li>所有被<strong>同步锁synchronized</strong>持有的对象</li>
+<li><strong>Java虚拟机内部</strong>的引用：基本数据类型对应的Class对象，一些常驻的异常对象（如：NullPointerException、OutofMemoryError），系统类加载器，反映java虚拟机内部情况的JMXBean、JVMTI中注册的回调、本地代码缓存等。</li>
+<li>除了这些固定的GC Roots集合以外，根据用户所选用的垃圾收集器以及当前回收的内存区域不同，还可以有其他对象<strong>“临时性”</strong>地加入，共同构成完整GC Roots集合。比如：分代收集和局部回收（PartialGC）。<ul>
+<li>如果只针对Java堆中的某一块区域进行垃圾回收（比如：典型的只针对新生代），必须考虑到内存区域是虚拟机自己的实现细节，更不是孤立封闭的，这个区域的对象完全有可能被其他区域的对象所引用，这时候就需要一并将关联的区域对象也加入GC Roots集合中去考虑，才能保证可达性分析的准确性。</li>
+</ul>
+</li>
+<li>由于Root采用栈方式存放变量和指针，所以如果一个指针，它保存了堆内存里面的对象，但是自己又不存放在堆内存里面，那它就是一个Root。</li>
+</ul>
+</li>
+<li>当使用可达性分析算法 来判断内存是否可回收时，分析工作必须在一个<strong>能保障一致性的快照</strong>中进行。这点不满足的话分析结果的<strong>准确性</strong>就无法保证。这点也是导致GC进行时必须“Stop The World”的一个重要原因。即使是号称（几乎）不会发生停顿的CMS收集器中，枚举根节点时也是必须要停顿的。</li>
+</ul>
+<h3 id="2）对象的finalization机制"><a href="#2）对象的finalization机制" class="headerlink" title="2）对象的finalization机制"></a>2）对象的finalization机制</h3><h3 id="3）清除阶段："><a href="#3）清除阶段：" class="headerlink" title="3）清除阶段："></a>3）清除阶段：</h3><p>当成功区分出内存中存活对象和死亡对象后，GC接下来的任务是执行垃圾回收，释放掉无用对象所占用的内存空间，以便有足够的可用内存空间为新对象分配内存。目前在JVM中比较常见的几种垃圾收集算法：</p>
+<p>⚡ 标记-清除算法（Mark-Sweep）</p>
+<ul>
+<li>J.McCarthy 1960年提出，并用于Lisp语言</li>
+<li>执行过程：当堆中的有效内存空间（available memory）被耗尽时，就会停止整个程序（stop the world），然后进行两项标记和清除工作：<ul>
+<li><strong>标记</strong>：Collector从引用根节点开始遍历，标记<code>所有被引用的对象</code>。是可达对象，而不是不可达对象！一般是在对象的Header中记录为可达对象。</li>
+<li><strong>清除</strong>：Collector对堆内存从头到尾进行线性遍历，如果发现某个对象在其Header中<code>没有标记为可达对象</code>，则将其回收（把需要清除的对象地址保存在空闲地址列表里。下次有新对象需要加载时，判断垃圾的位置空间是否够，如果够，就存放并覆盖原有地址内容）。</li>
+</ul>
+</li>
+<li>缺点：标记时从根节点开始遍历，清除时对堆内存进行遍历，相当于两次O(N)，效率不高；在进行GC时，需要停止整个应用程序，用户体验较差；清理后的空闲内存并不连续，会产生内存碎片，需要维护一个空闲列表来分配这些内存。</li>
+</ul>
+<p>⚡ 复制算法（Copying）</p>
+<ul>
+<li><p>M.L.Minsky 1963年提出，改进了标记清除算法的低效率问题</p>
+</li>
+<li><p>原理：将活着的内存空间分为两块，每次只使用其中一块，在垃圾回收时将正在使用的内存中的存活对象复制到未被使用的内存块中，之后清除正在使用的内存块中的所有对象，交换两个内存的角色，最后完成垃圾回收</p>
+</li>
+<li>优点：没有标记和清除过程，实现简单，运行高效；复制过去以后保证空间的连续性，不会出现“碎片”问题。</li>
+<li>缺点：需要两倍内存空间；对于G1这种分拆成大量region的GC，复制而不是移动，意味着GC需要维护region之间对象引用关系，内存占用、时间开销都很大</li>
+<li>适用于<strong>垃圾对象很多，存活对象很少</strong>的场景；例如：Young区的Survivor 0区 和Survivor 1区</li>
+</ul>
+<p>⚡ 标记-压缩算法（Mark-Compact）</p>
+<ul>
+<li>复制算法适用于存活对象少、垃圾对象多的新生代，不适合有大量存活对象的老年代；标记-清除算法可以应用于老年代，但是会产生大量内存碎片</li>
+<li>1970年前后，G.L.Steele等人提出标记压缩算法</li>
+<li>执行过程：第一阶段和标记清除算法一样，从根节点开始标记所有被引用对象；第二阶段将所有的存活对象压缩到内存一端，按顺序排放；之后，清理边界外所有空间。</li>
+<li>标记-压缩算法相当于在标记-清除算法执行完成后，再进行一次内存碎片整理。两者的主要区别在于是否需要移动，移动时需要调整对象引用的地址，双刃剑。</li>
+<li>优点：消除了标记-清除算法当中，内存区域分散的缺点，我们需要给新对象分配内存时，JVM只需要持有一个内存的起始地址即可；消除了复制算法当中，内存减半的高额代价。</li>
+<li>缺点：从效率上来说，标记-整理算法要低于复制算法；移动对象的同时，如果对象被其他对象引用，则还需要调整引用的地址；移动过程中，需要全程暂停用户应用程序。即：STW</li>
+</ul>
+<p>⚡ 三种算法的比较</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">标记-清除算法</th>
+<th style="text-align:center">标记-整理算法</th>
+<th style="text-align:center">复制算法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210119162924.png" srcset="/img/loading.gif" alt=""></td>
+<td style="text-align:center"><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210119163357.png" srcset="/img/loading.gif" alt="20210119162931"></td>
+<td style="text-align:center"><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210119162950.png" srcset="/img/loading.gif" alt=""></td>
+</tr>
+<tr>
+<td style="text-align:center">速度</td>
+<td style="text-align:center">中等</td>
+<td style="text-align:center">最慢</td>
+<td style="text-align:center">最快</td>
+</tr>
+<tr>
+<td style="text-align:center">空间开销</td>
+<td style="text-align:center">少（但会堆积碎片）</td>
+<td style="text-align:center">少（不堆积碎片）</td>
+<td style="text-align:center">通常需要活对象的两倍大小（不堆积碎片）</td>
+</tr>
+<tr>
+<td style="text-align:center">移动对象</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">是</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>没有最好的，只有最合适的！具体问题、具体分析的算法应运而生。</p>
+<p>⚡ 分代算法（Generational Collecting）</p>
+<p>分代思想被现有的虚拟机广泛应用，几乎所有的垃圾回收器都是采用分代收集算法进行垃圾回收的。</p>
+<ul>
+<li>年轻代（Young Gen）<ul>
+<li>区域相对老年代较小，对象生命周期短、存活率低，回收频繁。</li>
+<li>这种情况<strong>复制算法</strong>的回收整理，速度是最快的。复制算法的效率只和当前存活对象大小有关，因此很适用于年轻代的回收。而复制算法内存利用率不高的问题，通过hotspot中的两个survivor的设计得到缓解。</li>
+</ul>
+</li>
+<li>老年代（Tenured Gen）<ul>
+<li>区域较大，对象生命周期长、存活率高，回收不及年轻代频繁。</li>
+<li>这种情况存在大量存活率高的对象，复制算法明显变得不合适。一般是由<strong>标记-清除</strong>或者是<strong>标记-清除与标记-整理的混合</strong>实现。<ul>
+<li>Mark标记阶段的开销与存活对象的数量成正比。</li>
+<li>Sweep清除阶段的开销与所管理区域的大小成正相关。</li>
+<li>Compact压缩阶段的开销与存活对象的数据成正比。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>以HotSpot中的CMS回收器为例，CMS是基于<code>Mark-Sweep</code>实现，对于对象的回收效率很高；对于碎片问题，CMS采用基于<code>Mark-Compact</code>算法的Serial Old回收器作为补偿措施：当内存回收不佳（碎片导致的Concurrent Mode Failure时），将采用Serial Old执行Full GC以达到对老年代内存的整理。</p>
+<p>⚡ 增量收集算法</p>
+<p>上述现有的算法，在垃圾回收过程中，应用软件将处于一种<code>Stop the World</code>的状态。在<code>Stop the World</code>状态下，应用程序所有的线程都会挂起，暂停一切正常的工作，等待垃圾回收的完成；</p>
+<p>如果垃圾回收时间过长，<strong>应用程序会被挂起很久</strong>，将严重影响用户体验或者系统的稳定性。为了解决这个问题，即对实时垃圾收集算法的研究直接导致了增量收集（Incremental Collecting）算法的诞生。</p>
+<ul>
+<li>基本思想：让<strong>垃圾收集线程和应用程序线程交替执行</strong>。每次，垃圾收集线程只收集一小片区域的内存空间，接着切换到应用程序线程。依次反复，直到垃圾收集完成。</li>
+<li>增量收集算法的基础仍是传统的标记-清除和复制算法。增量收集算法通过对线程间冲突的妥善处理，允许垃圾收集线程以分阶段的方式完成标记、清理或复制工作</li>
+<li>优缺点：系统停顿时间大量减少，但由于线程切换和上下文转换的消耗，垃圾回收的总体成本上升，造成<strong>系统吞吐量的下降</strong>。</li>
+</ul>
+<p>⚡ 分区算法</p>
+<p>一般来说，在相同条件下，堆空间越大，一次GC时所需要的时间就越长，有关GC产生的停顿也越长。</p>
+<p>为了更好地控制GC产生的停顿时间，<strong>将一块大的内存区域分割成多个小块，根据目标的停顿时间，每次合理地回收若干个小区间</strong>，而不是整个堆空间，从而减少一次GC所产生的停顿。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JVM/">JVM</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/0/">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <i class="iconfont icon-tags-fill"></i>&nbsp;<a href="http://www.beian.miit.gov.cn/" target="_blank">鲁ICP备19062448号</a>&nbsp&nbsp;| &nbsp&nbsp <i class="iconfont icon-addrcard"></i>&nbsp; 2021<a href="https://www.jngwl.top/" target="_blank"> 清风与归_G</a>&nbsp&nbsp;|&nbsp&nbsp;  <i class="iconfont icon-docker"></i> <a href="https://hexo.io/" target="_blank">&nbsp Hexo</a>&nbsp & &nbsp <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank">Fluid</a><br> 你的骄傲多半来自于自己的无知，共勉之
+
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

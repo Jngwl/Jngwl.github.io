@@ -180,7 +180,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      8.4k 字
+      14.7k 字
     </span>
   
 
@@ -190,7 +190,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      88
+      156
        分钟
     </span>
   
@@ -297,7 +297,7 @@ null</code></pre>
 </ul>
 </li>
 </ul>
-<h2 id="三、运行时数据区"><a href="#三、运行时数据区" class="headerlink" title="三、运行时数据区"></a>三、运行时数据区</h2><h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><h3 id="虚拟机栈"><a href="#虚拟机栈" class="headerlink" title="虚拟机栈"></a>虚拟机栈</h3><h3 id="本地方法接口"><a href="#本地方法接口" class="headerlink" title="本地方法接口"></a>本地方法接口</h3><h3 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h3><h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3><h2 id="垃圾回收概述"><a href="#垃圾回收概述" class="headerlink" title="垃圾回收概述"></a>垃圾回收概述</h2><h3 id="1）相关面试题"><a href="#1）相关面试题" class="headerlink" title="1）相关面试题"></a>1）相关面试题</h3><h4 id="蚂蚁金服"><a href="#蚂蚁金服" class="headerlink" title="蚂蚁金服"></a>蚂蚁金服</h4><ul>
+<h2 id="三、运行时数据区"><a href="#三、运行时数据区" class="headerlink" title="三、运行时数据区"></a>三、运行时数据区</h2><h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><h3 id="虚拟机栈"><a href="#虚拟机栈" class="headerlink" title="虚拟机栈"></a>虚拟机栈</h3><h3 id="本地方法接口"><a href="#本地方法接口" class="headerlink" title="本地方法接口"></a>本地方法接口</h3><h3 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h3><h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3><h2 id="四、垃圾回收概述"><a href="#四、垃圾回收概述" class="headerlink" title="四、垃圾回收概述"></a>四、垃圾回收概述</h2><h3 id="1）相关面试题"><a href="#1）相关面试题" class="headerlink" title="1）相关面试题"></a>1）相关面试题</h3><h4 id="蚂蚁金服"><a href="#蚂蚁金服" class="headerlink" title="蚂蚁金服"></a>蚂蚁金服</h4><ul>
 <li>你知道哪几种垃圾回收器，各自的优缺点，重点讲一下cms和G1？</li>
 <li>JVM GC算法有哪些，目前的JDK版本采用什么回收算法？</li>
 <li>G1回收器讲下回收过程GC是什么？为什么要有GC？</li>
@@ -342,17 +342,15 @@ null</code></pre>
 <li>基本不收集Perm区（元空间）</li>
 </ul>
 <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210119101047.png" srcset="/img/loading.gif" alt=""></p>
-<h2 id="垃圾回收相关算法"><a href="#垃圾回收相关算法" class="headerlink" title="垃圾回收相关算法"></a>垃圾回收相关算法</h2><h3 id="1）标记阶段"><a href="#1）标记阶段" class="headerlink" title="1）标记阶段"></a>1）标记阶段</h3><p>在堆中存放着几乎所有的Java对象实例，在GC执行垃圾回收之前，首先要区分出哪些是需要被清除的死亡对象。当一个对象已经不再被任何的存活对象继续引用时，其被宣判死亡。（老寻梦环游记了…）判断对象是否存活，一般有引用计数算法和可达性分析算法两种方式：</p>
-<p>⚡ 引用计数算法（Reference Counting）</p>
-<ul>
+<h2 id="五、垃圾回收相关算法"><a href="#五、垃圾回收相关算法" class="headerlink" title="五、垃圾回收相关算法"></a>五、垃圾回收相关算法</h2><h3 id="1）标记阶段"><a href="#1）标记阶段" class="headerlink" title="1）标记阶段"></a>1）标记阶段</h3><p>在堆中存放着几乎所有的Java对象实例，在GC执行垃圾回收之前，首先要区分出哪些是需要被清除的死亡对象。当一个对象已经不再被任何的存活对象继续引用时，其被宣判死亡。（老寻梦环游记了…）判断对象是否存活，一般有引用计数算法和可达性分析算法两种方式：</p>
+<h4 id="⚡-引用计数算法（Reference-Counting）"><a href="#⚡-引用计数算法（Reference-Counting）" class="headerlink" title="⚡ 引用计数算法（Reference Counting）"></a>⚡ 引用计数算法（Reference Counting）</h4><ul>
 <li>原理：为每个对象保存一个整型的引用计数器属性，用于记录对象被引用的情况。对于一个对象A，只要有任何一个对象引用了A，则A的引用计数器就加1；当引用失效时，引用计数器就减1。只要对象A的引用计数器的值为0，即表示对象A不可能再被使用，可进行回收。</li>
 <li>优点：实现简单，垃圾对象便于辨识；判定效率高，回收没有延迟性</li>
 <li>缺点：它需要单独的字段存储计数器，这样的做法增加了存储空间的开销；每次赋值都需要更新计数器，伴随着加法和减法操作，这增加了时间开销；引用计数器有一个严重的问题，即<strong>无法处理循环引用的情况</strong>。这是一条致命缺陷，导致在<strong>Java的垃圾回收器中没有使用这类算法</strong>。</li>
 <li>Python在使用引用计数算法，其在处理循环引用时，用两种方案：在合适的时机，手动解除引用关系；采用Python的弱引用库weakref</li>
 </ul>
 <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210119110611.png" srcset="/img/loading.gif" alt=""></p>
-<p>⚡ 可达性分析算法</p>
-<ul>
+<h4 id="⚡-可达性分析算法"><a href="#⚡-可达性分析算法" class="headerlink" title="⚡ 可达性分析算法"></a>⚡ 可达性分析算法</h4><ul>
 <li>可达性分析算法，也称为根搜索算法、追踪性垃圾收集。其有效解决了引用计数算法中的循环引用问题，防止内存泄漏</li>
 <li>原理：以根对象集合（GC Root Set）为起始点，<strong>向下搜索被根对象集合直接或间接连接到的对象</strong>被标记为存活对象，无法建立连接的对象被标记为可回收对象。参考官场的裙带关系</li>
 </ul>
@@ -374,8 +372,7 @@ null</code></pre>
 <li>当使用可达性分析算法 来判断内存是否可回收时，分析工作必须在一个<strong>能保障一致性的快照</strong>中进行。这点不满足的话分析结果的<strong>准确性</strong>就无法保证。这点也是导致GC进行时必须“Stop The World”的一个重要原因。即使是号称（几乎）不会发生停顿的CMS收集器中，枚举根节点时也是必须要停顿的。</li>
 </ul>
 <h3 id="2）对象的finalization机制"><a href="#2）对象的finalization机制" class="headerlink" title="2）对象的finalization机制"></a>2）对象的finalization机制</h3><h3 id="3）清除阶段"><a href="#3）清除阶段" class="headerlink" title="3）清除阶段"></a>3）清除阶段</h3><p>当成功区分出内存中存活对象和死亡对象后，GC接下来的任务是执行垃圾回收，释放掉无用对象所占用的内存空间，以便有足够的可用内存空间为新对象分配内存。目前在JVM中比较常见的几种垃圾收集算法：</p>
-<p>⚡ 标记-清除算法（Mark-Sweep）</p>
-<ul>
+<h4 id="⚡-标记-清除算法（Mark-Sweep）"><a href="#⚡-标记-清除算法（Mark-Sweep）" class="headerlink" title="⚡ 标记-清除算法（Mark-Sweep）"></a>⚡ 标记-清除算法（Mark-Sweep）</h4><ul>
 <li>J.McCarthy 1960年提出，并用于Lisp语言</li>
 <li>执行过程：当堆中的有效内存空间（available memory）被耗尽时，就会停止整个程序（stop the world），然后进行两项标记和清除工作：<ul>
 <li><strong>标记</strong>：Collector从引用根节点开始遍历，标记<code>所有被引用的对象</code>。是可达对象，而不是不可达对象！一般是在对象的Header中记录为可达对象。</li>
@@ -384,8 +381,7 @@ null</code></pre>
 </li>
 <li>缺点：标记时从根节点开始遍历，清除时对堆内存进行遍历，相当于两次O(N)，效率不高；在进行GC时，需要停止整个应用程序，用户体验较差；清理后的空闲内存并不连续，会产生内存碎片，需要维护一个空闲列表来分配这些内存。</li>
 </ul>
-<p>⚡ 复制算法（Copying）</p>
-<ul>
+<h4 id="⚡-复制算法（Copying）"><a href="#⚡-复制算法（Copying）" class="headerlink" title="⚡ 复制算法（Copying）"></a>⚡ 复制算法（Copying）</h4><ul>
 <li><p>M.L.Minsky 1963年提出，改进了标记清除算法的低效率问题</p>
 </li>
 <li><p>原理：将活着的内存空间分为两块，每次只使用其中一块，在垃圾回收时将正在使用的内存中的存活对象复制到未被使用的内存块中，之后清除正在使用的内存块中的所有对象，交换两个内存的角色，最后完成垃圾回收</p>
@@ -394,8 +390,7 @@ null</code></pre>
 <li>缺点：需要两倍内存空间；对于G1这种分拆成大量region的GC，复制而不是移动，意味着GC需要维护region之间对象引用关系，内存占用、时间开销都很大</li>
 <li>适用于<strong>垃圾对象很多，存活对象很少</strong>的场景；例如：Young区的Survivor 0区 和Survivor 1区</li>
 </ul>
-<p>⚡ 标记-压缩算法（Mark-Compact）</p>
-<ul>
+<h4 id="⚡-标记-压缩算法（Mark-Compact）"><a href="#⚡-标记-压缩算法（Mark-Compact）" class="headerlink" title="⚡ 标记-压缩算法（Mark-Compact）"></a>⚡ 标记-压缩算法（Mark-Compact）</h4><ul>
 <li>复制算法适用于存活对象少、垃圾对象多的新生代，不适合有大量存活对象的老年代；标记-清除算法可以应用于老年代，但是会产生大量内存碎片</li>
 <li>1970年前后，G.L.Steele等人提出标记压缩算法</li>
 <li>执行过程：第一阶段和标记清除算法一样，从根节点开始标记所有被引用对象；第二阶段将所有的存活对象压缩到内存一端，按顺序排放；之后，清理边界外所有空间。</li>
@@ -403,8 +398,7 @@ null</code></pre>
 <li>优点：消除了标记-清除算法当中，内存区域分散的缺点，我们需要给新对象分配内存时，JVM只需要持有一个内存的起始地址即可；消除了复制算法当中，内存减半的高额代价。</li>
 <li>缺点：从效率上来说，标记-整理算法要低于复制算法；移动对象的同时，如果对象被其他对象引用，则还需要调整引用的地址；移动过程中，需要全程暂停用户应用程序。即：STW</li>
 </ul>
-<p>⚡ 三种算法的比较</p>
-<div class="table-container">
+<h4 id="⚡-三种算法的比较"><a href="#⚡-三种算法的比较" class="headerlink" title="⚡ 三种算法的比较"></a>⚡ 三种算法的比较</h4><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -443,8 +437,7 @@ null</code></pre>
 </table>
 </div>
 <p>没有最好的，只有最合适的！具体问题、具体分析的算法应运而生。</p>
-<p>⚡ 分代算法（Generational Collecting）</p>
-<p>分代思想被现有的虚拟机广泛应用，几乎所有的垃圾回收器都是采用分代收集算法进行垃圾回收的。</p>
+<h4 id="⚡-分代算法（Generational-Collecting）"><a href="#⚡-分代算法（Generational-Collecting）" class="headerlink" title="⚡ 分代算法（Generational Collecting）"></a>⚡ 分代算法（Generational Collecting）</h4><p>分代思想被现有的虚拟机广泛应用，几乎所有的垃圾回收器都是采用分代收集算法进行垃圾回收的。</p>
 <ul>
 <li>年轻代（Young Gen）<ul>
 <li>区域相对老年代较小，对象生命周期短、存活率低，回收频繁。</li>
@@ -463,19 +456,17 @@ null</code></pre>
 </li>
 </ul>
 <p>以HotSpot中的CMS回收器为例，CMS是基于<code>Mark-Sweep</code>实现，对于对象的回收效率很高；对于碎片问题，CMS采用基于<code>Mark-Compact</code>算法的Serial Old回收器作为补偿措施：当内存回收不佳（碎片导致的Concurrent Mode Failure时），将采用Serial Old执行Full GC以达到对老年代内存的整理。</p>
-<p>⚡ 增量收集算法</p>
-<p>上述现有的算法，在垃圾回收过程中，应用软件将处于一种<code>Stop the World</code>的状态。在<code>Stop the World</code>状态下，应用程序所有的线程都会挂起，暂停一切正常的工作，等待垃圾回收的完成；</p>
+<h4 id="⚡-增量收集算法"><a href="#⚡-增量收集算法" class="headerlink" title="⚡ 增量收集算法"></a>⚡ 增量收集算法</h4><p>上述现有的算法，在垃圾回收过程中，应用软件将处于一种<code>Stop the World</code>的状态。在<code>Stop the World</code>状态下，应用程序所有的线程都会挂起，暂停一切正常的工作，等待垃圾回收的完成；</p>
 <p>如果垃圾回收时间过长，<strong>应用程序会被挂起很久</strong>，将严重影响用户体验或者系统的稳定性。为了解决这个问题，即对实时垃圾收集算法的研究直接导致了增量收集（Incremental Collecting）算法的诞生。</p>
 <ul>
 <li>基本思想：让<strong>垃圾收集线程和应用程序线程交替执行</strong>。每次，垃圾收集线程只收集一小片区域的内存空间，接着切换到应用程序线程。依次反复，直到垃圾收集完成。</li>
 <li>增量收集算法的基础仍是传统的标记-清除和复制算法。增量收集算法通过对线程间冲突的妥善处理，允许垃圾收集线程以分阶段的方式完成标记、清理或复制工作</li>
 <li>优缺点：系统停顿时间大量减少，但由于线程切换和上下文转换的消耗，垃圾回收的总体成本上升，造成<strong>系统吞吐量的下降</strong>。</li>
 </ul>
-<p>⚡ 分区算法</p>
-<p>一般来说，在相同条件下，堆空间越大，一次GC时所需要的时间就越长，有关GC产生的停顿也越长。</p>
+<h4 id="⚡-分区算法"><a href="#⚡-分区算法" class="headerlink" title="⚡ 分区算法"></a>⚡ 分区算法</h4><p>一般来说，在相同条件下，堆空间越大，一次GC时所需要的时间就越长，有关GC产生的停顿也越长。</p>
 <p>为了更好地控制GC产生的停顿时间，<strong>将一块大的内存区域分割成多个小块，根据目标的停顿时间，每次合理地回收若干个小区间</strong>，而不是整个堆空间，从而减少一次GC所产生的停顿。</p>
 <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210119191542.png" srcset="/img/loading.gif" alt=""></p>
-<h2 id="垃圾回收相关概念"><a href="#垃圾回收相关概念" class="headerlink" title="垃圾回收相关概念"></a>垃圾回收相关概念</h2><h3 id="1）System-gc-的理解"><a href="#1）System-gc-的理解" class="headerlink" title="1）System.gc()的理解"></a>1）System.gc()的理解</h3><p>在默认情况下，通过System.gc()者Runtime.getRuntime().gc() 的调用，会<strong>显式触发Full GC</strong>，同时对老年代和新生代进行回收，尝试释放被丢弃对象占用的内存。但System.gc()调用时，对垃圾收集器的调用<strong>不能确保立即生效</strong>。</p>
+<h2 id="六、垃圾回收相关概念"><a href="#六、垃圾回收相关概念" class="headerlink" title="六、垃圾回收相关概念"></a>六、垃圾回收相关概念</h2><h3 id="1）System-gc-的理解"><a href="#1）System-gc-的理解" class="headerlink" title="1）System.gc()的理解"></a>1）System.gc()的理解</h3><p>在默认情况下，通过System.gc()者Runtime.getRuntime().gc() 的调用，会<strong>显式触发Full GC</strong>，同时对老年代和新生代进行回收，尝试释放被丢弃对象占用的内存。但System.gc()调用时，对垃圾收集器的调用<strong>不能确保立即生效</strong>。</p>
 <p>JVM实现者可以通过System.gc() 调用来决定JVM的GC行为。而一般情况下，垃圾回收应该是自动进行的，无须手动触发，否则就太过于麻烦。</p>
 <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210119194314.png" srcset="/img/loading.gif" alt=""></p>
 <h3 id="2）内存溢出与泄漏"><a href="#2）内存溢出与泄漏" class="headerlink" title="2）内存溢出与泄漏"></a>2）内存溢出与泄漏</h3><p>⚡ 内存溢出（Out of memory）</p>
@@ -551,15 +542,15 @@ null</code></pre>
 </div>
 <p>⚡ 垃圾回收</p>
 <ul>
+<li><p>串行：单线程地执行垃圾回收，比如内存不够需要清理垃圾时，先暂停程序，再启动JVM垃圾回收器进行垃圾回收，回收完之后启动用户程序线程</p>
+</li>
+<li><p>并行：多条垃圾回收线程并行工作，用户线程此时处于等待状态</p>
+</li>
 <li><p>并发：<strong>用户线程与垃圾收集线程同时执行</strong>（但不一定是并行的，可能会交替执行），垃圾回收线程在执行时不会停顿用户程序的运行。</p>
 <ul>
 <li>比如用户程序在继续运行，而垃圾收集程序线程运行于另一个CPU上；</li>
 <li>典型垃圾回收器：CMS、G1</li>
 </ul>
-</li>
-<li><p>并行：多条垃圾回收线程并行工作，用户线程此时处于等待状态</p>
-</li>
-<li><p>串行：单线程地执行垃圾回收，比如内存不够，先暂停程序，启动JVM垃圾回收器进行垃圾回收，回收完之后再启动用户程序线程</p>
 <p>|                        串行和并行示例                        |                           并发示例                           |<br>| :—————————————————————————————: | :—————————————————————————————: |<br>| <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210119210732.png" srcset="/img/loading.gif" alt="img"> | <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210119210738.png" srcset="/img/loading.gif" alt=""> |</p>
 </li>
 </ul>
@@ -628,6 +619,311 @@ null</code></pre>
 <li>用于实现对象的finalize() 方法</li>
 <li>无需手动编码，其内部配合引用队列使用</li>
 <li>在GC时，终结器引用入队。由Finalizer线程通过终结器引用找到被引用对象调用它的finalize()方法，第二次GC时才回收被引用的对象</li>
+</ul>
+<blockquote>
+<p>Java不同版本的新特性：</p>
+<p>1.语法层面：Lambda表达式、switch、自动装箱和拆箱、enum等等</p>
+<p>2.API层面：Stream API、新的日期时间、Optional、String、集合框架</p>
+<p>3.底层优化：JVM优化、GC方面的变化、元空间、静态域、字符串常量池等等</p>
+</blockquote>
+<h2 id="七、垃圾回收器"><a href="#七、垃圾回收器" class="headerlink" title="七、垃圾回收器"></a>七、垃圾回收器</h2><h3 id="1）GC分类"><a href="#1）GC分类" class="headerlink" title="1）GC分类"></a>1）GC分类</h3><ul>
+<li>按垃圾回收线程数：串行垃圾回收器和并行垃圾回收器</li>
+<li>按工作模式：独占式垃圾回收器（STW）和并发式垃圾回收器</li>
+<li>按碎片处理方式：压缩式垃圾回收器（整理内存碎片，通过指针碰撞分配对象空间）和非压缩式垃圾回收器（不整理内存碎片，通过空闲列表分配对象空间）</li>
+<li>按工作的内存空间：年轻代垃圾回收器和年轻代垃圾回收器</li>
+</ul>
+<h3 id="2）GC的性能指标"><a href="#2）GC的性能指标" class="headerlink" title="2）GC的性能指标"></a>2）GC的性能指标</h3><ul>
+<li><p><strong>吞吐量</strong>：运行用户代码的时间占总运行时间的比例</p>
+<ul>
+<li>总运行时间s = 程序的运行时间a + 内存回收的时间b</li>
+<li>吞吐量throughput = a/s；</li>
+<li>吞吐量优先，意味着在单位时间内，STW的时间最短</li>
+</ul>
+</li>
+<li><p><strong>暂停时间</strong>：是指一个时间段内应用程序线程暂停（STW），让GC线程执行的状态</p>
+<ul>
+<li>GC期间100毫秒的暂停时间意味着在这100毫秒期间内没有应用程序线程是活动的</li>
+<li>暂停时间优先，意味着尽可能让单次STW的时间最短</li>
+<li>交互式应用程序，低暂停时间（低延迟）的用户体验更好。</li>
+</ul>
+<p>吞吐量和暂停时间相互矛盾，吞吐量大了，每次暂停时间较长，暂停时间短了，垃圾收集的频率增大，吞吐量也随之减小了。目前的标准是，<strong>在可控的暂停时间下，尽可能地提高吞吐量</strong></p>
+</li>
+<li><p><strong>内存占用</strong>：Java堆区所占的内存大小。</p>
+</li>
+<li><p>垃圾收集开销：垃圾收集所用时间与总运行时间的比例。</p>
+</li>
+<li><p>收集频率：相对于应用程序的执行，收集操作发生的频率。</p>
+</li>
+<li><p>快速：一个对象从诞生到被回收所经历的时间。</p>
+</li>
+</ul>
+<h3 id="3）7种经典垃圾回收器"><a href="#3）7种经典垃圾回收器" class="headerlink" title="3）7种经典垃圾回收器"></a>3）7种经典垃圾回收器</h3><p>串行回收器：Serial、Serial old</p>
+<p>并行回收器：ParNew、Parallel Scavenge、Parallel old</p>
+<p>并发回收器：CMS、G1</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210120095503.png" srcset="/img/loading.gif" alt=""></p>
+<p>新生代：Serial、ParNew、Parallel Scavenge</p>
+<p>老年代：CMS、Serial Old、Parallel Old</p>
+<p>全功能：G1</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210120100234.png" srcset="/img/loading.gif" alt=""></p>
+<p>如何当前版本查看默认的垃圾回收器：</p>
+<ul>
+<li><code>-XX:+PrintCommandLineFlags</code>：查看命令行相关参数（包含使用的垃圾收集器）</li>
+<li>使用命令行指令：<code>jinfo -flag 相关垃圾回收器参数（如UseG1GC） 进程ID</code></li>
+</ul>
+<h3 id="4）Serial串行回收器"><a href="#4）Serial串行回收器" class="headerlink" title="4）Serial串行回收器"></a>4）Serial串行回收器</h3><p><strong>Serial GC</strong>（年轻代）：复制算法、串行回收、”Stop-the-World”机制</p>
+<p><strong>Serial Old GC</strong>（老年代）：标记-压缩算法、串行回收和”Stop the World”机制</p>
+<ul>
+<li>Server模式下，与新生代的Parallel Scavenge配合使用，同时也作为老年代CMS收集器的后备垃圾收集方案</li>
+</ul>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210120102455.png" srcset="/img/loading.gif" alt=""></p>
+<ul>
+<li>单线程：它只会使用一个CPU或一条收集线程去完成垃圾收集工作，省去了切换线程的开销；此外，在它进行垃圾收集时，必须暂停其他所有的工作线程，直到它收集结束（STW）</li>
+</ul>
+<p>对于限定单个CPU的环境来说，Serial收集器由于没有线程交互的开销，专心做垃圾收集自然可以获得最高的单线程收集效率。运行在Client模式下的虚拟机是个不错的选择。</p>
+<p>在HotSpot虚拟机中，可通过<code>-XX:+UseSerialGC</code>指定年轻代和老年代都使用串行收集器</p>
+<ul>
+<li>新生代Serial GC，老年代Serial Old GC</li>
+</ul>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210120104845.png" srcset="/img/loading.gif" alt=""></p>
+<p>现在的设备基本已经没有单核的了，这个垃圾回收器也在弃用的边缘了…</p>
+<p>JavaWeb中交互较多，但串行时会暂停程序，用户体验很差，因此JavaWeb程序中也是不会采用串行垃圾回收器的…</p>
+<h3 id="5）ParNew-——-并行回收"><a href="#5）ParNew-——-并行回收" class="headerlink" title="5）ParNew —— 并行回收"></a>5）ParNew —— 并行回收</h3><p>Parallel New，<strong>并行回收垃圾，只能处理新生代</strong>；和Serial GC一样，也都是<strong>复制算法、Stop the World机制</strong>，区别仅为是否并行。</p>
+<ul>
+<li>ParaNew是很多JVM运行在Server模式下新生代 的默认垃圾回收器</li>
+</ul>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210120105613.png" srcset="/img/loading.gif" alt=""></p>
+<ul>
+<li>新生代：回收次数频繁，使用并行方式高效</li>
+<li>老年代：回收次数少，使用串行方式节省资源（避免切换线程）</li>
+</ul>
+<p>适用范围：</p>
+<ul>
+<li>多GPU下，ParaNew比Serial高效</li>
+<li>单CPU下，还是Serial好一些，避免了多线程交互中的一些额外开销</li>
+</ul>
+<p>参数配置：</p>
+<ul>
+<li>可通过<code>-XX:+UseParNewGC</code>指定使用ParNew收集器执行内存回收任务。它表示年轻代使用并行收集器，不影响老年代</li>
+<li>可通过<code>-XX:ParallelGCThreads</code>限制线程数量，默认开启和CPU相同线程数</li>
+</ul>
+<h3 id="6）Parallel-Scavenge-——-吞吐量优先"><a href="#6）Parallel-Scavenge-——-吞吐量优先" class="headerlink" title="6）Parallel Scavenge —— 吞吐量优先"></a>6）Parallel Scavenge —— 吞吐量优先</h3><p>并行回收垃圾、复制算法、Stop the world机制</p>
+<p>区别ParaNew：</p>
+<ul>
+<li>Parallel Scavenge收集器的目标：达到一个可控制的吞吐量</li>
+<li>自适应调节策略</li>
+</ul>
+<p>高吞吐量可以高效率利用CPU时间，尽快完成程序的运算任务，主要适用于<strong>后台运算而不需要太多交互任务</strong>。因此，常见在<strong>服务器环境</strong>中使用。例如，执行批量处理、订单处理、工资支付、科学计算的应用程序。</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210120142549.png" srcset="/img/loading.gif" alt=""></p>
+<ul>
+<li>新生代：复制算法、STW，Parallel</li>
+<li>老年代：标记-压缩算法、STW，Parallel Old</li>
+</ul>
+<p><strong>JDK8中，默认的垃圾回收器</strong>为Parallel（也会自动激活Parallel Old）</p>
+<p>JKD9中，默认为G1.</p>
+<p>参数配置：</p>
+<ul>
+<li>可通过<code>-XX:+UseParallelGC</code> 指定年轻代使用Parallel GC，但也会激活Parallel Old GC</li>
+<li>可通过<code>-XX:+UseParallelOldGC</code>指定老年代使用并行回收收集器，但也会激活Parallel GC</li>
+<li>可通过<code>-XX:ParallelGCThreads</code>：设置年轻代并行收集器的『线程数』<ul>
+<li>默认情况下，当CPU数量小于8个，ParallelGCThreads的值等于CPU数量</li>
+<li>当CPU数量大于8个，ParallelGCThreads的值等于3+[5*CPU_Count]/8]</li>
+</ul>
+</li>
+<li>可通过<code>-XX:MaxGCPauseMillis</code>：设置垃圾收集器『最大停顿时间』（即STW的时间）单位：毫秒</li>
+<li>可通过<code>-XX:GCTimeRatio</code>：垃圾收集时间占总时间的『比例』，用于衡量吞吐量的大小</li>
+<li>可通过<code>-XX:+UseAdaptiveSizePolicy</code>：设置Parallel Scavenge收集器具有『自适应调节策略』<ul>
+<li>在这种模式下，年轻代的大小、Eden和Survivor的比例、晋升老年代的对象年龄等参数会被自动调整，来达到在堆大小、吞吐量和停顿时间之间的平衡点。</li>
+<li>在手动调优比较困难的场合，可以直接使用这种自适应方式，仅指定虚拟机的最大堆、目标的吞吐量（GCTimeRatio）和停顿时间（MaxGCPauseMillis），让虚拟机自己完成调优工作</li>
+</ul>
+</li>
+</ul>
+<h3 id="7）CMS-——-低延迟"><a href="#7）CMS-——-低延迟" class="headerlink" title="7）CMS —— 低延迟"></a>7）CMS —— 低延迟</h3><h4 id="⚡-概述"><a href="#⚡-概述" class="headerlink" title="⚡ 概述"></a>⚡ 概述</h4><p>Concurrent-Mark-Sweep，第一次实现了让垃圾收集线程和用户线程同时工作，HotSpot虚拟机中第一款真正意义上的并发收集器。</p>
+<p>匹配的清除器有：ParNew和Serial GC，无法和Parallel Scavenge匹配使用；</p>
+<p>标记清除算法</p>
+<h4 id="⚡-工作原理"><a href="#⚡-工作原理" class="headerlink" title="⚡ 工作原理"></a>⚡ 工作原理</h4><ul>
+<li><strong>初始标记（Initial-Mark）阶段</strong>：STW。程序中所有的工作线程都将会因为“Stop-the-World”机制而出现短暂的暂停，这个阶段的主要任务<strong>仅仅只是标记出GC Roots能直接关联到的对象</strong>。一旦标记完成之后就会恢复之前被暂停的所有应用线程。由于直接关联对象比较小，所以这里的<strong>速度非常快</strong>。</li>
+<li><strong>并发标记（Concurrent-Mark）阶段</strong>：从GC Roots的<strong>直接关联对象开始遍历整个对象图</strong>的过程，这个过程耗时较长但是<strong>不需要停顿用户线程</strong>，可以与垃圾收集线程一起并发运行。</li>
+<li><strong>重新标记（Remark）阶段</strong>：STW。由于在并发标记阶段中，程序的工作线程会和垃圾收集线程同时运行或者交叉运行，因此为了<strong>修正并发标记期间，因用户程序继续运作而导致标记产生变动的那一部分对象的标记记录</strong>，这个阶段的停顿时间通常会比初始标记阶段稍长一些，并且也会导致“Stop-the-World”的发生，但也远比并发标记阶段的时间短</li>
+<li><strong>并发清除（Concurrent-Sweep）阶段</strong>：此阶段清理删除掉标记阶段判断的已经死亡的对象，释放内存空间。由于不需要移动存活对象，所以这个阶段也是可以与用户线程同时并发的</li>
+</ul>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210120151010.png" srcset="/img/loading.gif" alt=""></p>
+<ul>
+<li>由于在垃圾收集阶段用户线程没有中断，所以在CMS回收过程中，还应该确保 应用程序用户线程 有足够的内存可用 —&gt; <strong>堆内存使用率达到某一阈值时，便开始进行垃圾回收</strong></li>
+<li>CMS运行期间预留的内存无法满足程序需求：出现“Concurrent Mode Failure”失败，这时虚拟机将启动后备预案：临时启用Serial old收集器来重新进行老年代的垃圾收集，这样停顿时间更长</li>
+<li>由于清除阶段是并发进行的，用compact整理内存，需要移动对象，这时是需要STW的，这就违背了并发的规则。因此，无法采用并发整理算法</li>
+</ul>
+<h4 id="⚡-优缺点"><a href="#⚡-优缺点" class="headerlink" title="⚡ 优缺点"></a>⚡ 优缺点</h4><ul>
+<li>并发、低延迟：CMS中最耗时的并发标记、并发清除阶段都不需要暂停工作，所以整体的回收是低停顿的</li>
+<li>产生内存碎片：CMS采用标记-清除算法，不可避免地将会产生一些内存碎片；此时，无法使用指针碰撞（Bump the pointer）来分配对象，只能再维护一个空闲列表（free list）来分配内存。此外，无法分配大对象，只能提前触发Full GC。</li>
+<li>对CPU资源敏感：并发阶段占用了一部分线程而导致应用程序变慢，总吞吐量降低</li>
+<li>无法处理浮动垃圾：在CMS的并发标记和并发清理阶段，用户线程和垃圾收集线程是同时运行的，而程序的运行自然伴随着垃圾对象的产生，但这一部分垃圾已经无法再本次CMS收集中处理掉了，只能留待下一次垃圾收集时才可以处理掉</li>
+</ul>
+<h4 id="⚡-参数设置"><a href="#⚡-参数设置" class="headerlink" title="⚡ 参数设置"></a>⚡ 参数设置</h4><ul>
+<li><code>-XX:+UseConcMarkSweepGC</code>：手动指定使用CMS收集器执行内存回收任务。<ul>
+<li>开启该参数后会自动将-XX:+UseParNewGC打开。即：ParNew（Young区）+CMS（Old区）+Serial Old（Old区备选方案）的组合。</li>
+</ul>
+</li>
+<li><code>-XX:CMSInitiatingOccupanyFraction</code>：设置堆内存使用率的阈值，一旦达到该阈值，便开始进行回收。<ul>
+<li>JDK5及以前版本的默认值为68，即当老年代的空间使用率达到68%时，会执行一次CMS回收。JDK6及以上版本默认值为92%</li>
+<li>如果内存增长缓慢，则可以设置一个稍大的值，大的阀值可以有效降低CMS的触发频率，减少老年代回收的次数可以较为明显地改善应用程序性能；反之，如果应用程序内存使用率增长很快，则应该降低这个阈值，以避免频繁触发老年代串行收集器。因此通过该选项便可以有效降低Full GC的执行次数。</li>
+</ul>
+</li>
+<li><code>-XX:+UseCMSCompactAtFullCollection</code>：用于指定在执行完Full GC后对内存空间进行压缩整理，以此避免内存碎片的产生。不过由于内存压缩整理过程无法并发执行，所带来的问题就是停顿时间变得更长了。</li>
+<li><code>-XX:CMSFullGCsBeforeCompaction</code>：设置执行多少次Full GC后对内存空间进行压缩整理</li>
+<li><code>-XX:ParallelCMSThreads</code>：设置CMS的线程数</li>
+</ul>
+<blockquote>
+<p>如何选择垃圾回收器？</p>
+<p>（1）最小化地使用内存和并行开销：Serial GC</p>
+<p>（2）最大化应用程序的吞吐量：Parallel Scavenge GC</p>
+<p>（3）最小化GC的中断或停顿时间：CMS GC</p>
+</blockquote>
+<p>JDK9之后，CMS被废弃deprecated</p>
+<p>JDK14之后，直接删除了CMS</p>
+<h3 id="8）G1-——-区域化分代式"><a href="#8）G1-——-区域化分代式" class="headerlink" title="8）G1 —— 区域化分代式"></a>8）G1 —— 区域化分代式</h3><blockquote>
+<p>Garbage-First，复制算法、并行并发兼具、面向服务器，在延迟可控的情况下获得尽可能高的吞吐量</p>
+</blockquote>
+<h4 id="⚡-概述-1"><a href="#⚡-概述-1" class="headerlink" title="⚡ 概述"></a>⚡ 概述</h4><ul>
+<li><p>G1是一个并行回收器，它把Java堆内存分割为很多不相关的区域（Region）（物理上不连续的）。使用不同的Region来表示Eden、幸存者0区，幸存者1区，老年代等。</p>
+</li>
+<li><p>G1有计划地避免在整个Java堆中进行全区域的垃圾收集，其跟踪各个Region里面的垃圾堆积的价值大小（回收所获得的空间大小以及回收所需时间的经验值），在后台维护一个优先列表，<strong>每次根据允许的收集时间，优先回收价值最大的Region</strong>。</p>
+</li>
+<li><p>由于该回收器的侧重点在于<strong>回收垃圾最大量的区间（Region）</strong>，所以我们将该回收器称为：垃圾优先（Garbage First）</p>
+</li>
+<li><p>G1是一款<strong>面向服务端应用</strong>的垃圾收集器，<strong>主要针对配备多核CPU及大容量内存的机器</strong>，以极高概率满足GC停顿时间的同时，还兼具高吞吐量的性能特征。</p>
+</li>
+<li><p>JDK9之后的默认垃圾回收器，且JDK9之后废弃了CMS。在JDK8中，可通过-XX:+UseG1GC启用</p>
+</li>
+</ul>
+<h4 id="⚡-优势"><a href="#⚡-优势" class="headerlink" title="⚡ 优势"></a>⚡ 优势</h4><ul>
+<li>支持并行与并发<ul>
+<li>并行性：G1在回收期间，可以有多个GC线程同时工作，有效利用多核计算能力。此时用户线程STW</li>
+<li>并发性：G1拥有与应用程序交替执行的能力，部分工作可以和应用程序同时执行，因此，一般来说，不会在整个回收阶段发生完全阻塞应用程序的情况</li>
+</ul>
+</li>
+<li>分代收集<ul>
+<li>区分年轻代和老年代，年轻代依然有Eden区和Survivor区；但从堆的结构上看，它不要求整个Eden区、年轻代或者老年代都是物理连续的，也不再坚持固定大小和固定数量。</li>
+<li><strong>堆空间物理上被分为了若干个区域Region，但这些区域中包含了逻辑上的年轻代和老年代</strong></li>
+</ul>
+</li>
+</ul>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210120202521.png" srcset="/img/loading.gif" alt=""></p>
+<ul>
+<li>可预测的停顿时间模型（软实时）<ul>
+<li>可以让使用者明确设定在一个长度为M毫秒的时间片段内，消耗在垃圾收集上的时间不得超过N毫秒。</li>
+<li>G1可以只选取部分区域进行内存回收，这样缩小了回收的范围，因此对于全局停顿情况的发生也能得到较好的控制。</li>
+</ul>
+</li>
+</ul>
+<h4 id="⚡-缺点"><a href="#⚡-缺点" class="headerlink" title="⚡ 缺点"></a>⚡ 缺点</h4><ul>
+<li>用户程序运行过程中，G1无论是为了垃圾收集产生的内存占用（Footprint）还是程序运行时的额外执行负载（overload）都要比CMS要高。</li>
+<li>从经验上来说，在小内存应用上CMS的表现大概率会优于G1，而G1在大内存应用上则发挥其优势。平衡点在6-8GB之间。</li>
+</ul>
+<h4 id="⚡-参数配置"><a href="#⚡-参数配置" class="headerlink" title="⚡ 参数配置"></a>⚡ 参数配置</h4><ul>
+<li><code>-XX:+UseG1GC</code>：手动指定使用G1垃圾收集器执行内存回收任务</li>
+<li><code>-XX:G1HeapRegionSize</code>：设置每个Region的大小<ul>
+<li>值是2的幂，范围是1MB到32MB之间，目标是根据最小的Java堆大小划分出约2048个区域。</li>
+<li>默认是堆内存的1/2000</li>
+</ul>
+</li>
+<li><code>-XX:MaxGCPauseMillis</code>：设置期望达到的最大GC停顿时间指标，默认值：200ms</li>
+<li><code>-XX:+ParallelGCThread</code>：设置并行垃圾回收线程数。最多设置为8</li>
+<li><code>-XX:ConcGCThreads</code>：设置并发标记的线程数。一般将n设置为并行垃圾回收线程数的1/4左右</li>
+<li><code>-XX:InitiatingHeapOccupancyPercent</code>：设置触发并发GC周期的Java堆占用率阈值<ul>
+<li>超过此值，触发GC。默认值为45</li>
+</ul>
+</li>
+</ul>
+<h4 id="⚡-G1的适用场景"><a href="#⚡-G1的适用场景" class="headerlink" title="⚡ G1的适用场景"></a>⚡ G1的适用场景</h4><ul>
+<li>面向服务端应用，针对具有大内存、多处理器的机器。（在普通大小的堆里，表现并没有那么惊喜）</li>
+<li>要低GC延迟，并具有大堆的应用程序提供解决方案<ul>
+<li>比如：在堆大小约6GB或更大时，可预测的暂停时间可以低于0.5秒；（G1通过每次只清理一部分而不是全部的Region的增量式清理来保证每次GC停顿时间不会过长）</li>
+</ul>
+</li>
+<li>以下场景，采用G1替换掉CMS收集器，可以收获更好的效果：<ul>
+<li>超过50%的Java堆被活动数据占用</li>
+<li>对象分配频率或年代提升频率变化很大</li>
+<li>GC停顿时间过长（长于0.5至1秒）</li>
+</ul>
+</li>
+</ul>
+<h4 id="⚡-分区：化整为零"><a href="#⚡-分区：化整为零" class="headerlink" title="⚡ 分区：化整为零"></a>⚡ 分区：化整为零</h4><p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210120210415.png" srcset="/img/loading.gif" alt=""></p>
+<ul>
+<li>使用G1收集器时，它将整个Java堆划分成约2048个大小相同的独立Region块，每个Region块大小根据堆空间的实际大小而定，整体被控制在1MB到32MB之间，且为2的N次幂，即1MB，2MB，4MB，8MB，16MB，32MB。</li>
+<li>可以通过<code>-XX:G1HeapRegionSize</code>设定。所有的Region大小相同，且在JVM生命周期内不会被改变。</li>
+<li>虽然还保留有新生代和老年代的概念，但新生代和老年代不再是物理隔离的了，它们都是一部分Region的集合。通过Region的动态分配方式实现<strong>逻辑上的连续</strong>。</li>
+<li>G1垃圾收集器还增加了一种新的内存区域，叫做Humongous内存区域，如图中的H块。主要用于存储大对象，如果超过0.5个Region，就放到H。<ul>
+<li>对于堆中的大对象，默认直接会被分配到老年代，但是如果它是一个短期存在的大对象就会对垃圾收集器造成负面影响。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210120212840.png" srcset="/img/loading.gif" alt=""></p>
+<ul>
+<li>每个Region都是通过指针碰撞来分配空间；每个Region都有TLAB，提高对象分配的效率</li>
+</ul>
+<h4 id="⚡-G1垃圾回收过程"><a href="#⚡-G1垃圾回收过程" class="headerlink" title="⚡ G1垃圾回收过程"></a>⚡ G1垃圾回收过程</h4><p>① 年轻代GC</p>
+<p>JVM启动时，G1先准备好Eden区，程序在运行过程中不断创建对象到Eden区，当Eden空间耗尽时，G1会启动一次年轻代垃圾回收过程。</p>
+<p>年轻代垃圾回收时，首先停止应用程序的执行（stop-The-Wor1d），然后G1创建回收集（Collection Set，需要被回收的内存分段的集合，年轻代回收过程的回收集包含年轻代Eden区和Survivor区所有的内存分段）。</p>
+<ul>
+<li><strong>扫描根</strong>：根是指static变量指向的对象，正在执行的方法调用链条上的局部变量等。根引用连同RSet记录的外部引用作为扫描存活对象的入口。</li>
+<li><strong>更新RSet</strong>：处理dirty card queue中的card，更新RSet。此阶段完成后，RSet可以准确的反映老年代对所在的内存分段中对象的引用。</li>
+<li><strong>处理RSet</strong>：识别被老年代对象指向的Eden中的对象，这些被指向的Eden中的对象被认为是存活的对象</li>
+<li><strong>复制对象</strong>：此阶段，对象树被遍历，Eden区内存段中存活的对象会被复制到Survivor区中空的内存分段，Survivor区内存段中存活的对象如果年龄未达阈值，年龄会加1，达到阀值会被会被复制到o1d区中空的内存分段。如果Survivor空间不够，Eden空间的部分数据会直接晋升到老年代空间。</li>
+<li><strong>处理引用</strong>：处理Soft，Weak，Phantom，Final，JNI Weak 等引用。最终Eden空间的数据为空，GC停止工作，而目标内存中的对象都是连续存储的，没有碎片，所以复制过程可以达到内存整理的效果，减少碎片。</li>
+</ul>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210120221927.png" srcset="/img/loading.gif" alt=""></p>
+<p>② 老年代并发标记过程</p>
+<ul>
+<li><strong>初始标记阶段</strong>：标记从根节点直接可达的对象。这个阶段是sTw的，并且会触发一次年轻代GC。</li>
+<li><strong>根区域扫描</strong>（Root Region Scanning）：G1 Gc扫描survivor区直接可达的老年代区域对象，并标记被引用的对象。这一过程必须在youngGC之前完成。</li>
+<li><strong>并发标记</strong>（Concurrent  Marking）：在整个堆中进行并发标记（和应用程序并发执行），此过程可能被youngGC中断。在并发标记阶段，若发现区域对象中的所有对象都是垃圾，那这个区域会被立即回收。同时，并发标记过程中，会计算每个区域的对象活性（区域中存活对象的比例）。</li>
+<li><strong>再次标记</strong>（Remark）：由于应用程序持续进行，需要修正上一次的标记结果。是STW的。G1中采用了比CMS更快的初始快照算法：snapshot-at-the-beginning（SATB）。</li>
+<li><strong>独占清理</strong>（cleanup，STW）：计算各个区域的存活对象和GC回收比例，并进行排序，识别可以混合回收的区域。为下阶段做铺垫。是sTw的。这个阶段并不会实际上去做垃圾的收集</li>
+<li><strong>并发清理阶段</strong>：识别并清理完全空闲的区域。</li>
+</ul>
+<p>③ 混合回收</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210120222832.png" srcset="/img/loading.gif" alt=""></p>
+<p>当越来越多的对象晋升到老年代o1d region时，为了避免堆内存被耗尽，虚拟机会触发一个混合的垃圾收集器，即Mixed GC，该算法并不是一个old GC，除了回收整个Young Region，还会回收一部分的old Region。这里需要注意：<strong>是一部分老年代，而不是全部老年代</strong>。可以选择哪些o1d Region进行收集，从而可以对垃圾回收的耗时时间进行控制。也要注意的是Mixed GC并不是Full GC。</p>
+<ul>
+<li><p>并发标记结束以后，老年代中百分百为垃圾的内存分段被回收了，部分为垃圾的内存分段被计算了出来。</p>
+</li>
+<li><p>混合回收的回收集（Collection Set）包括八分之一的老年代内存分段，Eden区内存分段，Survivor区内存分段。混合回收的算法和年轻代回收的算法完全一样，只是回收集多了老年代的内存分段。具体过程请参考上面的年轻代回收过程。</p>
+</li>
+<li><p>由于老年代中的内存分段默认分8次回收，G1会优先回收垃圾多的内存分段。垃圾占内存分段比例越高的，越会被先回收。并且有一个阈值会决定内存分段是否被回收，XX:G1MixedGCLiveThresholdPercent，默认为65%，意思是垃圾占内存分段比例要达到65%才会被回收。如果垃圾占比太低，意味着存活的对象占比高，在复制的时候会花费更多的时间。</p>
+</li>
+<li><p>混合回收并不一定要进行8次。有一个阈值-XX:G1HeapWastePercent，默认值为1e%，意思是允许整个堆内存中有10%的空间被浪费，意味着如果发现可以回收的垃圾占堆内存的比例低于1e%，则不再进行混合回收。因为GC会花费很多的时间但是回收到的内存却很少。</p>
+</li>
+</ul>
+<p>④ Full GC</p>
+<p>G1的初衷就是要避免Fu11GC的出现。但是如果上述方式不能正常工作，G1会停止应用程序的执行（stop-The-world），使用单线程的内存回收算法进行垃圾回收，性能会非常差，应用程序停顿时间会很长。</p>
+<p>要避免Fu11GC的发生，一旦发生需要进行调整。什么时候会发生Ful1GC呢？比如堆内存太小，当G1在复制存活对象的时候没有空的内存分段可用，则会回退到ful1gc，这种情况可以通过增大内存解决。 导致61Fu11GC的原因可能有两个：</p>
+<ul>
+<li>EVacuation的时候没有足够的to-space来存放晋升的对象；</li>
+<li>并发处理过程完成之前空间耗尽。</li>
+</ul>
+<p>⑤ 可优化的点</p>
+<ul>
+<li>年轻代大小：避免使用-Xmn或-XX:NewRatio等相关选项显式设置年轻代大小</li>
+<li>暂停时间目标暂停时间目标不要太过严苛：G1的吞吐量目标是90%的应用程序时间和10%的垃圾回收时间，目标太过严苛表示你愿意承受更多的垃圾回收开销，而这些会直接影响到吞吐量。</li>
+</ul>
+<h3 id="9）垃圾回收器的总结"><a href="#9）垃圾回收器的总结" class="headerlink" title="9）垃圾回收器的总结"></a>9）垃圾回收器的总结</h3><p>GC发展阶段：Seria l=&gt; Parallel（并行）=&gt; CMS（并发）=&gt; G1 =&gt; ZGC</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210120223639.png" srcset="/img/loading.gif" alt=""></p>
+<p>同厂商、不同版本的虚拟机实现差距比较大。HotSpot虚拟机在JDK7/8后所有收集器及组合如下图</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210120223801.png" srcset="/img/loading.gif" alt=""></p>
+<p>🔎 新生代垃圾回收器和老年代垃圾回收器都有哪些？有什么区别？</p>
+<p>🔎 怎样选择垃圾回收器：</p>
+<ul>
+<li>优先调整堆的大小让JVM自适应完成。</li>
+<li>如果内存小于100M，使用串行收集器</li>
+<li>如果是单核、单机程序，并且没有停顿时间的要求，串行收集器</li>
+<li>如果是多CPU、需要高吞吐量、允许停顿时间超过1秒，选择并行或者JVM自己选择</li>
+<li>如果是多CPU、追求低停顿时间，需快速响应（比如延迟不能超过1秒，如互联网应用），使用并发收集器</li>
+<li>官方推荐G1，性能高。现在互联网的项目，基本都是使用G1。</li>
+</ul>
+<p>最后需要明确一个观点：</p>
+<ul>
+<li>没有最好的收集器，更没有万能的收集</li>
+<li>调优永远是针对特定场景、特定需求，不存在一劳永逸的收集器</li>
 </ul>
 
             </div>

@@ -169,6 +169,65 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/posts/e8b3ed83/" target="_self">
+          <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210108193616.jfif" srcset="/img/loading.gif" alt="Grad-CAM解析">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/posts/e8b3ed83/">Grad-CAM解析</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/posts/e8b3ed83/">
+          
+          
+            
+          
+          
+采用VGG16等分类模型，计算输入图像的特征图、预测类别及预测类别得分，通过对某预测类别的特征图进行加权求和，再通过ReLU去除对该类别有负影响的点，得到最终的热力图：
+
+L_{Grad-CAM}^c=ReLU(\sum\limits_k\alpha_k^cA^k)其中，第k个特征图关于类别c的权重$\alpha_k^c$可通过类别预测得分关于该特征图的梯度全局平均获得：
+
+\alpha_k^c
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-05-10 16:42" pubdate>
+              2020-05-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Grad-CAM/">Grad-CAM</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/posts/51eb250e/" target="_self">
           <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210108193616.jfif" srcset="/img/loading.gif" alt="SS+Grad-Cam论文笔记">
         </a>
@@ -763,63 +822,11 @@ Esc+:wq退出vim
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/posts/a4ce31d2/">贪心算法</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/posts/a4ce31d2/">
-          
-          
-            
-          
-          📰 基本概念对于一组数据，定义了限定值（比如重量不大于100KG）和期望值（物品总价值最高），希望从中选取几个数据，在满足限定值的情况下，期望值最大。
-贪心算法每一步都会采取当前状态下最有利的选择，从而希望得到最优解。但由于前面的选择会影响后面的选择，有时候期望终究是期望，无缘全局最优解。
-
-🔎 实例分析（1）分糖果
-向n个孩子分m个糖果，每个孩子对糖果的需求不一样，每个糖果的大小不一样，n&
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-04-25 12:27" pubdate>
-              2020-04-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">贪心算法</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/3/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/3/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
   

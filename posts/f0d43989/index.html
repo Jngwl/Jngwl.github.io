@@ -1,0 +1,771 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" type="image/png" href="/img/favicon.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="清风与归_G">
+  <meta name="keywords" content="">
+  <title>Redis基础自查手册 - 清风与归_G</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.staticfile.org/prism/1.22.0/themes/prism.min.css" />
+      
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.jngwl.top","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"ViwB1XmjsmmXpFx2gikUmM5V-gzGzoHsz","app_key":"7r6Y8CzBkl8MJwPNmCqSdLWW","server_url":"https://viwb1xmj.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>清风与归_G</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201121211851.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Redis基础自查手册">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-22 09:38" pubdate>
+        2021年1月22日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      37
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Redis基础自查手册</h1>
+            
+            <div class="markdown-body">
+              <h2 id="一、NoSQL概述"><a href="#一、NoSQL概述" class="headerlink" title="一、NoSQL概述"></a>一、NoSQL概述</h2><h3 id="1）什么是Nosql"><a href="#1）什么是Nosql" class="headerlink" title="1）什么是Nosql"></a>1）什么是Nosql</h3><p>关系型数据库：列+行，同一个表下数据的结构是一样的。</p>
+<p>非关系型数据库：<strong>数据存储没有固定的格式，并且可以进行横向扩展</strong>。</p>
+<p>NoSQL（Not only SQL）泛指非关系型数据库，随着web2.0互联网的诞生，传统的关系型数据库很难对付web2.0时代！尤其是超大规模的高并发的社区，暴露出来很多难以克服的问题，NoSQL在当今大数据环境下发展的十分迅速，Redis是发展最快的。</p>
+<h3 id="2）类别"><a href="#2）类别" class="headerlink" title="2）类别"></a>2）类别</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>Examples举例</th>
+<th>典型应用场景</th>
+<th>数据模型</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>键值对（key-value）</strong></td>
+<td>Tokyo Cabinet/Tyrant, <strong>Redis</strong>, Voldemort, Oracle BDB</td>
+<td>内容缓存，主要用于处理大量数据的高访问负载，也用于一些日志系统等等。</td>
+<td>Key 指向 Value 的键值对，通常用hash table来实现</td>
+<td>查找速度快</td>
+<td>数据无结构化，通常只被当作字符串或者二进制数据</td>
+</tr>
+<tr>
+<td><strong>列存储数据库</strong></td>
+<td>Cassandra, <strong>HBase</strong>, Riak</td>
+<td>分布式的文件系统</td>
+<td>以列簇式存储，将同一列数据存在一起</td>
+<td>查找速度快，可扩展性强，更容易进行分布式扩展</td>
+<td>功能相对局限</td>
+</tr>
+<tr>
+<td><strong>文档型数据库</strong></td>
+<td>CouchDB, <strong>MongoDb</strong></td>
+<td>Web应用（与Key-Value类似，Value是结构化的，不同的是数据库能够了解Value的内容）</td>
+<td>Key-Value对应的键值对，Value为结构化数据</td>
+<td>数据结构要求不严格，表结构可变，不需要像关系型数据库一样需要预先定义表结构</td>
+<td>查询性能不高，而且缺乏统一的查询语法。</td>
+</tr>
+<tr>
+<td><strong>图形(Graph)数据库</strong></td>
+<td><strong>Neo4J</strong>, InfoGrid, Infinite Graph</td>
+<td>社交网络，推荐系统等。专注于构建关系图谱</td>
+<td>图结构</td>
+<td>利用图结构相关算法。比如最短路径寻址，N度关系查找等</td>
+<td>很多时候需要对整个图做计算才能得出需要的信息，而且这种结构不太好做分布式的集群</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="二、Redis入门"><a href="#二、Redis入门" class="headerlink" title="二、Redis入门"></a>二、Redis入门</h2><h3 id="1）概述"><a href="#1）概述" class="headerlink" title="1）概述"></a>1）概述</h3><p>Redis（Remote Dictionary Server )，即远程字典服务，一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、<strong>Key-Value数据库</strong>，并提供多种语言的API。</p>
+<p>与memcached一样，为了保证效率，<strong>数据都是缓存在内存中</strong>。区别的是redis会周期性的把更新的数据写入磁盘或者把修改操作写入追加的记录文件，并且在此基础上实现了master-slave(主从)同步。</p>
+<h3 id="2）安装与启动"><a href="#2）安装与启动" class="headerlink" title="2）安装与启动"></a>2）安装与启动</h3><p>🌏 下载文件并编译安装：</p>
+<ul>
+<li><p>文件路径：<code>https://download.redis.io/releases/</code></p>
+</li>
+<li><p>默认安装的路径为<code>/usr/local/bin</code>，安装完之后该路径下就有<code>redis-benchmark、redis-check-aof、redis-check-rdb、redis-cli、redis-sentinel、redis-server</code>几个文件</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 解压文件，切换目录</span>
+<span class="token function">tar</span> xzf redis-5.0.7.tar.gz
+<span class="token builtin class-name">cd</span> redis-5.0.7
+
+<span class="token comment"># 编译安装</span>
+<span class="token function">make</span>
+<span class="token function">make</span> <span class="token function">install</span>
+
+<span class="token comment"># 测试</span>
+yum <span class="token function">install</span>  tlp
+nake <span class="token builtin class-name">test</span></code></pre>
+</li>
+</ul>
+<p>🌏 开启后台启动</p>
+<ul>
+<li>将redis-5.0.7文件夹下的配置文件复制到opt目录下，<code>cp /opt/redis-5.0.7/redis.conf myRedisConfig</code></li>
+<li>将配置文件中的<code>daemonize no</code>改为<code>daemonize yes</code></li>
+</ul>
+<p>🌏 启动Redis服务：<code>redis-server myRedisConfig</code></p>
+<p>🌏 连接指定的端口号，Redis默认端口6379:<code>redis-cli -p 6379</code></p>
+<p>🌏 性能测试：<code>redis-benchmark -h localhost -p 6379 -c 100 -n 100000</code></p>
+<p>🌏 关闭服务：<code>shutdown</code></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>root@VM-0-13-centos bin<span class="token punctuation">]</span><span class="token comment"># redis-server myRedisConfig</span>
+<span class="token number">23002</span>:C <span class="token number">21</span> Jan <span class="token number">2021</span> 09:54:39.333 <span class="token comment"># oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo</span>
+<span class="token number">23002</span>:C <span class="token number">21</span> Jan <span class="token number">2021</span> 09:54:39.333 <span class="token comment"># Redis version=5.0.7, bits=64, commit=00000000, modified=0, pid=23002, just started</span>
+<span class="token number">23002</span>:C <span class="token number">21</span> Jan <span class="token number">2021</span> 09:54:39.333 <span class="token comment"># Configuration loaded</span>
+
+<span class="token punctuation">[</span>root@VM-0-13-centos bin<span class="token punctuation">]</span><span class="token comment"># redis-cli -p 6379</span>
+<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> <span class="token function">ping</span>
+PONG
+<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> <span class="token builtin class-name">set</span> name gaowl
+OK
+<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> get name
+<span class="token string">"gaowl"</span>
+<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> keys *
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"name"</span>
+<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> <span class="token builtin class-name">exit</span></code></pre>
+<h3 id="3）基础知识"><a href="#3）基础知识" class="headerlink" title="3）基础知识"></a>3）基础知识</h3><ul>
+<li>Redis默认有16个数据库：<code>DB0~DB15</code>，默认使用<code>DB0</code>，<ul>
+<li><code>select n</code>：切换数据库</li>
+<li><code>dbsize</code>：查看当前数据库的大小（size与key的个数有关）</li>
+<li><code>flushdb</code>：清空当前数据库</li>
+<li><code>flushall</code>：清空所有数据库。</li>
+</ul>
+</li>
+<li>Redis是单线程的，但为何单线程还这么快呢？<ul>
+<li>Redis将所有数据都放在内存中，当采用多线程时，CPU间的切换会浪费一定的时间，而单线程是无需切换CPU的，多次读写都是在一个CPU上的，因此在内存存储数据情况下，单线程是优于多线程的。（？？？狗屁）。</li>
+<li>Redis的性能瓶颈不是取决于CPU,而是机器内存和网络带宽。</li>
+</ul>
+</li>
+</ul>
+<h2 id="三、数据类型"><a href="#三、数据类型" class="headerlink" title="三、数据类型"></a>三、数据类型</h2><p>在redis中无论什么数据类型，在数据库中都是以<code>key-value</code>形式保存，通过对Redis-key的操作，来完成数据的操作</p>
+<ul>
+<li><p><code>keys *</code> ：查看当前数据库中所有的key。</p>
+</li>
+<li><p><code>exists key</code>：判断键是否存在</p>
+</li>
+<li><p><code>move key db</code>：将某个键值对 移动到 指定数据库</p>
+</li>
+<li><p><code>expire key second</code>：设置过期时间</p>
+</li>
+<li><p><code>ttl key</code>：查看还有多少秒过期，-2表示已过期，-1表示永不过期</p>
+</li>
+<li><p><code>type key</code>：查看value的数据类型</p>
+</li>
+</ul>
+<ul>
+<li><p><code>rename key newkey</code>：修改 key 的名称</p>
+</li>
+<li><p><code>renamenx key newkey</code>：仅当 newkey 不存在时，将 key 改名为 newkey 。</p>
+</li>
+</ul>
+<h3 id="1）String-字符串"><a href="#1）String-字符串" class="headerlink" title="1）String 字符串"></a>1）String 字符串</h3><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">set</span> key value  添加键值对
+del key  删除键值对
+append key value   向指定的key的value后追加字符串	
+get key     查询对应key的value
+strlen key	获取key对应的value的长度
+
+decr/incr key	将指定key的value数值进行+1/-1<span class="token punctuation">(</span>仅对数字进行操作<span class="token punctuation">)</span>	
+incrby/decrby key n	按指定的步长对数值进行加减	
+
+getrange key start end	按起止位置获取字符串（闭区间，起止位置都取）
+setrange key offset value	用指定的value 替换 key中 offset开始的值
+
+
+setex key seconds value  添加键值对并设置过期时间<span class="token punctuation">(</span>s<span class="token punctuation">)</span>--set with expire
+setnx key value	仅当key不存在时添加--set <span class="token keyword">if</span> not exist
+getset key value	设置新值，同时获取旧值
+
+mset key1 value1 <span class="token punctuation">[</span>key2 value2<span class="token punctuation">..</span><span class="token punctuation">]</span>	批量set键值对
+mget key1 <span class="token punctuation">[</span>key2<span class="token punctuation">..</span><span class="token punctuation">]</span>	批量获取多个key保存的值
+msetnx key1 value1 <span class="token punctuation">[</span>key2 value2<span class="token punctuation">..</span><span class="token punctuation">]</span>	批量设置键值对，仅当参数中所有的key都不存在时执行</code></pre>
+<h3 id="2）List-列表"><a href="#2）List-列表" class="headerlink" title="2）List 列表"></a>2）List 列表</h3><p>底层实际上是一个双向链表，左右两侧均可以插入元素。</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 【1.插入元素】</span>
+lpush/rpush key value1 value2 value3<span class="token punctuation">..</span>.  <span class="token comment"># 从左/右插入多个值</span>
+linsert key before/after value value1  <span class="token comment"># 在value前面/后面插入value1值</span>
+
+<span class="token comment"># 【2.弹出元素】</span>
+lpop/rpop key  <span class="token comment"># 从左/右边弹出元素</span>
+rpoplpush key1 key2  <span class="token comment"># 从key1列表弹出一个值，插入key2列表左边                          </span>
+
+<span class="token comment"># 【3.查看元素】</span>
+lrange key start stop  <span class="token comment"># 查看key中指定范围内的value（索引按从左到右）</span>
+<span class="token comment"># 查看key中指定索引位置处的value（索引按从左到右来）</span>
+lindex key index   
+
+<span class="token comment"># 获取key对应list的长度</span>
+llen key    
+ 
+<span class="token comment"># 【4.删除元素】</span>
+lrem key n value1
+    n为正，从左边删除n个符合value1的值（从左到右） 
+    n为负，从右边删除n个符合value1的值（从右到左）
+    n为0，将列表中符合value1的值全部删除
+ltrin key start end  <span class="token comment"># key中仅保留start到end的元素，其余的丢弃（索引从左到右）</span></code></pre>
+<h3 id="3）Hash-哈希表"><a href="#3）Hash-哈希表" class="headerlink" title="3）Hash 哈希表"></a>3）Hash 哈希表</h3><p>类似于java的Map<String,String>，字符串里套字符串</p>
+<ul>
+<li>增加元素：<code>hset key field vlaue</code>、<code>hmset key1 field1 value1 field2 value2</code> <ul>
+<li>仅当field域不存在时，给key集合中field赋值value ：<code>hsetnx key field value</code>                    </li>
+</ul>
+</li>
+<li>查询元素：<ul>
+<li>获取key1中filed1所对应的的值：<code>hget key1 field1</code></li>
+<li>获取key中全部的值：<code>hgetall key</code> </li>
+<li>获取key中所有的value或field：<code>hvals key</code>、<code>hkeys key</code></li>
+<li>查询key中，field1域是否存在：<code>hexists key field1</code></li>
+</ul>
+</li>
+<li>给key集合的域field的值加上增量increment：<code>hincrby key field increment</code></li>
+</ul>
+<h3 id="4）Set-集合"><a href="#4）Set-集合" class="headerlink" title="4）Set 集合"></a>4）Set 集合</h3><ul>
+<li>添加元素（若重复自动忽略）：<code>sadd key value1 value2...</code>  </li>
+<li>删除元素：<code>srem key value1 value2</code>  </li>
+<li>查询所有元素：<code>smembers key</code> </li>
+<li>查询集合元素个数：<code>scard key</code></li>
+<li>查询元素是否在集合中：<code>sismember key value</code></li>
+<li>随机取值：<ul>
+<li><code>spop key</code>    随机取出1个值，不保留</li>
+<li><code>srandmember key n</code>     随机取出n个值，集合中保留</li>
+</ul>
+</li>
+<li>取两个集合的交集/并集/差集：<code>sinter/sunion/sdiff  key1  key2</code></li>
+</ul>
+<h3 id="5）Zset-有序集合"><a href="#5）Zset-有序集合" class="headerlink" title="5）Zset 有序集合"></a>5）Zset 有序集合</h3><p>Redis的Zset和Set一样，都是String类型的集合，且不允许重复</p>
+<p>不同的是，Zset每个元素都会关联一个double类型的分数；redis正是通过该分数对集合中的成员进行从大到小的排序。</p>
+<p>Zset中成员是唯一的，但分数可以重复。</p>
+<ul>
+<li>增加元素：<code>zadd key score1 value1 score2 value2...</code></li>
+<li>删除元素：<code>zrem key value</code></li>
+<li>获取元素数量：<code>zcard key</code></li>
+<li>获取元素得分：<code>zscore key member</code></li>
+<li>获取元素得分排名：<code>zrank key value</code></li>
+<li>获取元素：<ul>
+<li>下标在start和stop之间的元素：<code>zrange key start stop withscores</code><ul>
+<li>带withscores可以让score和value一起返回到结果集）</li>
+</ul>
+</li>
+<li>所有score值介于[min,max]的元素：<ul>
+<li>得分从小到大排列：<code>zrangebyscore key min max withscores</code></li>
+<li>得分从大到小排列：<code>zrevrangebyscore key max min withscores</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>统计指定得分区间中的元素个数：<code>zcount key min max</code></p>
+</li>
+<li><p>元素添加增量：<code>zincrby key increment value</code></p>
+</li>
+</ul>
+<h3 id="6）Geospatial-地理位置"><a href="#6）Geospatial-地理位置" class="headerlink" title="6）Geospatial 地理位置"></a>6）Geospatial 地理位置</h3><h3 id="7）Hyperloglog-基数统计"><a href="#7）Hyperloglog-基数统计" class="headerlink" title="7）Hyperloglog 基数统计"></a>7）Hyperloglog 基数统计</h3><h3 id="8）BitMaps-位图"><a href="#8）BitMaps-位图" class="headerlink" title="8）BitMaps 位图"></a>8）BitMaps 位图</h3><h2 id="四、事务"><a href="#四、事务" class="headerlink" title="四、事务"></a>四、事务</h2><p>原子性Atomic：这一组命令要么一起成功，要么一起失败</p>
+<p>一致性Consistency：事务必须使数据库从一个一致性状态变换到另一个一致性状态。比如A转给B100快，无法成功与否，A和B的总额不变，数据库的一致性状态没有被破坏。</p>
+<p>隔离性Isolation： 在并发数据操作时，不同的事务拥有各自的数据空间，相互隔离。</p>
+<p>持久性Durabiliy：一旦事务提交成功后，事务中所有的数据操作都必须被持久化到数据库中。即使在事务提交后，数据库马上崩溃，在数据库重启时，也必须保证能够通过某种机制恢复数据。</p>
+<h3 id="1）Redis事务操作过程"><a href="#1）Redis事务操作过程" class="headerlink" title="1）Redis事务操作过程"></a>1）Redis事务操作过程</h3><ul>
+<li>开启事务：<code>multi</code></li>
+<li>命令入队</li>
+<li><p>执行事务：<code>exec</code></p>
+<ul>
+<li>事务中的命令在加入时，并不会立即执行；只有提交时，才会一次性执行完</li>
+</ul>
+</li>
+<li><p>取消事务：<code>discard</code></p>
+</li>
+</ul>
+<h3 id="2）事务发生错误"><a href="#2）事务发生错误" class="headerlink" title="2）事务发生错误"></a>2）事务发生错误</h3><ul>
+<li><p>代码语法 错误，所有命令均不执行 —&gt;  符合原子性</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> multi
+OK
+<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> <span class="token builtin class-name">set</span> k1 v1
+QUEUED
+<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> <span class="token builtin class-name">set</span> k2 v2
+QUEUED
+<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> error k1 <span class="token comment"># 这是一条语法错误命令</span>
+<span class="token punctuation">(</span>error<span class="token punctuation">)</span> ERR unknown <span class="token builtin class-name">command</span> <span class="token variable"><span class="token variable">`</span>error<span class="token variable">`</span></span>, with args beginning with: <span class="token variable"><span class="token variable">`</span>k1<span class="token variable">`</span></span>, <span class="token comment"># 会报错但是不影响后续命令入队 </span>
+<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> get k2
+QUEUED
+<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> EXEC
+<span class="token punctuation">(</span>error<span class="token punctuation">)</span> EXECABORT Transaction discarded because of previous errors. <span class="token comment"># 执行报错</span>
+<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> get k1 
+<span class="token punctuation">(</span>nil<span class="token punctuation">)</span>    s<span class="token comment"># 其他命令并没有被执行</span></code></pre>
+</li>
+<li><p>代码逻辑 错误，部分命令可以执行  –&gt;  不符合原子性</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> multi
+OK
+<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> <span class="token builtin class-name">set</span> k1 v1
+QUEUED
+<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> <span class="token builtin class-name">set</span> k2 v2
+QUEUED
+<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> INCR k1 <span class="token comment"># 这条命令逻辑错误（对字符串进行增量）</span>
+QUEUED
+<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> get k2
+QUEUED
+<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> <span class="token builtin class-name">exec</span>
+<span class="token number">1</span><span class="token punctuation">)</span> OK
+<span class="token number">2</span><span class="token punctuation">)</span> OK
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> ERR value is not an integer or out of range <span class="token comment"># 运行时报错</span>
+<span class="token number">4</span><span class="token punctuation">)</span> <span class="token string">"v2"</span> <span class="token comment"># 其他命令正常执行</span></code></pre>
+</li>
+<li><p>总结：单个 Redis 命令的执行是原子性的，但 Redis 没有在事务上增加任何维持原子性的机制，所以 Redis<br>事务的执行并不是原子性的。 所以收到 EXEC 命令后进入事务执行，事务中任意命令执行失败，其余的命令依然被执行。</p>
+</li>
+</ul>
+<h3 id="3）乐观锁与悲观锁"><a href="#3）乐观锁与悲观锁" class="headerlink" title="3）乐观锁与悲观锁"></a>3）乐观锁与悲观锁</h3><ul>
+<li>悲观锁：很悲观，认为什么时候都会出现问题，无论做什么都要加锁</li>
+<li>乐观锁：很乐观，认为什么时候都不会出现问题，所以不会上锁！更新数据的时候去判断一下，在此期间是否有人修改过这个数据</li>
+</ul>
+<p>Redis采用的是乐观锁，可采用<code>watch key</code>监控指定数据，相当于乐观锁加锁；</p>
+<p>每次exec时，无法成功与否，都是自动释放锁；</p>
+<p>也可采用<code>unwatch key</code>手动解锁</p>
+<h2 id="五、"><a href="#五、" class="headerlink" title="五、"></a>五、</h2><h2 id="和SpringBoot整合"><a href="#和SpringBoot整合" class="headerlink" title="和SpringBoot整合"></a>和SpringBoot整合</h2><h2 id="六、配置文件redis-conf"><a href="#六、配置文件redis-conf" class="headerlink" title="六、配置文件redis.conf"></a>六、配置文件redis.conf</h2><p>持久化</p>
+<p>发布和订阅</p>
+<p>主从复制</p>
+<p>哨兵模式</p>
+<p>缓存穿透和雪崩</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>【1】<a target="_blank" rel="noopener" href="https://blog.csdn.net/lijie0213/article/details/108129934">https://blog.csdn.net/lijie0213/article/details/108129934</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Redis/">Redis</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/401f2bf8/">
+                        <span class="hidden-mobile">JVM基础自查手册</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <i class="iconfont icon-tags-fill"></i>&nbsp;<a href="http://www.beian.miit.gov.cn/" target="_blank">鲁ICP备19062448号</a>&nbsp&nbsp;| &nbsp&nbsp <i class="iconfont icon-addrcard"></i>&nbsp; 2021<a href="https://www.jngwl.top/" target="_blank"> 清风与归_G</a>&nbsp&nbsp;|&nbsp&nbsp;  <i class="iconfont icon-docker"></i> <a href="https://hexo.io/" target="_blank">&nbsp Hexo</a>&nbsp & &nbsp <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank">Fluid</a><br> 你的骄傲多半来自于自己的无知，共勉之
+
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

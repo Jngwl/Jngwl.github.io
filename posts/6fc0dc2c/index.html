@@ -434,17 +434,17 @@ SELECT last_name,job_id FROM employees WHERE manager_id IN (100,101,110);
 <p>举例：<br>        select last_name,salary from employees where salary&gt;20000 order by salary ;</p>
 <p>特点：<br>        1、排序列表可以是单个字段、多个字段、表达式、函数、列数、以及以上的组合<br>        2、升序，通过 asc，默认行为<br>               降序，通过 desc</p>
 </blockquote>
-<h3 id="（1）示例"><a href="#（1）示例" class="headerlink" title="（1）示例"></a>（1）示例</h3><h4 id="一、按单个字段排序"><a href="#一、按单个字段排序" class="headerlink" title="一、按单个字段排序"></a>一、按单个字段排序</h4><pre class="language-none"><code class="language-none">#案例1：将 员工编号&gt;120 的员工信息进行 工资 的升序、降序
+<h3 id="（1）示例"><a href="#（1）示例" class="headerlink" title="（1）示例"></a>（1）示例</h3><h4 id="一、按单个字段排序"><a href="#一、按单个字段排序" class="headerlink" title="一、按单个字段排序"></a>一、按单个字段排序</h4><pre class="language-mysql" data-language="mysql"><code class="language-mysql">#案例1：将 员工编号&gt;120 的员工信息进行 工资 的升序、降序
 SELECT * FROM employees WHERE employee_id &gt; 120 ORDER BY salary;   # 默认升序
 SELECT * FROM employees WHERE employee_id &gt; 120 ORDER BY salary ASC;
 SELECT * FROM employees WHERE employee_id &gt; 120 ORDER BY salary DESC;</code></pre>
-<h4 id="二、按表达式排序"><a href="#二、按表达式排序" class="headerlink" title="二、按表达式排序"></a>二、按表达式排序</h4><h1 id="案例1：对有奖金的员工，按年薪降序"><a href="#案例1：对有奖金的员工，按年薪降序" class="headerlink" title="案例1：对有奖金的员工，按年薪降序"></a>案例1：对有奖金的员工，按年薪降序</h1><h4 id="三、按别名排序"><a href="#三、按别名排序" class="headerlink" title="三、按别名排序"></a>三、按别名排序</h4><pre class="language-none"><code class="language-none">#案例1：对有奖金的员工，按年薪降序
+<h4 id="二、按表达式排序"><a href="#二、按表达式排序" class="headerlink" title="二、按表达式排序"></a>二、按表达式排序</h4><h1 id="案例1：对有奖金的员工，按年薪降序"><a href="#案例1：对有奖金的员工，按年薪降序" class="headerlink" title="案例1：对有奖金的员工，按年薪降序"></a>案例1：对有奖金的员工，按年薪降序</h1><h4 id="三、按别名排序"><a href="#三、按别名排序" class="headerlink" title="三、按别名排序"></a>三、按别名排序</h4><pre class="language-mysql" data-language="mysql"><code class="language-mysql">#案例1：对有奖金的员工，按年薪降序
 SELECT *,salary*12*(1+IFNULL(commission_pct,0)) 年薪 FROM employees WHERE commission_pct IS NOT NULL ORDER BY 年薪 DESC;</code></pre>
-<h4 id="四、按函数的结果排序"><a href="#四、按函数的结果排序" class="headerlink" title="四、按函数的结果排序"></a>四、按函数的结果排序</h4><pre class="language-none"><code class="language-none">#案例1：按姓名的字数长度进行升序
+<h4 id="四、按函数的结果排序"><a href="#四、按函数的结果排序" class="headerlink" title="四、按函数的结果排序"></a>四、按函数的结果排序</h4><pre class="language-mysql" data-language="mysql"><code class="language-mysql">#案例1：按姓名的字数长度进行升序
 SELECT last_name FROM employees ORDER BY LENGTH(last_name);</code></pre>
-<h4 id="五、按多个字段排序"><a href="#五、按多个字段排序" class="headerlink" title="五、按多个字段排序"></a>五、按多个字段排序</h4><pre class="language-none"><code class="language-none">#案例1：查询员工的姓名、工资、部门编号，先按工资升序，再按部门编号降序
+<h4 id="五、按多个字段排序"><a href="#五、按多个字段排序" class="headerlink" title="五、按多个字段排序"></a>五、按多个字段排序</h4><pre class="language-mysql" data-language="mysql"><code class="language-mysql">#案例1：查询员工的姓名、工资、部门编号，先按工资升序，再按部门编号降序
 SELECT last_name,salary,department_id FROM employees ORDER BY department_id;</code></pre>
-<h4 id="六、补充选学：按列数排序"><a href="#六、补充选学：按列数排序" class="headerlink" title="六、补充选学：按列数排序"></a>六、补充选学：按列数排序</h4><pre class="language-none"><code class="language-none">SELECT * FROM employees ORDER BY first_name;
+<h4 id="六、补充选学：按列数排序"><a href="#六、补充选学：按列数排序" class="headerlink" title="六、补充选学：按列数排序"></a>六、补充选学：按列数排序</h4><pre class="language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM employees ORDER BY first_name;
 SELECT * FROM employees ORDER BY 2;</code></pre>
 <h3 id="（2）-作业"><a href="#（2）-作业" class="headerlink" title="（2） 作业"></a>（2） 作业</h3><pre class="language-mysql" data-language="mysql"><code class="language-mysql">#1. 查询员工的姓名和部门号和年薪，按年薪降序 按姓名升序
 SELECT last_name,department_id,salary*12*(1+IFNULL(commission_pct,0)) 年薪 FROM employees ORDER BY 年薪 DESC, last_name;  # 通过逗号隔开

@@ -180,7 +180,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      20.6k 字
+      21.2k 字
     </span>
   
 
@@ -190,7 +190,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      296
+      304
        分钟
     </span>
   
@@ -2385,7 +2385,7 @@ public:
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span></code></pre>
 <h4 id="326-是否3的幂-easy"><a href="#326-是否3的幂-easy" class="headerlink" title="326.是否3的幂(easy)"></a>326.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/power-of-three/">是否3的幂(easy)</a></h4><p>给定一个整数，写一个函数来判断它是否是 3 的幂次方。如果是，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>
-<p><strong>解题思路</strong>：【对数】设$3^m=n$即$log<em>3^n=m$，如果n是3的整数次幂，则m一定是整数。由于java中无法以3为底，因此使用换底公式换底:$m=log_3^n=log</em>{10}^n/log_{10}^3$。此外，整数的话，和1取余必为0</p>
+<p><strong>解题思路</strong>：【对数】设<script type="math/tex">3^m=n</script>即<script type="math/tex">log_3^n=m</script>，如果n是3的整数次幂，则m一定是整数。由于java中无法以3为底，因此使用换底公式换底:<script type="math/tex">m=log_3^n=log_{10}^n/log_{10}^3</script>。此外，整数的话，和1取余必为0</p>
 <pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isPowerOfThree</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
          <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">log10</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token operator">/</span><span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">log10</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">1</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">;</span>
@@ -2462,7 +2462,7 @@ public:
 </blockquote>
 <p>也可以直接使用<code>Collections.shuffle(listName)</code>打乱数组，但要先把<code>int[]</code>转换为<code>ArrayList</code></p>
 <h4 id="528-按权重随机选择-medium"><a href="#528-按权重随机选择-medium" class="headerlink" title="528.按权重随机选择(medium)"></a>528.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/random-pick-with-weight/">按权重随机选择(medium)</a></h4><p>给定一个数组，数组每个位置的值表示该位置的权重，要求按照权重的概率去随机采样</p>
-<p><strong>解题思路</strong>：先取前缀和（递增的）。每次采样时，先随机产生一个数字，然后使用二分法查找其在前缀和中的位置，以模拟随机采样过程。</p>
+<p><strong>解题思路</strong>：先取前缀和<code>psum</code>（递增的，最大值记为tot），之后随机产生一个范围在0~tot间的数字<code>targ</code>，并使用二分法查找其在前缀和中的位置x(x是满足$\text{targ} &lt; psum[x]$的最小下标)，以模拟随机采样过程。</p>
 <pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
 
     <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">></span></span> psum <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -2477,18 +2477,92 @@ public:
     <span class="token punctuation">&#125;</span>
 
     <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">pickIndex</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">int</span> targ <span class="token operator">=</span> rand<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span>tot<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> targ <span class="token operator">=</span> rand<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span>tot<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 生成随机数</span>
 
         <span class="token keyword">int</span> lo <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
         <span class="token keyword">int</span> hi <span class="token operator">=</span> psum<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token comment">// 二分法查找位置</span>
         <span class="token keyword">while</span> <span class="token punctuation">(</span>lo <span class="token operator">!=</span> hi<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
             <span class="token keyword">int</span> mid <span class="token operator">=</span> <span class="token punctuation">(</span>lo <span class="token operator">+</span> hi<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">;</span>
             <span class="token keyword">if</span> <span class="token punctuation">(</span>targ <span class="token operator">>=</span> psum<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>mid<span class="token punctuation">)</span><span class="token punctuation">)</span> lo <span class="token operator">=</span> mid <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
             <span class="token keyword">else</span> hi <span class="token operator">=</span> mid<span class="token punctuation">;</span>
         <span class="token punctuation">&#125;</span>
-        <span class="token keyword">return</span> lo<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> lo<span class="token punctuation">;</span>   <span class="token comment">// 最小下标</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span></code></pre>
+<p>二分法也可是采用<code>Arrays.binarySearch(listName, name)</code>,要先确保list是有序的</p>
+<ul>
+<li><p>如果找到关键字，则返回值为关键字在数组中的位置索引，且索引从0开始</p>
+</li>
+<li><p>如果没有找到关键字，返回值为负的插入点值，所谓插入点值就是第一个比关键字大的元素在数组中的位置索引，而且这个位置索引从1开始。</p>
+</li>
+</ul>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> weight<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token class-name">Random</span> random <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">Solution</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> w<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        weight <span class="token operator">=</span> w<span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> w<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            weight<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+=</span> weight<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        sum <span class="token operator">=</span> weight<span class="token punctuation">[</span>w<span class="token punctuation">.</span>length<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">pickIndex</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> r <span class="token operator">=</span> random<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span>sum<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> idx <span class="token operator">=</span> <span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">binarySearch</span><span class="token punctuation">(</span>weight<span class="token punctuation">,</span> r<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>idx <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            idx <span class="token operator">=</span> <span class="token operator">-</span>idx <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> idx<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<h4 id="382-链表随机节点-medium"><a href="#382-链表随机节点-medium" class="headerlink" title="382.链表随机节点(medium)"></a>382.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/linked-list-random-node/">链表随机节点(medium)</a></h4><p>给定一个单链表，随机选择链表的一个节点，并返回相应的节点值。保证每个节点<strong>被选的概率一样</strong>。</p>
+<p><strong>解题思路</strong>：【水库采样】不同于数组，在未完成遍历链表前，是无法获取其总长度的。因此，为了只遍历一遍链表，可以采用水库采样法，在遍历到第m个节点时，以1/m的概率选择这个节点覆盖到之前选中的节点，且链表的其他节点均未被选中。</p>
+<p>对于长度为n的链表的第m个节点，最后其被采样的充要条件为 该节点被选择且之后的所有节点都未被选择。概率为</p>
+<script type="math/tex; mode=display">
+\frac{1}{m} \times \frac{m}{m+1} \times \frac{m+1}{m+2} \times \cdots \times \frac{n-1}{n} = \frac{1}{n}</script><pre class="language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+ * Definition for singly-linked list.
+ * public class ListNode &#123;
+ *     int val;
+ *     ListNode next;
+ *     ListNode() &#123;&#125;
+ *     ListNode(int val) &#123; this.val = val; &#125;
+ *     ListNode(int val, ListNode next) &#123; this.val = val; this.next = next; &#125;
+ * &#125;
+ */</span>
+<span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">ListNode</span> head<span class="token punctuation">;</span>
+    <span class="token class-name">Random</span> random <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">/** @param head The linked list's head.
+        Note that the head is guaranteed to be not null, so it contains at least one node. */</span>
+    <span class="token keyword">public</span> <span class="token class-name">Solution</span><span class="token punctuation">(</span><span class="token class-name">ListNode</span> head<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>head <span class="token operator">=</span> head<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    
+    <span class="token comment">/** Returns a random node's value. */</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getRandom</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> ans <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> cnt <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token class-name">ListNode</span> p <span class="token operator">=</span> head<span class="token punctuation">;</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span>p <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            cnt<span class="token operator">++</span><span class="token punctuation">;</span>
+            <span class="token keyword">int</span> tmp <span class="token operator">=</span> random<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span>cnt<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">// [0, cnt-1] 共cnt个数，随机选一个的概率为 1/cnt</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>tmp <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+                ans <span class="token operator">=</span> p<span class="token punctuation">.</span>val<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            p <span class="token operator">=</span> p<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> ans<span class="token punctuation">;</span> 
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution obj = new Solution(head);
+ * int param_1 = obj.getRandom();
+ */</span></code></pre>
 
             </div>
             <hr>
@@ -2711,6 +2785,45 @@ public:
 
 
 
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.1.2/es5/tex-svg.js" ></script>
+
+  
 
 
 

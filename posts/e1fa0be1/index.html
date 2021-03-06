@@ -972,13 +972,13 @@ arr<span class="token punctuation">[</span><span class="token number">2</span><s
         <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<h2 id="十七、集合"><a href="#十七、集合" class="headerlink" title="十七、集合"></a>十七、集合</h2><h3 id="1-概念-8"><a href="#1-概念-8" class="headerlink" title="1.概念"></a>1.概念</h3><p>集合是指用来存储多个元素的容器。相比于固定长度的数组，其可以任意扩容</p>
+<h2 id="十七、集合"><a href="#十七、集合" class="headerlink" title="十七、集合"></a>十七、集合</h2><h3 id="1-概念-8"><a href="#1-概念-8" class="headerlink" title="1.概念"></a>1.概念</h3><p>集合是指用来存储多个元素的容器。相比于固定长度的<code>int[]</code>这种类型的数组，其可以任意扩容</p>
 <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201102225358.png" srcset="/img/loading.gif" alt="单列集合和双列集合"></p>
 <p>（1）单列集合<code>Collection</code>有<code>List</code>和<code>Set</code>两个常用接口，其中<code>List</code>的常用实现类为<code>ArrayList</code>，元素有序且可重复；Set的常用实现类为<code>HashSet</code>，元素无序且不可重复；</p>
 <p>（2）双列集合<code>Map</code>的实现类为<code>HashMap</code>，其元素由键值对 <code>key--value</code>构成，其中key不可重复，value可重复。</p>
 <h3 id="2-单列集合之List集合"><a href="#2-单列集合之List集合" class="headerlink" title="2.单列集合之List集合"></a>2.单列集合之List集合</h3><ul>
 <li>元素有序(元素的存取顺序一致)，可重复。</li>
-<li>通过创建其子类<code>ArrayList</code>对象来完成List接口的实例化。<code>List list = new ArrayList();</code></li>
+<li>通过创建其子类<code>ArrayList</code>对象来完成List接口的实例化。<code>List&lt;&gt; list = new ArrayList&lt;&gt;();</code></li>
 <li>List接口中的成员方法:<ul>
 <li>public boolean <code>add</code>(E e);      // <strong>将数据添加到集合的末尾</strong>, 这里的E是泛型的意思, 目前可以先理解为Object类型.</li>
 <li>public E <code>get</code>(int index);        // <strong>根据索引, 索取其对应的元素</strong>.</li>
@@ -1242,7 +1242,7 @@ arr<span class="token punctuation">[</span><span class="token number">2</span><s
 <span class="token comment">// 调用该方法的调用者必须处理这个异常，try..catch..捕获，或者 继续抛出日常</span></code></pre>
 </li>
 </ul>
-<h2 id="十九、IO流"><a href="#十九、IO流" class="headerlink" title="十九、IO流"></a>十九、IO流</h2><h3 id="1-概念-10"><a href="#1-概念-10" class="headerlink" title="1.概念"></a>1.概念</h3><p>输出、输出流，可用于在本地磁盘、网络上读写数据</p>
+<h2 id="十九、IO流"><a href="#十九、IO流" class="headerlink" title="十九、IO流"></a>十九、IO流</h2><h3 id="1-概念-10"><a href="#1-概念-10" class="headerlink" title="1.概念"></a>1.概念</h3><p>输入、输出流，可用于在本地磁盘、网络上读写数据</p>
 <h3 id="2-分类-2"><a href="#2-分类-2" class="headerlink" title="2.分类"></a>2.分类</h3><p>（1）字符流：按字符（a~z, 0~9）读写数据</p>
 <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201103101848.png" srcset="/img/loading.gif" alt=""></p>
 <p>（2）字节流：按字节（0,1）读写数据</p>
@@ -1314,7 +1314,7 @@ reader<span class="token punctuation">.</span><span class="token function">close
 <span class="token class-name">Reader</span> reader <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileReader</span><span class="token punctuation">(</span><span class="token string">"lib/2.txt"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">char</span><span class="token punctuation">[</span><span class="token punctuation">]</span> chs <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">char</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token keyword">int</span> len<span class="token punctuation">;</span>
-<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token punctuation">(</span>len <span class="token operator">=</span> reader<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>chs<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>   # 三步：读取字符存到chs中，返回值赋给len，比较
+<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token punctuation">(</span>len <span class="token operator">=</span> reader<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>chs<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>   <span class="token comment">//  三步：读取字符存到chs中，返回值赋给len，比较</span>
     <span class="token class-name">String</span> s <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span>chs<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>len<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">// 0: 表示起始索引；len: 表示要操作的字符的个数.</span>
     <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
@@ -1404,33 +1404,27 @@ bw<span class="token punctuation">.</span><span class="token function">close</sp
 <span class="token punctuation">&#125;</span>
 is<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 os<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<h2 id="十九、反射"><a href="#十九、反射" class="headerlink" title="十九、反射"></a>十九、反射</h2><p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201103213034.png" srcset="/img/loading.gif" alt=""></p>
-<h2 id="二十、其他"><a href="#二十、其他" class="headerlink" title="二十、其他"></a>二十、其他</h2><h3 id="1-Java中有没有真正意义的引用传递？"><a href="#1-Java中有没有真正意义的引用传递？" class="headerlink" title="1. Java中有没有真正意义的引用传递？"></a>1. Java中有没有真正意义的引用传递？</h3><ul>
-<li>值传递（ pass by value）是指在调用函数时将实际参数复制一份传递到函数中，这样在函数中如果对参数进行修改，将不会影响到实际参数</li>
-<li>引用传递（ pass by reference）是指在调用函数时将实际参数的<strong>地址</strong>直接传递到函数中，那么在函数中对参数所进行的修改，将影响到实际参数</li>
-</ul>
-<h3 id="2-访问权限修饰符"><a href="#2-访问权限修饰符" class="headerlink" title="2.访问权限修饰符"></a>2.访问权限修饰符</h3><p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201101150934.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="二十、反射"><a href="#二十、反射" class="headerlink" title="二十、反射"></a>二十、反射</h2><p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201103213034.png" srcset="/img/loading.gif" alt=""></p>
 <h2 id="二十一、多线程"><a href="#二十一、多线程" class="headerlink" title="二十一、多线程"></a>二十一、多线程</h2><h3 id="（1）定义"><a href="#（1）定义" class="headerlink" title="（1）定义"></a>（1）定义</h3><p>进程是指正在运行的程序，而线程是指进程中的执行路径</p>
 <ul>
 <li>单线程：一个进程只有一条执行路径。比如记事本</li>
 <li>多线程：一个进程有多条执行路径。比如扫雷</li>
 </ul>
 <h3 id="（2）实现方式"><a href="#（2）实现方式" class="headerlink" title="（2）实现方式"></a>（2）实现方式</h3><ul>
-<li><p><strong>继承 Threads类</strong></p>
-<ul>
-<li><p>定义一个类MyThread 继承Thread类</p>
+<li><strong>继承 Threads类</strong><ul>
+<li>定义一个类MyThread 继承Thread类</li>
+</ul>
 </li>
 <li><p>在 MyThread类中重写run()方法</p>
-</li>
+<ul>
+<li>run方法用来封装被线程执行的代码。</li>
+<li>start()方法：启动线程，然后由JVM调用此线程的run()方法<ul>
 <li>创建 MyThread类的对象</li>
 <li>启动线程</li>
 </ul>
 </li>
 </ul>
-<blockquote>
-<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201106144017.png" srcset="/img/loading.gif" alt="image-20201106144017653"></p>
-</blockquote>
-<ul>
+</li>
 <li><p><strong>实现Runnable接口</strong></p>
 <ul>
 <li>定义一个类 MyRunnable实现 Runnable接口</li>
@@ -1454,7 +1448,7 @@ os<span class="token punctuation">.</span><span class="token function">close</sp
 <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201106144705.png" srcset="/img/loading.gif" alt=""></p>
 </li>
 <li><p>通过<strong>带参构造</strong>设置线程名称，但需要<strong>在父类中重新定义带参构造</strong></p>
-<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201106145031.png" srcset="/img/loading.gif" alt="image-20201106145031194"></p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201106145031.png" srcset="/img/loading.gif" alt=""></p>
 <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201106145101.png" srcset="/img/loading.gif" alt=""></p>
 </li>
 <li><p>也可通过<code>cuurentthread</code>方法，先得到线程对象再获取当前线程名称</p>
@@ -1684,7 +1678,12 @@ os<span class="token punctuation">.</span><span class="token function">close</sp
 </ul>
 </li>
 </ul>
-<h2 id="二十四、Stream流"><a href="#二十四、Stream流" class="headerlink" title="二十四、Stream流"></a>二十四、Stream流</h2>
+<h2 id="二十四、Stream流"><a href="#二十四、Stream流" class="headerlink" title="二十四、Stream流"></a>二十四、Stream流</h2><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="1-Java中有没有真正意义的引用传递？"><a href="#1-Java中有没有真正意义的引用传递？" class="headerlink" title="1. Java中有没有真正意义的引用传递？"></a>1. Java中有没有真正意义的引用传递？</h3><ul>
+<li>值传递（ pass by value）是指在调用函数时将实际参数复制一份传递到函数中，这样在函数中如果对参数进行修改，将不会影响到实际参数</li>
+<li>引用传递（ pass by reference）是指在调用函数时将实际参数的<strong>地址</strong>直接传递到函数中，那么在函数中对参数所进行的修改，将影响到实际参数</li>
+</ul>
+<h3 id="2-访问权限修饰符"><a href="#2-访问权限修饰符" class="headerlink" title="2.访问权限修饰符"></a>2.访问权限修饰符</h3><p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201101150934.png" srcset="/img/loading.gif" alt=""></p>
+
             </div>
             <hr>
             <div>

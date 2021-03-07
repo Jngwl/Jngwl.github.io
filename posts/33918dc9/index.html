@@ -222,6 +222,12 @@
             <!-- SEO header -->
             <h1 style="display: none">准确率、召回率与mAP</h1>
             
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年1月8日 晚上
+                
+              </p>
+            
             <div class="markdown-body">
               <p>最近在看毕业设计相关的论文，mAP这个性能评估指标多次出现，因此谈谈自己对mAP的理解。然而，看mAP前，我们需要先了解下P和R的概念<br>（1）<strong>Precision</strong>：准确率，又称查准率，指所有检索到的文件中，相关文件所占的比率。<br>（2）<strong>Recall</strong>：召回率，又称查全率，指所有相关文件中，检索到的文件所占的比率。<br><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20191117185759.gif" srcset="/img/loading.gif" alt="图源：http://www.vanjor.org/blog/2010/11/recall-precision/ 侵删"><br>注意：在实际应用中，准确率和召回率就像鱼和熊掌，不可兼得：准确率高时，召回率低；召回率高时，准确率低。</p>
 <p>因此，我们要根据应用场景选择相应的侧重点：如果是<strong>单纯做搜索</strong>，那就是保证召回的情况下提升准确率；如果做<strong>疾病监测、反垃圾</strong>，则是保准确率的条件下，提升召回。当两者都要求高的情况下，我们可以用F1来衡量。</p>
@@ -278,6 +284,38 @@
               
             </div>
 
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "ViwB1XmjsmmXpFx2gikUmM5V-gzGzoHsz",
+          app_key: "7r6Y8CzBkl8MJwPNmCqSdLWW",
+          placeholder: "来都来了，不说点什么吗⊙(・◇・)？",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
             
           </article>
         </div>

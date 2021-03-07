@@ -180,7 +180,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      23k 字
+      23.9k 字
     </span>
   
 
@@ -190,7 +190,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      330
+      342
        分钟
     </span>
   
@@ -2790,6 +2790,116 @@ public:
             dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> dp<span class="token punctuation">[</span>i<span class="token operator">&amp;</span><span class="token punctuation">(</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
         <span class="token punctuation">&#125;</span>
         <span class="token keyword">return</span> dp<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<h2 id="十、妙用数据结构"><a href="#十、妙用数据结构" class="headerlink" title="十、妙用数据结构"></a>十、妙用数据结构</h2><h3 id="🌟-常见数据结构"><a href="#🌟-常见数据结构" class="headerlink" title="🌟 常见数据结构"></a>🌟 常见数据结构</h3><h4 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h4><ul>
+<li>创建数组：<code>int[][] temp = new int[m][n]</code>、<code>int[] temp = &#123;1,2,3&#125;</code></li>
+<li>获取长度：<code>temp.length</code>、<code>temp[0].length</code></li>
+<li>给数组赋值：<code>Arrays.fill(temp, 1)</code></li>
+<li>排序：<code>Arrays.sort(temp)</code>，默认升序</li>
+<li>二分查找元素：<code>int idx = Arrays.binarySearch(temp, key)</code>，在调用方法前数组需有序，若发现了key，返回索引，否则返回负的插入点值<code>(-(插入点) - 1)</code>，所谓插入点值就是第一个比关键字大的元素在数组中的位置索引。因此第一个比key的元素的索引为<code>-idx-1</code></li>
+</ul>
+<h4 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h4><ul>
+<li>创建集合：<code>ArrayList&lt;String&gt; temp = new ArrayList&lt;String&gt;();</code></li>
+<li><p>获取长度：<code>temp.size()</code></p>
+</li>
+<li><p>增删改查：</p>
+<ul>
+<li>添加元素：<code>temp.add(“MicroSoft”);</code></li>
+<li>删除元素：<code>temp.remove(0);</code>  // 变量为元素索引</li>
+<li>修改元素：<code>temp.set(0, “Google”);</code>   // 第一个变量为索引</li>
+<li>访问元素：<code>temp.get(0);</code>  // 变量为元素索引</li>
+</ul>
+</li>
+<li>判断元素是否在集合中：<code>temp.contains(a)</code></li>
+<li>转换为数组、字符串：<code>temp.toArray()</code>、<code>temp.toString()</code></li>
+<li>是否为空：<code>temp.isEmpty()</code></li>
+<li>排序、打乱顺序：<code>Collection.sort(temp)</code>、<code>Collection.shuffle(temp)</code></li>
+</ul>
+<h4 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h4><ul>
+<li>创建集合：<code>LinkedList&lt;String&gt; temp  = new LinkedList&lt;&gt;();</code> </li>
+<li><p>获取长度：<code>temp.size()</code></p>
+</li>
+<li><p>增删改查：</p>
+<ul>
+<li>添加元素：<code>temp.add(“ThoughtWorks”)</code>、<code>temp.offer(“Apple”)</code>、<code>temp.addFirst(&quot;Wiki&quot;)</code></li>
+<li>移除元素：<code>temp.remove(idx)</code>、<code>temp.removeFirst()</code>、<code>temp.removeLast()</code>、</li>
+<li>获取元素：<code>temp.get(idx)</code>、<code>temp.peek()</code>、<code>temp.poll()</code>删除并返回第一个元素</li>
+<li>查找元素第一次出现的索引: <code>temp.indexOf(&quot;wiki&quot;)</code></li>
+</ul>
+</li>
+<li>转换为数组：<code>temp.toArray()</code></li>
+</ul>
+<h4 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h4><ul>
+<li><p>创建散列表：<code>HashMap&lt;String, String&gt; ans = new HashMap&lt;&gt;();</code></p>
+</li>
+<li><p>获取大小：<code>ans.size()</code></p>
+</li>
+<li><p>增删改查：</p>
+<ul>
+<li><p>添加元素：<code>ans.put(&quot;key&quot;, &quot;value&quot;)</code></p>
+</li>
+<li><p>移除元素：<code>ans.remove(“key”)</code>、<code>ans.clear()</code></p>
+</li>
+<li>获取元素：<code>ans.get(“key”)</code></li>
+</ul>
+</li>
+<li><p>遍历：</p>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">for</span><span class="token punctuation">(</span><span class="token class-name">String</span> key<span class="token operator">:</span> ans<span class="token punctuation">.</span><span class="token function">keySet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>ans<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token class-name">String</span> value<span class="token operator">:</span> ans<span class="token punctuation">.</span><span class="token function">values</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+</li>
+</ul>
+<h4 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h4><ul>
+<li><p>创建栈：<code>Stack&lt;Integer&gt; s1 = new Stack&lt;Integer&gt;();</code></p>
+</li>
+<li><p>元素压入顶部：<code>s1.push(100)</code></p>
+</li>
+<li>弹出顶部元素：<code>s1.pop()</code></li>
+<li>获取顶部元素：<code>s1.peek()</code></li>
+<li>栈是否为空：<code>s1.empty()</code></li>
+</ul>
+<h4 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h4><ul>
+<li><p>先进先出，只能在表的前端删除元素、后端插入元素</p>
+</li>
+<li><p>创建：<code>Queue&lt;String&gt; queue = new LinkedList&lt;String&gt;();</code></p>
+</li>
+<li>添加：queue.offer()</li>
+<li>获取第一个元素：queue.peek()</li>
+<li><p>删除第一个元素：queue.poll()</p>
+</li>
+<li><p>创建小根堆</p>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token comment">// 定义小根堆，根据数字频率自小到大排序</span>
+<span class="token class-name">Queue</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">></span></span> pq <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PriorityQueue</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">(</span>v1<span class="token punctuation">,</span> v2<span class="token punctuation">)</span> <span class="token operator">-></span> map<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>v1<span class="token punctuation">)</span> <span class="token operator">-</span> map<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>v2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 遍历数组，维护一个大小为 k 的小根堆：</span>
+<span class="token comment">// 不足 k 个直接将当前数字加入到堆中；否则判断堆中的最小次数是否小于当前数字的出现次数，若是，则删掉堆中出现次数最少的一个数字，将当前数字加入堆中。</span>
+map<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span>num<span class="token punctuation">,</span> cnt<span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>pq<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> k<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        pq<span class="token punctuation">.</span><span class="token function">offer</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>map<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>pq<span class="token punctuation">.</span><span class="token function">peek</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> cnt<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        pq<span class="token punctuation">.</span><span class="token function">poll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        pq<span class="token punctuation">.</span><span class="token function">offer</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span></code></pre>
+</li>
+</ul>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><h4 id="448-找到所有数组中消失的数字-easy"><a href="#448-找到所有数组中消失的数字-easy" class="headerlink" title="448.找到所有数组中消失的数字(easy)"></a>448.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/">找到所有数组中消失的数字(easy)</a></h4><p>给定一个范围在  1 ≤ a[i] ≤ n ( n = 数组大小 ) 的 整型数组，数组中的元素一些出现了两次，另一些只出现一次。找到所有在 [1, n] 范围之间没有出现在数组中的数字。</p>
+<p>解题思路：遍历一遍数组，将大于0的数作为索引，将该索引处的数设为负数；最后再遍历一遍数组，找到正数元素对应的索引即为未出现的数字</p>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">></span></span> <span class="token function">findDisappearedNumbers</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">></span></span> ans <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> num<span class="token operator">:</span> nums<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            <span class="token keyword">int</span> pos <span class="token operator">=</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">abs</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>nums<span class="token punctuation">[</span>pos<span class="token punctuation">]</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>  nums<span class="token punctuation">[</span>pos<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">-</span>nums<span class="token punctuation">[</span>pos<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> ans<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span></code></pre>
 

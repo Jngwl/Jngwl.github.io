@@ -182,7 +182,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      27.3k 字
+      27.7k 字
     </span>
   
 
@@ -192,7 +192,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      390
+      395
        分钟
     </span>
   
@@ -226,7 +226,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年3月15日 下午
+                  本文最后更新于：2021年3月15日 晚上
                 
               </p>
             
@@ -3272,6 +3272,37 @@ queue2<span class="token punctuation">.</span><span class="token function">add</
 
     <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">gcd</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
         <span class="token keyword">return</span> b <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">?</span> a <span class="token operator">:</span> <span class="token function">gcd</span><span class="token punctuation">(</span>b<span class="token punctuation">,</span> a<span class="token operator">%</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<h3 id="🌟-前缀和与积分图"><a href="#🌟-前缀和与积分图" class="headerlink" title="🌟 前缀和与积分图"></a>🌟 前缀和与积分图</h3><p>一维的前缀和，二维的积分图，都是<strong>把每个位置之前的一维线段或二维矩形预先存储</strong>，方便加速计算。如果需要对前缀和或积分图的值做寻址，则要存在哈希表里；如果要对每个位置记录前缀和或积分图的值，则可以储存到一维或二维数组里，也常常伴随着动态规划。</p>
+<h4 id="303-区域和检索-数组不可变-easy"><a href="#303-区域和检索-数组不可变-easy" class="headerlink" title="303.区域和检索 - 数组不可变(easy)"></a>303.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/range-sum-query-immutable/">区域和检索 - 数组不可变(easy)</a></h4><p>给定一个整数数组<code>nums</code>，求出数组从索引<code>i</code>到<code>j</code>（<code>i ≤ j</code>）范围内元素的总和，包含 <code>i</code>、<code>j</code>两点。</p>
+<p>实现<code>NumArray</code>类：</p>
+<ul>
+<li><code>NumArray(int[] nums)</code>使用数组<code>nums</code>初始化对象</li>
+<li><code>int sumRange(int i, int j)</code>返回数组<code>nums</code>从索引<code>i</code>到<code>j</code>（i ≤ j）范围内元素的总和，包含 i、j 两点</li>
+</ul>
+<p><strong>解题思路</strong>：最简单的方法是每次遍历数组left到right间的值求和，但多次查询时时间较慢；为了提高速度，可以采用前缀和思想来解决此问题。先遍历一遍数组，统计前i个数字的和，保存到dp数组中。之后要查询时，直接用<code>dp[right] - dp[left] + nums[left]</code>即可（包含左右边界元素）</p>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">NumArray</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">;</span>
+    <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> dp<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token class-name">NumArray</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>nums <span class="token operator">=</span> nums<span class="token punctuation">;</span>
+
+        dp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span>nums<span class="token punctuation">.</span>length<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        dp<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> dp<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>    <span class="token comment">// 索引从0到i的元素的总和</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">sumRange</span><span class="token punctuation">(</span><span class="token keyword">int</span> left<span class="token punctuation">,</span> <span class="token keyword">int</span> right<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// int ans = 0;</span>
+        <span class="token comment">// for(int i = left; i &lt;= right; i++)&#123;</span>
+        <span class="token comment">//     ans += nums[i];</span>
+        <span class="token comment">// &#125;</span>
+        <span class="token comment">// return ans;</span>
+        <span class="token keyword">return</span> dp<span class="token punctuation">[</span>right<span class="token punctuation">]</span> <span class="token operator">-</span> dp<span class="token punctuation">[</span>left<span class="token punctuation">]</span> <span class="token operator">+</span> nums<span class="token punctuation">[</span>left<span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span></code></pre>
 

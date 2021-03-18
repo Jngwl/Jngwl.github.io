@@ -182,7 +182,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.9k 字
+      2.8k 字
     </span>
   
 
@@ -192,7 +192,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      35
+      34
        分钟
     </span>
   
@@ -235,7 +235,7 @@
 <p>转载自<a target="_blank" rel="noopener" href="https://github.com/Snailclimb/JavaGuide/blob/master/docs/dataStructures-algorithms/data-structure/bloom-filter.md">JavaGuide</a>，感谢整理分享</p>
 </blockquote>
 <h3 id="1-什么是布隆过滤器？"><a href="#1-什么是布隆过滤器？" class="headerlink" title="1.什么是布隆过滤器？"></a>1.什么是布隆过滤器？</h3><p>首先，我们需要了解布隆过滤器的概念。</p>
-<p>布隆过滤器（Bloom Filter）是一个叫做 Bloom 的老哥于1970年提出的。我们可以把它看作由二进制向量（或者说<strong>位数组</strong>）和一系列随机映射函数（哈希函数）两部分组成的数据结构。相比于我们平时常用的的 List、Map 、Set 等数据结构，它占用空间更少并且效率更高，但是缺点是其返回的结果是概率性的，而不是非常准确的。理论情况下添加到集合中的元素越多，误报的可能性就越大。并且，存放在布隆过滤器的数据不容易删除。</p>
+<p>布隆过滤器（Bloom Filter）是一个叫做 Bloom 的老哥于1970年提出的。我们可以把它看作由二进制向量（或者说<strong>位数组</strong>）和一系列随机映射函数（<strong>哈希函数</strong>）两部分组成的数据结构。相比于我们平时常用的的 List、Map 、Set 等数据结构，它占用空间更少并且效率更高，但是缺点是其返回的结果是概率性的，而不是非常准确的。理论情况下添加到集合中的元素越多，误报的可能性就越大。并且，存放在布隆过滤器的数据不容易删除。 </p>
 <p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/cda39808ba1cbc106cdd931845f84dd26b76d7c14d84852fe83d0bfdbcbec64b/68747470733a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f323031392d31312f2545352542382538332545392539412538362545382542462538372545362542422541342545352539392541382d6269742545362539352542302545372542422538342e706e67"><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210318221829.png" srcset="/img/loading.gif" alt="布隆过滤器示意图"></a></p>
 <p>位数组中的每个元素都只占用 1 bit ，并且每个元素只能是 0 或者 1。这样申请一个 100w 个元素的位数组只占用 1000000Bit / 8 = 125000 Byte = 125000/1024 kb ≈ 122kb 的空间。</p>
 <p>总结：<strong>一个名叫 Bloom 的人提出了一种来检索元素是否在给定大集合中的数据结构，这种数据结构是高效且性能很好的，但缺点是具有一定的错误识别率和删除难度。并且，理论情况下，添加到集合中的元素越多，误报的可能性就越大。</strong></p>
@@ -268,134 +268,134 @@
 <li>判断给定元素是否存在于位数组（布隆过滤器）的方法实现。</li>
 </ol>
 <p>下面给出一个我觉得写的还算不错的代码（参考网上已有代码改进得到，对于所有类型对象皆适用）：</p>
-<pre class="language-none"><code class="language-none">import java.util.BitSet;
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">BitSet</span><span class="token punctuation">;</span>
 
-public class MyBloomFilter &#123;
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyBloomFilter</span> <span class="token punctuation">&#123;</span>
 
-    &#x2F;**
+    <span class="token comment">/**
      * 位数组的大小
-     *&#x2F;
-    private static final int DEFAULT_SIZE &#x3D; 2 &lt;&lt; 24;
-    &#x2F;**
+     */</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> DEFAULT_SIZE <span class="token operator">=</span> <span class="token number">2</span> <span class="token operator">&lt;&lt;</span> <span class="token number">24</span><span class="token punctuation">;</span>
+    <span class="token comment">/**
      * 通过这个数组可以创建 6 个不同的哈希函数
-     *&#x2F;
-    private static final int[] SEEDS &#x3D; new int[]&#123;3, 13, 46, 71, 91, 134&#125;;
+     */</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> SEEDS <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">&#123;</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">13</span><span class="token punctuation">,</span> <span class="token number">46</span><span class="token punctuation">,</span> <span class="token number">71</span><span class="token punctuation">,</span> <span class="token number">91</span><span class="token punctuation">,</span> <span class="token number">134</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 
-    &#x2F;**
+    <span class="token comment">/**
      * 位数组。数组中的元素只能是 0 或者 1
-     *&#x2F;
-    private BitSet bits &#x3D; new BitSet(DEFAULT_SIZE);
+     */</span>
+    <span class="token keyword">private</span> <span class="token class-name">BitSet</span> bits <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BitSet</span><span class="token punctuation">(</span>DEFAULT_SIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    &#x2F;**
+    <span class="token comment">/**
      * 存放包含 hash 函数的类的数组
-     *&#x2F;
-    private SimpleHash[] func &#x3D; new SimpleHash[SEEDS.length];
+     */</span>
+    <span class="token keyword">private</span> <span class="token class-name">SimpleHash</span><span class="token punctuation">[</span><span class="token punctuation">]</span> func <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SimpleHash</span><span class="token punctuation">[</span>SEEDS<span class="token punctuation">.</span>length<span class="token punctuation">]</span><span class="token punctuation">;</span>
 
-    &#x2F;**
+    <span class="token comment">/**
      * 初始化多个包含 hash 函数的类的数组，每个类中的 hash 函数都不一样
-     *&#x2F;
-    public MyBloomFilter() &#123;
-        &#x2F;&#x2F; 初始化多个不同的 Hash 函数
-        for (int i &#x3D; 0; i &lt; SEEDS.length; i++) &#123;
-            func[i] &#x3D; new SimpleHash(DEFAULT_SIZE, SEEDS[i]);
-        &#125;
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token class-name">MyBloomFilter</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 初始化多个不同的 Hash 函数</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> SEEDS<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            func<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SimpleHash</span><span class="token punctuation">(</span>DEFAULT_SIZE<span class="token punctuation">,</span> SEEDS<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
 
-    &#x2F;**
+    <span class="token comment">/**
      * 添加元素到位数组
-     *&#x2F;
-    public void add(Object value) &#123;
-        for (SimpleHash f : func) &#123;
-            bits.set(f.hash(value), true);
-        &#125;
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token class-name">Object</span> value<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">SimpleHash</span> f <span class="token operator">:</span> func<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            bits<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>f<span class="token punctuation">.</span><span class="token function">hash</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
 
-    &#x2F;**
+    <span class="token comment">/**
      * 判断指定元素是否存在于位数组
-     *&#x2F;
-    public boolean contains(Object value) &#123;
-        boolean ret &#x3D; true;
-        for (SimpleHash f : func) &#123;
-            ret &#x3D; ret &amp;&amp; bits.get(f.hash(value));
-        &#125;
-        return ret;
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">contains</span><span class="token punctuation">(</span><span class="token class-name">Object</span> value<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">boolean</span> ret <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">SimpleHash</span> f <span class="token operator">:</span> func<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            ret <span class="token operator">=</span> ret <span class="token operator">&amp;&amp;</span> bits<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>f<span class="token punctuation">.</span><span class="token function">hash</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> ret<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    &#x2F;**
+    <span class="token comment">/**
      * 静态内部类。用于 hash 操作！
-     *&#x2F;
-    public static class SimpleHash &#123;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">SimpleHash</span> <span class="token punctuation">&#123;</span>
 
-        private int cap;
-        private int seed;
+        <span class="token keyword">private</span> <span class="token keyword">int</span> cap<span class="token punctuation">;</span>
+        <span class="token keyword">private</span> <span class="token keyword">int</span> seed<span class="token punctuation">;</span>
 
-        public SimpleHash(int cap, int seed) &#123;
-            this.cap &#x3D; cap;
-            this.seed &#x3D; seed;
-        &#125;
+        <span class="token keyword">public</span> <span class="token class-name">SimpleHash</span><span class="token punctuation">(</span><span class="token keyword">int</span> cap<span class="token punctuation">,</span> <span class="token keyword">int</span> seed<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>cap <span class="token operator">=</span> cap<span class="token punctuation">;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>seed <span class="token operator">=</span> seed<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
 
-        &#x2F;**
+        <span class="token comment">/**
          * 计算 hash 值
-         *&#x2F;
-        public int hash(Object value) &#123;
-            int h;
-            return (value &#x3D;&#x3D; null) ? 0 : Math.abs(seed * (cap - 1) &amp; ((h &#x3D; value.hashCode()) ^ (h &gt;&gt;&gt; 16)));
-        &#125;
+         */</span>
+        <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">hash</span><span class="token punctuation">(</span><span class="token class-name">Object</span> value<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">int</span> h<span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token punctuation">(</span>value <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token number">0</span> <span class="token operator">:</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">abs</span><span class="token punctuation">(</span>seed <span class="token operator">*</span> <span class="token punctuation">(</span>cap <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>h <span class="token operator">=</span> value<span class="token punctuation">.</span><span class="token function">hashCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">^</span> <span class="token punctuation">(</span>h <span class="token operator">>>></span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
 
-    &#125;
-&#125;</code></pre>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
 <p>测试：</p>
-<pre class="language-none"><code class="language-none">String value1 &#x3D; &quot;https:&#x2F;&#x2F;javaguide.cn&#x2F;&quot;;
-String value2 &#x3D; &quot;https:&#x2F;&#x2F;github.com&#x2F;Snailclimb&quot;;
-MyBloomFilter filter &#x3D; new MyBloomFilter();
-System.out.println(filter.contains(value1));
-System.out.println(filter.contains(value2));
-filter.add(value1);
-filter.add(value2);
-System.out.println(filter.contains(value1));
-System.out.println(filter.contains(value2));</code></pre>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> value1 <span class="token operator">=</span> <span class="token string">"https://javaguide.cn/"</span><span class="token punctuation">;</span>
+<span class="token class-name">String</span> value2 <span class="token operator">=</span> <span class="token string">"https://github.com/Snailclimb"</span><span class="token punctuation">;</span>
+<span class="token class-name">MyBloomFilter</span> filter <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MyBloomFilter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>filter<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>value1<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>filter<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>value2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+filter<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>value1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+filter<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>value2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>filter<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>value1<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>filter<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>value2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>Output:</p>
-<pre class="language-none"><code class="language-none">false
+<pre class="language-shell" data-language="shell"><code class="language-shell">false
 false
 true
 true</code></pre>
 <p>测试：</p>
-<pre class="language-none"><code class="language-none">Integer value1 &#x3D; 13423;
-Integer value2 &#x3D; 22131;
-MyBloomFilter filter &#x3D; new MyBloomFilter();
-System.out.println(filter.contains(value1));
-System.out.println(filter.contains(value2));
-filter.add(value1);
-filter.add(value2);
-System.out.println(filter.contains(value1));
-System.out.println(filter.contains(value2));</code></pre>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token class-name">Integer</span> value1 <span class="token operator">=</span> <span class="token number">13423</span><span class="token punctuation">;</span>
+<span class="token class-name">Integer</span> value2 <span class="token operator">=</span> <span class="token number">22131</span><span class="token punctuation">;</span>
+<span class="token class-name">MyBloomFilter</span> filter <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MyBloomFilter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>filter<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>value1<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>filter<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>value2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+filter<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>value1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+filter<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>value2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>filter<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>value1<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>filter<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>value2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>Output:</p>
-<pre class="language-none"><code class="language-none">false
+<pre class="language-shell" data-language="shell"><code class="language-shell">false
 false
 true
 true</code></pre>
 <h3 id="5-利用Google开源的-Guava中自带的布隆过滤器"><a href="#5-利用Google开源的-Guava中自带的布隆过滤器" class="headerlink" title="5.利用Google开源的 Guava中自带的布隆过滤器"></a>5.利用Google开源的 Guava中自带的布隆过滤器</h3><p>自己实现的目的主要是为了让自己搞懂布隆过滤器的原理，Guava 中布隆过滤器的实现算是比较权威的，所以实际项目中我们不需要手动实现一个布隆过滤器。</p>
 <p>首先我们需要在项目中引入 Guava 的依赖：</p>
-<pre class="language-none"><code class="language-none">&lt;dependency&gt;
-    &lt;groupId&gt;com.google.guava&lt;&#x2F;groupId&gt;
-    &lt;artifactId&gt;guava&lt;&#x2F;artifactId&gt;
-    &lt;version&gt;28.0-jre&lt;&#x2F;version&gt;
-&lt;&#x2F;dependency&gt;</code></pre>
+<pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.google.guava<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>guava<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>28.0-jre<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
 <p>实际使用如下：</p>
 <p>我们创建了一个最多存放 最多 1500个整数的布隆过滤器，并且我们可以容忍误判的概率为百分之（0.01）</p>
-<pre class="language-none"><code class="language-none">&#x2F;&#x2F; 创建布隆过滤器对象
-BloomFilter&lt;Integer&gt; filter &#x3D; BloomFilter.create(
-        Funnels.integerFunnel(),
-        1500,
-        0.01);
-&#x2F;&#x2F; 判断指定元素是否存在
-System.out.println(filter.mightContain(1));
-System.out.println(filter.mightContain(2));
-&#x2F;&#x2F; 将元素添加进布隆过滤器
-filter.put(1);
-filter.put(2);
-System.out.println(filter.mightContain(1));
-System.out.println(filter.mightContain(2));</code></pre>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token comment">// 创建布隆过滤器对象</span>
+<span class="token class-name">BloomFilter</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">></span></span> filter <span class="token operator">=</span> <span class="token class-name">BloomFilter</span><span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>
+        <span class="token class-name">Funnels</span><span class="token punctuation">.</span><span class="token function">integerFunnel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token number">1500</span><span class="token punctuation">,</span>
+        <span class="token number">0.01</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 判断指定元素是否存在</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>filter<span class="token punctuation">.</span><span class="token function">mightContain</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>filter<span class="token punctuation">.</span><span class="token function">mightContain</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 将元素添加进布隆过滤器</span>
+filter<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+filter<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>filter<span class="token punctuation">.</span><span class="token function">mightContain</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>filter<span class="token punctuation">.</span><span class="token function">mightContain</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>在我们的示例中，当<code>mightContain（）</code> 方法返回<em>true</em>时，我们可以99％确定该元素在过滤器中，当过滤器返回<em>false</em>时，我们可以100％确定该元素不存在于过滤器中。</p>
 <p><strong>Guava 提供的布隆过滤器的实现还是很不错的（想要详细了解的可以看一下它的源码实现），但是它有一个重大的缺陷就是只能单机使用（另外，容量扩展也不容易），而现在互联网一般都是分布式的场景。为了解决这个问题，我们就需要用到 Redis 中的布隆过滤器了。</strong></p>
 <h3 id="6-Redis-中的布隆过滤器"><a href="#6-Redis-中的布隆过滤器" class="headerlink" title="6.Redis 中的布隆过滤器"></a>6.Redis 中的布隆过滤器</h3><h4 id="6-1介绍"><a href="#6-1介绍" class="headerlink" title="6.1介绍"></a>6.1介绍</h4><p>Redis v4.0 之后有了 Module（模块/插件） 功能，Redis Modules 让 Redis 可以使用外部模块扩展其功能 。布隆过滤器就是其中的 Module。详情可以查看 Redis 官方对 Redis Modules 的介绍 ：<a target="_blank" rel="noopener" href="https://redis.io/modules">https://redis.io/modules</a></p>
@@ -408,7 +408,7 @@ System.out.println(filter.mightContain(2));</code></pre>
 <p>RedisBloom 提供了多种语言的客户端支持，包括：Python、Java、JavaScript 和 PHP。</p>
 <h4 id="6-2使用Docker安装"><a href="#6-2使用Docker安装" class="headerlink" title="6.2使用Docker安装"></a>6.2使用Docker安装</h4><p>如果我们需要体验 Redis 中的布隆过滤器非常简单，通过 Docker 就可以了！我们直接在 Google 搜索<strong>docker redis bloomfilter</strong> 然后在排除广告的第一条搜素结果就找到了我们想要的答案（这是我平常解决问题的一种方式，分享一下），具体地址：<a target="_blank" rel="noopener" href="https://hub.docker.com/r/redislabs/rebloom/">https://hub.docker.com/r/redislabs/rebloom/</a> （介绍的很详细 ）。</p>
 <p><strong>具体操作如下：</strong></p>
-<pre class="language-none"><code class="language-none">➜  ~ docker run -p 6379:6379 --name redis-redisbloom redislabs&#x2F;rebloom:latest
+<pre class="language-shell" data-language="shell"><code class="language-shell">➜  ~ docker run -p 6379:6379 --name redis-redisbloom redislabs&#x2F;rebloom:latest
 ➜  ~ docker exec -it redis-redisbloom bash
 root@21396d02c252:&#x2F;data# redis-cli
 127.0.0.1:6379&gt; </code></pre>
@@ -434,7 +434,7 @@ root@21396d02c252:&#x2F;data# redis-cli
 <ul>
 <li>expansion：如果创建了一个新的子过滤器，则其大小将是当前过滤器的大小乘以<code>expansion</code>。默认扩展值为2。这意味着每个后续子过滤器将是前一个子过滤器的两倍。</li>
 </ul>
-<h4 id="6-4实际使用"><a href="#6-4实际使用" class="headerlink" title="6.4实际使用"></a>6.4实际使用</h4><pre class="language-none"><code class="language-none">127.0.0.1:6379&gt; BF.ADD myFilter java
+<h4 id="6-4实际使用"><a href="#6-4实际使用" class="headerlink" title="6.4实际使用"></a>6.4实际使用</h4><pre class="language-redis" data-language="redis"><code class="language-redis">127.0.0.1:6379&gt; BF.ADD myFilter java
 (integer) 1
 127.0.0.1:6379&gt; BF.ADD myFilter javaguide
 (integer) 1

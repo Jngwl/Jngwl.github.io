@@ -231,7 +231,10 @@
               </p>
             
             <div class="markdown-body">
-              <h3 id="1-什么是布隆过滤器？"><a href="#1-什么是布隆过滤器？" class="headerlink" title="1.什么是布隆过滤器？"></a>1.什么是布隆过滤器？</h3><p>首先，我们需要了解布隆过滤器的概念。</p>
+              <blockquote>
+<p>转载自<a target="_blank" rel="noopener" href="https://github.com/Snailclimb/JavaGuide/blob/master/docs/dataStructures-algorithms/data-structure/bloom-filter.md">JavaGuide</a>，感谢整理分享</p>
+</blockquote>
+<h3 id="1-什么是布隆过滤器？"><a href="#1-什么是布隆过滤器？" class="headerlink" title="1.什么是布隆过滤器？"></a>1.什么是布隆过滤器？</h3><p>首先，我们需要了解布隆过滤器的概念。</p>
 <p>布隆过滤器（Bloom Filter）是一个叫做 Bloom 的老哥于1970年提出的。我们可以把它看作由二进制向量（或者说<strong>位数组</strong>）和一系列随机映射函数（哈希函数）两部分组成的数据结构。相比于我们平时常用的的 List、Map 、Set 等数据结构，它占用空间更少并且效率更高，但是缺点是其返回的结果是概率性的，而不是非常准确的。理论情况下添加到集合中的元素越多，误报的可能性就越大。并且，存放在布隆过滤器的数据不容易删除。</p>
 <p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/cda39808ba1cbc106cdd931845f84dd26b76d7c14d84852fe83d0bfdbcbec64b/68747470733a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f323031392d31312f2545352542382538332545392539412538362545382542462538372545362542422541342545352539392541382d6269742545362539352542302545372542422538342e706e67"><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210318221829.png" srcset="/img/loading.gif" alt="布隆过滤器示意图"></a></p>
 <p>位数组中的每个元素都只占用 1 bit ，并且每个元素只能是 0 或者 1。这样申请一个 100w 个元素的位数组只占用 1000000Bit / 8 = 125000 Byte = 125000/1024 kb ≈ 122kb 的空间。</p>

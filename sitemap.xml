@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://www.jngwl.top/posts/1a0fd663/</loc>
+    <loc>https://www.jngwl.top/posts/480276e2/</loc>
     
     <lastmod>2021-03-18</lastmod>
     
@@ -11,7 +11,14 @@
   <url>
     <loc>https://www.jngwl.top/posts/925c77bc/</loc>
     
-    <lastmod>2021-03-17</lastmod>
+    <lastmod>2021-03-18</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.jngwl.top/posts/1a0fd663/</loc>
+    
+    <lastmod>2021-03-18</lastmod>
     
   </url>
   
@@ -1097,6 +1104,13 @@
   
   <url>
     <loc>https://www.jngwl.top/tags/Faster-RCNN/</loc>
+    <lastmod>2021-03-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.jngwl.top/tags/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/</loc>
     <lastmod>2021-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

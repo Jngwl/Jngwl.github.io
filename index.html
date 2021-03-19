@@ -244,7 +244,8 @@ class Solution &#123;
             
           
           
-一、分布式基础概念1.微服务2.集群、分布式、节点
+一、分布式基础概念1.微服务把一个单独的应用程序开发成一套小服务，每个小服务运行在自己的进程中，并使用轻量级机制通信
+2.集群、分布式、节点
 集群：将多台服务器集中在一起，实现同一业务
 
 分布式：将不同的业务分布在不同的地方
@@ -252,10 +253,7 @@ class Solution &#123;
 节点：集群中的每台服务器就是一个节点
 
 3.远程调用在分布式系统中，各个业务可能处于不同主机，但是服务之间不可避免地需要相互调用，即远程调用。
-SpringCloud中采用HTTP+JSON方式完成远程调用。
-RPC ？？
-
-4.负载均衡为了使分布式系统中的每
+SpringCloud中采
         </a>
       </p>
 
@@ -276,6 +274,87 @@ RPC ？？
             
           </div>
         
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/posts/e750a506/" target="_self">
+          <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210108214048.png" srcset="/img/loading.gif" alt="SpringBoot常用注解">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/posts/e750a506/">SpringBoot常用注解</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/posts/e750a506/">
+          
+          
+            
+          
+          Controller层
+
+
+
+
+注解
+含义
+
+
+
+
+@Controller
+标明该类为控制器类
+
+
+@RestController
+@Controller 和@ResponseBody的结合，返回字符串，不跳转视图
+
+
+@RequestMapping
+URL映射
+
+
+@GetMapping
+Get请求，为@RequestMapping(method = RequestMethod.GET)的简写
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-19 17:13" pubdate>
+              2021-03-19
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Java/">Java</a>
+            
+              <a href="/tags/SpringBoot/">SpringBoot</a>
+            
+          </div>
         
       </div>
     </article>
@@ -707,66 +786,6 @@ View：html、jsp等
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/SpringMVC/">SpringMVC</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/posts/c98cb521/" target="_self">
-          <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210108193351.png" srcset="/img/loading.gif" alt="Mybatis使用手册">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/posts/c98cb521/">Mybatis使用手册</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/posts/c98cb521/">
-          
-          
-            
-          
-          
-一、简介1）什么是Mybatis【官网介绍】：MyBatis 是一款优秀的持久层框架，它支持自定义 SQL、存储过程以及高级映射。
-
-MyBatis 免除了几乎所有的 JDBC 代码以及设置参数和获取结果集的工作。
-MyBatis 可以通过简单的 XML 或注解来配置和映射原始类型、接口和 Java POJO（Plain Old Java Objects，普通老式 Java 对象）为数据库中的记
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-12-24 10:13" pubdate>
-              2020-12-24
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/SSM%E6%A1%86%E6%9E%B6/">SSM框架</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Java/">Java</a>
-            
-              <a href="/tags/Mybatis/">Mybatis</a>
             
           </div>
         

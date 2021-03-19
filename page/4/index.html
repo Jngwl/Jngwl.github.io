@@ -169,6 +169,65 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/posts/8cf651e6/" target="_self">
+          <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210108193616.jfif" srcset="/img/loading.gif" alt="CNN中的注意力机制">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/posts/8cf651e6/">CNN中的注意力机制</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/posts/8cf651e6/">
+          
+          
+            
+          
+          通道注意力机制SENetSENet(Squeeze-and-Excitation Networks，SENet)是ImageNet2017分类比赛的冠军模型，主要思想为对H×W×C的feature map进行处理，得到一个1×1×C的权重，再乘回去得到最终的feature map。具体结构如下图所示：
+
+
+Sequeeze：对H×W×C的feature map进行global average po
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-05-14 16:27" pubdate>
+              2020-05-14
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Attention/">Attention</a>
+            
+              <a href="/tags/CNN/">CNN</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/posts/84be052c/" target="_self">
           <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210108193616.jfif" srcset="/img/loading.gif" alt="Softmax Vs Softmax loss">
         </a>
@@ -740,72 +799,6 @@ import torchvision
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/PyTorch/">PyTorch</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/posts/5e67f605/" target="_self">
-          <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210108194654.jfif" srcset="/img/loading.gif" alt="Numpy.prod问题">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/posts/5e67f605/">Numpy.prod问题</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/posts/5e67f605/">
-          
-          
-            
-          
-          import numpy as np
-
-a=[[ [1,2,3,4],[1,2,3,4] ]]
-
-print(np.array(a).shape) # (1, 2, 4)
-
-s=np.prod(a) # 576
-s1=np.prod(a,axis=1) # [[ 1,4,9,16]]
-s2=np.prod(a,axis=2) # [[24, 24]]
-
-np.prod在默认情况下计算所有元素的乘积
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-05-05 21:51" pubdate>
-              2020-05-05
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Python/">Python</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Python/">Python</a>
-            
-              <a href="/tags/numpy/">numpy</a>
             
           </div>
         

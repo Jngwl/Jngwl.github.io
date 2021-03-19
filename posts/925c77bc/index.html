@@ -182,7 +182,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      8k 字
+      8.1k 字
     </span>
   
 
@@ -192,7 +192,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      119
+      120
        分钟
     </span>
   
@@ -226,42 +226,43 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年3月18日 晚上
+                  本文最后更新于：2021年3月19日 下午
                 
               </p>
             
             <div class="markdown-body">
               <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210309100748.jpg" srcset="/img/loading.gif" alt="谷粒商城-微服务架构图"></p>
-<h2 id="一、分布式基础概念"><a href="#一、分布式基础概念" class="headerlink" title="一、分布式基础概念"></a>一、分布式基础概念</h2><h3 id="1-微服务"><a href="#1-微服务" class="headerlink" title="1.微服务"></a>1.微服务</h3><h3 id="2-集群、分布式、节点"><a href="#2-集群、分布式、节点" class="headerlink" title="2.集群、分布式、节点"></a>2.集群、分布式、节点</h3><ul>
+<h1 id="一、分布式基础概念"><a href="#一、分布式基础概念" class="headerlink" title="一、分布式基础概念"></a>一、分布式基础概念</h1><h2 id="1-微服务"><a href="#1-微服务" class="headerlink" title="1.微服务"></a>1.微服务</h2><p>把一个单独的应用程序开发成一套小服务，每个小服务运行在自己的进程中，并使用轻量级机制通信</p>
+<h2 id="2-集群、分布式、节点"><a href="#2-集群、分布式、节点" class="headerlink" title="2.集群、分布式、节点"></a>2.集群、分布式、节点</h2><ul>
 <li><p>集群：将多台服务器集中在一起，实现同一业务</p>
 </li>
 <li><p>分布式：将不同的业务分布在不同的地方</p>
 </li>
 <li>节点：集群中的每台服务器就是一个节点</li>
 </ul>
-<h3 id="3-远程调用"><a href="#3-远程调用" class="headerlink" title="3.远程调用"></a>3.远程调用</h3><p>在分布式系统中，各个业务可能处于不同主机，但是服务之间不可避免地需要相互调用，即远程调用。</p>
+<h2 id="3-远程调用"><a href="#3-远程调用" class="headerlink" title="3.远程调用"></a>3.远程调用</h2><p>在分布式系统中，各个业务可能处于不同主机，但是服务之间不可避免地需要相互调用，即远程调用。</p>
 <p><code>SpringCloud</code>中采用<code>HTTP+JSON</code>方式完成远程调用。</p>
 <p>RPC ？？</p>
 <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210309100922.png" srcset="/img/loading.gif" alt=""></p>
-<h3 id="4-负载均衡"><a href="#4-负载均衡" class="headerlink" title="4.负载均衡"></a>4.负载均衡</h3><p>为了使分布式系统中的每个服务器不至于太忙或者太闲，我们可以负载均衡地调用每一个服务器，提升网页的健壮性。</p>
+<h2 id="4-负载均衡"><a href="#4-负载均衡" class="headerlink" title="4.负载均衡"></a>4.负载均衡</h2><p>为了使分布式系统中的每个服务器不至于太忙或者太闲，我们可以负载均衡地调用每一个服务器，提升网页的健壮性。</p>
 <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210309101334.png" srcset="/img/loading.gif" alt=""></p>
 <p>常见的负载均衡算法有：</p>
 <ul>
 <li>轮询：为第一个请求选择健康池中的第一个后端服务器，然后按照顺序依次往后选择</li>
 <li>最小连接：优先选择连接数最小的后端服务器</li>
 </ul>
-<h3 id="5-服务注册-发现、注册中心"><a href="#5-服务注册-发现、注册中心" class="headerlink" title="5.服务注册/发现、注册中心"></a>5.服务注册/发现、注册中心</h3><p>通过注册中心进行服务的注册及调用。</p>
+<h2 id="5-服务注册-发现、注册中心"><a href="#5-服务注册-发现、注册中心" class="headerlink" title="5.服务注册/发现、注册中心"></a>5.服务注册/发现、注册中心</h2><p>通过注册中心进行服务的注册及调用。</p>
 <p>比如A服务要调用B服务，A服务不知道B服务当前在哪几台服务器有、哪些是正常的、哪些已下线，此时直接向注册中心发起请求询问即可</p>
 <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210309101648.png" srcset="/img/loading.gif" alt=""></p>
-<h3 id="6-配置中心"><a href="#6-配置中心" class="headerlink" title="6.配置中心"></a>6.配置中心</h3><p>每一个服务最终都有大量的配置，并且每个服务都可能部署在多台服务器上。此时便可以使用配置中心来集中管理微服务的配置信息</p>
+<h2 id="6-配置中心"><a href="#6-配置中心" class="headerlink" title="6.配置中心"></a>6.配置中心</h2><p>每一个服务最终都有大量的配置，并且每个服务都可能部署在多台服务器上。此时便可以使用配置中心来集中管理微服务的配置信息</p>
 <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210309102243.png" srcset="/img/loading.gif" alt=""></p>
-<h3 id="7-服务熔断、服务降级"><a href="#7-服务熔断、服务降级" class="headerlink" title="7.服务熔断、服务降级"></a>7.服务熔断、服务降级</h3><p>在微服务架构中，微服务之间通过网络进行通信，存在相互依赖，当其中一个服务不可用时，可能会造成雪崩效应。为了避免这种情况，需设置相应的容错机制来保护服务。</p>
+<h2 id="7-服务熔断、服务降级"><a href="#7-服务熔断、服务降级" class="headerlink" title="7.服务熔断、服务降级"></a>7.服务熔断、服务降级</h2><p>在微服务架构中，微服务之间通过网络进行通信，存在相互依赖，当其中一个服务不可用时，可能会造成雪崩效应。为了避免这种情况，需设置相应的容错机制来保护服务。</p>
 <pre class="language-none"><code class="language-none">订单服务   ---》   商品服务     ---》   库存服务</code></pre>
 <p><strong>服务熔断</strong>：设置服务的超时，当被调用的服务经常失败达到某个阈值时，<strong>开启断路保护机制</strong>，后来的请求不再去调用这个服务，本地直接返回默认的数据。</p>
 <p><strong>服务降级</strong>：在系统高峰期、资源紧张时，某些业务不处理或者简单处理（抛异常、返回Null、调用Mock数据等等）</p>
-<h3 id="8-API网关"><a href="#8-API网关" class="headerlink" title="8.API网关"></a>8.API网关</h3><p>前后端分离，前端发来的所有请求先到达API网关，进行处理（如统一认证、限流、日志统计等）后，再调用相应的后台服务器</p>
+<h2 id="8-API网关"><a href="#8-API网关" class="headerlink" title="8.API网关"></a>8.API网关</h2><p>前后端分离，前端发来的所有请求先到达API网关，进行处理（如统一认证、限流、日志统计等）后，再调用相应的后台服务器</p>
 <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210309103938.png" srcset="/img/loading.gif" alt=""></p>
-<h2 id="二、环境搭建"><a href="#二、环境搭建" class="headerlink" title="二、环境搭建"></a>二、环境搭建</h2><h3 id="1-安装VirtualBox和Vagrant"><a href="#1-安装VirtualBox和Vagrant" class="headerlink" title="1.安装VirtualBox和Vagrant"></a>1.安装VirtualBox和Vagrant</h3><h3 id="2-安装centos"><a href="#2-安装centos" class="headerlink" title="2.安装centos"></a>2.安装centos</h3><pre class="language-bash" data-language="bash"><code class="language-bash">$ vagrant init centos/7
+<h1 id="二、环境搭建"><a href="#二、环境搭建" class="headerlink" title="二、环境搭建"></a>二、环境搭建</h1><h2 id="1-安装VirtualBox和Vagrant"><a href="#1-安装VirtualBox和Vagrant" class="headerlink" title="1.安装VirtualBox和Vagrant"></a>1.安装VirtualBox和Vagrant</h2><h2 id="2-安装centos"><a href="#2-安装centos" class="headerlink" title="2.安装centos"></a>2.安装centos</h2><pre class="language-bash" data-language="bash"><code class="language-bash">$ vagrant init centos/7
 A <span class="token variable"><span class="token variable">`</span>Vagrantfile<span class="token variable">`</span></span> has been placed <span class="token keyword">in</span> this directory. You are now
 ready to <span class="token variable"><span class="token variable">`</span>vagrant up<span class="token variable">`</span></span> your first virtual environment<span class="token operator">!</span> Please <span class="token builtin class-name">read</span>
 the comments <span class="token keyword">in</span> the Vagrantfile as well as documentation on
@@ -398,7 +399,7 @@ PING <span class="token number">172.18</span>.154.202 <span class="token punctua
 --- <span class="token number">172.18</span>.154.202 <span class="token function">ping</span> statistics ---
 <span class="token number">4</span> packets transmitted, <span class="token number">4</span> received, <span class="token number">0</span>% packet loss, <span class="token function">time</span> 3003ms
 rtt min/avg/max/mdev <span class="token operator">=</span> <span class="token number">0.707</span>/1.373/3.082/0.992 ms</code></pre>
-<h3 id="3-centos中安装Docker"><a href="#3-centos中安装Docker" class="headerlink" title="3.centos中安装Docker"></a>3.centos中安装Docker</h3><pre class="language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 安装所需软件包</span>
+<h2 id="3-centos中安装Docker"><a href="#3-centos中安装Docker" class="headerlink" title="3.centos中安装Docker"></a>3.centos中安装Docker</h2><pre class="language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 安装所需软件包</span>
 <span class="token function">sudo</span> yum <span class="token function">install</span> -y yum-utils device-mapper-persistent-data lvm2
 
 <span class="token comment"># 设置仓库</span>
@@ -426,7 +427,7 @@ rtt min/avg/max/mdev <span class="token operator">=</span> <span class="token nu
 <li><p>以交互模式进入特定的容器：<code>docker exec -it mysql /bin/bash</code></p>
 </li>
 </ul>
-<h3 id="4-Docker安装Mysql"><a href="#4-Docker安装Mysql" class="headerlink" title="4.Docker安装Mysql"></a>4.Docker安装Mysql</h3><pre class="language-shell" data-language="shell"><code class="language-shell"><span class="token punctuation">[</span>root@promote vagrant<span class="token punctuation">]</span><span class="token comment"># docker pull mysql:5.7</span>
+<h2 id="4-Docker安装Mysql"><a href="#4-Docker安装Mysql" class="headerlink" title="4.Docker安装Mysql"></a>4.Docker安装Mysql</h2><pre class="language-shell" data-language="shell"><code class="language-shell"><span class="token punctuation">[</span>root@promote vagrant<span class="token punctuation">]</span><span class="token comment"># docker pull mysql:5.7</span>
 <span class="token number">5.7</span>: Pulling from library/mysql
 45b42c59be33: Pull complete
 b4f790bd91da: Pull complete
@@ -510,7 +511,7 @@ root@e917388553f6:/<span class="token comment"># exit</span>
 <p>设置mysql服务随Docker启动</p>
 <pre class="language-shell" data-language="shell"><code class="language-shell"><span class="token punctuation">[</span>root@promote conf<span class="token punctuation">]</span><span class="token comment"># docker update mysql --restart=always</span>
 mysql</code></pre>
-<h3 id="5-Docker安装Redis"><a href="#5-Docker安装Redis" class="headerlink" title="5.Docker安装Redis"></a>5.Docker安装Redis</h3><p>拉取镜像：<code>docker pull redis</code></p>
+<h2 id="5-Docker安装Redis"><a href="#5-Docker安装Redis" class="headerlink" title="5.Docker安装Redis"></a>5.Docker安装Redis</h2><p>拉取镜像：<code>docker pull redis</code></p>
 <p>启动镜像:</p>
 <pre class="language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 预先创建文件，避免docker将路径识别为目录；持久化redis</span>
 <span class="token function">mkdir</span> -p /mydata/redis/conf
@@ -529,10 +530,10 @@ OK
 <span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> <span class="token builtin class-name">exit</span></code></pre>
 <p>设置redis容器随docker启动</p>
 <pre class="language-shell" data-language="shell"><code class="language-shell">docker update redis --restart<span class="token operator">=</span>always</code></pre>
-<h3 id="6-创建Maven工程"><a href="#6-创建Maven工程" class="headerlink" title="6.创建Maven工程"></a>6.创建Maven工程</h3><p>在gitee新建项目，然后通过IDEA的project from拉取gitee上的项目，然后初始化。</p>
+<h2 id="6-创建Maven工程"><a href="#6-创建Maven工程" class="headerlink" title="6.创建Maven工程"></a>6.创建Maven工程</h2><p>在gitee新建项目，然后通过IDEA的project from拉取gitee上的项目，然后初始化。</p>
 <p>新建coupon、member、order、product、ware等服务模块</p>
 <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210316222437.png" srcset="/img/loading.gif" alt="image-20210316222434782"></p>
-<h3 id="7-Renren-fast"><a href="#7-Renren-fast" class="headerlink" title="7.Renren-fast"></a>7.Renren-fast</h3><p>通过<code>git clone https://gitee.com/renrenio/renren-fast.git</code>拉取代码，并删除其中的<code>.git</code>文件夹</p>
+<h2 id="7-Renren-fast"><a href="#7-Renren-fast" class="headerlink" title="7.Renren-fast"></a>7.Renren-fast</h2><p>通过<code>git clone https://gitee.com/renrenio/renren-fast.git</code>拉取代码，并删除其中的<code>.git</code>文件夹</p>
 <ul>
 <li><p>将源码复制到IDEA中，并修改根目录<code>pom.xml</code>，使其包含此模块</p>
 </li>
@@ -543,7 +544,7 @@ OK
 <li>IDEA中运行<code>RenrenApplication.java</code>，则可启动项目</li>
 </ul>
 <p>此时，通过<code>http://localhost:8080/renren-fast/</code>即可访问</p>
-<h3 id="8-Renren-fast-vue"><a href="#8-Renren-fast-vue" class="headerlink" title="8.Renren-fast-vue"></a>8.Renren-fast-vue</h3><pre class="language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> clone https://gitee.com/renrenio/renren-fast-vue.git
+<h2 id="8-Renren-fast-vue"><a href="#8-Renren-fast-vue" class="headerlink" title="8.Renren-fast-vue"></a>8.Renren-fast-vue</h2><pre class="language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> clone https://gitee.com/renrenio/renren-fast-vue.git
 
 <span class="token builtin class-name">cd</span> renren-fast-vue/
 
@@ -556,7 +557,7 @@ cnpm <span class="token function">install</span>
 <p>之后就可以在<code>http://localhost:8001/#/login</code>查看后台管理的前端登录界面了。</p>
 <p>若已经启动了后端系统，此时验证码处会出现相应的验证码图片，初始用户和密码均为<code>admin</code></p>
 <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210310203252.png" srcset="/img/loading.gif" alt=""></p>
-<h3 id="9-逆向生成各个微服务"><a href="#9-逆向生成各个微服务" class="headerlink" title="9.逆向生成各个微服务"></a>9.逆向生成各个微服务</h3><p>通过<code>git clone https://gitee.com/renrenio/renren-generator.git</code>拉取文件，然后删掉<code>.git</code>移动到<code>gulimall</code>根路径下，修改<code>pom.xml</code>添加此模块</p>
+<h2 id="9-逆向生成各个微服务"><a href="#9-逆向生成各个微服务" class="headerlink" title="9.逆向生成各个微服务"></a>9.逆向生成各个微服务</h2><p>通过<code>git clone https://gitee.com/renrenio/renren-generator.git</code>拉取文件，然后删掉<code>.git</code>移动到<code>gulimall</code>根路径下，修改<code>pom.xml</code>添加此模块</p>
 <pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>module</span><span class="token punctuation">></span></span>renren-generator<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>module</span><span class="token punctuation">></span></span></code></pre>
 <p>修改spring配置文件<code>application.yaml</code></p>
 <pre class="language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">spring</span><span class="token punctuation">:</span>
@@ -605,7 +606,7 @@ cnpm <span class="token function">install</span>
 </li>
 </ul>
 <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210318104643.png" srcset="/img/loading.gif" alt=""></p>
-<h2 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h2><div class="table-container">
+<h1 id="三、相关技术基础知识"><a href="#三、相关技术基础知识" class="headerlink" title="三、相关技术基础知识"></a>三、相关技术基础知识</h1><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -678,8 +679,8 @@ cnpm <span class="token function">install</span>
 </tbody>
 </table>
 </div>
-<h2 id="SpringCloud-Alibaba"><a href="#SpringCloud-Alibaba" class="headerlink" title="SpringCloud Alibaba"></a>SpringCloud Alibaba</h2><p><a target="_blank" rel="noopener" href="https://nacos.io/zh-cn/docs/quick-start-spring-cloud.html">Nacos官方文档</a>、</p>
-<h3 id="1-Nacos作为注册中心"><a href="#1-Nacos作为注册中心" class="headerlink" title="1.Nacos作为注册中心"></a>1.Nacos作为注册中心</h3><p>（1）修改<code>gulimall-common</code>的<code>pom.xml</code>文件</p>
+<h2 id="SpringCloud-Alibaba"><a href="#SpringCloud-Alibaba" class="headerlink" title="SpringCloud Alibaba"></a>SpringCloud Alibaba</h2><h3 id="🌟-Nacos-discovery-注册中心"><a href="#🌟-Nacos-discovery-注册中心" class="headerlink" title="🌟 Nacos-discovery 注册中心"></a>🌟 Nacos-discovery 注册中心</h3><p><a target="_blank" rel="noopener" href="https://nacos.io/zh-cn/docs/quick-start-spring-cloud.html">Nacos官方文档</a></p>
+<p>（1）修改<code>gulimall-common</code>的<code>pom.xml</code>文件</p>
 <pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token comment">&lt;!-- SpringCloud-Alibaba依赖 --></span>
 <span class="token comment">&lt;!-- 版本对应关系如下
     SpringCloud-Alibaba2.2.5
@@ -726,7 +727,7 @@ cnpm <span class="token function">install</span>
 <p>（3）在主启动类上，通过<code>@EnableDiscoveryClient</code>开启服务的注册与发现</p>
 <p>（4）此时，通过<code>http://127.0.0.1:8848/nacos/</code>进入Nacos控制台查看各个服务。</p>
 <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210314192620.png" srcset="/img/loading.gif" alt=""></p>
-<h3 id="2-Nacos配置中心"><a href="#2-Nacos配置中心" class="headerlink" title="2.Nacos配置中心"></a>2.Nacos配置中心</h3><h4 id="🌟-基本使用流程"><a href="#🌟-基本使用流程" class="headerlink" title="🌟 基本使用流程"></a>🌟 基本使用流程</h4><p>a.在<code>gulimall-common</code>的<code>pom.xml</code>文件中导入依赖</p>
+<h3 id="🌟-Nacos-config-配置中心"><a href="#🌟-Nacos-config-配置中心" class="headerlink" title="🌟 Nacos-config 配置中心"></a>🌟 Nacos-config 配置中心</h3><h4 id="（1）基本使用流程"><a href="#（1）基本使用流程" class="headerlink" title="（1）基本使用流程"></a>（1）基本使用流程</h4><p>a.在<code>gulimall-common</code>的<code>pom.xml</code>文件中导入依赖</p>
 <pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.alibaba.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-cloud-starter-alibaba-nacos-config<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
@@ -753,7 +754,7 @@ cnpm <span class="token function">install</span>
 <span class="token punctuation">&#125;</span></code></pre>
 <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210318104644.png" srcset="/img/loading.gif" alt=""></p>
 <p>此外，如果配置中心和当前应用的配置文件中都配置了相同的项，<strong>优先使用配置中心的配置</strong>。</p>
-<h4 id="🌟-核心概念："><a href="#🌟-核心概念：" class="headerlink" title="🌟 核心概念："></a>🌟 核心概念：</h4><ul>
+<h4 id="（2）核心概念"><a href="#（2）核心概念" class="headerlink" title="（2）核心概念"></a>（2）核心概念</h4><ul>
 <li><p><strong>命名空间</strong>：用于用户隔离。</p>
 <p>默认为public（保留空间），但可以在<code>bootstrap.properties</code>中通过<code>spring.cloud.nacos.config.namespace=命名空间id</code>指定自己所使用的命名空间。</p>
 <p>可以基于环境（开发、测试和生产）进行隔离，也可以每一个微服务之间相互隔离配置，每一个微服务都创建一个自己的命名空间，只加载自己的命名空间</p>
@@ -769,7 +770,7 @@ cnpm <span class="token function">install</span>
 <p>在本项目中，每个微服务创建自己的命名空间，然后再使用配置分组来区分环境(dev,test,prod)。</p>
 <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210316203938.png" srcset="/img/loading.gif" alt=""></p>
 <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210316203935.png" srcset="/img/loading.gif" alt=""></p>
-<h4 id="🌟-加载多配置集"><a href="#🌟-加载多配置集" class="headerlink" title="🌟 加载多配置集"></a>🌟 加载多配置集</h4><p>将原先<code>application.yaml</code>中的配置信息根据类型，分成多个子配置集，然后分别在<code>bootstrap.properties</code>中加载</p>
+<h4 id="（3）加载多配置集"><a href="#（3）加载多配置集" class="headerlink" title="（3）加载多配置集"></a>（3）加载多配置集</h4><p>将原先<code>application.yaml</code>中的配置信息根据类型，分成多个子配置集，然后分别在<code>bootstrap.properties</code>中加载</p>
 <pre class="language-properties" data-language="properties"><code class="language-properties"><span class="token comment"># 加载多个子配置集来构成一个完整的配置集</span>
 <span class="token attr-name">spring.cloud.nacos.config.extension-configs[0].data-id</span><span class="token punctuation">=</span><span class="token attr-value">datasource.yml</span>
 <span class="token attr-name">spring.cloud.nacos.config.extension-configs[0].group</span><span class="token punctuation">=</span><span class="token attr-value">dev</span>
@@ -785,7 +786,7 @@ cnpm <span class="token function">install</span>
 <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210316205815.png" srcset="/img/loading.gif" alt=""></p>
 <p>任何配置文件、任何配置项都可以放在配置中心中，只需要在bootstrap中说明要加载配置中心中的哪些配置文件即可。</p>
 <p>此外，可以通过<code>@Value</code>或者<code>@ConfigurationProperties</code>等注解获取这些配置项</p>
-<h2 id="SpringCloud"><a href="#SpringCloud" class="headerlink" title="SpringCloud"></a>SpringCloud</h2><h3 id="1-Feign声明式远程调用"><a href="#1-Feign声明式远程调用" class="headerlink" title="1.Feign声明式远程调用"></a>1.Feign声明式远程调用</h3><p>Feign是一个声明式的HTTP客户端，他的目的是让远程调用更加简单。其提供了HTTP请求的模板，通过<strong>编写简单的接口和插入注解</strong>，就可以定义好HTTP请求的参数、格式、地址等信息。</p>
+<h2 id="SpringCloud"><a href="#SpringCloud" class="headerlink" title="SpringCloud"></a>SpringCloud</h2><h3 id="🌟-Feign-声明式远程调用"><a href="#🌟-Feign-声明式远程调用" class="headerlink" title="🌟 Feign 声明式远程调用"></a>🌟 Feign 声明式远程调用</h3><p>Feign是一个声明式的HTTP客户端，他的目的是让远程调用更加简单。其提供了HTTP请求的模板，通过<strong>编写简单的接口和插入注解</strong>，就可以定义好HTTP请求的参数、格式、地址等信息。</p>
 <p>Feign<strong>整合了Ribbon（负载均衡）和Hystrix（服务熔断）</strong>，可以让我们不再显式地使用这两个组件。</p>
 <p>SpringCloud-Feign在Netflix-Feign基础上上<strong>拓展了对SpringMVC注解的支持</strong>，在其实现下，我们只需要创建一个接口并用注解的方式配置它，即可完成对服务提供方的接口绑定。简化了SpringCloud-Ribbon自行封装服务调用客户端的开发量。</p>
 <p>使用步骤：</p>
@@ -839,9 +840,9 @@ cnpm <span class="token function">install</span>
     couponEntity<span class="token punctuation">.</span><span class="token function">setCouponName</span><span class="token punctuation">(</span><span class="token string">"满100减10"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token class-name">R</span><span class="token punctuation">.</span><span class="token function">ok</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"coupons"</span><span class="token punctuation">,</span> <span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">asList</span><span class="token punctuation">(</span>couponEntity<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<h3 id="2-Gateway网关"><a href="#2-Gateway网关" class="headerlink" title="2.Gateway网关"></a>2.Gateway网关</h3><p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210316212736.png" srcset="/img/loading.gif" alt=""></p>
-<h4 id="🌟-简要介绍："><a href="#🌟-简要介绍：" class="headerlink" title="🌟 简要介绍："></a>🌟 简要介绍：</h4><p>网关为流量的入口，常用功能有权限校验、限流控制、路由转发、日志输出等。SpringCloud GateWay取代了原先了Zuul网关，是第二代网关框架。【<a target="_blank" rel="noopener" href="https://docs.spring.io/spring-cloud-gateway/docs/">官方文档</a>】</p>
-<h4 id="🌟-基本使用："><a href="#🌟-基本使用：" class="headerlink" title="🌟 基本使用："></a>🌟 基本使用：</h4><p><a target="_blank" rel="noopener" href="https://start.aliyun.com/">https://start.aliyun.com/</a></p>
+<h3 id="🌟-Gateway-网关"><a href="#🌟-Gateway-网关" class="headerlink" title="🌟 Gateway 网关"></a>🌟 Gateway 网关</h3><p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210316212736.png" srcset="/img/loading.gif" alt=""></p>
+<h4 id="（1）简要介绍："><a href="#（1）简要介绍：" class="headerlink" title="（1）简要介绍："></a>（1）简要介绍：</h4><p>网关为流量的入口，常用功能有权限校验、限流控制、路由转发、日志输出等。SpringCloud GateWay取代了原先了Zuul网关，是第二代网关框架。【<a target="_blank" rel="noopener" href="https://docs.spring.io/spring-cloud-gateway/docs/">官方文档</a>】</p>
+<h4 id="（2）基本使用："><a href="#（2）基本使用：" class="headerlink" title="（2）基本使用："></a>（2）基本使用：</h4><p><a target="_blank" rel="noopener" href="https://start.aliyun.com/">https://start.aliyun.com/</a></p>
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wgslucky/p/11395932.html">王广帅</a>：</p>
 <p>如果你引入了<code>spring cloud gateway</code>的依赖，但是又不想使用<code>spring cloud gateway</code>生效，可以在<code>application.yml</code>配置中添加<code>spring.cloud.gateway.enabled=false</code>。</p>
@@ -879,7 +880,7 @@ cnpm <span class="token function">install</span>
 <p>此时通过<code>http://localhost:88/hello?url=bili</code>接口即可访问哔哩哔哩</p>
 <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210317204430.png" srcset="/img/loading.gif" alt=""></p>
 <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210317204506.png" srcset="/img/loading.gif" alt=""></p>
-<h2 id="前端基础知识"><a href="#前端基础知识" class="headerlink" title="前端基础知识"></a>前端基础知识</h2><p>VS Code快捷键</p>
+<h2 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h2><p>VS Code快捷键</p>
 <ul>
 <li><code>Alt</code> + <code>Shift</code> + <code>F</code>：规范化代码格式</li>
 <li><code>!</code> + <code>回车</code>：生成html的基本格式等</li>
@@ -1287,7 +1288,8 @@ console<span class="token punctuation">.</span><span class="token function">log<
 </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></code></pre>
 </li>
 </ul>
-<h4 id="（5）过滤器"><a href="#（5）过滤器" class="headerlink" title="（5）过滤器"></a>（5）过滤器</h4><p>过滤器常用来<strong>处理文本格式化</strong>的操作。过滤器可以用在两个地方：<strong>双花括号插值</strong>和 <strong>v-bind表达式</strong></p>
+<h4 id="（5）计算属性和监听器"><a href="#（5）计算属性和监听器" class="headerlink" title="（5）计算属性和监听器"></a>（5）计算属性和监听器</h4><p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210319125457.png" srcset="/img/loading.gif" alt=""></p>
+<h4 id="（6）过滤器"><a href="#（6）过滤器" class="headerlink" title="（6）过滤器"></a>（6）过滤器</h4><p>过滤器常用来<strong>处理文本格式化</strong>的操作。过滤器可以用在两个地方：<strong>双花括号插值</strong>和 <strong>v-bind表达式</strong></p>
 <pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>app<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>user in userList<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
@@ -1319,7 +1321,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
             <span class="token punctuation">]</span>
         <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
         filters<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-            <span class="token comment">//// filters 定义局部过滤器，只可以在当前vue实例中使用</span>
+            <span class="token comment">// 局部过滤器，只可以在当前vue实例中使用</span>
             <span class="token function">genderFilter</span><span class="token punctuation">(</span><span class="token parameter">val</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
                 <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
                     <span class="token keyword">return</span> <span class="token string">"男"</span><span class="token punctuation">;</span>
@@ -1330,7 +1332,8 @@ console<span class="token punctuation">.</span><span class="token function">log<
         <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></code></pre>
-<h4 id="（6）组件化"><a href="#（6）组件化" class="headerlink" title="（6）组件化"></a>（6）组件化</h4><pre class="language-html" data-language="html"><code class="language-html">div id="app">
+<h4 id="（6）组件化"><a href="#（6）组件化" class="headerlink" title="（6）组件化"></a>（6）组件化</h4><p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210319125951.png" srcset="/img/loading.gif" alt=""></p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>app<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name"><span class="token namespace">v-on:</span>click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>count++<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>我被点击了 &#123;&#123;count&#125;&#125; 次<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
 
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>counter</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>counter</span><span class="token punctuation">></span></span>
@@ -1371,13 +1374,14 @@ console<span class="token punctuation">.</span><span class="token function">log<
             count<span class="token operator">:</span> <span class="token number">1</span>
         <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
         components<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-            <span class="token comment">//声明所定义的局部组件</span>
+            <span class="token comment">//2.声明所定义的局部组件</span>
             <span class="token string">'button-counter'</span><span class="token operator">:</span> buttonCounter
         <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210318204941.png" srcset="/img/loading.gif" alt="image-20200425110048496"></p>
-<h4 id="（7）生命周期钩子函数"><a href="#（7）生命周期钩子函数" class="headerlink" title="（7）生命周期钩子函数"></a>（7）生命周期钩子函数</h4><pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>app<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<h4 id="（7）生命周期钩子函数"><a href="#（7）生命周期钩子函数" class="headerlink" title="（7）生命周期钩子函数"></a>（7）生命周期钩子函数</h4><p>生命周期就是指一个对象从创建到销毁的过程。</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210319130749.png" srcset="/img/loading.gif" alt="Vue 实例生命周期"></p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>app<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>num<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>&#123;&#123;num&#125;&#125;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>num++<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>赞！<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">></span></span>&#123;&#123;name&#125;&#125;，有&#123;&#123;num&#125;&#125;个人点赞<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
@@ -1433,7 +1437,19 @@ console<span class="token punctuation">.</span><span class="token function">log<
         <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></code></pre>
-<h4 id="（8）Element-UI"><a href="#（8）Element-UI" class="headerlink" title="（8）Element UI"></a>（8）Element UI</h4>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210319131654.png" srcset="/img/loading.gif" alt=""></p>
+<h4 id="（8）模块化开发"><a href="#（8）模块化开发" class="headerlink" title="（8）模块化开发"></a>（8）模块化开发</h4><ul>
+<li>全局安装webpack：<code>npm install webpack -g</code></li>
+<li><p>全局安装vue脚手架：<code>npm install -g @vue/cli-init</code></p>
+</li>
+<li><p>初始化vue项目：<code>vue init webpack projectname</code></p>
+<ul>
+<li>遇到错误的解决方案：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34450741/article/details/97626381">CSDN</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="（9）ElementUI"><a href="#（9）ElementUI" class="headerlink" title="（9）ElementUI"></a>（9）ElementUI</h4><p><a target="_blank" rel="noopener" href="https://element.eleme.cn/#/zh-CN/component/installation">官方文档</a></p>
+<h1 id="四、商品服务"><a href="#四、商品服务" class="headerlink" title="四、商品服务"></a>四、商品服务</h1>
             </div>
             <hr>
             <div>

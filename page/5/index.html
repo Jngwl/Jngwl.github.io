@@ -169,6 +169,132 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/posts/5cf99eb1/" target="_self">
+          <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210108194654.jfif" srcset="/img/loading.gif" alt="Python 各类图像库的读取方式">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/posts/5cf99eb1/">Python 各类图像库的读取方式</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/posts/5cf99eb1/">
+          
+          
+            
+          
+          
+ 最近在搞爱奇艺的卡通人物检测比赛，刚开始就被卡在图像读取阶段了。我发现大部分图像读取后shape为(3,H,W)，但有一部分图像为（4，H，W）。经同学提醒，有的图像还有衡量一个像素或者图像透明度的alpha通道。
+
+本文转载自冠军的试炼，这篇文章主要总结了以下主流Python图像库的一些基本使用方法和需要注意的地方：
+
+OpenCV
+PIL(pillow)
+matplotlib.image
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-05-08 10:18" pubdate>
+              2020-05-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Python/">Python</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Python/">Python</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/posts/e638570a/" target="_self">
+          <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210108194654.jfif" srcset="/img/loading.gif" alt="PyTorch常用代码段整理">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/posts/e638570a/">PyTorch常用代码段整理</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/posts/e638570a/">
+          
+          
+            
+          
+          本文代码基于PyTorch 1.0版本，需要用到以下包
+import collections
+import os
+import shutil
+import tqdm
+
+import numpy as np
+import PIL.Image
+import torch
+import torchvision
+1. 基础配置检查PyTorch版本torch.__version__             
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-05-05 22:24" pubdate>
+              2020-05-05
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Python/">Python</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/PyTorch/">PyTorch</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/posts/5e67f605/" target="_self">
           <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210108194654.jfif" srcset="/img/loading.gif" alt="Numpy.prod问题">
         </a>
@@ -636,127 +762,6 @@ Esc+:wq退出vim
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/%E6%A0%88/">栈</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/posts/a1063e70/" target="_self">
-          <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124103728.jpg" srcset="/img/loading.gif" alt="Linux基础自查手册">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/posts/a1063e70/">Linux基础自查手册</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/posts/a1063e70/">
-          
-          
-            
-          
-          一、文件系统1.目录结构
-bin：存放二进制可执行文件（ls,cat,mkdir等）；
-boot：存放用于系统引导时使用的各种文件；
-dev：存放设备文件；
-etc：存放系统配置文件；
-home：存放所有用户文件的根目录；
-lib：存放跟文件系统中的程序运行所需要的共享库及内核模块；
-opt：存放额外安装的可选应用程序包
-tmp：存放各种临时文件。每次重启都会删掉
-mnt：系统管理员安装临时文件系
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2019-12-05 10:13" pubdate>
-              2019-12-05
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Linux/">Linux</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Linux%E5%9F%BA%E7%A1%80/">Linux基础</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/posts/4d5f67f9/">链表：实现LRU缓存淘汰算法</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/posts/4d5f67f9/">
-          
-          
-            
-          
-          
-王争《数据结构与算法之美》课程笔记
-
-
-LRU（Least recently used，最近最少使用）算法根据数据的历史访问记录来进行数据淘汰。
-我们建立一个有序单链表，越靠近链表尾部的结点是越早之前访问的。当有一个新的数据被访问时，我们从链表头开始顺序遍历链表。
-
-如果此数据之前已经被缓存在链表中了，我们遍历得到这个数据对应的结点，并将其从原来的位置删除，然后再插入到链表的头部。
-如果此数据没
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2019-11-28 18:55" pubdate>
-              2019-11-28
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
-            
-              <a href="/tags/%E9%93%BE%E8%A1%A8/">链表</a>
             
           </div>
         

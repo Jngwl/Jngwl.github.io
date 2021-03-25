@@ -169,6 +169,129 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/posts/f1d4ca7e/" target="_self">
+          <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20191212170655.jpg" srcset="/img/loading.gif" alt="文件和指指令跨服务器传输">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/posts/f1d4ca7e/">文件和指指令跨服务器传输</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/posts/f1d4ca7e/">
+          
+          
+            
+          
+          传送与接收文件# 将『本地文件』传送到远程服务器
+scp /opt/soft/nginx.tar.gz  root@192.168.120.204:/opt/soft/scptest
+
+# 将『本地整个目录』传送到远程服务器
+scp -r /opt/soft/mongodb  root@192.168.120.204:/opt/soft/scptest
+
+# 从远程服务器拷贝文件到本地
+scp r
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-08-24 16:01" pubdate>
+              2020-08-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Linux/">Linux</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93/">文件传输</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/posts/60434180/" target="_self">
+          <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210108193616.jfif" srcset="/img/loading.gif" alt="远程访问tensorboard">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/posts/60434180/">远程访问tensorboard</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/posts/60434180/">
+          
+          
+            
+          
+          # 将服务器端的6006端口重定向为本地16006
+ssh -L 16006:127.0.0.1:6006 -p remote_port username@remote_server_ip
+
+# 在服务器端开启6006端口
+tensorboard --logdir=xxx --port=6006
+
+# 本地端查看
+127.0.0.1:16006
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-05-27 09:37" pubdate>
+              2020-05-27
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Tensorboard/">Tensorboard</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/posts/8cf651e6/" target="_self">
           <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210108193616.jfif" srcset="/img/loading.gif" alt="CNN中的注意力机制">
         </a>
@@ -673,132 +796,6 @@ $ab$
               <a href="/tags/Ubuntu/">Ubuntu</a>
             
               <a href="/tags/caffe/">caffe</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/posts/5cf99eb1/" target="_self">
-          <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210108194654.jfif" srcset="/img/loading.gif" alt="Python 各类图像库的读取方式">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/posts/5cf99eb1/">Python 各类图像库的读取方式</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/posts/5cf99eb1/">
-          
-          
-            
-          
-          
- 最近在搞爱奇艺的卡通人物检测比赛，刚开始就被卡在图像读取阶段了。我发现大部分图像读取后shape为(3,H,W)，但有一部分图像为（4，H，W）。经同学提醒，有的图像还有衡量一个像素或者图像透明度的alpha通道。
-
-本文转载自冠军的试炼，这篇文章主要总结了以下主流Python图像库的一些基本使用方法和需要注意的地方：
-
-OpenCV
-PIL(pillow)
-matplotlib.image
-
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-05-08 10:18" pubdate>
-              2020-05-08
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Python/">Python</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Python/">Python</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/posts/e638570a/" target="_self">
-          <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210108194654.jfif" srcset="/img/loading.gif" alt="PyTorch常用代码段整理">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/posts/e638570a/">PyTorch常用代码段整理</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/posts/e638570a/">
-          
-          
-            
-          
-          本文代码基于PyTorch 1.0版本，需要用到以下包
-import collections
-import os
-import shutil
-import tqdm
-
-import numpy as np
-import PIL.Image
-import torch
-import torchvision
-1. 基础配置检查PyTorch版本torch.__version__             
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-05-05 22:24" pubdate>
-              2020-05-05
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Python/">Python</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/PyTorch/">PyTorch</a>
             
           </div>
         

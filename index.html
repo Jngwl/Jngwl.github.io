@@ -168,33 +168,22 @@
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/posts/1a0fd663/" target="_self">
-          <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20200509222445.jpg" srcset="/img/loading.gif" alt="LeetCode101（Java版）">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
+    <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-          <i class="index-pin iconfont icon-top" title="Pin on top"></i>
-        
-        <a href="/posts/1a0fd663/">LeetCode101（Java版）</a>
+        <a href="/posts/820f5b54/">Maven打包方式</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/posts/1a0fd663/">
+        <a href="/posts/820f5b54/">
           
           
             
           
-          
-感谢Chang Gao分享的 LeetCode 101 - A LeetCode Grinding Guide (C++ Version)
+          Pom方式用在父级工程或聚合工程中，用来做jar包的版本控制，必须指明这个聚合工程的打包方式为pom  
+jar方式工程的默认打包方式，打包成jar用作jar包使用。存放一些其他工程都会使用的类，工具类。我们可以在其他工程的pom文件中去引用它
+war方式：将会打包成war，发布在服务器上，如网站或服务。用户可以通过浏览器直接访问，或者是通过发布服务被别的工程调用。
 
-一、贪心算法贪心算法采用贪心的策略，保证每次操作都是局部最优的，从而使最后得到的结果也是全局最优的
-🌟 分配问题455.分配饼干解题思路：先对孩子的饥饿度和饼干大小进行排序，然后从饥饿度最小的孩子开始分配
-class Solution &#123;
-  
         </a>
       </p>
 
@@ -202,8 +191,8 @@ class Solution &#123;
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-04-29 11:46" pubdate>
-              2020-04-29
+            <time datetime="2021-03-25 09:16" pubdate>
+              2021-03-25
             </time>
           </div>
         
@@ -211,10 +200,17 @@ class Solution &#123;
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
+              <a href="/categories/%E5%85%B6%E4%BB%96/">其他</a>
             
           </div>
         
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Maven/">Maven</a>
+            
+          </div>
         
       </div>
     </article>
@@ -224,36 +220,58 @@ class Solution &#123;
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/posts/925c77bc/" target="_self">
-          <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210316202049.png" srcset="/img/loading.gif" alt="商城项目实战">
+        <a href="/posts/35ef9e0/" target="_self">
+          <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210324135143.jpg" srcset="/img/loading.gif" alt="MongoDB手册">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-          <i class="index-pin iconfont icon-top" title="Pin on top"></i>
-        
-        <a href="/posts/925c77bc/">商城项目实战</a>
+        <a href="/posts/35ef9e0/">MongoDB手册</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/posts/925c77bc/">
+        <a href="/posts/35ef9e0/">
           
           
             
           
-          
-一、分布式基础概念1.微服务把一个单独的应用程序开发成一套小服务，每个小服务运行在自己的进程中，并使用轻量级机制通信
-2.集群、分布式、节点
-集群：将多台服务器集中在一起，实现同一业务
+          一、简介MongoDB 是一个面向文档存储的非关系型数据库，数据由键值对组成。
 
-分布式：将不同的业务分布在不同的地方
 
-节点：集群中的每台服务器就是一个节点
 
-3.远程调用在分布式系统中，各个业务可能处于不同主机，但是服务之间不可避免地需要相互调用，即远程调用。
-SpringCloud中采
+
+SQL术语/概念
+MongoDB术语/概念
+解释/说明
+
+
+
+
+database
+database
+数据库
+
+
+table/表
+collection/集合
+数据库表/集合
+
+
+row/行
+document/文档
+数据记录行/文档
+
+
+column/列
+field/字段
+数据字段/域
+
+
+index
+index
+
         </a>
       </p>
 
@@ -261,8 +279,8 @@ SpringCloud中采
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-09 11:46" pubdate>
-              2021-03-09
+            <time datetime="2021-03-24 12:38" pubdate>
+              2021-03-24
             </time>
           </div>
         
@@ -270,10 +288,17 @@ SpringCloud中采
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a>
+              <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
             
           </div>
         
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/MongoDB/">MongoDB</a>
+            
+          </div>
         
       </div>
     </article>
@@ -424,6 +449,63 @@ Get请求，为@RequestMapping(method = RequestMethod.GET)的简写
     
     
       <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/posts/925c77bc/" target="_self">
+          <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210316202049.png" srcset="/img/loading.gif" alt="商城项目">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/posts/925c77bc/">商城项目</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/posts/925c77bc/">
+          
+          
+            
+          
+          
+一、分布式基础概念1.微服务把一个单独的应用程序开发成一套小服务，每个小服务运行在自己的进程中，并使用轻量级机制通信
+2.集群、分布式、节点
+集群：将多台服务器集中在一起，实现同一业务
+
+分布式：将不同的业务分布在不同的地方
+
+节点：集群中的每台服务器就是一个节点
+
+3.远程调用在分布式系统中，各个业务可能处于不同主机，但是服务之间不可避免地需要相互调用，即远程调用。
+SpringCloud中采
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-09 11:46" pubdate>
+              2021-03-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/posts/d04bd5bc/" target="_self">
           <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210301123534.jpg" srcset="/img/loading.gif" alt="操作系统">
         </a>
@@ -465,6 +547,46 @@ Get请求，为@RequestMapping(method = RequestMethod.GET)的简写
               <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">计算机科学基础知识</a>
             
           </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/posts/0/"></a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/posts/0/">
+          
+          
+            
+          
+          title: LeetCode101（Java版）
+categories: 数据结构与算法
+index_img: &gt;-
+  https:&#x2F;&#x2F;hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com&#x2F;img&#x2F;20200509222445.jpg
+sticky: 100
+abbrlink: 1a0fd663
+dat
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-28 13:22" pubdate>
+              2021-02-28
+            </time>
+          </div>
+        
         
         
       </div>
@@ -659,133 +781,6 @@ Tokyo Cabinet/Tyrant, Redis, Vold
               <a href="/tags/Java/">Java</a>
             
               <a href="/tags/SpringCloud/">SpringCloud</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/posts/99fe454c/" target="_self">
-          <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210319194755.jpg" srcset="/img/loading.gif" alt="SpringBoot使用手册">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/posts/99fe454c/">SpringBoot使用手册</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/posts/99fe454c/">
-          
-          
-            
-          
-          SpringBoot开冲，Spring的配置实在是太太太太多了。
-一、SpringBoot概述Maven、Spring、SpringMVC、SpringBoot均约定大于配置
-微服务架构。
-1）特点
-开箱即用，没有代码生成，也无需XML配置，同时也可以修改默认值来满足特定的需求
-提供了一些大型项目中常见的非功能性特性，如嵌入式服务器、安全、指标、健康监测等等
-SpringBoot不是Spring功
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-08 20:13" pubdate>
-              2021-01-08
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Java/">Java</a>
-            
-              <a href="/tags/SpringBoot/">SpringBoot</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/posts/788732e/" target="_self">
-          <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210108170754.svg" srcset="/img/loading.gif" alt="SpringMVC使用手册">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/posts/788732e/">SpringMVC使用手册</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/posts/788732e/">
-          
-          
-            
-          
-          一、回顾MVC
-
-用户发请求；
-Servlet接收请求数据，并调用响应的业务逻辑方法；
-业务处理完毕后，service层返回更新后的数据给Servlet层；
-Servlet转向JSP，由JSP来渲染页面；
-响应给前端更新后的页面
-
-MVC：指Model模型、View视图和Controller控制器的缩写
-
-Model：dao、service层等，业务逻辑，保存数据状态
-View：html、jsp等
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-03 21:08" pubdate>
-              2021-01-03
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/SSM%E6%A1%86%E6%9E%B6/">SSM框架</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/SpringMVC/">SpringMVC</a>
             
           </div>
         

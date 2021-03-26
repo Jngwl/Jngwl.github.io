@@ -182,7 +182,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      30.9k 字
+      31.2k 字
     </span>
   
 
@@ -192,7 +192,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      439
+      443
        分钟
     </span>
   
@@ -226,7 +226,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年3月25日 晚上
+                  本文最后更新于：2021年3月26日 上午
                 
               </p>
             
@@ -3641,6 +3641,52 @@ queue2<span class="token punctuation">.</span><span class="token function">add</
         <span class="token punctuation">&#125;</span>
 
         <span class="token keyword">return</span> head<span class="token punctuation">;</span>        
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<h3 id="🌟-其他链表技巧"><a href="#🌟-其他链表技巧" class="headerlink" title="🌟 其他链表技巧"></a>🌟 其他链表技巧</h3><h4 id="160-相交链表-easy"><a href="#160-相交链表-easy" class="headerlink" title="160.相交链表(easy)"></a>160.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists/">相交链表(easy)</a></h4><p>编写一个程序，找到两个单链表相交的起始节点。</p>
+<p><strong>解题思路</strong>：使两个链表以相同的速度，从各自的头节点出发，若某一个到达自己的尾部，则换到另一个链表继续走。</p>
+<p>（缺一个图，待补充）</p>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token class-name">ListNode</span> <span class="token function">getIntersectionNode</span><span class="token punctuation">(</span><span class="token class-name">ListNode</span> headA<span class="token punctuation">,</span> <span class="token class-name">ListNode</span> headB<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">ListNode</span> l1 <span class="token operator">=</span> headA<span class="token punctuation">,</span> l2 <span class="token operator">=</span> headB<span class="token punctuation">;</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span>l1 <span class="token operator">!=</span> l2<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            l1 <span class="token operator">=</span> l1 <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">?</span> l1<span class="token punctuation">.</span>next <span class="token operator">:</span> headB<span class="token punctuation">;</span>
+            l2 <span class="token operator">=</span> l2 <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">?</span> l2<span class="token punctuation">.</span>next <span class="token operator">:</span> headA<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> l1<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<h4 id="234-回文链表-easy"><a href="#234-回文链表-easy" class="headerlink" title="234.回文链表(easy)"></a>234.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/palindrome-linked-list/">回文链表(easy)</a></h4><p>请判断一个链表是否为回文链表。</p>
+<p><strong>解题思路</strong>：先通过快慢指针找到链表的中部节点，然后翻转后半部分链表；最后将翻转后的半部分链表和原先链表作比较，若值出现不同则返回false</p>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isPalindrome</span><span class="token punctuation">(</span><span class="token class-name">ListNode</span> head<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>head <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token class-name">ListNode</span> slow <span class="token operator">=</span> head<span class="token punctuation">,</span> fast <span class="token operator">=</span> head<span class="token punctuation">;</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span>fast<span class="token punctuation">.</span>next <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> fast<span class="token punctuation">.</span>next<span class="token punctuation">.</span>next <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            slow <span class="token operator">=</span> slow<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+            fast <span class="token operator">=</span> fast<span class="token punctuation">.</span>next<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token comment">// 将链表的后一半翻转</span>
+        <span class="token class-name">ListNode</span> node <span class="token operator">=</span> <span class="token function">reversePa</span><span class="token punctuation">(</span>slow<span class="token punctuation">.</span>next<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 比较</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span>node <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>val <span class="token operator">!=</span> head<span class="token punctuation">.</span>val<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+                <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            node <span class="token operator">=</span> node<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+            head <span class="token operator">=</span> head<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">ListNode</span> <span class="token function">reversePa</span><span class="token punctuation">(</span><span class="token class-name">ListNode</span> head<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>head <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">||</span> head<span class="token punctuation">.</span>next <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">return</span> head<span class="token punctuation">;</span>
+        <span class="token class-name">ListNode</span> tmp <span class="token operator">=</span> <span class="token function">reversePa</span><span class="token punctuation">(</span>head<span class="token punctuation">.</span>next<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        head<span class="token punctuation">.</span>next<span class="token punctuation">.</span>next <span class="token operator">=</span> head<span class="token punctuation">;</span>
+        head<span class="token punctuation">.</span>next <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> tmp<span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span></code></pre>
 

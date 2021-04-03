@@ -182,7 +182,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      34.8k 字
+      36k 字
     </span>
   
 
@@ -192,7 +192,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      493
+      508
        分钟
     </span>
   
@@ -226,7 +226,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年4月2日 晚上
+                  本文最后更新于：2021年4月3日 下午
                 
               </p>
             
@@ -3727,7 +3727,7 @@ queue2<span class="token punctuation">.</span><span class="token function">add</
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span></code></pre>
 <h4 id="543-二叉树的直径-easy"><a href="#543-二叉树的直径-easy" class="headerlink" title="543.二叉树的直径(easy)"></a>543.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/diameter-of-binary-tree/">二叉树的直径(easy)</a></h4><p>给定一棵二叉树，你需要计算它的直径长度（一棵二叉树的直径长度是任意两个结点路径长度中的最大值。这条路径可能穿过也可能不穿过根结点）。</p>
-<p><strong>解题思路</strong>：由于路径可能不经过根节点，则对于本级递归而言，返回值为一侧的直径（并未考虑另一侧子树），本级递归需要做的事为：计算两个子树的直径，并更新全局直径。</p>
+<p><strong>解题思路</strong>：由于路径可能不经过根节点，则对于本级递归而言，返回值为一侧子树的深度，本级递归需要做的事为：计算两个子树的深度，并更新全局直径。</p>
 <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210401150115.png" srcset="/img/loading.gif" alt=""></p>
 <pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">int</span> diameter<span class="token punctuation">;</span>
@@ -3735,16 +3735,17 @@ queue2<span class="token punctuation">.</span><span class="token function">add</
     <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">diameterOfBinaryTree</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
         diameter <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
         <span class="token function">helper</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> diameter<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> diameter <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>  <span class="token comment">// 直径为边的个数，等于节点数-1</span>
     <span class="token punctuation">&#125;</span>
 
     <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">helper</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
         <span class="token keyword">if</span><span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span>  <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
         
-        <span class="token keyword">int</span> l_d <span class="token operator">=</span> <span class="token function">helper</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">)</span><span class="token punctuation">,</span> r_d <span class="token operator">=</span> <span class="token function">helper</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        diameter <span class="token operator">=</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>diameter<span class="token punctuation">,</span> l_d <span class="token operator">+</span> r_d<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 全局直径长度</span>
+        <span class="token keyword">int</span> l_d <span class="token operator">=</span> <span class="token function">helper</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">)</span><span class="token punctuation">,</span> r_d <span class="token operator">=</span> <span class="token function">helper</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 计算左、右子树深度</span>
         
-        <span class="token keyword">return</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>l_d<span class="token punctuation">,</span> r_d<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// 本次递归返回值为 该子树的最长直径值（仅为一侧长度）</span>
+        diameter <span class="token operator">=</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>diameter<span class="token punctuation">,</span> l_d <span class="token operator">+</span> r_d <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 全局直径长度</span>
+        
+        <span class="token keyword">return</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>l_d<span class="token punctuation">,</span> r_d<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// 本次递归返回值为 一侧子树深度+1</span>
     <span class="token punctuation">&#125;</span>
 
 <span class="token punctuation">&#125;</span></code></pre>
@@ -4107,6 +4108,89 @@ queue2<span class="token punctuation">.</span><span class="token function">add</
         <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span></code></pre>
+<h3 id="🌟-二叉搜索树"><a href="#🌟-二叉搜索树" class="headerlink" title="🌟 二叉搜索树"></a>🌟 二叉搜索树</h3><p>二叉搜索树（Binary Search Tree, BST）是指：该树的<strong>左子树节点值 &lt;= 父节点值 &lt;= 右子树节点值</strong>。因此对于一个二叉搜索树，可以在$O(nlogn)$的时间内查找一个值是否存在：从根节点开始，若查找值大于当前节点值，则往右走；否则，往左走。同时，二叉搜索树的中序遍历（左父右）结果，是排好序的数组。</p>
+<h4 id="669-修剪二叉搜索树-easy"><a href="#669-修剪二叉搜索树-easy" class="headerlink" title="669.修剪二叉搜索树(easy)"></a>669.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/trim-a-binary-search-tree/">修剪二叉搜索树(easy)</a></h4><p>给定一个二叉查找树和两个整数 L 和 R，且 L &lt; R，试修剪此二叉查找树，使得修剪后所有节点的值都在 [L, R] 的范围内。</p>
+<p><strong>解题思路</strong>：根据二叉搜索树的特点，检查当前节点值</p>
+<ul>
+<li>若当前节点值小于L，则直接扔掉父节点和左子树，去右子树寻找答案</li>
+<li>若当前节点值大于L，则直接扔掉父节点和右子树，去左子树寻找答案</li>
+<li>若当前节点值符合条件，则需继续到两个子树中修剪，并更新左右子树，返回root即可</li>
+</ul>
+<p>递归截至条件：当前二叉树已空</p>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token class-name">TreeNode</span> <span class="token function">trimBST</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">,</span> <span class="token keyword">int</span> low<span class="token punctuation">,</span> <span class="token keyword">int</span> high<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+       <span class="token keyword">if</span><span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">return</span> root<span class="token punctuation">;</span>
+       <span class="token keyword">if</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>val <span class="token operator">&lt;</span> low<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+           <span class="token keyword">return</span> <span class="token function">trimBST</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>right<span class="token punctuation">,</span> low<span class="token punctuation">,</span> high<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">// 扔掉父节点和左子树，去右子树寻找答案</span>
+       <span class="token punctuation">&#125;</span>
+       <span class="token keyword">if</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>val <span class="token operator">></span> high<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+           <span class="token keyword">return</span> <span class="token function">trimBST</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">,</span> low<span class="token punctuation">,</span> high<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">// 扔掉父节点和右子树，去左子树寻找答案</span>
+       <span class="token punctuation">&#125;</span> 
+       <span class="token comment">// 当前节点值符合条件，去左右子树中修建，并更新左右子树</span>
+       root<span class="token punctuation">.</span>left <span class="token operator">=</span> <span class="token function">trimBST</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">,</span> low<span class="token punctuation">,</span> high<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       root<span class="token punctuation">.</span>right <span class="token operator">=</span> <span class="token function">trimBST</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>right<span class="token punctuation">,</span> low<span class="token punctuation">,</span> high<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token keyword">return</span> root<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<h4 id="530-二叉搜索树的最小绝对差-easy"><a href="#530-二叉搜索树的最小绝对差-easy" class="headerlink" title="530.二叉搜索树的最小绝对差(easy)"></a>530.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-absolute-difference-in-bst/">二叉搜索树的最小绝对差(easy)</a></h4><p>给你一棵所有节点为非负值的二叉搜索树，请你计算树中任意两节点的差的绝对值的最小值。</p>
+<p><strong>解题思路</strong>：二叉树搜索的<strong>中序遍历</strong>结果就是一个从小到大排好序的数组。因此可以直接在中序遍历过程中直接获得全局 差绝对值最小值</p>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">TreeNode</span> prev<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> min <span class="token operator">=</span> <span class="token class-name">Integer</span><span class="token punctuation">.</span>MAX_VALUE<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getMinimumDifference</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">inOrder</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> min<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">inOrder</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+
+        <span class="token function">inOrder</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>prev <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> min <span class="token operator">=</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span>min<span class="token punctuation">,</span> root<span class="token punctuation">.</span>val <span class="token operator">-</span> prev<span class="token punctuation">.</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        prev <span class="token operator">=</span> root<span class="token punctuation">;</span>
+        <span class="token function">inOrder</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<h4 id="235-二叉搜索树的最近公共祖先-easy"><a href="#235-二叉搜索树的最近公共祖先-easy" class="headerlink" title="235. 二叉搜索树的最近公共祖先(easy)"></a>235.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/"> 二叉搜索树的最近公共祖先(easy)</a></h4><p>给定一个二叉搜索树, 找到该树中两个指定节点的最近公共祖先（所有节点的值都是唯一的）。</p>
+<p><strong>解题思路</strong>：根据二叉搜索树 左子树节点 &lt;= 父节点 &lt;= 右子树节点的性质，</p>
+<ul>
+<li>如果p,q分布在两个子树中，则最近公共祖先必为父节点；</li>
+<li>如果都在左子树（或者右子树）中，则去左子树（或者右子树）中继续搜索</li>
+</ul>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token class-name">TreeNode</span> <span class="token function">lowestCommonAncestor</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">,</span> <span class="token class-name">TreeNode</span> p<span class="token punctuation">,</span> <span class="token class-name">TreeNode</span> q<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+
+        <span class="token keyword">if</span><span class="token punctuation">(</span>p<span class="token punctuation">.</span>val <span class="token operator">&lt;</span> root<span class="token punctuation">.</span>val <span class="token operator">&amp;&amp;</span> q<span class="token punctuation">.</span>val <span class="token operator">&lt;</span> root<span class="token punctuation">.</span>val<span class="token punctuation">)</span>  <span class="token keyword">return</span> <span class="token function">lowestCommonAncestor</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">,</span> p<span class="token punctuation">,</span> q<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>p<span class="token punctuation">.</span>val <span class="token operator">></span> root<span class="token punctuation">.</span>val <span class="token operator">&amp;&amp;</span> q<span class="token punctuation">.</span>val <span class="token operator">></span> root<span class="token punctuation">.</span>val<span class="token punctuation">)</span>  <span class="token keyword">return</span> <span class="token function">lowestCommonAncestor</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>right<span class="token punctuation">,</span> p<span class="token punctuation">,</span> q<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> root<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<h4 id="236-二叉树的最近公共祖先-medium"><a href="#236-二叉树的最近公共祖先-medium" class="headerlink" title="236.二叉树的最近公共祖先(medium)"></a>236.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/">二叉树的最近公共祖先(medium)</a></h4><p>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先（所有节点的值都是唯一的，且p!=q）。</p>
+<p><strong>解题思路</strong>：若root为p,q的公共祖先，则</p>
+<ul>
+<li>p和q在root的左、右子树中</li>
+<li>p=root，且q位于root的子树中</li>
+<li>q=root，且p位于root的子树中</li>
+</ul>
+<p>递归截止条件为：二叉树已空，或者遇到了p,q</p>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token class-name">TreeNode</span> <span class="token function">lowestCommonAncestor</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">,</span> <span class="token class-name">TreeNode</span> p<span class="token punctuation">,</span> <span class="token class-name">TreeNode</span> q<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+       <span class="token keyword">if</span><span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">||</span> root <span class="token operator">==</span> p <span class="token operator">||</span> root <span class="token operator">==</span> q<span class="token punctuation">)</span> <span class="token keyword">return</span> root<span class="token punctuation">;</span>   <span class="token comment">// 如果走到了二叉树的尾部，或者遇到了p,q</span>
+    
+       <span class="token comment">// 不管三七二十一，先找再说</span>
+       <span class="token class-name">TreeNode</span> tmp_left <span class="token operator">=</span> <span class="token function">lowestCommonAncestor</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">,</span> p<span class="token punctuation">,</span> q<span class="token punctuation">)</span><span class="token punctuation">;</span>    
+       <span class="token class-name">TreeNode</span> tmp_right <span class="token operator">=</span> <span class="token function">lowestCommonAncestor</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>right<span class="token punctuation">,</span> p<span class="token punctuation">,</span> q<span class="token punctuation">)</span><span class="token punctuation">;</span>   
+
+       <span class="token keyword">if</span><span class="token punctuation">(</span>tmp_left <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">return</span> tmp_right<span class="token punctuation">;</span>  <span class="token comment">// 如果tmp_left为空，说明p,q两个节点均在右子树中</span>
+       <span class="token keyword">if</span><span class="token punctuation">(</span>tmp_right <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">return</span> tmp_left<span class="token punctuation">;</span>  
+
+       <span class="token keyword">return</span> root<span class="token punctuation">;</span>  <span class="token comment">// 均不为空，则说明p,q分步在两个子树中，最近公共祖先即为父节点</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<h3 id="🌟-字典树"><a href="#🌟-字典树" class="headerlink" title="🌟 字典树"></a>🌟 字典树</h3><p>字典树（Trie）常用于判断<strong>字符串是否存在</strong>或者<strong>是否具有某种字符串前缀</strong>。</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210403164712.png" srcset="/img/loading.gif" alt="image-20210403164703873"></p>
+<p>为什么需要用字典树解决这类问题呢？假如我们有一个储存了近万个单词的字典，即使我们使用哈希，在其中搜索一个单词的实际开销也是非常大的，且无法轻易支持搜索单词前缀。然而由于一个英文单词的长度 n 通常在 10 以内，如果我们使用字典树，则可以在 O(n)——近似 O(1)的时间内完成搜索，且额外开销非常小</p>
 
             </div>
             <hr>

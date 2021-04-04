@@ -182,7 +182,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      39.4k 字
+      39.3k 字
     </span>
   
 
@@ -4427,22 +4427,7 @@ queue2<span class="token punctuation">.</span><span class="token function">add</
 <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210404172157.png" srcset="/img/loading.gif" alt=""></p>
 <h4 id="684-冗余连接"><a href="#684-冗余连接" class="headerlink" title="684.冗余连接"></a>684.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/redundant-connection/">冗余连接</a></h4><p>在无向图找出一条边，移除它之后该图能够成为一棵树（即无向无环图） 。如果有多个解，返回在原数组中位置最靠后的那条边</p>
 <p><strong>解题思路</strong>：可以通过并查集寻找附加的边。初始时，每个节点都属于不同的连通分量。<strong>遍历每一条边，判断这条边连接的两个顶点是否属于相同的连通分量</strong>。</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">路径压缩</th>
-<th style="text-align:center">按秩合并</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210404224923.png" srcset="/img/loading.gif" alt=""></td>
-<td style="text-align:center"><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210404224932.png" srcset="/img/loading.gif" alt=""></td>
-</tr>
-</tbody>
-</table>
-</div>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210404233120.png" srcset="/img/loading.gif" alt=""></p>
 <pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">private</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> res <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
     

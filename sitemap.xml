@@ -2,7 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://www.jngwl.top/posts/0/</loc>
+    <loc>https://www.jngwl.top/posts/c32dd7ad/</loc>
+    
+    <lastmod>2021-06-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.jngwl.top/posts/e22d24c8/</loc>
     
     <lastmod>2021-06-16</lastmod>
     
@@ -10,13 +17,6 @@
   
   <url>
     <loc>https://www.jngwl.top/posts/3c88d6c6/</loc>
-    
-    <lastmod>2021-06-16</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.jngwl.top/posts/0/</loc>
     
     <lastmod>2021-06-16</lastmod>
     
@@ -1179,6 +1179,20 @@
     <priority>0.6</priority>
   </url>
   
+  <url>
+    <loc>https://www.jngwl.top/tags/Nginx/</loc>
+    <lastmod>2021-06-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.jngwl.top/tags/RabbitMq/</loc>
+    <lastmod>2021-06-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
   
   <url>
@@ -1260,6 +1274,13 @@
   
   <url>
     <loc>https://www.jngwl.top/categories/LeetCode/</loc>
+    <lastmod>2021-06-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.jngwl.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/</loc>
     <lastmod>2021-06-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

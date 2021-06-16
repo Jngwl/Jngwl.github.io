@@ -169,6 +169,219 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/posts/e8b3ed83/" target="_self">
+          <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210108193616.jfif" srcset="/img/loading.gif" alt="Grad-CAM解析">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/posts/e8b3ed83/">Grad-CAM解析</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/posts/e8b3ed83/">
+          
+          
+            
+          
+          
+采用VGG16等分类模型，计算输入图像的特征图、预测类别及预测类别得分，通过对某预测类别的特征图进行加权求和，再通过ReLU去除对该类别有负影响的点，得到最终的热力图：
+
+L_{Grad-CAM}^c=ReLU(\sum\limits_k\alpha_k^cA^k)其中，第k个特征图关于类别c的权重$\alpha_k^c$可通过类别预测得分关于该特征图的梯度全局平均获得：
+
+\alpha_k^c
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-05-10 16:42" pubdate>
+              2020-05-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Grad-CAM/">Grad-CAM</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/posts/51eb250e/" target="_self">
+          <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210108193616.jfif" srcset="/img/loading.gif" alt="SS+Grad-Cam论文笔记">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/posts/51eb250e/">SS+Grad-Cam论文笔记</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/posts/51eb250e/">
+          
+          
+            
+          
+          📖 区域建议生成基于Selective Search和Grad-CAM，采用由粗到细的two-stage方法来生成区域建议。
+第一个stage采用VGG16模型训练一组带有图像级标签的粗分类器，通过sigmoid交叉熵损失函数进行多标签图像分类
+
+S=-\sum_{i=1}^{C}\left(y_{i} \log P_{i}+\left(1-y_{i}\right) \log \left(1-P
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-05-10 09:58" pubdate>
+              2020-05-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Grad-CAM/">Grad-CAM</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/posts/8151211a/" target="_self">
+          <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210108194444.jfif" srcset="/img/loading.gif" alt="Latex数学公式输入空格">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/posts/8151211a/">Latex数学公式输入空格</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/posts/8151211a/">
+          
+          
+            
+          
+          
+
+
+
+解释
+代码
+效果
+
+
+
+
+两个quad空格
+a \qquad b
+$a \qquad b$
+
+
+quad空格
+a \quad b
+$a \quad b$
+
+
+大空格
+a\ b
+$a\ b$
+
+
+中等空格
+a\;b
+$a \:b $
+
+
+小空格
+a\,b
+$a\,b$
+
+
+没有空格
+ab
+$ab$
+
+
+
+
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-05-09 20:52" pubdate>
+              2020-05-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%85%B6%E4%BB%96/">其他</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Latex/">Latex</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/posts/21ad9564/" target="_self">
           <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20191212170655.jpg" srcset="/img/loading.gif" alt="Ubuntu使用过程中遇到的问题">
         </a>
@@ -609,175 +822,11 @@ Esc+:wq退出vim
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/posts/a4ce31d2/">贪心算法</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/posts/a4ce31d2/">
-          
-          
-            
-          
-          📰 基本概念对于一组数据，定义了限定值（比如重量不大于100KG）和期望值（物品总价值最高），希望从中选取几个数据，在满足限定值的情况下，期望值最大。
-贪心算法每一步都会采取当前状态下最有利的选择，从而希望得到最优解。但由于前面的选择会影响后面的选择，有时候期望终究是期望，无缘全局最优解。
-
-🔎 实例分析（1）分糖果
-向n个孩子分m个糖果，每个孩子对糖果的需求不一样，每个糖果的大小不一样，n&
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-04-25 12:27" pubdate>
-              2020-04-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">贪心算法</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/posts/5e22230e/">LeetCode 刷题记录</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/posts/5e22230e/">
-          
-          
-            
-          
-          【8】字符串转换函数📖 题目要求实现一个atoi函数，将字符串转换为整数，转换规则如下：
-丢弃字符串开头的空格字符 &#39; &#39; 。，得到新的字符串，
-
-第一个字符是+或-号，则取该字符与之后的连续数字
-
-第一个字符是数字，也取其和之后的数字
-
-有效整数部分后的字符，忽略
-
-第一个非空字符不是一个有效整数字符（数字和正负号）、字符串为空或字符串仅包含空白字符时，则无法进行有效转换，返回
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-04-20 15:00" pubdate>
-              2020-04-20
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/LeetCode/">LeetCode</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/LeetCode/">LeetCode</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/posts/bcb5a487/" target="_self">
-          <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210108193616.jfif" srcset="/img/loading.gif" alt="Weakly Supervised Object Detection Report">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/posts/bcb5a487/">Weakly Supervised Object Detection Report</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/posts/bcb5a487/">
-          
-          
-            
-          
-          
-
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-01-13 09:00" pubdate>
-              2020-01-13
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E8%AE%BA%E6%96%87/">论文</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/4/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/6/"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/4/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/6/"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
   

@@ -226,7 +226,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年3月24日 下午
+                  本文最后更新于：2021年6月7日 下午
                 
               </p>
             
@@ -262,7 +262,9 @@
 <p><strong>服务降级</strong>：在系统高峰期、资源紧张时，某些业务不处理或者简单处理（抛异常、返回Null、调用Mock数据等等）</p>
 <h2 id="8-API网关"><a href="#8-API网关" class="headerlink" title="8.API网关"></a>8.API网关</h2><p>前后端分离，前端发来的所有请求先到达API网关，进行处理（如统一认证、限流、日志统计等）后，再调用相应的后台服务器</p>
 <p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210309103938.png" srcset="/img/loading.gif" alt=""></p>
-<h1 id="二、环境搭建"><a href="#二、环境搭建" class="headerlink" title="二、环境搭建"></a>二、环境搭建</h1><h2 id="1-安装VirtualBox和Vagrant"><a href="#1-安装VirtualBox和Vagrant" class="headerlink" title="1.安装VirtualBox和Vagrant"></a>1.安装VirtualBox和Vagrant</h2><h2 id="2-安装centos"><a href="#2-安装centos" class="headerlink" title="2.安装centos"></a>2.安装centos</h2><pre class="language-bash" data-language="bash"><code class="language-bash">$ vagrant init centos/7
+<h1 id="二、环境搭建"><a href="#二、环境搭建" class="headerlink" title="二、环境搭建"></a>二、环境搭建</h1><h2 id="1-安装VirtualBox和Vagrant"><a href="#1-安装VirtualBox和Vagrant" class="headerlink" title="1.安装VirtualBox和Vagrant"></a>1.安装VirtualBox和Vagrant</h2><p><a target="_blank" rel="noopener" href="https://www.vagrantup.com/downloads">Downloads | Vagrant by HashiCorp (vagrantup.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.virtualbox.org/wiki/Download_Old_Builds_6_0">Download_Old_Builds_6_0 – Oracle VM VirtualBox</a></p>
+<h2 id="2-安装centos"><a href="#2-安装centos" class="headerlink" title="2.安装centos"></a>2.安装centos</h2><pre class="language-bash" data-language="bash"><code class="language-bash">$ vagrant init centos/7
 A <span class="token variable"><span class="token variable">`</span>Vagrantfile<span class="token variable">`</span></span> has been placed <span class="token keyword">in</span> this directory. You are now
 ready to <span class="token variable"><span class="token variable">`</span>vagrant up<span class="token variable">`</span></span> your first virtual environment<span class="token operator">!</span> Please <span class="token builtin class-name">read</span>
 the comments <span class="token keyword">in</span> the Vagrantfile as well as documentation on
@@ -519,8 +521,7 @@ mysql</code></pre>
 <span class="token builtin class-name">echo</span> <span class="token string">"appendonly yes"</span>  <span class="token operator">>></span> /mydata/redis/conf/redis.conf
 
 <span class="token comment"># 启动容器</span>
-docker run -p <span class="token number">6379</span>:6379 --name redis -v /mydata/redis/data:/data  -v /mydata/r
-edis/conf/redis.conf:/etc/redis/redis.conf  -d redis redis-server /etc/redis/redis.conf</code></pre>
+docker run -p <span class="token number">6379</span>:6379 --name redis -v /mydata/redis/data:/data  -v /mydata/redis/conf/redis.conf:/etc/redis/redis.conf  -d redis redis-server /etc/redis/redis.conf</code></pre>
 <p>连接到docker中的redis</p>
 <pre class="language-shell" data-language="shell"><code class="language-shell"><span class="token punctuation">[</span>root@promote vagrant<span class="token punctuation">]</span><span class="token comment"># docker exec -it redis redis-cli</span>
 <span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> <span class="token builtin class-name">set</span> key1 v1

@@ -169,6 +169,179 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/posts/d40f621f/" target="_self">
+          <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210108195114.jfif" srcset="/img/loading.gif" alt="Matlab使用中遇到的问题">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/posts/d40f621f/">Matlab使用中遇到的问题</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/posts/d40f621f/">
+          
+          
+            
+          
+          一、Matlab中如何保存无白边图片img=imread('C:\Users\GWL\Desktop\arun.jpg');
+imshow(img,'Border','tight');
+frame=getframe(gcf);
+
+% method 1
+imwrite(frame.cdata(:,:,1),'test.png');
+
+% method 2
+imm = frame2im(frame);
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-01-13 23:14" pubdate>
+              2019-01-13
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%85%B6%E4%BB%96/">其他</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Matlab/">Matlab</a>
+            
+              <a href="/tags/%E5%9B%BE%E7%89%87%E4%BF%9D%E5%AD%98/">图片保存</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/posts/75edad0d/" target="_self">
+          <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210108193616.jfif" srcset="/img/loading.gif" alt="(更新中) 迁移学习概述">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/posts/75edad0d/">(更新中) 迁移学习概述</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/posts/75edad0d/">
+          
+          
+            
+          
+          1.什么是迁移学习(What)迁移学习是指把别处学来的知识，迁移到新的场景中。具体实践中，就是指将 A任务上 预训练好的模型 放在B任务上，加上少量B任务训练数据，进行微调 。
+2.为什么要使用迁移学习(Why)传统学习中，我们会给不同任务均提供足够的数据，以分别训练出不同的模型：
+
+但是如果 新任务 和旧任务类似，同时 新任务 缺乏足够数据 去从头训练一个新模型，那该怎么办呢？
+这时就需要使用高
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-01-06 22:59" pubdate>
+              2019-01-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0/">迁移学习</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/posts/92550a8e/">一些小技巧</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/posts/92550a8e/">
+          
+          
+            
+          
+          一、常用Windows批处理命令1）清除制定目录下的空文件夹@echo off
+for /f "tokens=*" %%a in ('dir /b /ad /s C:\test^|sort /r') do rd "%%a" /q 2>nul
+2）批量获取指定目录下的文件名dir E:\test /b > E:\test\asd.txt
+二、kindle自定义封面1）获取中亚官方Kindle电子书高
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2018-12-12 20:41" pubdate>
+              2018-12-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%85%B6%E4%BB%96/">其他</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%89%B9%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4/">批处理命令</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/posts/33918dc9/" target="_self">
           <img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210108193616.jfif" srcset="/img/loading.gif" alt="准确率、召回率与mAP">
         </a>

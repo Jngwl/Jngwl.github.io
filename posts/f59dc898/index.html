@@ -1,0 +1,673 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" type="image/png" href="/img/favicon.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="清风与归_G">
+  <meta name="keywords" content="">
+  <title>XML、JSON与Ajax - 清风与归_G</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://cdn.staticfile.org/prism/1.22.0/themes/prism-tomorrow.min.css" />
+      
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.jngwl.top","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"ViwB1XmjsmmXpFx2gikUmM5V-gzGzoHsz","app_key":"7r6Y8CzBkl8MJwPNmCqSdLWW","server_url":"https://viwb1xmj.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>清风与归_G</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201121211851.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="XML、JSON与Ajax">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-11-23 10:13" pubdate>
+        2020年11月23日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      961 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">XML、JSON与Ajax</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年12月24日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1 id="一、JSON"><a href="#一、JSON" class="headerlink" title="一、JSON"></a>一、JSON</h1><h2 id="1-JSON概述"><a href="#1-JSON概述" class="headerlink" title="1.JSON概述"></a>1.JSON概述</h2><p>JSON，即JavaScript Object Notion，是一种轻量级的数据交换格式。</p>
+<ul>
+<li><p>轻量级是相对于xml而言的</p>
+</li>
+<li><p>数据交换指的是 客户端与服务器之间业务数据的传递格式</p>
+</li>
+</ul>
+<h2 id="2-JSON在Javascript中的使用"><a href="#2-JSON在Javascript中的使用" class="headerlink" title="2.JSON在Javascript中的使用"></a>2.JSON在Javascript中的使用</h2><h3 id="（1）定义"><a href="#（1）定义" class="headerlink" title="（1）定义"></a>（1）定义</h3><p>json由<strong>键值对</strong>组成，并且由花括号<code>&#123;&#125;</code>包围。</p>
+<p>每个键由引号<code>“”</code>引起来，键和值之间使用冒号<code>：</code>进行分隔，多组键值对之间进行逗号<code>,</code>进行分隔。</p>
+<p>值可以是数字、字符串、数组、JSON等等。</p>
+<pre class="language-json" data-language="json"><code class="language-json">var jsonObj = <span class="token punctuation">&#123;</span>
+	<span class="token property">"key1"</span><span class="token operator">:</span><span class="token number">12</span><span class="token punctuation">,</span>
+	<span class="token property">"key2"</span><span class="token operator">:</span><span class="token string">"abc"</span><span class="token punctuation">,</span>
+	<span class="token property">"key3"</span><span class="token operator">:</span><span class="token boolean">true</span><span class="token punctuation">,</span>
+	<span class="token property">"key4"</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">,</span><span class="token string">"arr"</span><span class="token punctuation">,</span><span class="token boolean">false</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+	<span class="token property">"key5"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
+		<span class="token property">"key5_1"</span> <span class="token operator">:</span> <span class="token number">551</span><span class="token punctuation">,</span>
+		<span class="token property">"key5_2"</span> <span class="token operator">:</span> <span class="token string">"key5_2_value"</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+	<span class="token property">"key6"</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token punctuation">&#123;</span>
+		<span class="token property">"key6_1_1"</span><span class="token operator">:</span><span class="token number">6611</span><span class="token punctuation">,</span>
+		<span class="token property">"key6_1_2"</span><span class="token operator">:</span><span class="token string">"key6_1_2_value"</span>
+		<span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span>
+		<span class="token property">"key6_2_1"</span><span class="token operator">:</span><span class="token number">6621</span><span class="token punctuation">,</span>
+		<span class="token property">"key6_2_2"</span><span class="token operator">:</span><span class="token string">"key6_2_2_value"</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span>;</code></pre>
+<h3 id="（2）访问"><a href="#（2）访问" class="headerlink" title="（2）访问"></a>（2）访问</h3><p>json 本身是一个对象，json 中的key 我们可以理解为是对象中的一个属性。因此，json 中的<code>key</code>访问就跟访问对象的属性一样：<code>json对象.key</code></p>
+<pre class="language-json" data-language="json"><code class="language-json">alert(typeof(jsonObj));<span class="token comment">// object json 就是一个对象</span>
+
+alert(jsonObj.key1); <span class="token comment">// 12</span>
+alert(jsonObj.key2); <span class="token comment">// abc</span>
+alert(jsonObj.key3); <span class="token comment">// true</span>
+alert(jsonObj.key4); <span class="token comment">// 得到数组[11,"arr",false]</span>
+
+<span class="token comment">// json 中数组值的遍历</span>
+for(var i = <span class="token number">0</span>; i &lt; jsonObj.key4.length; i++) <span class="token punctuation">&#123;</span>
+	alert(jsonObj.key4<span class="token punctuation">[</span>i<span class="token punctuation">]</span>);
+<span class="token punctuation">&#125;</span>
+
+alert(jsonObj.key5.key5_1); <span class="token comment">// 551</span>
+alert(jsonObj.key5.key5_2); <span class="token comment">// key5_2_value</span>
+
+<span class="token comment">// 取出来每一个元素都是json 对象</span>
+var jsonItem = jsonObj.key6<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>;
+<span class="token comment">// alert( jsonItem.key6_1_1 ); //6611</span>
+alert( jsonItem.key6_1_2 ); <span class="token comment">//key6_1_2_value</span></code></pre>
+<h3 id="（3）常用方法"><a href="#（3）常用方法" class="headerlink" title="（3）常用方法"></a>（3）常用方法</h3><p>json 的存在有两种形式：</p>
+<ul>
+<li><strong>json对象</strong>，常用在需要操作json中数据时。</li>
+<li><p><strong>json字符串</strong>，常用在客户端和服务器之间进行数据交换的时候。</p>
+</li>
+<li><p>转换方法为<code>JSON.stringify()</code>和<code>JSON.parse()</code></p>
+</li>
+</ul>
+<pre class="language-json" data-language="json"><code class="language-json"><span class="token comment">// 把 json对象 转换成为 json字符串</span>
+var jsonObjString = JSON.stringify(jsonObj); <span class="token comment">// 特别像Java 中对象的toString</span>
+alert(jsonObjString);
+
+<span class="token comment">// 把 json字符串 转换成为 json对象</span>
+var jsonObj2 = JSON.parse(jsonObjString);
+alert(jsonObj2.key1);   <span class="token comment">// 12</span>
+alert(jsonObj2.key2);   <span class="token comment">// abc</span></code></pre>
+<h2 id="3-JSON在Java中的使用"><a href="#3-JSON在Java中的使用" class="headerlink" title="3.JSON在Java中的使用"></a>3.JSON在Java中的使用</h2><h3 id="（1）Javabean和JSON转换"><a href="#（1）Javabean和JSON转换" class="headerlink" title="（1）Javabean和JSON转换"></a>（1）Javabean和JSON转换</h3><ul>
+<li>借助<code>Gson</code>包里面的<code>gson.toJson</code>方法和<code>gson.fromJson</code>方法</li>
+</ul>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token class-name">Person</span> person <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">"国哥好帅!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+	<span class="token comment">// 创建Gson 对象实例</span>
+	<span class="token class-name">Gson</span> gson <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Gson</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+	<span class="token comment">// toJson 方法可以把java 对象转换成为json 字符串</span>
+	<span class="token class-name">String</span> personJsonString <span class="token operator">=</span> gson<span class="token punctuation">.</span><span class="token function">toJson</span><span class="token punctuation">(</span>person<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>personJsonString<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+	<span class="token comment">// fromJson 把json 字符串转换回Java 对象</span>
+	<span class="token comment">// 第一个参数是json 字符串</span>
+	<span class="token comment">// 第二个参数是转换回去的Java 对象类型</span>
+	<span class="token class-name">Person</span> person1 <span class="token operator">=</span> gson<span class="token punctuation">.</span><span class="token function">fromJson</span><span class="token punctuation">(</span>personJsonString<span class="token punctuation">,</span> <span class="token class-name">Person</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>person1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<h3 id="（2）List和json互转"><a href="#（2）List和json互转" class="headerlink" title="（2）List和json互转"></a>（2）List和json互转</h3><ul>
+<li>list转json，可以直接用Gson包的<code>gson.toJson</code>方法</li>
+<li>json转list，需要先新建一个继承自<strong>TypeToken</strong>类的PersonListType类，然后再通过<code>gson.fromJson(personListJsonString, new PersonListType().getType());</code> 进行转换</li>
+</ul>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Person</span><span class="token punctuation">></span></span> personList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	personList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"国哥"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	personList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">"康师傅"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+	<span class="token class-name">Gson</span> gson <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Gson</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token comment">// 把 List 转换为json字符串</span>
+	<span class="token class-name">String</span> personListJsonString <span class="token operator">=</span> gson<span class="token punctuation">.</span><span class="token function">toJson</span><span class="token punctuation">(</span>personList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>personListJsonString<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   
+    <span class="token comment">// 将 JSON字符串 转换为 List</span>
+	<span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Person</span><span class="token punctuation">></span></span> list <span class="token operator">=</span> gson<span class="token punctuation">.</span><span class="token function">fromJson</span><span class="token punctuation">(</span>personListJsonString<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">PersonListType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+	<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>list<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+	<span class="token class-name">Person</span> person <span class="token operator">=</span> list<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>person<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<h3 id="（3）map和json的互转"><a href="#（3）map和json的互转" class="headerlink" title="（3）map和json的互转"></a>（3）map和json的互转</h3><ul>
+<li>nap转json，可以直接用Gson包的<code>gson.toJson</code>方法</li>
+<li>json转list，需要先新建一个继承自<strong>TypeToken</strong>类的PersonListType类，然后再通过<code>gson.fromJson(personListJsonString, new PersonListType().getType());</code> 进行转换</li>
+<li>json转list，采用匿名内部类：<code>gson.fromJson(personMapJsonString, new TypeToken&lt;HashMap&lt;Integer,Person&gt;&gt;()&#123;&#125;.getType())</code></li>
+</ul>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test3</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">,</span><span class="token class-name">Person</span><span class="token punctuation">></span></span> personMap <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	personMap<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"国哥好帅"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	personMap<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">"康师傅也好帅"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+	<span class="token class-name">Gson</span> gson <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Gson</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token comment">// 把map 集合转换成为json 字符串</span>
+	<span class="token class-name">String</span> personMapJsonString <span class="token operator">=</span> gson<span class="token punctuation">.</span><span class="token function">toJson</span><span class="token punctuation">(</span>personMap<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>personMapJsonString<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    
+	<span class="token comment">// Map&lt;Integer,Person> personMap2 = gson.fromJson(personMapJsonString, new  PersonMapType().getType());</span>
+    
+	<span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">,</span><span class="token class-name">Person</span><span class="token punctuation">></span></span> personMap2 <span class="token operator">=</span> gson<span class="token punctuation">.</span><span class="token function">fromJson</span><span class="token punctuation">(</span>personMapJsonString<span class="token punctuation">,</span> <span class="token keyword">new</span>	<span class="token class-name">TypeToken</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">HashMap</span><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">,</span><span class="token class-name">Person</span><span class="token punctuation">></span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">.</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>personMap2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+	<span class="token class-name">Person</span> p <span class="token operator">=</span> personMap2<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<h1 id="二、AJAX"><a href="#二、AJAX" class="headerlink" title="二、AJAX"></a>二、AJAX</h1><h2 id="1-AJAX概述"><a href="#1-AJAX概述" class="headerlink" title="1.AJAX概述"></a>1.AJAX概述</h2><p>AJAX即“Asynchronous JavaScript And XML”（异步JavaScript和XML），是指一种创建交互式网页的网页开发技术。</p>
+<p>ajax 是一种浏览器通过js异步发起请求，局部更新页面的技术。<br>Ajax 请求的局部更新，浏览器地址栏不会发生变化。局部更新不会舍弃原来页面的内容。</p>
+<p>待更新…</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JavaWeb/">JavaWeb</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Java%EF%BC%8CJavaWEB/">Java，JavaWEB</a>
+                    
+                      <a class="hover-with-bg" href="/tags/XML/">XML</a>
+                    
+                      <a class="hover-with-bg" href="/tags/JSON/">JSON</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Ajax/">Ajax</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/27d8c8a5/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Tomcat使用自查手册</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/1de0f858/">
+                        <span class="hidden-mobile">jQuery基础自查手册</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "ViwB1XmjsmmXpFx2gikUmM5V-gzGzoHsz",
+          app_key: "7r6Y8CzBkl8MJwPNmCqSdLWW",
+          placeholder: "来都来了，不说点什么吗⊙(・◇・)？",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <i class="iconfont icon-tags-fill"></i>&nbsp;<a href="http://www.beian.miit.gov.cn/" target="_blank">鲁ICP备19062448号</a>&nbsp&nbsp;| &nbsp&nbsp <i class="iconfont icon-addrcard"></i>&nbsp; 2018~2022<a href="https://www.jngwl.top/" target="_blank"> 清风与归_G</a>&nbsp&nbsp;|&nbsp&nbsp;  <i class="iconfont icon-docker"></i> <a href="https://hexo.io/" target="_blank">&nbsp Hexo</a>&nbsp & &nbsp <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank">Fluid</a><br> 你的骄傲多半来自于自己的无知，共勉之
+
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

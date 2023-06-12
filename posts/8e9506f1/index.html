@@ -1,0 +1,719 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" type="image/png" href="/img/favicon.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="清风与归_G">
+  <meta name="keywords" content="">
+  <title>Docker使用指北 - 清风与归_G</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://cdn.staticfile.org/prism/1.22.0/themes/prism-tomorrow.min.css" />
+      
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.jngwl.top","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"ViwB1XmjsmmXpFx2gikUmM5V-gzGzoHsz","app_key":"7r6Y8CzBkl8MJwPNmCqSdLWW","server_url":"https://viwb1xmj.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>清风与归_G</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201121211851.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Docker使用指北">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-06-22 20:13" pubdate>
+        2021年6月22日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Docker使用指北</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年6月23日 凌晨
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="一、Docker概述"><a href="#一、Docker概述" class="headerlink" title="一、Docker概述"></a>一、Docker概述</h2><h3 id="1-Docker-镜像原理"><a href="#1-Docker-镜像原理" class="headerlink" title="1. Docker 镜像原理"></a>1. Docker 镜像原理</h3><p>Docker镜像本质上是一个<strong>分层文件系统</strong>：</p>
+<ul>
+<li>最底层是bootfs，这里的bootfs使用的是宿主机的bootfs</li>
+<li>第二层是root文件系统rootfs</li>
+<li>再往上可以叠加其他的镜像文件</li>
+</ul>
+<p>统一文件系统技术（Union File System）将这些不同的层整合成一个系统，供用户使用。</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210622224538.png" srcset="/img/loading.gif" alt=""></p>
+<blockquote>
+<p>Docker中的一个centos镜像只有200M，而一个centos操作系统的iso文件却要几个G？</p>
+<ul>
+<li>centos的iso镜像包含bootfs和rootfs，而docker的centos镜像复用宿主机的bootfs，只有rootfs和其他镜像层，因此比较小</li>
+</ul>
+<p>一个tomcat安装包只有70M，为什么Docker中的tomcat镜像却有500M？</p>
+<ul>
+<li>因此docker镜像是分层的，虽然其中的tomcat只有70M左右，但依赖的父镜像和基础镜像也不只70M，杂七杂八的加来了就500M了</li>
+</ul>
+</blockquote>
+<h3 id="2-Docker容器虚拟化技术-和-传统虚拟机的比较"><a href="#2-Docker容器虚拟化技术-和-传统虚拟机的比较" class="headerlink" title="2. Docker容器虚拟化技术 和 传统虚拟机的比较"></a>2. Docker容器虚拟化技术 和 传统虚拟机的比较</h3><ul>
+<li>Docker容器和虚拟机具有相似的资源隔离和分配优势，</li>
+<li>但<strong>Docker容器虚拟化的是操作系统</strong>，也就是共用软件；而<strong>虚拟机虚拟化的是硬件设备</strong>。</li>
+<li>因此，容器优先于宿主机底层内核，<strong>只能运行和宿主机同一类型的操作系统</strong>，而<strong>传统虚拟机可以运行不同的操作系统</strong>（如windows主机安装linux虚拟机）</li>
+</ul>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20210622223248.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="二、Dokcer基础命令"><a href="#二、Dokcer基础命令" class="headerlink" title="二、Dokcer基础命令"></a>二、Dokcer基础命令</h2><ul>
+<li>查看本地镜像：<code>docker images</code></li>
+<li>拉取镜像：<code>docker image pull 镜像名称</code></li>
+<li>查看运行中的容器：<code>docker ps</code></li>
+<li>查看所有容器：<code>docker ps -a</code></li>
+<li>进入Redis：<code>docker exec -it redis redis-cli</code></li>
+<li>进入MySQL：<code>docker exec -it mysql /bin/bash</code></li>
+<li>创建并启动容器：<code>docker run 参数</code><ul>
+<li>-d：以守护模式运行容器。需使用docker exec进入容器，退出容器，容器不会关闭，继续在后台运行</li>
+<li>—name：为创建的容器命名</li>
+</ul>
+</li>
+<li>关闭容器：docker stop 容器id/容器名</li>
+<li>删除容器：docker rm 容器id</li>
+<li>删除镜像：docker rmi 镜像名</li>
+<li>查看容器日志：docker logs 容器id</li>
+<li>启动/停止/重启docker服务：<code>systemctl start/stop/restart docker</code></li>
+<li>查看docker服务状态：systemctl status docker</li>
+<li>设置docker开启启动：systemctl enable docker</li>
+</ul>
+<h2 id="三、Dockerfile"><a href="#三、Dockerfile" class="headerlink" title="三、Dockerfile"></a>三、Dockerfile</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FROM image_name:tag</td>
+<td>指明基础镜像</td>
+</tr>
+<tr>
+<td>MAINTAINER user_name</td>
+<td>声明镜像的创建者</td>
+</tr>
+<tr>
+<td>ENV key value</td>
+<td>设置环境变量 (可以写多条)</td>
+</tr>
+<tr>
+<td>WORKDIR path_dir</td>
+<td>设置工作目录</td>
+</tr>
+<tr>
+<td>RUN command</td>
+<td>执行命令</td>
+</tr>
+<tr>
+<td>ADD source_dir/file dest_dir/file</td>
+<td>将宿主机的文件复制到容器内，如果是一个压缩文件，将会在复制后自动解压</td>
+</tr>
+<tr>
+<td>COPY source_dir/file dest_dir/file</td>
+<td>和ADD相似，但是如果有压缩文件并不能解压</td>
+</tr>
+<tr>
+<td>CMD</td>
+<td>启动容器时的默认命令</td>
+</tr>
+<tr>
+<td>EXPOSE</td>
+<td>暴露端口</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p> 示例：</p>
+<pre class="language-dockerfile" data-language="dockerfile"><code class="language-dockerfile"># 自定义centos7镜像，默认登陆路径为&#x2F;usr，可以使用vim
+FROM centos:7
+MAINTAINER gaowl@stu.jiangnan.edu.cn
+WORKDIR &#x2F;usr
+RUN yum install -y vim
+CMD &#x2F;bin&#x2F;bash
+
+
+# 定义dockerfile，发布springboot项目
+FROM java:8
+MAINTAINER gaowl@stu.jiangnan.edu.cn
+ADD springbootDemo.jar app.jar
+CMD java -jar app.jar</code></pre>
+<p>根据dockerfile编译镜像</p>
+<pre class="language-none"><code class="language-none">docker build -f .&#x2F;springboot_dockerfile -t app .</code></pre>
+<ul>
+<li>-f：指定dockerfile的路径</li>
+<li>-t：指定镜像名</li>
+<li>别忘了最后的<code>.</code></li>
+</ul>
+<h2 id="四、Docker-Compose"><a href="#四、Docker-Compose" class="headerlink" title="四、Docker Compose"></a>四、Docker Compose</h2><p> Docker Compose按照一定规则批量管理容器，避免一个个地手动启停微服务</p>
+<h3 id="（1）安装与卸载"><a href="#（1）安装与卸载" class="headerlink" title="（1）安装与卸载"></a>（1）安装与卸载</h3><pre class="language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 需先安装Docker，再以编译好的二进制包方式将docker compose安装在Linux系统中。 </span>
+<span class="token function">curl</span> -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-<span class="token variable"><span class="token variable">`</span><span class="token function">uname</span> -s<span class="token variable">`</span></span>-<span class="token variable"><span class="token variable">`</span><span class="token function">uname</span> -m<span class="token variable">`</span></span> -o /usr/local/bin/docker-compose
+
+<span class="token comment"># 设置文件可执行权限 </span>
+<span class="token function">chmod</span> +x /usr/local/bin/docker-compose
+
+<span class="token comment"># 查看docker-compose 版本信息 </span>
+docker-compose -version
+
+<span class="token comment"># 删除二进制文件即可卸载</span>
+<span class="token function">rm</span> /usr/local/bin/docker-compose</code></pre>
+<h3 id="（2）使用compose编排Nginx-Springboot项目"><a href="#（2）使用compose编排Nginx-Springboot项目" class="headerlink" title="（2）使用compose编排Nginx+Springboot项目"></a>（2）使用compose编排Nginx+Springboot项目</h3><ul>
+<li><p>创建空docker-compose目录，并新建docker-compose.yml 文件</p>
+<pre class="language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">'3'</span>
+<span class="token key atrule">services</span><span class="token punctuation">:</span>
+  <span class="token key atrule">nginx</span><span class="token punctuation">:</span>   <span class="token comment"># 第一个微服务</span>
+   image<span class="token punctuation">:</span> nginx
+   ports<span class="token punctuation">:</span>  <span class="token comment"># 端口映射</span>
+    <span class="token punctuation">-</span> <span class="token datetime number">80:80</span>  
+   links<span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> app
+   volumes<span class="token punctuation">:</span>  <span class="token comment"># 目录映射</span>
+    <span class="token punctuation">-</span> ./nginx/conf.d<span class="token punctuation">:</span>/etc/nginx/conf.d
+  <span class="token key atrule">app</span><span class="token punctuation">:</span>   <span class="token comment"># 第二个微服务</span>
+    image<span class="token punctuation">:</span> app
+    expose<span class="token punctuation">:</span>  <span class="token comment"># 暴露端口</span>
+      <span class="token punctuation">-</span> <span class="token string">"8080"</span></code></pre>
+</li>
+<li><p>创建Nginx配置文件./nginx/conf.d</p>
+<pre class="language-nginx" data-language="nginx"><code class="language-nginx"><span class="token keyword">server</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">listen</span> <span class="token number">80</span><span class="token punctuation">;</span>
+    <span class="token keyword">access_log</span> off<span class="token punctuation">;</span>
+​
+    <span class="token keyword">location</span> <span class="token operator">/</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">proxy_pass</span> <span class="token keyword">http</span><span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>app<span class="token punctuation">:</span><span class="token number">8080</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+</li>
+<li><p>在docker-compose目录下，使用docker-compose启动容器</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">docker-compose up</code></pre>
+</li>
+</ul>
+<h2 id="五、Docker私有仓库"><a href="#五、Docker私有仓库" class="headerlink" title="五、Docker私有仓库"></a>五、Docker私有仓库</h2><h3 id="（1）搭建私有仓库"><a href="#（1）搭建私有仓库" class="headerlink" title="（1）搭建私有仓库"></a>（1）搭建私有仓库</h3><pre class="language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 1、拉取私有仓库镜像 </span>
+docker pull registry
+
+<span class="token comment"># 2、启动私有仓库容器 </span>
+docker run -id --name<span class="token operator">=</span>registry -p <span class="token number">5000</span>:5000 registry
+
+<span class="token comment"># 3、打开浏览器 输入地址http://私有仓库服务器ip:5000/v2/_catalog，看到&#123;"repositories":[]&#125; 表示私有仓库 搭建成功</span>
+
+<span class="token comment"># 4、修改daemon.json   </span>
+<span class="token function">vim</span> /etc/docker/daemon.json    
+<span class="token comment"># 在上述文件中添加一个key，保存退出。此步用于让 docker 信任私有仓库地址；注意将私有仓库服务器ip修改为自己私有仓库服务器真实ip </span>
+<span class="token punctuation">&#123;</span><span class="token string">"insecure-registries"</span>:<span class="token punctuation">[</span><span class="token string">"私有仓库服务器ip:5000"</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span> 
+
+<span class="token comment"># 5、重启docker 服务 </span>
+systemctl restart docker
+docker start registry</code></pre>
+<h3 id="（2）上传镜像"><a href="#（2）上传镜像" class="headerlink" title="（2）上传镜像"></a>（2）上传镜像</h3><pre class="language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 1、标记镜像为私有仓库的镜像     </span>
+docker tag centos:7 私有仓库服务器IP:5000/centos:7
+ 
+<span class="token comment"># 2、上传标记的镜像     </span>
+docker push 私有仓库服务器IP:5000/centos:7</code></pre>
+<h3 id="（3）从私有仓库拉取镜像"><a href="#（3）从私有仓库拉取镜像" class="headerlink" title="（3）从私有仓库拉取镜像"></a>（3）从私有仓库拉取镜像</h3><pre class="language-shell" data-language="shell"><code class="language-shell">docker pull 私有仓库服务器ip:5000/centos:7</code></pre>
+<p>参考：</p>
+<p>【1】<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42195284/article/details/108919697">黑马 Docker 笔记_伟大的计算机科学家-CSDN博客</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Docker/">Docker</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/">容器技术</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/874a1b37/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MyCat使用指北</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/129747bb/">
+                        <span class="hidden-mobile">MySQL进阶</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "ViwB1XmjsmmXpFx2gikUmM5V-gzGzoHsz",
+          app_key: "7r6Y8CzBkl8MJwPNmCqSdLWW",
+          placeholder: "来都来了，不说点什么吗⊙(・◇・)？",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <i class="iconfont icon-tags-fill"></i>&nbsp;<a href="http://www.beian.miit.gov.cn/" target="_blank">鲁ICP备19062448号</a>&nbsp&nbsp;| &nbsp&nbsp <i class="iconfont icon-addrcard"></i>&nbsp; 2018~2022<a href="https://www.jngwl.top/" target="_blank"> 清风与归_G</a>&nbsp&nbsp;|&nbsp&nbsp;  <i class="iconfont icon-docker"></i> <a href="https://hexo.io/" target="_blank">&nbsp Hexo</a>&nbsp & &nbsp <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank">Fluid</a><br> 你的骄傲多半来自于自己的无知，共勉之
+
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

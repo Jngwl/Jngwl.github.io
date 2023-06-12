@@ -1,0 +1,578 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" type="image/png" href="/img/favicon.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="清风与归_G">
+  <meta name="keywords" content="">
+  <title>MySQL实战45讲-下集（31-45） - 清风与归_G</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://cdn.staticfile.org/prism/1.22.0/themes/prism-tomorrow.min.css" />
+      
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.jngwl.top","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"ViwB1XmjsmmXpFx2gikUmM5V-gzGzoHsz","app_key":"7r6Y8CzBkl8MJwPNmCqSdLWW","server_url":"https://viwb1xmj.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>清风与归_G</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201121211851.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="MySQL实战45讲-下集（31-45）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-01-07 22:38" pubdate>
+        2022年1月7日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      26
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">MySQL实战45讲-下集（31-45）</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2022年1月14日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="33-我查这么多数据，会不会把数据库内存打爆？"><a href="#33-我查这么多数据，会不会把数据库内存打爆？" class="headerlink" title="33.我查这么多数据，会不会把数据库内存打爆？"></a>33.我查这么多数据，会不会把数据库内存打爆？</h2><p>由于MySQL是采取边读边发的逻辑，先一行行地读取数据存放在net_buffer中，存满了再调用网络接口发出去，因此MySQL 不会在server端存放完整的结果集，占用的MySQL内部内存最大也就是net_buffer_length（默认16K），因此一个大查询不会把内存打爆。但是，正因为是边读边发，如果客户端读结果不及时，会导致MySQL服务端由于结果发不出去，堵住查询过程…</p>
+<p>而对于InnoDB引擎内部，由于有LRU算法之类的内存淘汰策略，及时清除InnoDB Buffer Pool中的旧数据，因此大查询也不会导致内存暴涨。并且，InnoDB对普通的LRU算法进行了改变，避免冷数据表全表查询时大量淘汰当前Buffer Pool里的数据导致内存命中率急剧下降、磁盘压力增加、SQL响应也变慢，InnoDB引擎按照5:3的比例将整个LRU链表分为young和old两个区域，① 需要插入新数据页时，不再放在链表头部，而是放在old区域头部；② 当访问已在LRU链表young区域中数据页时，将其移动到链表头部；③ 当访问在LRU链表old区域的数据页时，若这个数据页已在LRU链表中存在超过1s，将其移动到头部，未超过1s则保存位置不变。这样在全表扫描时，由于顺序数据页的多条记录，这个数据页第一次被访问和最后一次被访问的时间一般不超过1s，也就不会移动到young区域；又因为是冷数据表，后面继续扫描时也不会访问到了，慢慢地就被淘汰了…这样就使得大查询既利用了Buffer Pool，也不会对young区域和内存命中率造成恶劣的影响。</p>
+<p>当然，全表扫描还是非常耗费IO资源的，所以业务高峰期尽量不要直接在线上主库执行全表扫描！</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/202201121957229.png" srcset="/img/loading.gif" alt="我查这么多数据，会不会把数据库内存打爆-2022/01/12"></p>
+<h2 id="36-为什么临时表可以重名"><a href="#36-为什么临时表可以重名" class="headerlink" title="36.为什么临时表可以重名"></a>36.为什么临时表可以重名</h2><p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/202201081213113.png" srcset="/img/loading.gif" alt="为什么临时表可以重名-2022/01/08"></p>
+<h2 id="37-什么时候需要使用内部临时表"><a href="#37-什么时候需要使用内部临时表" class="headerlink" title="37.什么时候需要使用内部临时表"></a>37.什么时候需要使用内部临时表</h2><p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/202201081652530.png" srcset="/img/loading.gif" alt="什么时候会使用内部临时表-2022/01/08"></p>
+<h2 id="38-都是InnoDB引擎好，为什么还要用Memory引擎？"><a href="#38-都是InnoDB引擎好，为什么还要用Memory引擎？" class="headerlink" title="38.都是InnoDB引擎好，为什么还要用Memory引擎？"></a>38.都是InnoDB引擎好，为什么还要用Memory引擎？</h2><p>内存表由于支持hash索引，同时所有数据都保存在内存中，读写是明显快于磁盘表的。若因为内存表处理快而使用内存表，但能放到内存表中的数据一般不大，即使放在InnoDB中，数据缓存在InnoDB buffer pool里，性能也不会差！</p>
+<p>此外，<strong>内存表仅支持行锁，不支持表锁</strong>。一张表在更新时，其他读写操作全部被堵住，并发性能有限。同时内存表存在持久化问题，即<strong>数据库重启时会情况所有内存表</strong>，这可能造成主备同步停止等问题。因此<strong>不建议在生产上使用普通内存表</strong>。</p>
+<p>有一种场景，恰好可以忽略上面介绍的两个问题，使用Memory引擎建立表格，即<strong>内存临时表</strong>。内存临时表仅本线程可访问，因此不存在并发性问题；临时表在会话关闭或重启后也是会删除数据的，同时备库的临时表也不会影响主库的临时表，因此也不存在数据持久化问题。</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/202201101632802.png" srcset="/img/loading.gif" alt="都说InnoDB好，那还要不要使用Memory引擎-2022/01/10"></p>
+<h2 id="40-Insert语句的锁为什么这么多？"><a href="#40-Insert语句的锁为什么这么多？" class="headerlink" title="40.Insert语句的锁为什么这么多？"></a>40.Insert语句的锁为什么这么多？</h2><p>正常的insert语句执行完会添加next-key lock，如果遇到唯一索引，会退化为行锁；如果等值查询后的最后一个值不符合条件，退化为间隙锁。</p>
+<p><code>insert ... select</code>常用来在两个表之间拷贝数据，在<strong>可重复读隔离</strong>级别下，该命令会给select的表里扫描到的所有行的间隙加锁，以保证日志和数据的一致性。当select和insert操作的对象为同一张表时，可能存在循环写入问题，即select操作时可能对表进行了全表扫描，并将数据拷贝到了临时表中，操作比较冗余。如果涉及的数据量较小，可考虑新建用户临时表，来优化插入操作。</p>
+<p>执行insert操作时，常遇到唯一键冲突问题。在<strong>可重复读隔离</strong>级别下，此时会<strong>对冲突的索引字段添加next-key lock</strong>（此场景下并不会因为唯一索引退化为行锁）。因此，程序报错后需要及时提交或回滚事务，避免加锁时间太长。此外，唯一键冲突时，有时会导致死锁。</p>
+<p>相比于<code>insert ... select</code>命令，<code>insert ... on duplicate key update ...</code>命令在插入一行数据时，如果遇到唯一键冲突，不会报错，而是执行后面的更新操作。此时如果有多个列违反了唯一性约束，会优先修改跟<strong>第一个索引</strong>冲突的行！</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/202201112218005.png" srcset="/img/loading.gif" alt="insert语句的锁为什么这么多-2022/01/11"></p>
+<h2 id="41-怎样最快地复制一张表？"><a href="#41-怎样最快地复制一张表？" class="headerlink" title="41.怎样最快地复制一张表？"></a>41.怎样最快地复制一张表？</h2><ul>
+<li>通过<code>mysqldump</code>导出包含一组INSERT命令的sql文件，然后通过source将数据导入到目标表中。可以基于where过滤数据，但无法使用join这种复杂逻辑</li>
+<li>通过<code>select ... into outfile</code>将查询结果导出到服务器本地的csv文件中，然后通过load data (local) infile导入数据。最灵活的一种方法，支持所有格式的SQL语法，但每次只能导出一张表格，但表结构需要另外的语句单独备份！同时需要注意生成和读取csv文件的路径，避免执行出错。</li>
+<li><code>物理拷贝</code>是三者中最快的复制方法，尤其是大表复制时。但必须是全表复制，不可仅拷贝部分数据；必须是InnoDB引擎的表，不支持Memory等引擎。</li>
+</ul>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/202201091845231.png" srcset="/img/loading.gif" alt="怎样最快地复制一张表-2022/01/09"></p>
+<h2 id="42-grant之后要跟着flush-privileges命令吗"><a href="#42-grant之后要跟着flush-privileges命令吗" class="headerlink" title="42.grant之后要跟着flush privileges命令吗"></a>42.grant之后要跟着flush privileges命令吗</h2><p>一般情况是不需要的。</p>
+<ul>
+<li>grant命令会同步修改数据表和内存，并在判断权限的时候使用内存数据。如果规范地使用grant和revoke语句，使内存权限数据和磁盘数据保存一致，也就无需flush privileges来清空内存acl_users数组等并基于现磁盘表重建内存中操作权限数据。<ul>
+<li>需要注意的一点是，grant修改db权限、表权限及列权限后，无需新建连接，会立刻感知到权限变化；而grant修改全局权限对于一个已经存在的连接是无效的，其基于新建连接时线程对象内部缓存的权限位进行权限校验，因此需要新建连接才可感知到权限变化。</li>
+</ul>
+</li>
+<li>有时直接使用DML语句操作系统权限表等不规范操作，会导致内存权限数据和磁盘表不一致。此时就需要flush privileges命令来重建内存权限数据了</li>
+</ul>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/202201101148720.png" srcset="/img/loading.gif" alt="grant之后要跟着flush privileges-2022/01/10"></p>
+<h2 id="43-要不要使用临时表？"><a href="#43-要不要使用临时表？" class="headerlink" title="43.要不要使用临时表？"></a>43.要不要使用临时表？</h2><p>创建临时表时，会根据分区规则生成多个.ibd文件，每个.ibd文件对应着一个临时表分区。</p>
+<p>分区表和手工分表，<strong>从引擎层而言</strong>，都是根据server层分区规则或应用层代码去访问必要的分区或分表，无明显差别。较小的一点不同为<u>引擎层会把每个分区看做一个单独的表</u>，在执行查询、更新等DML语句操作时，加锁只会影响访问到的分区，对未访问到的分区无影响，因此锁的细粒度可能略小于手工分表，并发性能略好些。</p>
+<p><strong>两者的主要区别在于server层</strong>，（1）<strong>分区表的打开问题</strong>。MySQL在第一次访问一个分区时，需要把所有分区都访问一遍。MyISAM引擎下可能会因此导致打开的表文件数量超出上限。而打开普通分表时无需打开其他分表，也就不存在这种问题。（2）server层将一个分区表的多个分区看做一个表，因此<strong>多个分区是公用同一个MDL锁的</strong>，从而导致对分区表进行DDL或其他运维操作，影响较大。而普通的分表，对其进行truncate等DDL操作是不会和其他分表上的查询语句，发送MDL锁冲突的。</p>
+<p>临时表的优点主要在于对业务透明，相比于用户分表，业务代码更加简洁；此外，分区表清理历史数据也更容易些。可通过truncate、drop特定分区或交换分区的方式清理掉过期的历史数据，速度快，对系统影响小。</p>
+<p>因此，还是需要根据具体的业务场景衡量临时表的优缺点，选择是否使用。</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/202201111441591.png" srcset="/img/loading.gif" alt="要不要使用分区表-2022/01/10"></p>
+<h2 id="44-答疑文章"><a href="#44-答疑文章" class="headerlink" title="44.答疑文章"></a>44.答疑文章</h2><ul>
+<li>join的写法：使用left join命令时，左侧的表不一定为驱动表，但join命令左侧的表一定为驱动表；如果要使用left join的语义输出驱动表的全部记录及被驱动表符合条件的记录，就不要将被驱动表的字段放在where条件里面进行判断，必须写在on里面。</li>
+<li>相比于Block Nested Loop Join算法，Simple Nested Loop Join算法虽然同样进行了M*N次判断，但被驱动表进行了M次全表扫描（前者仅一次）。全表扫描时，将数据从磁盘读入内存会影响正常业务的Buffer Pool内存命中率，而多次全表扫描影响更甚；此外，进行记录匹配时，即使被驱动表数据都在记录中了，Simple Nested Loop Join算法在内存中寻找下一条记录的操作类似于指针遍历操作，是慢于Block Nested Loop Join算法的join_buffer数组的。因此，BNL算法的性能更加优异！</li>
+<li>如果group by加了order by null，且无需返回不同值的出现次数count(*)，其语义和执行流程是与distinct命令是完全相同的，因此性能也是相同的。<br><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/202201142111251.png" srcset="/img/loading.gif" alt="答疑文章-2022/01/14"></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/MySQL/">MySQL</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/7071cef4/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MySQL实战45讲-中集（16-30）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/8ccc0fe9/">
+                        <span class="hidden-mobile">undo log 和 binlog</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "ViwB1XmjsmmXpFx2gikUmM5V-gzGzoHsz",
+          app_key: "7r6Y8CzBkl8MJwPNmCqSdLWW",
+          placeholder: "来都来了，不说点什么吗⊙(・◇・)？",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <i class="iconfont icon-tags-fill"></i>&nbsp;<a href="http://www.beian.miit.gov.cn/" target="_blank">鲁ICP备19062448号</a>&nbsp&nbsp;| &nbsp&nbsp <i class="iconfont icon-addrcard"></i>&nbsp; 2018~2022<a href="https://www.jngwl.top/" target="_blank"> 清风与归_G</a>&nbsp&nbsp;|&nbsp&nbsp;  <i class="iconfont icon-docker"></i> <a href="https://hexo.io/" target="_blank">&nbsp Hexo</a>&nbsp & &nbsp <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank">Fluid</a><br> 你的骄傲多半来自于自己的无知，共勉之
+
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

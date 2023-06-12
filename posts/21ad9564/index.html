@@ -1,0 +1,952 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" type="image/png" href="/img/favicon.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="清风与归_G">
+  <meta name="keywords" content="">
+  <title>Ubuntu使用过程中遇到的问题 - 清风与归_G</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://cdn.staticfile.org/prism/1.22.0/themes/prism-tomorrow.min.css" />
+      
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.jngwl.top","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"ViwB1XmjsmmXpFx2gikUmM5V-gzGzoHsz","app_key":"7r6Y8CzBkl8MJwPNmCqSdLWW","server_url":"https://viwb1xmj.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>清风与归_G</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201121211851.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Ubuntu使用过程中遇到的问题">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-05-09 20:49" pubdate>
+        2020年5月9日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      53
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Ubuntu使用过程中遇到的问题</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年1月8日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="一、Ubuntu安装Caffe"><a href="#一、Ubuntu安装Caffe" class="headerlink" title="一、Ubuntu安装Caffe"></a>一、Ubuntu安装Caffe</h2><h3 id="前期"><a href="#前期" class="headerlink" title="前期"></a>前期</h3><p>参照<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40755643/article/details/96346453">链接</a>一步一步走</p>
+<h3 id="遇到的其他错误："><a href="#遇到的其他错误：" class="headerlink" title="遇到的其他错误："></a>遇到的其他错误：</h3><h4 id="错误1"><a href="#错误1" class="headerlink" title="错误1"></a>错误1</h4><p><code>make runtest -j12</code>时，遇到<code>.build_release/tools/caffe: error while loading shared libraries: libcudnn.so.6: cannot open shared object file: No such file or directory</code></p>
+<ul>
+<li>由于用的zsh而不是bash，输入<code>nvcc -V</code>发现找不到nvcc指令，因此通过在终端输入<code>bash</code>换回到bash环境，再运行<code>make runtest -j12</code>，即可解决</li>
+</ul>
+<h4 id="错误2"><a href="#错误2" class="headerlink" title="错误2"></a>错误2</h4><p><code>make runtest -j12</code>和<code>make pycaffe -j8</code>成功后，在python中<code>import caffe</code>时报错。</p>
+<ul>
+<li>no module caffe，检查<code>~/bashrc</code>中是否添加了<code>export PYTHONPATH=/home/xxx/caffe/python:$PYTHONPATH</code></li>
+<li>ImportError：No module named skimage.io，则通过<code>sudo apt-get install python-skimage</code>安装<code>skimage</code>模块</li>
+</ul>
+<h4 id="错误3"><a href="#错误3" class="headerlink" title="错误3"></a>错误3</h4><p>caffe安装出现 “error : too few arguments in function call” 的错误</p>
+<ul>
+<li>替换caffe-master\include\caffe\util中的”cudnn.hpp”</li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/mao_hui_fei/article/details/80326464">参考</a></li>
+</ul>
+<h4 id="错误4"><a href="#错误4" class="headerlink" title="错误4"></a>错误4</h4><p>2 errors detected in the compilation of “/tmp/tmpxft_0000339c_00000000-19_box_annotator_ohem_layer.compute_61.cpp1.ii”.<br>Makefile:595: recipe for target ‘.build_release/cuda/src/caffe/layers/box_annotator_ohem_layer.o’ failed<br>make: <em>*</em> [.build_release/cuda/src/caffe/layers/box_annotator_ohem_layer.o] Error 1</p>
+<ul>
+<li><p>修改makefile,  319行附近部分改成：（加了-std=c++11）</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">ifeq <span class="token punctuation">(</span><span class="token variable"><span class="token variable">$(</span>DEBUG<span class="token variable">)</span></span>, <span class="token number">1</span><span class="token punctuation">)</span>
+    COMMON_FLAGS <span class="token operator">+=</span> -DDEBUG -g -O0 -std<span class="token operator">=</span>c++11
+    NVCCFLAGS <span class="token operator">+=</span> -G
+<span class="token keyword">else</span>
+    COMMON_FLAGS <span class="token operator">+=</span> -DNDEBUG -O2 -std<span class="token operator">=</span>c++11
+endif</code></pre>
+</li>
+</ul>
+<h2 id="二、安装与卸载python3-6"><a href="#二、安装与卸载python3-6" class="headerlink" title="二、安装与卸载python3.6"></a>二、安装与卸载python3.6</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> add-apt-repository ppa:deadsnakes/ppa
+<span class="token function">sudo</span> <span class="token function">apt-get</span> update
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> python3.6
+
+<span class="token comment">### 卸载python3.6</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> autoremove python3.6</code></pre>
+<h2 id="三、Screen的使用"><a href="#三、Screen的使用" class="headerlink" title="三、Screen的使用"></a>三、Screen的使用</h2><ul>
+<li>安装：<code>sudo apt install screen</code></li>
+<li>新建会话窗口：<code>scrren</code>或者<code>screen -S name</code></li>
+<li>退出当前窗口，回到主窗口(detach)：<code>Ctrl+a+d</code></li>
+<li>恢复会话窗口：<ul>
+<li>先通过<code>screen -ls</code>查看窗口列表，</li>
+<li><code>再通过screen -r name</code>或者<code>screen -r id</code>恢复窗口</li>
+</ul>
+</li>
+<li>杀死会话窗口：<code>screen -9 id</code></li>
+<li>清除死去窗口：<code>screen -wipe</code></li>
+</ul>
+<h2 id="四、nvidia-smi后显卡驱动报错"><a href="#四、nvidia-smi后显卡驱动报错" class="headerlink" title="四、nvidia-smi后显卡驱动报错"></a>四、nvidia-smi后显卡驱动报错</h2><h4 id="查看显卡信息"><a href="#查看显卡信息" class="headerlink" title="查看显卡信息"></a>查看显卡信息</h4><pre class="language-bash" data-language="bash"><code class="language-bash">amax@amax:~$ nvidia-smi
+NVIDIA-SMI has failed because it couldn't communicate with the NVIDIA driver. Make sure that the latest NVIDIA driver is installed and running.</code></pre>
+<ul>
+<li><p>该问题出现在Ubuntu装好CUDA后<a id="more"></a></p>
+</li>
+<li><p>解决方案</p>
+<pre class="language-none"><code class="language-none">sudo apt-get update
+sudo apt-get install --no-install-recommends nvidia-384 libcuda1-384 nvidia-opencl-icd-384
+sudo reboot</code></pre>
+</li>
+</ul>
+<h4 id="查看显卡驱动"><a href="#查看显卡驱动" class="headerlink" title="查看显卡驱动"></a>查看显卡驱动</h4><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> dpkg --list <span class="token operator">|</span> <span class="token function">grep</span> nvidia-*</code></pre>
+<h4 id="查看显卡型号"><a href="#查看显卡型号" class="headerlink" title="查看显卡型号"></a>查看显卡型号</h4><pre class="language-bash" data-language="bash"><code class="language-bash">amax@amax:~$ lspci <span class="token operator">|</span><span class="token function">grep</span> VGA
+02:00.0 VGA compatible controller: NVIDIA Corporation GP102 <span class="token punctuation">[</span>GeForce GTX <span class="token number">1080</span> Ti<span class="token punctuation">]</span> <span class="token punctuation">(</span>rev a1<span class="token punctuation">)</span></code></pre>
+<h4 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h4><p>1.<a target="_blank" rel="noopener" href="https://www.cnblogs.com/feifanrensheng/p/9974249.html">https://www.cnblogs.com/feifanrensheng/p/9974249.html</a></p>
+<h2 id="五、自定义截图快捷键"><a href="#五、自定义截图快捷键" class="headerlink" title="五、自定义截图快捷键"></a>五、自定义截图快捷键</h2><p>通过<code>System settings/keyboard/shortcus/custom shortcuts</code>新建快捷键，</p>
+<ul>
+<li>Name输入<code>Screenshot</code>（自己定，能看懂就好）</li>
+<li>Command输入<code>gnome-screenshot -a</code>（有个空格）</li>
+</ul>
+<p>应用之后，会多出一行，单击<code>Disabled</code>，按下<code>Ctrl+Alt+A</code>（你要设置的快捷键）即可</p>
+<h2 id="六、重装系统流程"><a href="#六、重装系统流程" class="headerlink" title="六、重装系统流程"></a>六、重装系统流程</h2><h3 id="1）制作系统启动盘"><a href="#1）制作系统启动盘" class="headerlink" title="1）制作系统启动盘"></a>1）制作系统启动盘</h3><ul>
+<li>工具：Rufus、Ubuntu镜像</li>
+</ul>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20200506091838.jpg" srcset="/img/loading.gif" alt="rufus"></p>
+<h3 id="2）开始安装系统"><a href="#2）开始安装系统" class="headerlink" title="2）开始安装系统"></a>2）开始安装系统</h3><ul>
+<li>将U盘插到Amax主机上，安装UBuntu，选择<strong>非UEFI形式</strong>启动（很重要！！）</li>
+<li>选择地点、设置用户名等等</li>
+</ul>
+<h3 id="3）安装显卡驱动"><a href="#3）安装显卡驱动" class="headerlink" title="3）安装显卡驱动"></a>3）安装显卡驱动</h3><ul>
+<li>到NVIDIA官网下载对应版本的显卡驱动，如<code>NVIDIA-Linux-x86_64-430.50.run</code></li>
+<li>赋予权限，<code>sudo chomod 777 NVIDIA-Linux-x86_64-430.50.run</code></li>
+<li>开机后，按住<code>Ctrl+Alt+F1</code>进行命令行，通过<code>sudo service lightdm stop</code>关闭相应服务</li>
+<li><code>sudo init 3</code></li>
+<li>通过<code>cd</code>切换到对应目录，安装驱动程序<code>sudo ./NVIDIA-Linux-x86_64-430.50.run</code></li>
+<li>之后，yes，no，no</li>
+<li>安装完成后，通过<code>nvidia-smi</code>确认是否安装成功</li>
+<li>最后，<code>sudo reboot</code>重启即可</li>
+</ul>
+<h3 id="4）修改源"><a href="#4）修改源" class="headerlink" title="4）修改源"></a>4）修改源</h3><ul>
+<li>备份原先的源文件<code>sudo cp /etc/apt/sources.list /etc/apt/sources.list.backup</code></li>
+<li>修改源为阿里源、中科大源或者清华源<code>sudo gedit /etc/apt/sources.list</code></li>
+</ul>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">## 阿里源 16.04</span>
+deb-src http://archive.ubuntu.com/ubuntu xenial main restricted <span class="token comment">#Added by software-properties</span>
+deb http://mirrors.aliyun.com/ubuntu/ xenial main restricted
+deb-src http://mirrors.aliyun.com/ubuntu/ xenial main restricted multiverse universe <span class="token comment">#Added by software-properties</span>
+deb http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted
+deb-src http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted multiverse universe <span class="token comment">#Added by software-properties</span>
+deb http://mirrors.aliyun.com/ubuntu/ xenial universe
+deb http://mirrors.aliyun.com/ubuntu/ xenial-updates universe
+deb http://mirrors.aliyun.com/ubuntu/ xenial multiverse
+deb http://mirrors.aliyun.com/ubuntu/ xenial-updates multiverse
+deb http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse <span class="token comment">#Added by software-properties</span>
+deb http://archive.canonical.com/ubuntu xenial partner
+deb-src http://archive.canonical.com/ubuntu xenial partner
+deb http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted
+deb-src http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted multiverse universe <span class="token comment">#Added by software-properties</span>
+deb http://mirrors.aliyun.com/ubuntu/ xenial-security universe
+deb http://mirrors.aliyun.com/ubuntu/ xenial-security multiverse
+
+<span class="token comment">## 中科大源</span>
+deb http://mirrors.ustc.edu.cn/ubuntu/ xenial main restricted universe multiverse  
+deb http://mirrors.ustc.edu.cn/ubuntu/ xenial-security main restricted universe multiverse  
+deb http://mirrors.ustc.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse  
+deb http://mirrors.ustc.edu.cn/ubuntu/ xenial-proposed main restricted universe multiverse  
+deb http://mirrors.ustc.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse  
+deb-src http://mirrors.ustc.edu.cn/ubuntu/ xenial main restricted universe multiverse  
+deb-src http://mirrors.ustc.edu.cn/ubuntu/ xenial-security main restricted universe multiverse  
+deb-src http://mirrors.ustc.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse  
+deb-src http://mirrors.ustc.edu.cn/ubuntu/ xenial-proposed main restricted universe multiverse  
+deb-src http://mirrors.ustc.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse</code></pre>
+<h3 id="5）安装pip"><a href="#5）安装pip" class="headerlink" title="5）安装pip"></a>5）安装pip</h3><p><code>sudo apt install python-pip</code></p>
+<h3 id="6）安装多个版本的CUDA和CUDNN"><a href="#6）安装多个版本的CUDA和CUDNN" class="headerlink" title="6）安装多个版本的CUDA和CUDNN"></a>6）安装多个版本的CUDA和CUDNN</h3><ul>
+<li>在NVIDIA官网下载<a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-90-download-archive?target_os=Linux&amp;target_arch=x86_64&amp;target_distro=Ubuntu&amp;target_version=1604&amp;target_type=runfilelocal">Cuda9.0</a>以及<a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-80-ga2-download-archive">Cuda8.0</a></li>
+<li>赋予读写权限，如<code>sudo chmod 777 cuda_8.0.61_375.26_linux.run</code></li>
+<li>执行安装文件，如<code>./cuda_8.0.61_375.26_linux.run</code></li>
+<li>修改环境变量<code>~/.bashrc</code></li>
+</ul>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token punctuation">\</span><span class="token environment constant">$PATH</span>:/usr/local/cuda/bin 
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">LD_LIBRARY_PATH</span><span class="token operator">=</span><span class="token punctuation">\</span><span class="token variable">$LD_LIBRARY_PATH</span>:/usr/local/cuda/lib64 
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">LIBRARY_PATH</span><span class="token operator">=</span><span class="token variable">$LIBRARY_PATH</span>:/usr/local/cuda/lib64</code></pre>
+<ul>
+<li>创建软连接</li>
+</ul>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /usr/local/ <span class="token comment">#切换路径</span>
+<span class="token function">sudo</span> <span class="token function">rm</span> -rf cuda  
+<span class="token function">sudo</span> <span class="token function">ln</span> -s cuda9.0 cuda  <span class="token comment">#创建新的软连接</span>
+
+nvcc -V</code></pre>
+<h3 id="7）安装搜狗输入法"><a href="#7）安装搜狗输入法" class="headerlink" title="7）安装搜狗输入法"></a>7）安装搜狗输入法</h3><p><a target="_blank" rel="noopener" href="https://qiyuan-z.github.io/2019/03/19/sougou/">参考链接</a></p>
+<h2 id="七、增加虚拟内存"><a href="#七、增加虚拟内存" class="headerlink" title="七、增加虚拟内存"></a>七、增加虚拟内存</h2><h3 id="1）查看内存（非实时，后面m是单位）"><a href="#1）查看内存（非实时，后面m是单位）" class="headerlink" title="1）查看内存（非实时，后面m是单位）"></a>1）查看内存（非实时，后面m是单位）</h3><pre class="language-bash" data-language="bash"><code class="language-bash">ubuntu@amax:~$ <span class="token function">free</span> -m
+              total        used        <span class="token function">free</span>      shared  buff/cache   available
+Mem:          <span class="token number">15711</span>        <span class="token number">1448</span>       <span class="token number">10962</span>          <span class="token number">93</span>        <span class="token number">3301</span>       <span class="token number">13761</span>
+Swap:         <span class="token number">16060</span>           <span class="token number">0</span>       <span class="token number">16060</span></code></pre>
+<h3 id="2）增加虚拟内存"><a href="#2）增加虚拟内存" class="headerlink" title="2）增加虚拟内存"></a>2）增加虚拟内存</h3><ul>
+<li><p>复制磁盘空间：<code>sudo dd if=/dev/zero of=/swap_file bs=1024 count=2097152</code> </p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token number">2097152</span>+0 records <span class="token keyword">in</span>
+<span class="token number">2097152</span>+0 records out
+<span class="token number">2147483648</span> bytes <span class="token punctuation">(</span><span class="token number">2.1</span> GB<span class="token punctuation">)</span> copied, <span class="token number">45.1339</span> s, <span class="token number">47.6</span> MB/s</code></pre>
+</li>
+<li><p>格式化swaps分区：<code>mkswap /swap_file</code> </p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">mkswap: /swap_file: warning: don't erase bootbits sectors
+        ``on whole disk. Use -f to force.
+Setting up swapspace version <span class="token number">1</span>, size <span class="token operator">=</span> <span class="token number">2097148</span> KiB
+no label, <span class="token assign-left variable">UUID</span><span class="token operator">=</span>e70c01f7-1117-46a5-ba36-955027112db6</code></pre>
+</li>
+<li><p>开启swap分区：<code>swapon /swap_file</code></p>
+</li>
+<li><p>再次查看内存：<code>free -m</code></p>
+</li>
+<li><p>关闭swap分区：<code>swapoff -v /swap_file</code></p>
+</li>
+<li><p>在/etc/fstab 文件末端添加如下命令，可实现开机自动开启swap分区</p>
+<pre class="language-none"><code class="language-none">&#x2F;swap_file	swap	swap	defaults	0 0</code></pre>
+</li>
+</ul>
+<h3 id="3）参考链接"><a href="#3）参考链接" class="headerlink" title="3）参考链接"></a>3）参考链接</h3><p>【1】<a target="_blank" rel="noopener" href="http://www.cnblogs.com/turingbrain/p/6531516.html">http://www.cnblogs.com/turingbrain/p/6531516.html</a></p>
+<p>【2】<a target="_blank" rel="noopener" href="https://www.linuxidc.com/Linux/2018-08/153517.htm">用以检查 Linux 内存使用的 5 个命令</a></p>
+<p>【3】<a target="_blank" rel="noopener" href="https://www.cnblogs.com/DswCnblog/p/5860181.html">每天一个linux命令(4) df命令</a></p>
+<p>【4】<a target="_blank" rel="noopener" href="https://zhidao.baidu.com/question/524205961027078765.html?qbl=relate_question_0">Linux系统怎么调整swap分区大小</a></p>
+<h2 id="八、Ubuntu系统重启分辨率出错问题"><a href="#八、Ubuntu系统重启分辨率出错问题" class="headerlink" title="八、Ubuntu系统重启分辨率出错问题"></a>八、Ubuntu系统重启分辨率出错问题</h2><p>Ubuntu安装完matlab后，重启系统，遇到了分辨率变成640x480的情况。</p>
+<p>参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/QianQiYing/article/details/81535761">https://blog.csdn.net/QianQiYing/article/details/81535761</a>，修改<code>/etc/X11/xorg.conf</code>配置，重启后仍然没有解决。</p>
+<p>之后，参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35379989/article/details/78934486">https://blog.csdn.net/qq_35379989/article/details/78934486</a></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#修改grub中相应的分辨率内容 GRUB_GFXMODE</span>
+<span class="token function">sudo</span> gedit /etc/default/grub
+
+<span class="token comment">#更新grub</span>
+<span class="token function">sudo</span> <span class="token function">update-grub</span></code></pre>
+<p>重启，万事大吉！</p>
+<h2 id="九、修改系统默认的Python解释器"><a href="#九、修改系统默认的Python解释器" class="headerlink" title="九、修改系统默认的Python解释器"></a>九、修改系统默认的Python解释器</h2><h3 id="1）查看系统中是否安装Python3-X："><a href="#1）查看系统中是否安装Python3-X：" class="headerlink" title="1）查看系统中是否安装Python3.X："></a>1）查看系统中是否安装Python3.X：</h3><p>命令行输入 ：<code>whereis python3</code></p>
+<p>如果已经安装，会返回安装地址。</p>
+<p>如果没有安装，则使用以下命令安装：<code>sudo apt-get install python3</code></p>
+<h3 id="2）转换方法"><a href="#2）转换方法" class="headerlink" title="2）转换方法"></a>2）转换方法</h3><h4 id="不修改默认设置，在命令行输入对应版本号即可使用对应版本的python"><a href="#不修改默认设置，在命令行输入对应版本号即可使用对应版本的python" class="headerlink" title="不修改默认设置，在命令行输入对应版本号即可使用对应版本的python"></a>不修改默认设置，在命令行输入对应版本号即可使用对应版本的python</h4><ul>
+<li>调用Python2.X：<code>python</code></li>
+<li>调用Python3.X：<code>python3</code></li>
+</ul>
+<h4 id="修改默认python解释器"><a href="#修改默认python解释器" class="headerlink" title="修改默认python解释器"></a>修改默认python解释器</h4><ul>
+<li>python2.X修改为python3.X</li>
+</ul>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#删除原有的Python连接文件</span>
+<span class="token function">sudo</span> <span class="token function">rm</span> /usr/bin/python
+
+<span class="token comment">#建立指向Python3.X的连接</span>
+<span class="token function">sudo</span> <span class="token function">ln</span> -s /usr/bin/python3.5 /usr/bin/python
+
+<span class="token comment">#把路径/usr/bin/加入环境变量PATH中（一般不需要这一步）</span>
+<span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span>/usr/bin:<span class="token environment constant">$PATH</span>
+
+<span class="token comment">#验证，命令行输入python，就会输出新的版本。</span>
+python</code></pre>
+<ul>
+<li>python3.X还原为python2.X</li>
+</ul>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#删除原有的Python连接文件</span>
+<span class="token function">sudo</span> <span class="token function">rm</span> /usr/bin/python
+
+<span class="token comment">#建立指向Python2.X的连接</span>
+<span class="token function">sudo</span> <span class="token function">ln</span> -s /usr/bin/python2.7 /usr/bin/python</code></pre>
+<h2 id="十、同时安装Cuda-8-0和Cuda-9-0"><a href="#十、同时安装Cuda-8-0和Cuda-9-0" class="headerlink" title="十、同时安装Cuda 8.0和Cuda 9.0"></a>十、同时安装Cuda 8.0和Cuda 9.0</h2><h3 id="1）查看当前cuda版本"><a href="#1）查看当前cuda版本" class="headerlink" title="1）查看当前cuda版本"></a>1）查看当前cuda版本</h3><pre class="language-bash" data-language="bash"><code class="language-bash">amax@amax:/usr/local$ nvcc -V
+nvcc: NVIDIA <span class="token punctuation">(</span>R<span class="token punctuation">)</span> Cuda compiler driver
+Copyright <span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token number">2005</span>-2017 NVIDIA Corporation
+Built on Fri_Sep__1_21:08:03_CDT_2017
+Cuda compilation tools, release <span class="token number">9.0</span>, V9.0.176</code></pre>
+<h3 id="2）下载cuda8-0"><a href="#2）下载cuda8-0" class="headerlink" title="2）下载cuda8.0"></a>2）下载cuda8.0</h3><p><a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-80-ga2-download-archive">下载链接</a></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#赋予读写权限</span>
+<span class="token function">sudo</span> <span class="token function">chmod</span> <span class="token number">777</span> cuda_8.0.61_375.26_linux.run
+
+<span class="token comment">#执行安装文件</span>
+./cuda_8.0.61_375.26_linux.run</code></pre>
+<h3 id="3）下载对应的Cudnn"><a href="#3）下载对应的Cudnn" class="headerlink" title="3）下载对应的Cudnn"></a>3）下载对应的Cudnn</h3><p>cudaV8.0.61  —-  cudnn 6.0.21</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> /usr/local/cuda/include/cudnn.h <span class="token operator">|</span> <span class="token function">grep</span> CUDNN_MAJOR -A <span class="token number">2</span>
+<span class="token comment">#define CUDNN_MAJOR      6</span>
+<span class="token comment">#define CUDNN_MINOR      0</span>
+<span class="token comment">#define CUDNN_PATCHLEVEL 21</span></code></pre>
+<h3 id="4）修改-bashrc中的环境变量"><a href="#4）修改-bashrc中的环境变量" class="headerlink" title="4）修改~/.bashrc中的环境变量"></a>4）修改~/.bashrc中的环境变量</h3><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token punctuation">\</span><span class="token environment constant">$PATH</span>:/usr/local/cuda/bin <span class="token builtin class-name">export</span> <span class="token assign-left variable">LD_LIBRARY_PATH</span><span class="token operator">=</span><span class="token punctuation">\</span><span class="token variable">$LD_LIBRARY_PATH</span>:/usr/local/cuda/lib64 <span class="token builtin class-name">export</span> <span class="token assign-left variable">LIBRARY_PATH</span><span class="token operator">=</span><span class="token variable">$LIBRARY_PATH</span>:/usr/local/cuda/lib64 </code></pre>
+<h3 id="5）创建软连接"><a href="#5）创建软连接" class="headerlink" title="5）创建软连接"></a>5）创建软连接</h3><ul>
+<li>9.0切换到8.0(注意终端路径)</li>
+</ul>
+<pre class="language-bash" data-language="bash"><code class="language-bash">amax@amax:/usr/local$ <span class="token function">sudo</span> <span class="token function">rm</span> -rf cuda
+<span class="token punctuation">[</span>sudo<span class="token punctuation">]</span> password <span class="token keyword">for</span> amax: 
+amax@amax:/usr/local$ <span class="token function">sudo</span> <span class="token function">ln</span> -s /usr/local/cuda-8.0/ /usr/local/cuda
+amax@amax:/usr/local$ nvcc -V
+nvcc: NVIDIA <span class="token punctuation">(</span>R<span class="token punctuation">)</span> Cuda compiler driver
+Copyright <span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token number">2005</span>-2016 NVIDIA Corporation
+Built on Tue_Jan_10_13:22:03_CST_2017
+Cuda compilation tools, release <span class="token number">8.0</span>, V8.0.61</code></pre>
+<ul>
+<li>8.0切换到9.0(注意终端路径)</li>
+</ul>
+<pre class="language-bash" data-language="bash"><code class="language-bash">amax@amax:/usr/local$ <span class="token function">sudo</span> <span class="token function">rm</span> -rf cuda
+<span class="token punctuation">[</span>sudo<span class="token punctuation">]</span> password <span class="token keyword">for</span> amax: 
+amax@amax:/usr/local$ <span class="token function">sudo</span> <span class="token function">ln</span> -s /usr/local/cuda-9.0/ /usr/local/cuda
+amax@amax:/usr/local$ nvcc -V
+nvcc: NVIDIA <span class="token punctuation">(</span>R<span class="token punctuation">)</span> Cuda compiler driver
+Copyright <span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token number">2005</span>-2016 NVIDIA Corporation
+Built on Tue_Jan_10_13:22:03_CST_2017
+Cuda compilation tools, release <span class="token number">8.0</span>, V8.0.61</code></pre>
+<ul>
+<li>类似<a target="_blank" rel="noopener" href="https://jngwl.github.io/2019/03/23/ubuntu%E4%B8%AD%E4%BF%AE%E6%94%B9%E9%BB%98%E8%AE%A4Python%E7%89%88%E6%9C%AC%E5%8F%B7/">Ubuntu中默认Python解释器的选择</a></li>
+</ul>
+<h3 id="6）参考链接"><a href="#6）参考链接" class="headerlink" title="6）参考链接"></a>6）参考链接</h3><p>【1】<a target="_blank" rel="noopener" href="https://blog.csdn.net/u010821666/article/details/79957071">CUDA8.0和9.0版本切换</a><br>【2】<a target="_blank" rel="noopener" href="https://www.cnblogs.com/Free-Thinker/p/3649866.html">Ubuntu设置目录的读写权限</a></p>
+<h2 id="十一、设置别名alias"><a href="#十一、设置别名alias" class="headerlink" title="十一、设置别名alias"></a>十一、设置别名alias</h2><h3 id="1）用法"><a href="#1）用法" class="headerlink" title="1）用法"></a>1）用法</h3><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">alias</span> <span class="token punctuation">[</span>-p<span class="token punctuation">]</span> <span class="token punctuation">[</span>name<span class="token punctuation">[</span><span class="token operator">=</span>value<span class="token punctuation">]</span> <span class="token punctuation">..</span>.<span class="token punctuation">]</span></code></pre>
+<ul>
+<li>-p ：显示全部已定义的别名</li>
+<li>name：新的名称</li>
+<li>value：要被替代的名称<!--more--></li>
+</ul>
+<h3 id="2）实例"><a href="#2）实例" class="headerlink" title="2）实例"></a>2）实例</h3><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">alias</span> <span class="token assign-left variable">pls</span><span class="token operator">=</span><span class="token string">'sudo'</span>
+pls <span class="token function">shutdown</span>
+
+<span class="token builtin class-name">alias</span> cudnn-v<span class="token operator">=</span><span class="token string">'cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2'</span>
+cudnn-v</code></pre>
+<h3 id="3）使别名永久生效"><a href="#3）使别名永久生效" class="headerlink" title="3）使别名永久生效"></a>3）使别名永久生效</h3><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span>  gedit ~/.bahrc
+<span class="token comment">#之后将上述实例中的命令添加到环境变量bashrc中</span>
+<span class="token builtin class-name">source</span> ~/.bashrc <span class="token comment">#激活环境变量</span></code></pre>
+<h3 id="4）参考链接"><a href="#4）参考链接" class="headerlink" title="4）参考链接"></a>4）参考链接</h3><p>【1】<a target="_blank" rel="noopener" href="https://wangchujiang.com/linux-command/c/alias.html">alias</a></p>
+<h2 id="十二、清理缓存"><a href="#十二、清理缓存" class="headerlink" title="十二、清理缓存"></a>十二、清理缓存</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 切换管理员</span>
+<span class="token function">su</span>
+<span class="token comment"># 保存到本地，防止丢数据</span>
+<span class="token function">sync</span>
+
+<span class="token builtin class-name">echo</span> <span class="token number">1</span> <span class="token operator">></span> /proc/sys/vm/drop_caches
+<span class="token builtin class-name">echo</span> <span class="token number">2</span> <span class="token operator">></span> /proc/sys/vm/drop_caches
+<span class="token builtin class-name">echo</span> <span class="token number">3</span> <span class="token operator">></span> /proc/sys/vm/drop_caches</code></pre>
+<h2 id="十三、定时执行命令"><a href="#十三、定时执行命令" class="headerlink" title="十三、定时执行命令"></a>十三、定时执行命令</h2><h3 id="1）Crontab基本格式"><a href="#1）Crontab基本格式" class="headerlink" title="1）Crontab基本格式"></a>1）Crontab基本格式</h3><pre class="language-bash" data-language="bash"><code class="language-bash">*　　*　　*　　*　　*　　<span class="token builtin class-name">command</span>
+分　 时　 日　 月　 周　 命令</code></pre>
+<h3 id="2）命令示例"><a href="#2）命令示例" class="headerlink" title="2）命令示例"></a>2）命令示例</h3><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 每分钟执行一次            </span>
+*  *  *  *  * <span class="token builtin class-name">command</span>
+
+<span class="token comment"># 每隔一小时执行一次        </span>
+00  *  *  *  * <span class="token builtin class-name">command</span>
+
+<span class="token comment"># 每小时的15和30分各执行一次 （,表示并列）</span>
+<span class="token number">15,45</span> * * * * <span class="token builtin class-name">command</span> 
+
+<span class="token comment"># 在每天8-11时中的15，45分各执行一次（-表示范围）</span>
+<span class="token number">15,45</span> <span class="token number">8</span>-11 * * * <span class="token builtin class-name">command</span> 
+
+<span class="token comment"># 每个星期一的上午8点到11点的第3和第15分钟执行</span>
+<span class="token number">3,15</span> <span class="token number">8</span>-11 * * <span class="token number">1</span> <span class="token builtin class-name">command</span>
+
+<span class="token comment"># 每隔两天的上午8点到11点的第3和第15分钟执行</span>
+<span class="token number">3,15</span> <span class="token number">8</span>-11 */2 * * <span class="token builtin class-name">command</span>
+
+<span class="token comment"># 每天早上六点半执行某脚本</span></code></pre>
+<h3 id="3）任务示例"><a href="#3）任务示例" class="headerlink" title="3）任务示例"></a>3）任务示例</h3><p>假设我们的训练程序在『早上六点二十左右』跑完，作为知名赖床达人的自己不想起床怎么办？这时为了最大化利用显卡，我们便可以在『晚上』走的时候 设置 服务器在『早上六点半』自动执行测试脚本。</p>
+<ul>
+<li>创建任务脚本</li>
+</ul>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">touch</span> test.sh
+<span class="token function">nano</span> test.sh
+  
+<span class="token comment"># 将所需命令写入到任务脚本中</span>
+<span class="token comment">#!/bin/zsh</span>
+<span class="token builtin class-name">cd</span> ~/GWL/4T_Disk/Paper-2/PCL-ProMax/
+nvidia-smi
+<span class="token builtin class-name">source</span> /home/amax/GWL/py35/bin/activate
+python tools/test_net.py --cfg configs/baselines/vgg16_voc2007.yaml  --load_ckpt Outputs/vgg16_voc2007/Sep19-08-40-59_amax-desktop_step/ckpt/model_step24999.pth --dataset voc2007test <span class="token operator">|</span> <span class="token function">tee</span> test_0921_pcl_edge_ccnet.log</code></pre>
+<ul>
+<li>创建定时程序</li>
+</ul>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">touch</span> test.cron
+<span class="token function">nano</span> test.cron
+
+<span class="token number">30</span> <span class="token number">6</span> * * <span class="token number">2</span> <span class="token function">sh</span> /home/amax/GWL/test.sh <span class="token operator">>></span> /home/amax/GWL/test.log <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span></code></pre>
+<ul>
+<li>添加定时任务</li>
+</ul>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">crontab</span> test.cron</code></pre>
+<ul>
+<li>查看定时任务是否成功</li>
+</ul>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">crontab</span> -l</code></pre>
+<ul>
+<li>确认cron是否已启动</li>
+</ul>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">ps</span> aux <span class="token operator">|</span> <span class="token function">grep</span> <span class="token function">cron</span></code></pre>
+<ul>
+<li>躺好，继续睡大觉</li>
+</ul>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201224130119.jpeg" srcset="/img/loading.gif" alt=""></p>
+<h3 id="4）参考"><a href="#4）参考" class="headerlink" title="4）参考"></a>4）参考</h3><p>【1】<a target="_blank" rel="noopener" href="https://blog.csdn.net/wumian0123/article/details/83623292">Ubuntu 定时运行命令脚本crontab</a></p>
+<h2 id="十四、Ubuntu16-04挂载新硬盘"><a href="#十四、Ubuntu16-04挂载新硬盘" class="headerlink" title="十四、Ubuntu16.04挂载新硬盘"></a>十四、Ubuntu16.04挂载新硬盘</h2><p>师姐之前误输入了<code>rm -rf *</code>o(╯□╰)o真实版从删库到跑路</p>
+<p>重装系统后，发现4T机械硬盘无法挂载(T＿T)</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">Error mounting /dev/sdb1 at /media/amax/9dd3868b-f498-4428-bccc-e658442f9692: Command-line `mount -t <span class="token string">"ext4"</span> -o <span class="token string">"uhelper=udisks2,nodev,nosuid"</span> <span class="token string">"/dev/sdb1"</span> <span class="token string">"/media/amax/9dd3868b-f498-4428-bccc-e658442f9692"</span>' exited with non-zero <span class="token builtin class-name">exit</span> status <span class="token number">32</span>: mount: wrong fs type, bad option, bad superblock on /dev/sdb1,
+       missing codepage or helper program, or other error
+
+       In some cases useful info is found <span class="token keyword">in</span> syslog - try
+       <span class="token function">dmesg</span> <span class="token operator">|</span> <span class="token function">tail</span> or so.</code></pre>
+<h3 id="1）问题原因"><a href="#1）问题原因" class="headerlink" title="1）问题原因"></a>1）问题原因</h3><p>未成功挂载ext4</p>
+<h3 id="2）解决方案"><a href="#2）解决方案" class="headerlink" title="2）解决方案"></a>2）解决方案</h3><ul>
+<li><h5 id="创建分区（未测试，之前这台服务器已经创建过分区了）"><a href="#创建分区（未测试，之前这台服务器已经创建过分区了）" class="headerlink" title="创建分区（未测试，之前这台服务器已经创建过分区了）"></a>创建分区（未测试，之前这台服务器已经创建过分区了）</h5></li>
+</ul>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#硬盘设备情况</span>
+<span class="token function">ls</span> /dev/sd* 
+
+<span class="token comment">#确保sdb为新硬盘，当其≤2T时，</span>
+<span class="token function">sudo</span> <span class="token function">fdisk</span> /dev/sdb
+
+<span class="token comment">#当其＞2T时，</span>
+<span class="token function">sudo</span> <span class="token function">parted</span> /dev/sdb
+mklabel gpt   <span class="token comment">#用gpt格式可以将3TB弄在一个分区里</span>
+unit TB       <span class="token comment">#设置单位为TB</span>
+mkpart primary <span class="token number">0</span> <span class="token number">4</span>    <span class="token comment">#设置为一个主分区,大小为4TB，开始是0，结束是4</span>
+print    <span class="token comment">#显示设置的分区大小</span>
+quit     <span class="token comment">#退出parted程序</span></code></pre>
+<p>fdisk /dev/sdb </p>
+<p>1、查看帮助：<code>m</code> </p>
+<p>2、新建分区：<code>n</code> </p>
+<p>3、创建逻辑分区：<code>p</code> </p>
+<p>4、输入分区号以及指定分区大小： <code>依照提示，回车表示默认</code></p>
+<p> 5、检查分区情况（此时还未执行分区操作）： <code>Command（m for help）：p</code></p>
+<p> 6、保存退出 Command（m for help）：<code>w</code></p>
+<ul>
+<li><h5 id="格式化分区"><a href="#格式化分区" class="headerlink" title="格式化分区"></a>格式化分区</h5></li>
+</ul>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">mkfs</span> -t ext4 /dev/sdb1  <span class="token comment">#格式化为ext4格式</span></code></pre>
+<ul>
+<li><h5 id="设置挂载点"><a href="#设置挂载点" class="headerlink" title="设置挂载点"></a>设置挂载点</h5></li>
+</ul>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">mkdir</span> /home/4T</code></pre>
+<ul>
+<li><h5 id="设置开机挂载"><a href="#设置开机挂载" class="headerlink" title="设置开机挂载"></a>设置开机挂载</h5></li>
+</ul>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#查看sdb对应的UUID</span>
+<span class="token function">ls</span> -l /dev/disk/by-uuid/
+
+<span class="token comment">#修改/etc/fstab，设置开机挂载</span>
+<span class="token function">sudo</span> <span class="token function">vim</span> /etc/fstab 
+
+<span class="token comment">#在最后一行加入如下内容</span>
+<span class="token assign-left variable">UUID</span><span class="token operator">=</span>d765d835-4989-4bff-8ae8-116c654d4bba   /home/4T  ext4    defaults    <span class="token number">0</span>   <span class="token number">2</span></code></pre>
+<p>对fstab进行说明：</p>
+<pre class="language-none"><code class="language-none">&lt;file system&gt;    &lt;mount point&gt;    &lt;type&gt;    &lt;options&gt;    &lt;dump&gt;    &lt;pass&gt;   
+
+     1                 2            3           4          5         6</code></pre>
+<ol>
+<li><strong>文件系统的设备名</strong>，最初，该字段只包含待挂载分区的设备名（如/dev/sda1）。现在，除设备名外，还可以包含LABEL或UUID</li>
+<li><strong>文件系统挂载点</strong>，文件系统包含挂载点下整个目录树结构里的所有数据，除非其中某个目录又挂载了另一个文件系统</li>
+<li><strong>文件系统类型</strong>，下面是多数常见文件系统类型（ext3,tmpfs,devpts,sysfs,proc,swap,vfat）</li>
+<li><strong>mount命令选项</strong>，mount选项包括noauto（启动时不挂载该文件系统）和ro（只读方式挂载文件系统）等。在该字段里添加用户或属主选项，即可允许该用户挂载文件系统。多个选项之间必须用逗号隔开。其他选项的相关信息可参看mount命令手册页（-o选项处）</li>
+<li><strong>转储文件系统</strong>，该字段只在用dump备份时才有意义。数字1表示该文件系统需要转储，0表示不需要转储</li>
+<li><strong>文件系统检查</strong>，该字段里的数字表示文件系统是否需要用fsck检查。0表示不必检查该文件系统，数字1示意该文件系统需要先行检查（用于根文件系统）。数字2则表示完成根文件系统检查后，再检查该文件系统</li>
+</ol>
+<h3 id="3）参考链接-1"><a href="#3）参考链接-1" class="headerlink" title="3）参考链接"></a>3）参考链接</h3><p>【1】<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_29729577/article/details/52057629">https://blog.csdn.net/qq_29729577/article/details/52057629</a></p>
+<p>【2】<a target="_blank" rel="noopener" href="https://lijunaccp.iteye.com/blog/751709">https://lijunaccp.iteye.com/blog/751709</a></p>
+<p>【3】<a target="_blank" rel="noopener" href="https://blog.csdn.net/season_hangzhou/article/details/36423223">https://blog.csdn.net/season_hangzhou/article/details/36423223</a></p>
+<h2 id="十五、各种修改项"><a href="#十五、各种修改项" class="headerlink" title="十五、各种修改项"></a>十五、各种修改项</h2><h3 id="1）修改主机名"><a href="#1）修改主机名" class="headerlink" title="1）修改主机名"></a>1）修改主机名</h3><ul>
+<li>查看主机名：<code>hostname</code>或者<code>uname -a</code></li>
+<li>临时修改主机名：<code>hostname 新主机名</code></li>
+<li>永久修改主机名：<code>sudo nano /etc/hostname</code>，修改后，重启即可</li>
+</ul>
+<h3 id="2）修改用户密码"><a href="#2）修改用户密码" class="headerlink" title="2）修改用户密码"></a>2）修改用户密码</h3><ul>
+<li><p>sudo passwd xxx（xxx为用户名）</p>
+</li>
+<li><p><a href="https://www.jngwl.top/posts/51634/">https://www.jngwl.top/posts/51634/</a>)</p>
+</li>
+</ul>
+<h3 id="3）NVIDIA显卡驱动重装"><a href="#3）NVIDIA显卡驱动重装" class="headerlink" title="3）NVIDIA显卡驱动重装"></a>3）NVIDIA显卡驱动重装</h3><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> remove --purge nvidia-*
+<span class="token function">sudo</span> <span class="token function">apt-get</span> autoremove
+<span class="token function">sudo</span> <span class="token function">reboot</span>
+
+<span class="token function">sudo</span> <span class="token function">service</span> lightdm stop
+<span class="token function">sudo</span> ./NVIDIA-Linux-x86_64-418.56.run
+<span class="token function">sudo</span> <span class="token function">reboot</span></code></pre>
+<h3 id="4）新建用户并添加管理员权限"><a href="#4）新建用户并添加管理员权限" class="headerlink" title="4）新建用户并添加管理员权限"></a>4）新建用户并添加管理员权限</h3><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> adduser xxx  <span class="token comment">#用户名为xxx</span>
+<span class="token function">sudo</span> <span class="token function">nano</span> /etc/sudoers <span class="token comment"># 在root下添加xxx等，格式和root一样</span></code></pre>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Linux/">Linux</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Ubuntu/">Ubuntu</a>
+                    
+                      <a class="hover-with-bg" href="/tags/caffe/">caffe</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/8151211a/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Latex数学公式输入空格</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/5cf99eb1/">
+                        <span class="hidden-mobile">Python 各类图像库的读取方式</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "ViwB1XmjsmmXpFx2gikUmM5V-gzGzoHsz",
+          app_key: "7r6Y8CzBkl8MJwPNmCqSdLWW",
+          placeholder: "来都来了，不说点什么吗⊙(・◇・)？",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <i class="iconfont icon-tags-fill"></i>&nbsp;<a href="http://www.beian.miit.gov.cn/" target="_blank">鲁ICP备19062448号</a>&nbsp&nbsp;| &nbsp&nbsp <i class="iconfont icon-addrcard"></i>&nbsp; 2018~2022<a href="https://www.jngwl.top/" target="_blank"> 清风与归_G</a>&nbsp&nbsp;|&nbsp&nbsp;  <i class="iconfont icon-docker"></i> <a href="https://hexo.io/" target="_blank">&nbsp Hexo</a>&nbsp & &nbsp <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank">Fluid</a><br> 你的骄傲多半来自于自己的无知，共勉之
+
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

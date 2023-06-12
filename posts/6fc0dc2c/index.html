@@ -1,0 +1,1579 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" type="image/png" href="/img/favicon.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="清风与归_G">
+  <meta name="keywords" content="">
+  <title>MySQL基础自查手册 - 清风与归_G</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://cdn.staticfile.org/prism/1.22.0/themes/prism-tomorrow.min.css" />
+      
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.jngwl.top","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"ViwB1XmjsmmXpFx2gikUmM5V-gzGzoHsz","app_key":"7r6Y8CzBkl8MJwPNmCqSdLWW","server_url":"https://viwb1xmj.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>清风与归_G</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201121211851.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="MySQL基础自查手册">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-10-27 22:38" pubdate>
+        2020年10月27日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      12.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      172
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">MySQL基础自查手册</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年9月28日 上午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>前言</p>
+<ul>
+<li>查看Mysql版本：<code>mysql --version</code></li>
+</ul>
+<h2 id="1-基本规范"><a href="#1-基本规范" class="headerlink" title="1.基本规范"></a>1.基本规范</h2><ul>
+<li>SQL语句可以<strong>单行</strong>或<strong>多行</strong>书写，以<strong>分号</strong>结尾；</li>
+<li>可以用空格和缩进来来增强语句的可读性；</li>
+<li>关键字<strong>不区别大小写</strong>，建议使用大写；</li>
+</ul>
+<h2 id="2-注释"><a href="#2-注释" class="headerlink" title="2.注释"></a>2.注释</h2><ul>
+<li><p>单行注释(两种)</p>
+<pre class="language-mysql" data-language="mysql"><code class="language-mysql">#
+-- 此种注释需要加空格</code></pre>
+</li>
+<li><p>多行注释</p>
+<pre class="language-mysql" data-language="mysql"><code class="language-mysql">&#x2F;* 不可嵌套注释 *&#x2F;</code></pre>
+</li>
+</ul>
+<h2 id="3-基础查询"><a href="#3-基础查询" class="headerlink" title="3.基础查询"></a>3.基础查询</h2><blockquote>
+<p>语法：  select 查询列表 from 表名;</p>
+<p>特点：<br>         1、查询的结果集 是一个虚拟表<br>            2、select 查询列表类似于System.out.println(打印内容);<br>               （1）select后面跟的<strong>查询列表</strong>，可以有多个部分组成，中间用逗号隔开<br>                         例如：select 字段1,字段2,表达式 from 表;<br>               （2）System.out.println()的打印内容，只能有一个。</p>
+<p>执行顺序：<br> ① from子句    ② select子句</p>
+<p>查询列表可以是：字段、表达式、常量、函数等</p>
+</blockquote>
+<h3 id="（1）-示例"><a href="#（1）-示例" class="headerlink" title="（1） 示例"></a>（1） 示例</h3><pre class="language-mysql" data-language="mysql"><code class="language-mysql">USE myemployees;
+
+# 查询常量
+SELECT 100;
+SELECT 100%3;
+
+# 查询单个、多个、所有字段
+SELECT last_name FROM employees; 
+SELECT last_name,email,employee_id FROM employees;
+SELECT * FROM employees;
+
+
+SELECT DATABASE();  # 查询当前数据库
+SELECT VERSION();  # 当前SQL版本
+SELECT USER();  # 当前用户
+
+# 为 函数或者属性 起别名（AS可以省略）
+SELECT USER() AS 用户名;
+SELECT USER() AS &#39;用户名&#39;;
+SELECT USER() AS &quot;用户名&quot;;
+SELECT last_name AS &quot;姓名&quot; FROM employees;
+
+SELECT USER()   用户名;
+SELECT USER()   &quot;用户名&quot;;
+SELECT USER()   &#39;用户名&#39;;
+SELECT last_name   &quot;姓 名&quot; FROM employees;</code></pre>
+<h3 id="（2）-与concat拼接元素"><a href="#（2）-与concat拼接元素" class="headerlink" title="（2）+ 与concat拼接元素"></a>（2）+ 与concat拼接元素</h3><blockquote>
+<p>Java中+的作用：<br>            1、加法运算<br>                    100+1.5      ‘a’+2    1.3+’2’<br>            2、拼接符，至少有一个操作数为字符串<br>                    “hello”+’a’   ‘’ +1</p>
+<p>mysql中+的作用：<br>        1、加法运算<br>                ①两个操作数都是数值型<br>                        100+1.5<br>                ②其中一个操作数为字符型, 将字符型数据强制转换成数值型</p>
+<p>​                    如果无法转换，则直接当做0处理</p>
+<p>​                 ‘张无忌’ + 100 ===&gt;100</p>
+<p>​            ③其中一个操作数为null</p>
+<p>​                    null+null====》null</p>
+<p>​                    null+100====》 null   </p>
+<p>​     2、加号无法实现拼接，如需要拼接字符串需使用 CONCAT</p>
+</blockquote>
+<pre class="language-mysql" data-language="mysql"><code class="language-mysql">-- 需求：查询 first_name 和last_name 拼接成的全名，最终起别名为：姓 名
+SELECT first_name+last_name AS 姓名 FROM employees;  # 返回为空
+SELECT CONCAT(first_name,last_name) AS &quot;姓 名&quot; FROM employees;
+
+SELECT 100+1.5;
+SELECT &#39;张无忌&#39; + 100;</code></pre>
+<h3 id="（3）distinct的使用（去除重复元素）"><a href="#（3）distinct的使用（去除重复元素）" class="headerlink" title="（3）distinct的使用（去除重复元素）"></a>（3）distinct的使用（去除重复元素）</h3><pre class="language-mysql" data-language="mysql"><code class="language-mysql">-- 需求：查询员工涉及到的部门编号有哪些
+SELECT DISTINCT department_id FROM employees;</code></pre>
+<h3 id="（4）查看表的结构"><a href="#（4）查看表的结构" class="headerlink" title="（4）查看表的结构"></a>（4）查看表的结构</h3><pre class="language-mysql" data-language="mysql"><code class="language-mysql">DESC employees;
+SHOW COLUMNS FROM employees;</code></pre>
+<pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 只有salary被重命名为sal
+SELECT last_name,job_id,salary AS sal FROM employees;   
+SELECT * FROM employees;
+
+# 将salary增大12倍，并重命名为 ANNUAL SALARY
+SELECT employee_id , last_name, salary * 12 &quot;ANNUAL SALARY&quot;  FROM employees;
+
+# 显示表 departments 的结构，并查询其中的全部数据
+DESC departments;
+SELECT * FROM departments;
+
+# 显示出表 employees 中的全部 job_id（不能重复）
+SELECT DISTINCT job_id FROM employees;
+
+# 显示出表 employees 的全部列，各个列之间用逗号连接，列头显示成 OUT_PUT
+SELECT CONCAT(employee_id,&#39;,&#39;,first_name,&#39;,&#39;, &#39;last_name&#39;, &#39;,&#39;, &#39;salary&#39;, &#39;,&#39;, 
+              IFNULL(commission_pct, &#39;&#39;) ) AS &quot;OUT_PUT&quot; FROM employees;</code></pre>
+<h3 id="（5）ifnull-表达式1，表达式2"><a href="#（5）ifnull-表达式1，表达式2" class="headerlink" title="（5）ifnull(表达式1，表达式2)"></a>（5）ifnull(表达式1，表达式2)</h3><pre class="language-mysql" data-language="mysql"><code class="language-mysql">&#x2F;*
+功能：如果表达式1为null，则显示表达式2，否则显示表达式1
+*&#x2F;
+SELECT commission_pct, IFNULL(commission_pct,&#39;空&#39;) FROM employees;</code></pre>
+<h2 id="4-条件查询"><a href="#4-条件查询" class="headerlink" title="4.条件查询"></a>4.条件查询</h2><blockquote>
+<p>语法： select 查询列表 from  表名 where 筛选条件;</p>
+<p>执行顺序：<br>    ①from子句<br>    ②where子句<br>    ③select子句</p>
+<p>用法：<br>    select last_name,first_name from employees where salary&gt;20000;</p>
+<p>特点：</p>
+<p>​        1、按关系表达式筛选</p>
+<p>​                        关系运算符：&gt;   &lt;   &gt;=   &lt;=   =   &lt;&gt;  补充：也可以使用!=，但不建议使用 &lt;&gt;</p>
+<p>​        2、按逻辑表达式筛选<br>​                        逻辑运算符：and    or   not   补充：也可以使用&amp;&amp;  ||   !  ，但不建议</p>
+<p>​            3、模糊查询<br>​                        like,    in,    between   and,    is null</p>
+</blockquote>
+<h3 id="（1）按关系表达式筛选"><a href="#（1）按关系表达式筛选" class="headerlink" title="（1）按关系表达式筛选"></a>（1）按关系表达式筛选</h3><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 案例1：查询 部门编号不是100的员工信息 和 部门变换是100的员工信息
+SELECT * FROM employees WHERE department_id &lt;&gt; 100;
+SELECT * FROM employees WHERE department_id &#x3D; 100;  # 不要用 &#x3D;&#x3D;
+
+#案例2：查询 工资&lt;15000 员工的姓名、工资
+SELECT first_name,last_name,salary FROM employees WHERE salary &lt; 15000;</code></pre>
+<h3 id="（2）按逻辑表达式筛选"><a href="#（2）按逻辑表达式筛选" class="headerlink" title="（2）按逻辑表达式筛选"></a>（2）按逻辑表达式筛选</h3><pre class="language-mysql" data-language="mysql"><code class="language-mysql">#案例1：查询部门编号不是 50-100之间员工姓名、部门编号、邮箱
+SELECT first_name,last_name,department_id,email FROM employees WHERE department_id &gt; 100 OR department_id &lt; 50;
+SELECT first_name,last_name,department_id,email FROM employees WHERE NOT(department_id &gt;&#x3D; 50 AND department_id &lt;&#x3D; 100);
+
+#案例2：查询奖金率&gt;0.03 或者 员工编号在60-110之间的员工信息
+SELECT * FROM employees WHERE commission_pct &gt; 0.03 OR (employee_id &gt;&#x3D; 60 AND employee_id &lt;&#x3D; 110);</code></pre>
+<h3 id="（3）模糊查询"><a href="#（3）模糊查询" class="headerlink" title="（3）模糊查询"></a>（3）模糊查询</h3><h4 id="①-LIKE"><a href="#①-LIKE" class="headerlink" title="① LIKE"></a>① LIKE</h4><blockquote>
+<p>一般和通配符搭配使用，对<strong>字符型数据</strong>进行部分匹配查询<br>常见的通配符：<br>        _   任意<strong>单个</strong>字符<br>        % 任意<strong>多个</strong>字符,支持0 ~ 多个<br>用法：like/not like </p>
+</blockquote>
+<pre class="language-mysql" data-language="mysql"><code class="language-mysql">#案例1：查询姓名中 包含字符a 的员工信息
+SELECT * FROM employees WHERE last_name LIKE &#39;%a%&#39;;   # 前后任意一个字符
+
+#案例2：查询姓名中 包含最后一个字符为e 的员工信息
+SELECT * FROM employees WHERE last_name LIKE &#39;%e&#39;;    # e前面任意n个字符
+
+#案例3：查询姓名中包含 第一个字符为e 的员工信息
+SELECT * FROM employees WHERE last_name LIKE &#39;e%&#39;;    # e后面n个字符
+
+#案例4：查询姓名中包含 第三个字符为x 的员工信息
+SELECT * FROM employees WHERE last_name LIKE &#39;__x%&#39;;  # 前面两个字符
+
+#案例5：查询姓名中包含第二个字符为_的员工信息
+SELECT * FROM employees WHERE last_name LIKE &#39;_\_%&#39;;
+SELECT * FROM employees WHERE last_name LIKE &#39;_$_%&#39; ESCAPE &#39;$&#39;;</code></pre>
+<h4 id="②-IN"><a href="#②-IN" class="headerlink" title="② IN"></a>② IN</h4><blockquote>
+<p>功能：查询 某字段的值 是否属于 指定的列表之内<br>用法：in/not in<br>    a  in(常量值1,常量值2,常量值3,…)<br>    a not in(常量值1,常量值2,常量值3,…)</p>
+</blockquote>
+<pre class="language-mysql" data-language="mysql"><code class="language-mysql">#案例1：查询部门编号是30&#x2F;50&#x2F;90的员工名、部门编号
+SELECT last_name,department_id FROM employees WHERE department_id IN (30,50,90);
+SELECT last_name,department_id FROM employees WHERE department_id &#x3D; 30 OR department_id &#x3D; 50 OR department_id &#x3D; 90;
+
+#案例2：查询工种编号不是SH_CLERK或IT_PROG的员工信息
+SELECT * FROM employees WHERE job_id NOT IN (&#39;SH_CLERK&#39;,&#39;IT_PROG&#39;);
+SELECT * FROM employees WHERE NOT (job_id &#x3D; &#39;SH_CLERK&#39; OR job_id &#x3D; &#39;IT_PROG&#39;);</code></pre>
+<h4 id="③-BETWEEN-…-AND-…"><a href="#③-BETWEEN-…-AND-…" class="headerlink" title="③ BETWEEN …  AND …"></a>③ BETWEEN …  AND …</h4><blockquote>
+<p>功能：判断某个字段的值是否介于xx之间</p>
+<p>用法：between and/not between and</p>
+</blockquote>
+<pre class="language-mysql" data-language="mysql"><code class="language-mysql">#案例1：查询部门编号是30-90之间的部门编号、员工姓名
+SELECT department_id,last_name FROM employees WHERE department_id BETWEEN 30 AND 90;
+SELECT department_id,last_name FROM employees WHERE department_id &gt;&#x3D; 30 AND department_id &lt;&#x3D; 90;
+
+#案例2：查询年薪不是100000-200000之间的员工姓名、工资、年薪
+SELECT last_name,salary,salary*12*(1+IFNULL(commission_pct,0)) FROM employees 
+WHERE salary*12*(1+IFNULL(commission_pct,0)) NOT BETWEEN 100000 AND 200000;
+
+SELECT last_name,salary,salary*12*(1+IFNULL(commission_pct,0)) FROM employees 
+WHERE salary*12*(1+IFNULL(commission_pct,0)) &lt; 100000 OR salary*12*(1+IFNULL(commission_pct,0)) &gt; 200000;</code></pre>
+<h4 id="④-is-null-is-not-null"><a href="#④-is-null-is-not-null" class="headerlink" title="④ is null/is not null"></a>④ is null/is not null</h4><pre class="language-mysql" data-language="mysql"><code class="language-mysql">#案例1：查询没有奖金的员工信息
+SELECT * FROM employees WHERE commission_pct IS NULL;
+
+#案例2：查询有奖金的员工信息
+SELECT * FROM employees WHERE commission_pct IS NOT NULL;</code></pre>
+<h4 id="⑤-几种比较符号"><a href="#⑤-几种比较符号" class="headerlink" title="⑤ 几种比较符号"></a>⑤ 几种比较符号</h4><blockquote>
+<p>  =   只能判断普通的内容</p>
+<p>  IS  只能判断NULL值</p>
+<p>  &lt;=&gt; 安全等于，既能判断普通内容，又能判断NULL值</p>
+</blockquote>
+<pre class="language-none"><code class="language-none">SELECT * FROM employees WHERE salary &#x3D; 10000;
+SELECT * FROM employees WHERE salary &lt;&#x3D;&gt; 10000;
+SELECT * FROM employees WHERE salary &lt;&#x3D;&gt; NULL;</code></pre>
+<h3 id="（4）作业题"><a href="#（4）作业题" class="headerlink" title="（4）作业题"></a>（4）作业题</h3><pre class="language-mysql" data-language="mysql"><code class="language-mysql">#1. 查询工资大于12000的员工姓名和工资
+SELECT first_name,last_name,salary FROM employees WHERE salary &gt; 12000;
+
+#2. 查询员工号为176的员工的姓名和部门号和年薪
+SELECT first_name,last_name,department_id,salary*12*(1+IFNULL(commission_pct,0)) FROM employees WHERE employee_id &#x3D; 176;
+
+#3. 选择工资不在5000到12000的员工的姓名和工资
+SELECT first_name,last_name,salary FROM employees WHERE salary &gt; 5000 AND salary &lt; 12000;
+SELECT first_name,last_name,salary FROM employees WHERE salary NOT BETWEEN 5000 AND 12000;
+
+#4. 选择在20或50号部门工作的员工姓名和部门号
+SELECT first_name,last_name,department_id FROM employees WHERE department_id IN (20,50);
+
+#5. 选择公司中没有管理者的员工姓名及job_id
+SELECT first_name,last_name,job_id FROM employees WHERE manager_id IS NULL;
+
+#6. 选择公司中有奖金的员工姓名，工资和奖金级别
+SELECT first_name,last_name,commission_pct FROM employees WHERE commission_pct IS NOT NULL;
+
+#7. 选择员工姓名的第三个字母是a的员工姓名
+SELECT last_name FROM employees WHERE last_name LIKE &#39;__a%&#39;;
+
+#8. 选择姓名中有字母a和e的员工姓名
+SELECT last_name FROM employees WHERE last_name LIKE &#39;%a%&#39; AND last_name LIKE &#39;%e%&#39;;
+
+#9. 显示出表employees表中 first_name 以 &#39;e&#39;结尾的员工信息
+SELECT * FROM employees WHERE first_name LIKE &#39;%e&#39;;
+
+#10. 显示出表employees部门编号在80-100之间 的姓名、职位
+SELECT last_name,job_id FROM employees WHERE department_id BETWEEN 80 AND 100;
+
+#11. 显示出表employees的manager_id 是 100,101,110 的员工姓名、职位
+SELECT last_name,job_id FROM employees WHERE manager_id IN (100,101,110);
+</code></pre>
+<h2 id="5-排序查询"><a href="#5-排序查询" class="headerlink" title="5.排序查询"></a>5.排序查询</h2><blockquote>
+<p>语法： select 查询列表 from 表名【where 筛选条件】 order by 排序列表</p>
+<p>执行顺序：<br>        ①from子句    ②where子句<br>        ③select子句    <strong>④order by 子句</strong></p>
+<p>举例：<br>        select last_name,salary from employees where salary&gt;20000 order by salary ;</p>
+<p>特点：<br>        1、排序列表可以是单个字段、多个字段、表达式、函数、列数、以及以上的组合<br>        2、升序，通过 <strong>asc</strong>，默认行为<br>               降序，通过 <strong>desc</strong></p>
+</blockquote>
+<h3 id="（1）示例"><a href="#（1）示例" class="headerlink" title="（1）示例"></a>（1）示例</h3><h4 id="一、按单个字段排序"><a href="#一、按单个字段排序" class="headerlink" title="一、按单个字段排序"></a>一、按单个字段排序</h4><pre class="language-mysql" data-language="mysql"><code class="language-mysql">#案例1：将 员工编号&gt;120 的员工信息进行 工资 的升序、降序
+SELECT * FROM employees WHERE employee_id &gt; 120 ORDER BY salary;   # 默认升序
+SELECT * FROM employees WHERE employee_id &gt; 120 ORDER BY salary ASC;
+SELECT * FROM employees WHERE employee_id &gt; 120 ORDER BY salary DESC;</code></pre>
+<h4 id="二、按表达式排序"><a href="#二、按表达式排序" class="headerlink" title="二、按表达式排序"></a>二、按表达式排序</h4><p>案例1：对有奖金的员工，按年薪降序</p>
+<pre class="language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM employee WHERE commission_pct IS NOT FULL 
+   ORDER BY salary*12*(1+IFNULL(commission_pct,0)) DESC;</code></pre>
+<h4 id="三、按别名排序"><a href="#三、按别名排序" class="headerlink" title="三、按别名排序"></a>三、按别名排序</h4><pre class="language-mysql" data-language="mysql"><code class="language-mysql">#案例1：对有奖金的员工，按年薪降序
+SELECT *,salary*12*(1+IFNULL(commission_pct,0)) 年薪 FROM employees WHERE commission_pct IS NOT NULL ORDER BY 年薪 DESC;</code></pre>
+<h4 id="四、按函数的结果排序"><a href="#四、按函数的结果排序" class="headerlink" title="四、按函数的结果排序"></a>四、按函数的结果排序</h4><pre class="language-mysql" data-language="mysql"><code class="language-mysql">#案例1：按姓名的字数长度进行升序
+SELECT last_name FROM employees ORDER BY LENGTH(last_name);</code></pre>
+<h4 id="五、按多个字段排序"><a href="#五、按多个字段排序" class="headerlink" title="五、按多个字段排序"></a>五、按多个字段排序</h4><pre class="language-mysql" data-language="mysql"><code class="language-mysql">#案例1：查询员工的姓名、工资、部门编号，先按工资升序，再按部门编号降序
+SELECT last_name,salary,department_id FROM employees ORDER BY salary, department_id DESC;</code></pre>
+<h4 id="六、补充选学：按列数排序"><a href="#六、补充选学：按列数排序" class="headerlink" title="六、补充选学：按列数排序"></a>六、补充选学：按列数排序</h4><pre class="language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM employees ORDER BY first_name;
+SELECT * FROM employees ORDER BY 2;</code></pre>
+<h3 id="（2）-作业"><a href="#（2）-作业" class="headerlink" title="（2） 作业"></a>（2） 作业</h3><pre class="language-mysql" data-language="mysql"><code class="language-mysql">#1. 查询员工的姓名和部门号和年薪，按年薪降序 按姓名升序
+SELECT last_name,department_id,salary*12*(1+IFNULL(commission_pct,0)) 年薪 FROM employees ORDER BY 年薪 DESC, last_name;  # 通过逗号隔开
+
+#2. 选择工资不在8000到17000的员工的姓名和工资，按工资降序
+SELECT last_name,salary FROM employees WHERE salary NOT BETWEEN 8000 AND 17000 ORDER BY salary DESC;
+
+#3. 查询邮箱中包含e的员工信息，并先按邮箱的字节数降序，再按部门号升序
+SELECT * FROM employees WHERE email LIKE &#39;%e%&#39; ORDER BY LENGTH(email) DESC, department_id; </code></pre>
+<h2 id="6-常见函数"><a href="#6-常见函数" class="headerlink" title="6.常见函数"></a>6.常见函数</h2><blockquote>
+<p>函数：</p>
+<p>​        类似于java中学过的“方法”，为了解决某个问题，将编写的一系列的命令集合封装在一起，对外仅仅暴露方法名，供外部调用</p>
+<p><strong>常见函数：</strong><br>（1）字符函数<br>            concat,        substr,        length（str）,        char_length,        upper,        lower,      trim,            left,     right,      lpad,    rpad,        instr,      strcmp<br>（2）数学函数<br>            abs,            ceil,            floor,            round,            truncate,            mod<br>（3）日期函数<br>            now,        curtime,    curdate,    datediff,        date_format,        str_to_date<br>（4）流程控制函数<br>          if,     case</p>
+</blockquote>
+<h3 id="（1）字符函数"><a href="#（1）字符函数" class="headerlink" title="（1）字符函数"></a>（1）字符函数</h3><pre class="language-mysql" data-language="mysql"><code class="language-mysql">#1、CONCAT 拼接字符
+SELECT CONCAT(&#39;hello&#39;,first_name,last_name) 备注 FROM employees;
+
+#2、LENGTH 获取字节长度
+SELECT LENGTH(&#39;郭襄&#39;);  # 1个汉字 &#x3D; 3个字节
+SELECT LENGTH(&#39;hello,郭襄&#39;);
+
+#3、CHAR_LENGTH 获取字符个数
+SELECT CHAR_LENGTH(&#39;郭襄&#39;); # 1个汉字 &#x3D; 1个字符
+SELECT CHAR_LENGTH(&#39;hello,郭襄&#39;);
+
+#4、SUBSTRING 截取子串
+&#x2F;*
+    substr(str,起始索引，截取的字符长度)
+    substr(str,起始索引)
+    注意：起始索引从1开始！！！
+*&#x2F;
+SELECT SUBSTR(&#39;张三丰爱上了郭襄&#39;,1,3);  # 张三丰
+SELECT SUBSTR(&#39;张三丰爱上了郭襄&#39;,7);    # 郭襄
+SELECT SUBSTR(&#39;张三丰爱上了郭襄&#39;,-2);   # 郭襄
+
+#5、LEFT&#x2F;RIGHT  截取子串
+SELECT LEFT(&#39;鸠摩智&#39;,1);   # 鸠
+SELECT RIGHT(&#39;鸠摩智&#39;,1);  # 智
+
+#6、INSTR获取字符第一次出现的索引
+SELECT INSTR(&#39;三打白骨精aaa白骨精bb白骨精&#39;,&#39;白骨精&#39;);
+
+#7、TRIM去前后指定的字符，默认是去空格
+SELECT TRIM(&#39; 虚  竹    &#39;)  AS a;
+SELECT TRIM(&#39;x&#39; FROM &#39;xxxxxx虚xxx竹xxxxxxxxxxxxxxxxxx&#39;)  AS a;
+
+#8、LPAD&#x2F;RPAD  左填充&#x2F;右填充字符，使总长度符合要求
+SELECT LPAD(&#39;木婉清&#39;,10,&#39;a&#39;);    # aaaaaaa木婉清
+SELECT RPAD(&#39;木婉清&#39;,10,&#39;a&#39;);    # 木婉清aaaaaaa
+
+#9、UPPER&#x2F;LOWER  变大写&#x2F;变小写
+#案例：查询员工表的姓名，要求格式：姓首字符大写，其他字符小写，名所有字符大写，且姓和名之间用_分割，最后起别名“OUTPUT”
+SELECT 
+
+#10、STRCMP 比较两个字符大小
+SELECT STRCMP(&#39;aec&#39;,&#39;aec&#39;);  # 0</code></pre>
+<h3 id="（2）数学函数"><a href="#（2）数学函数" class="headerlink" title="（2）数学函数"></a>（2）数学函数</h3><pre class="language-mysql" data-language="mysql"><code class="language-mysql">#1、ABS 绝对值
+SELECT ABS(-2.4);
+
+#2、CEIL 向上取整  返回&gt;&#x3D;该参数的最小整数
+SELECT CEIL(-1.09);  # -1
+SELECT CEIL(0.09);   # 1
+SELECT CEIL(1.00);   # 1
+
+#3、FLOOR 向下取整，返回&lt;&#x3D;该参数的最大整数
+SELECT FLOOR(-1.09);  # -2
+SELECT FLOOR(0.09);   # 0
+SELECT FLOOR(1.00);   # 1
+
+#4、ROUND 四舍五入，把数值字段舍入为指定的小数位数。
+SELECT ROUND(1.8712345);    # 2
+SELECT ROUND(1.8712345,2);  # 1.87
+
+#5、TRUNCATE 直接截断
+SELECT TRUNCATE(1.8712345,1);  # 1.8
+
+#6、MOD 取余
+SELECT MOD(-10,3); # -1
+-- a%b &#x3D; a-(INT)a&#x2F;b*b
+-- -10%3 &#x3D; -10 - (INT)(-10)&#x2F;3*3   &#x3D; -1
+
+SELECT -10%3;    # -1
+SELECT 10%3;     # 1
+SELECT -10%-3;   # -1
+SELECT 10%-3;    # 1</code></pre>
+<h3 id="（3）日期函数"><a href="#（3）日期函数" class="headerlink" title="（3）日期函数"></a>（3）日期函数</h3><pre class="language-mysql" data-language="mysql"><code class="language-mysql">#1、NOW
+SELECT NOW();
+
+#2、CURDATE
+SELECT CURDATE();
+
+#3、CURTIME
+SELECT CURTIME();
+
+#4、DATEDIFF
+SELECT DATEDIFF(&#39;1998-7-16&#39;,&#39;2019-7-13&#39;);
+
+#5、DATE_FORMAT
+SELECT DATE_FORMAT(&#39;1998-7-16&#39;,&#39;%Y年%M月%d日 %H小时%i分钟%s秒&#39;) 出生日期;   # 1998年July月16日 00小时00分钟00秒
+SELECT DATE_FORMAT(hiredate,&#39;%Y年%M月%d日 %H小时%i分钟%s秒&#39;)入职日期 FROM employees;
+
+#6、STR_TO_DATE 按指定格式解析字符串为日期类型
+SELECT * FROM employees WHERE hiredate &lt; STR_TO_DATE(&#39;3&#x2F;15 1998&#39;,&#39;%m&#x2F;%d %Y&#39;);</code></pre>
+<h3 id="（4）流程控制函数"><a href="#（4）流程控制函数" class="headerlink" title="（4）流程控制函数"></a>（4）流程控制函数</h3><h4 id="①-IF函数"><a href="#①-IF函数" class="headerlink" title="① IF函数"></a>① IF函数</h4><pre class="language-mysql" data-language="mysql"><code class="language-mysql">SELECT IF(100&gt;9,&#39;好&#39;,&#39;坏&#39;);
+
+#需求：如果有奖金，则显示最终奖金，如果没有，则显示0
+SELECT IF(commission_pct IS NULL, 0, salary*12*commission_pct) 奖金, commission_pct FROM employees;</code></pre>
+<h4 id="②-CASE函数"><a href="#②-CASE函数" class="headerlink" title="② CASE函数"></a>② CASE函数</h4><blockquote>
+<p>①情况1 ：类似于switch语句，可以实现 <strong>等值判断</strong><br>        CASE 表达式<br>                WHEN 值1 THEN 结果1<br>                WHEN 值2 THEN 结果2<br>                …<br>                ELSE 结果n<br>        END</p>
+<p>②情况2：类似于多重IF语句，实现 <strong>区间判断</strong><br>        CASE<br>                WHEN 条件1 THEN 结果1<br>                WHEN 条件2 THEN 结果2<br>                …</p>
+<p>​              ELSE 结果n</p>
+<p>​       END</p>
+</blockquote>
+<pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 案例1：
+
+-- 部门编号是30，工资显示为2倍
+-- 部门编号是50，工资显示为3倍
+-- 部门编号是60，工资显示为4倍
+-- 否则不变
+
+-- 显示 部门编号，新工资，旧工资
+
+SELECT department_id, salary,
+CASE department_id
+	WHEN 30 THEN salary*2
+	WHEN 50 THEN salary*3
+	WHEN 60 THEN salary*4
+	ELSE salary
+END  newSalary
+FROM employees;
+
+SELECT department_id,
+CASE department_id
+	WHEN 30 THEN salary*2
+	WHEN 50 THEN salary*3
+	WHEN 60 THEN salary*4
+	ELSE salary
+END  newSalary,   # 重命名为newSalary
+salary  
+FROM employees;
+
+SELECT department_id,
+CASE 
+	WHEN department_id&#x3D;30 THEN salary*2
+	WHEN department_id&#x3D;50 THEN salary*3
+	WHEN department_id&#x3D;60 THEN salary*4
+	ELSE salary
+END newSalary,
+salary
+FROM employees;
+
+
+
+#案例2：如果工资&gt;20000,显示级别A
+--       工资&gt;15000,显示级别B
+--       工资&gt;10000,显示级别C
+--       否则，显示D
+      
+SELECT salary,
+CASE 
+	 WHEN salary&gt;20000 THEN &#39;A&#39;
+	 WHEN salary&gt;15000 THEN &#39;B&#39;
+	 WHEN salary&gt;10000 THEN &#39;C&#39;
+	 ELSE &#39;D&#39;
+END 
+AS  级别
+FROM employees; </code></pre>
+<h2 id="7-统计函数"><a href="#7-统计函数" class="headerlink" title="7.统计函数"></a>7.统计函数</h2><blockquote>
+<p>说明：分组函数往往用于实现将一组数据进行统计计算，最终得到一个值，又称为聚合函数或统计函数</p>
+<p>分组函数清单：</p>
+<pre class="language-mysql" data-language="mysql"><code class="language-mysql">sum(字段名)：求和
+avg(字段名)：求平均数
+max(字段名)：求最大值
+min(字段名)：求最小值
+count(字段名)：计算非空字段值的个数</code></pre>
+</blockquote>
+<h3 id="（1）-示例-1"><a href="#（1）-示例-1" class="headerlink" title="（1） 示例"></a>（1） 示例</h3><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 案例1 ：查询员工信息表中，所有员工的工资和、工资平均值、最低工资、最高工资、有工资的个数
+SELECT SUM(salary),AVG(salary),MIN(salary),MAX(salary),COUNT(salary) FROM employees;
+
+# 案例2：添加筛选条件
+# ①查询emp表中记录数：
+SELECT COUNT(employee_id) FROM employees;
+# ②查询emp表中有佣金的人数：
+SELECT COUNT(salary) FROM employees;		
+# ③查询emp表中月薪大于2500的人数：
+SELECT COUNT(*) FROM employees WHERE salary &gt; 2500;
+# ④查询有领导的人数：
+SELECT COUNT(manager_id) FROM employees;</code></pre>
+<h3 id="（2）count的补充介绍"><a href="#（2）count的补充介绍" class="headerlink" title="（2）count的补充介绍"></a>（2）count的补充介绍</h3><pre class="language-mysql" data-language="mysql"><code class="language-mysql">#1、统计结果集的行数，推荐使用count(*)
+SELECT COUNT(*) FROM employees;
+SELECT COUNT(*) FROM employees WHERE department_id &#x3D; 30;
+
+SELECT COUNT(1) FROM employees;
+SELECT COUNT(1) FROM employees WHERE department_id &#x3D; 30;
+		
+#2、搭配distinct实现去重的统计
+#需求：查询有员工的部门个数
+SELECT COUNT(DISTINCT department_id) FROM employees;
+
+# 思考：每个部门的总工资、平均工资？
+# GROUP BY 语句用于结合聚合函数，根据一个或多个列对结果集进行分组。
+SELECT department_id, SUM(salary), AVG(salary) FROM employees GROUP BY department_id;  </code></pre>
+<h3 id="（3）-作业"><a href="#（3）-作业" class="headerlink" title="（3） 作业"></a>（3） 作业</h3><pre class="language-mysql" data-language="mysql"><code class="language-mysql">#1.查询公司员工工资的最大值，最小值，平均值，总和
+SELECT MAX(salary), MIN(salary), AVG(salary), SUM(salary) FROM employees;
+
+#2.查询员工表中的最大入职时间和最小入职时间的相差天数 （DIFFRENCE）
+SELECT DATEDIFF(MAX(hiredate), MIN(hiredate)) FROM employees;
+SELECT MAX(hiredate),MIN(hiredate) FROM employees;
+
+#3.查询部门编号为90的员工个数
+SELECT COUNT(employee_id) FROM employees WHERE department_id &#x3D; 90;</code></pre>
+<h2 id="8-分组筛选"><a href="#8-分组筛选" class="headerlink" title="8.分组筛选"></a>8.分组筛选</h2><blockquote>
+<p>语法：<br>        select 查询列表    from 表名<br>        <strong>where</strong> 筛选条件    <strong>group by</strong> 分组列表    <strong>having</strong> 分组后筛选<br>        order by 排序列表;</p>
+<p>执行顺序：<br>        ①from子句    <strong>②where子句</strong>    <strong>③group by 子句</strong><br>        <strong>④having子句</strong>    <strong>⑤select子句</strong>    ⑥order by子句</p>
+<p>特点：<br>        ①查询列表往往是  <strong>分组函数和被分组的字段</strong> ★<br>        ②分组查询中的筛选分为两类：<br>                                                  筛选的基表            使用的关键词          位置<br>                    分组前筛选          原始表                    where                group by 的前面</p>
+<p>​                   分组后筛选        分组后的结果集    having            group by的后面</p>
+<p>★★★ where——group by ——having</p>
+<p>问题：分组函数做条件只可能放在having后面！！！</p>
+</blockquote>
+<h3 id="（1）简单的分组"><a href="#（1）简单的分组" class="headerlink" title="（1）简单的分组"></a>（1）简单的分组</h3><pre class="language-mysql" data-language="mysql"><code class="language-mysql">#案例1：查询每个工种的员工平均工资
+SELECT AVG(salary),job_id FROM employees GROUP BY job_id;
+
+#案例2：查询每个领导的手下人数
+SELECT COUNT(*), manager_id FROM employees WHERE manager_id IS NOT NULL GROUP BY manager_id;</code></pre>
+<h3 id="（2）可以实现分组前的筛选"><a href="#（2）可以实现分组前的筛选" class="headerlink" title="（2）可以实现分组前的筛选"></a>（2）可以实现分组前的筛选</h3><pre class="language-mysql" data-language="mysql"><code class="language-mysql">#案例1：查询邮箱中包含a字符的 每个部门的最高工资
+SELECT MAX(salary) 最高工资,department_id FROM employees WHERE email LIKE &#39;%a%&#39; GROUP BY department_id;
+
+#案例2：查询每个领导手下有奖金的员工的平均工资
+SELECT AVG(salary) 平均工资, manager_id FROM employees WHERE commission_pct IS NOT NULL GROUP BY manager_id;</code></pre>
+<h3 id="（3）可以实现分组后的筛选"><a href="#（3）可以实现分组后的筛选" class="headerlink" title="（3）可以实现分组后的筛选"></a>（3）可以实现分组后的筛选</h3><pre class="language-mysql" data-language="mysql"><code class="language-mysql">#案例1：查询哪个部门的员工个数&gt;5
+SELECT COUNT(*) 员工个数, department_id FROM employees GROUP BY department_id HAVING 员工个数 &gt; 5;
+
+#案例2：每个工种有奖金的员工的最高工资&gt;12000的工种编号和最高工资
+SELECT job_id, MAX(salary) FROM employees WHERE commission_pct IS NOT NULL GROUP BY job_id HAVING MAX(salary)&gt;12000;
+
+#案例3：领导编号&gt;102的 每个领导手下的最低工资大于5000的最低工资
+SELECT manager_id, MIN(salary) FROM employees WHERE manager_id &gt; 102 GROUP BY manager_id HAVING MIN(salary)&gt;5000;</code></pre>
+<h3 id="（4）可以实现排序"><a href="#（4）可以实现排序" class="headerlink" title="（4）可以实现排序"></a>（4）可以实现排序</h3><pre class="language-mysql" data-language="mysql"><code class="language-mysql">#案例：查询没有奖金的员工的最高工资&gt;6000的工种编号和最高工资，按最高工资升序
+SELECT MAX(salary) 最高工资, job_id FROM employees WHERE commission_pct IS NULL GROUP BY job_id 
+HAVING MAX(salary)&gt;6000 ORDER BY MAX(salary);</code></pre>
+<h3 id="（5）按多个字段分组"><a href="#（5）按多个字段分组" class="headerlink" title="（5）按多个字段分组"></a>（5）按多个字段分组</h3><pre class="language-mysql" data-language="mysql"><code class="language-mysql">#案例：查询每个工种每个部门的最低工资,并按最低工资降序（工种和部门都一样，才是一组）
+SELECT job_id, department_id, MIN(salary) 最低工资 FROM employees GROUP BY job_id,department_id;</code></pre>
+<h3 id="（6）-作业"><a href="#（6）-作业" class="headerlink" title="（6） 作业"></a>（6） 作业</h3><pre class="language-mysql" data-language="mysql"><code class="language-mysql">#1. 查询各job_id的员工工资的最大值，最小值，平均值，总和，并按job_id升序
+SELECT job_id,MAX(salary),MIN(salary),AVG(salary),SUM(salary) FROM employees GROUP BY job_id ORDER BY job_id;
+
+#2. 查询员工最高工资和最低工资的差距（DIFFERENCE）
+SELECT MAX(salary)-MIN(salary) FROM employees;
+SELECT MAX(salary) FROM employees;
+SELECT MIN(salary) FROM employees;
+
+#3. 查询各个管理者手下员工的最低工资，其中最低工资不能低于6000，没有管理者的员工不计算在内
+SELECT manager_id,MIN(salary) FROM employees WHERE MIN(salary) &gt;&#x3D; 6000; #GROUP BY manager_id; 
+SELECT manager_id,MIN(salary) FROM employees GROUP BY manager_id;  # 按管理者筛选
+SELECT manager_id,MIN(salary) FROM employees WHERE manager_id GROUP BY manager_id; # 按管理者筛选，没有管理者的员工不算在内
+SELECT manager_id,MIN(salary) FROM employees WHERE manager_id GROUP BY manager_id HAVING MIN(salary)&gt;&#x3D;6000;
+
+#4. 查询所有部门的编号，员工数量和工资平均值,并按平均工资降序
+SELECT department_id,COUNT(employee_id),AVG(salary) FROM employees GROUP BY department_id ORDER BY AVG(salary);
+
+#5. 选择具有各个job_id的员工人数
+SELECT job_id,COUNT(employee_id) FROM employees GROUP BY job_id;</code></pre>
+<h2 id="9-连接查询"><a href="#9-连接查询" class="headerlink" title="9.连接查询"></a>9.连接查询</h2><pre class="language-shell" data-language="shell"><code class="language-shell">/*
+说明：又称 多表查询，当查询语句涉及到的字段来自于 多个表 时，就会用到连接查询
+
+笛卡尔乘积现象：表1 有m行，表2有n行，结果<span class="token operator">=</span>m*n行
+	发生原因：没有有效的连接条件
+	如何避免：添加有效的连接条件
+
+分类：
+	（1）按年代分类：
+			<span class="token number">1</span>、sql92标准:仅仅支持内连接
+			<span class="token number">2</span>、sql99标准【推荐】：支持内连接 + 外连接（左外和右外）+ 交叉连接
+	（2）按功能分类：
+			内连接：
+				等值连接、非等值连接、自连接
+			外连接：
+				左外连接、右外连接、全外连接
+			交叉连接
+*/</code></pre>
+<h3 id="sql92标准"><a href="#sql92标准" class="headerlink" title="sql92标准"></a>sql92标准</h3><blockquote>
+<p>语法:<br>        <strong>select</strong> 查询列表    <strong>from</strong> 表1 别名,  表2 别名    <strong>where</strong> 连接条件    <strong>and</strong>  筛选条件<br>        <strong>group by</strong> 分组列表    <strong>having</strong> 分组后筛选<br>        <strong>order by</strong> 排序列表</p>
+<p>执行顺序：<br>        1、from子句        2、where子句        3、and子句<br>        4、group by子句        5、having子句<br>        6、select子句        7、order by子句<br>PS.仅仅支持内连接</p>
+</blockquote>
+<h4 id="一、等值连接"><a href="#一、等值连接" class="headerlink" title="一、等值连接"></a>一、等值连接</h4><p>① 多表等值连接的结果为 多表的交集部分<br>② n表连接，至少需要n-1个连接条件<br>③ 多表的顺序没有要求<br>④ 一般需要为表起别名<br>⑤ 可以搭配前面介绍的所有子句使用，比如排序、分组、筛选</p>
+<pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 案例1：查询女神名和对应的男神名
+SELECT NAME, boyName FROM boys, beauty WHERE beauty.boyfriend_id &#x3D; boys.id;
+
+# 案例2：查询员工名和对应的部门名
+USE myemployees;
+SELECT last_name,department_name FROM employees,departments WHERE employees.department_id &#x3D; departments.department_id;
+
+# 2、为表起别名
+&#x2F;*
+	① 提高语句的简洁度
+	② 区分多个重名的字段
+	注意：如果为表起了别名，则查询的字段就不能使用原来的表名去限定
+*&#x2F;
+# 查询员工名、工种号、工种名
+SELECT e.last_name, e.job_id, j.job_title FROM employees e, jobs j WHERE e.job_id &#x3D; j.job_id;
+
+# 3、两个表的顺序 是否 可以调换
+SELECT e.last_name, e.job_id, j.job_title FROM jobs j, employees e WHERE e.job_id &#x3D; j.job_id;  # 实践证明可以
+
+# 4、可以加筛选
+# 案例1：查询有奖金的员工名、部门名
+SELECT last_name, department_name FROM employees, departments WHERE commission_pct IS NOT NULL AND employees.department_id &#x3D; departments.department_id;
+# 案例2：查询城市名中第二个字符为o的部门名和城市名
+SELECT department_name,city FROM departments,locations WHERE departments.location_id &#x3D; locations.location_id AND city LIKE &#39;_o%&#39;;
+
+# 5、可以加分组
+# 案例1：查询每个城市的部门个数
+SELECT city, COUNT(department_id) FROM locations, departments WHERE locations.location_id &#x3D; departments.location_id GROUP BY city;
+# 案例2：查询有奖金的每个部门的部门名和部门的领导编号和该部门的最低工资
+SELECT department_name, departments.manager_id, MIN(salary) FROM departments, employees WHERE employees.department_id &#x3D; departments.department_id
+AND commission_pct IS NOT NULL GROUP BY department_name;     # 由于多个表中都有manager_id，因此为了避免出错，需指定来源
+
+# 6、可以加排序
+# 案例：查询每个工种的工种名和员工的个数，并且按员工个数降序
+SELECT job_title,COUNT(employee_id) 员工个数 FROM jobs,employees  WHERE jobs.job_id &#x3D; employees.job_id 
+GROUP BY job_title ORDER BY 员工个数 DESC;
+
+# 7、可以实现三表连接？
+# 案例：查询员工名、部门名和所在的城市
+SELECT last_name, department_name, city FROM employees e, departments d, locations l WHERE e.department_id &#x3D; d.department_id AND d.location_id &#x3D; l.location_id;</code></pre>
+<h4 id="二、非等值连接"><a href="#二、非等值连接" class="headerlink" title="二、非等值连接"></a>二、非等值连接</h4><p>不再通过 <strong>相等 条件</strong> 来连接两个表</p>
+<pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 案例1：查询员工的工资和工资级别
+# 创建表
+CREATE TABLE job_grades(grade_level VARCHAR(3), lowest_sal  int, highest_sal int);
+INSERT INTO job_grades VALUES (&#39;A&#39;, 1000, 2999); 
+INSERT INTO job_grades VALUES (&#39;B&#39;, 3000, 5999);
+INSERT INTO job_grades VALUES(&#39;C&#39;, 6000, 9999);
+INSERT INTO job_grades VALUES(&#39;D&#39;, 10000, 14999);
+INSERT INTO job_grades VALUES(&#39;E&#39;, 15000, 24999);
+INSERT INTO job_grades VALUES(&#39;F&#39;, 25000, 40000);
+
+# 非等值连接
+SELECT salary,grade_level FROM employees,job_grades WHERE employees.salary BETWEEN job_grades.lowest_sal AND job_grades.highest_sal ORDER BY grade_level;</code></pre>
+<h4 id="三、自连接"><a href="#三、自连接" class="headerlink" title="三、自连接"></a>三、自连接</h4><p>表自己连接自己</p>
+<pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 案例：查询 员工名和上级的名称(员工表中，每个员工只有自己的上级的id，并不知道姓名)
+SELECT e.employee_id, e.last_name, m.employee_id, m.last_name FROM employees e,employees m 
+WHERE e.manager_id &#x3D; m.employee_id;   # 虽然是上级，但其也为员工，有id。</code></pre>
+<h3 id="SQL99语法"><a href="#SQL99语法" class="headerlink" title="SQL99语法"></a>SQL99语法</h3><h4 id="🐳-内连接"><a href="#🐳-内连接" class="headerlink" title="🐳 内连接"></a>🐳 内连接</h4><blockquote>
+<p>语法：<br>        <strong>SELECT</strong> 查询列表         <strong>FROM</strong>  表名1 别名【INNER】 <strong>JOIN</strong>  表名2 别名    <strong>ON</strong>  连接条件<br>        <strong>WHERE</strong> 筛选条件<br>        <strong>GROUP BY</strong> 分组列表        <strong>HAVING</strong> 分组后筛选<br>        <strong>ORDER BY</strong> 排序列表;</p>
+<p>SQL92和99的区别：<br>            后者使用JOIN代替了之前的逗号，并且<strong>将连接条件和筛选条件进行了分离</strong>。</p>
+</blockquote>
+<h5 id="一、等值连接-1"><a href="#一、等值连接-1" class="headerlink" title="一、等值连接"></a>一、等值连接</h5><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># (1)简单连接
+# 案例：查询员工名和部门名
+USE myemployees;
+SELECT last_name,department_name FROM departments d  JOIN  employees e ON e.department_id &#x3D; d.department_id;
+
+# (2)添加筛选条件
+# 案例：查询部门编号&gt;100的部门名和所在的城市名
+SELECT department_name,city FROM departments d JOIN locations l ON d.location_id &#x3D; l.location_id WHERE d.department_id &gt; 100;
+
+# (3)添加分组+筛选
+# 案例：查询每个城市的部门个数
+SELECT city,COUNT(*)  FROM departments JOIN locations ON departments.location_id &#x3D; locations.location_id GROUP BY city;
+
+# (4)添加分组+筛选+排序
+# 案例1：查询部门中员工个数&gt;10的部门名，并按员工个数降序
+SELECT department_name, COUNT(*) 员工个数 FROM employees e JOIN departments d ON e.department_id &#x3D; d.department_id GROUP BY department_name HAVING 员工个数 &gt; 10 ORDER BY 员工个数 DESC;</code></pre>
+<h5 id="二、非等值连接-1"><a href="#二、非等值连接-1" class="headerlink" title="二、非等值连接"></a>二、非等值连接</h5><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 案例：查询部门编号在10-90之间的员工的工资级别，并按级别进行分组
+SELECT * FROM sal_grade;
+
+SELECT COUNT(*) 个数, grade FROM employees e JOIN sal_grade g ON e.salary BETWEEN g.min_salary AND g.max_salary WHERE e.department_id BETWEEN 10 AND 90 GROUP BY g.grade;</code></pre>
+<h5 id="三、自连接-1"><a href="#三、自连接-1" class="headerlink" title="三、自连接"></a>三、自连接</h5><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 案例：查询员工名和对应的领导名
+SELECT e.&#96;last_name&#96;,m.&#96;last_name&#96; FROM employees e JOIN employees m ON e.&#96;manager_id&#96;&#x3D;m.&#96;employee_id&#96;;</code></pre>
+<h4 id="🐳-外连接-左右连接"><a href="#🐳-外连接-左右连接" class="headerlink" title="🐳 外连接(左右连接)"></a>🐳 外连接(左右连接)</h4><blockquote>
+<p>说明：查询结果为<strong>主表中所有的记录</strong>，<strong>如果从表有匹配项，则显示匹配项；如果从表没有匹配项，则显示null</strong></p>
+<p>应用场景：一般用于查询 主表中有 但 从表没有 的记录</p>
+<p>特点：<br>    1、外连接分主从表，两表的顺序不能任意调换<br>    2、左连接的话，left join 左边为 主表<br>         右连接的话，right join 右边为 主表</p>
+<p><strong>left join</strong> : 左连接，返回左表中所有的记录以及右表中连接字段相等的记录。<br><strong>right join</strong> : 右连接，返回右表中所有的记录以及左表中连接字段相等的记录。<br><strong>inner join</strong>/join : 内连接，又叫等值连接，只返回两个表中连接字段相等的行。<br><strong>full join</strong> : 外连接，返回两个表中的行：left join + right join。<br><strong>cross</strong> join : 结果是笛卡尔积，就是第一个表的行数乘以第二个表的行数。</p>
+<p>语法：<br>        select   查询列表    from 表1 别名   <strong>left/right/full   outer join</strong> 表2 别名        <strong>on</strong> 连接条件<br>        where 筛选条件;</p>
+</blockquote>
+<pre class="language-mysql" data-language="mysql"><code class="language-mysql">USE girls;
+# 案例1：查询所有女神记录，以及对应的男神名，如果没有对应的男神，则显示为null
+# 左连接
+SELECT g.*,b.boyName FROM beauty g LEFT JOIN boys b ON g.boyfriend_id &#x3D; b.id;
+# 右连接
+SELECT g.*,b.boyName FROM boys b RIGHT JOIN beauty g ON g.boyfriend_id &#x3D; b.id;
+
+# 案例2：查哪个女神没有男朋友
+# 左连接
+SELECT g.name FROM beauty g LEFT JOIN boys b ON g.boyfriend_id &#x3D; b.id WHERE boyName IS NULL;
+# 右连接
+SELECT g.name FROM boys b RIGHT JOIN beauty g ON g.boyfriend_id &#x3D; b.id WHERE boyName IS NULL;
+
+# 案例3：查询哪个部门没有员工，并显示其部门编号和部门名
+# 分析：表departments中存在一些部门，但在employee表对应过来时，某些部门 不存在员工。
+USE myemployees;
+# 左连接
+SELECT d.department_id, department_name, e.employee_id 
+FROM departments d LEFT JOIN employees e ON e.department_id &#x3D; d.department_id
+WHERE e.employee_id IS NULL;
+# 右连接
+SELECT d.department_id,department_name,e.employee_id 
+FROM employees e RIGHT JOIN departments d ON e.department_id &#x3D; d.department_id
+WHERE e.employee_id IS NULL;</code></pre>
+<h3 id="📚-作业"><a href="#📚-作业" class="headerlink" title="📚 作业"></a>📚 作业</h3><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 1.显示所有员工的姓名，部门号和部门名称。
+# 通过ON后面的条件 建立起两个表间的桥梁。
+SELECT last_name, e.department_id, department_name FROM employees e JOIN departments d ON e.department_id &#x3D; d.department_id;
+
+# 2.查询90号部门员工的job_id和90号部门的location_id
+SELECT e.job_id, d.location_id FROM employees e JOIN departments d ON e.department_id &#x3D; d.department_id; WHERE e.department_id&#x3D;90;
+
+# 3. 选择所有有奖金的员工的last_name , department_name , location_id , city
+# 支持通过多个JOIN和ON，多次添加表
+SELECT last_name, department_name, d.location_id, city FROM employees e 
+JOIN departments d ON e.department_id &#x3D; d.department_id JOIN locations l ON d.location_id &#x3D; l.location_id
+WHERE commission_pct IS NOT NULL;
+
+SELECT last_name, department_name, d.location_id, city FROM employees e, departments d,locations l 
+WHERE e.department_id &#x3D; d.department_id AND d.location_id &#x3D; l.location_id AND commission_pct IS NOT NULL; # 通过将条件一次性放到where中，看起来更简洁
+
+# 4. 选择city在Toronto工作的员工的last_name , job_id , department_id , department_name
+SELECT last_name, job_id, e.department_id, department_name FROM employees e,locations l,departments d
+WHERE e.department_id &#x3D; d.department_id AND d.location_id &#x3D; l.location_id AND city &#x3D; &#39;Toronto&#39;; 
+
+# 5.查询每个工种、每个部门的部门名、工种名和最低工资
+SELECT department_name, job_title, MIN(salary) FROM departments d, jobs j,employees e
+WHERE e.department_id &#x3D; d.department_id AND e.job_id &#x3D; j.job_id
+GROUP BY e.job_id, e.department_id;
+
+# 6.查询每个国家下的部门个数大于2的国家编号
+SELECT country_id, COUNT(*) 部门个数 FROM departments d, locations l WHERE d.location_id &#x3D; l.location_id 
+GROUP BY country_id HAVING 部门个数 &gt; 2;
+
+# 7、选择指定员工的姓名，员工号，以及他的管理者的姓名和员工号，结果类似于下面的格式
+#			employees 	Emp# 		manager 		Mgr#
+#			kochhar 	101 		king 		100
+# 自连接
+SELECT e.last_name &quot;employees&quot;, e.employee_id &quot;Emp#&quot;, m.last_name &quot;manager&quot;, m.employee_id &quot;Mgr#&quot;
+FROM  employees e JOIN employees m ON e.manager_id &#x3D; m.employee_id ORDER BY m.employee_id;
+
+SELECT e.last_name &quot;employees&quot;, e.employee_id &quot;Emp#&quot;, m.last_name &quot;manager&quot;, m.employee_id &quot;Mgr#&quot;
+FROM  employees e JOIN employees m ON e.manager_id &#x3D; m.employee_id
+WHERE e.employee_id &#x3D; 101;
+
+SELECT e.&#96;last_name&#96;,m.&#96;last_name&#96; FROM employees e JOIN employees m ON e.&#96;manager_id&#96;&#x3D;m.&#96;employee_id&#96;;
+
+# 8.查询编号&gt;3的女神的男朋友信息，如果有则列出详细，如果没有，用null填充
+USE girls;
+# 先连接，LEFT JOIN是在左边表的基础上添加达成条件的右侧表选项
+SELECT beauty.id 女生ID, beauty.name 女生名字, boys.* FROM beauty LEFT JOIN boys ON beauty.boyfriend_id &#x3D; boys.id  WHERE beauty.id &gt; 3;  
+
+# 9.查询哪个城市没有部门
+USE myemployees;
+SELECT city FROM locations l LEFT OUTER JOIN departments d ON l.&#96;location_id&#96;&#x3D;d.&#96;location_id&#96; WHERE  d.department_id IS NULL;
+
+# 10.查询部门名为SAL或IT的员工信息
+SELECT d.department_name,e.* FROM employees e JOIN departments d ON e.department_id &#x3D; d.department_id
+WHERE d.department_name IN (&quot;SAL&quot;,&quot;IT&quot;);</code></pre>
+<h2 id="10-子查询"><a href="#10-子查询" class="headerlink" title="10.子查询"></a>10.子查询</h2><blockquote>
+<p>说明：<br>            当 <strong>一个查询语句 中又嵌套了 另一个完整的select语句</strong>，则 『被嵌套的select语句』称为 子查询或内查询，『外面的select语句』称为 主查询或外查询。</p>
+<p>分类：<br>       按子查询出现的位置进行分类：<br>                1、select后面<br>                    要求：子查询的结果为 单行单列（标量子查询）<br>                2、from后面<br>                    要求：子查询的结果可以为 多行多列<br>                3、where或having后面 ★<br>                    要求：子查询的结果必须为 单列<br>                        单行子查询、多行子查询<br>                4、exists后面<br>                    要求：子查询结果必须为 单列（相关子查询）</p>
+<p>特点：<br>        1、子查询放在条件中，要求必须放在 <strong>条件的右侧</strong><br>        2、子查询一般放在 小括号 中<br>        3、子查询的执行优先于主查询<br>        4、单行子查询对应了 单行操作符：&gt; &lt; &gt;= &lt;= = &lt;&gt;<br>             多行子查询对应了 多行操作符：any/some  all in   </p>
+</blockquote>
+<h3 id="（1）放在where或having后面"><a href="#（1）放在where或having后面" class="headerlink" title="（1）放在where或having后面"></a>（1）放在where或having后面</h3><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 单行子查询
+# 案例1：谁的工资比 Abel 高?
+USE myemployees;
+SELECT employee_id,last_name,salary FROM employees
+WHERE salary &gt; (SELECT salary FROM employees WHERE last_name &#x3D; &#39;Abel&#39;);   # 括号中，子查询 Abel的工资
+
+# 案例2：返回job_id与141号员工相同，salary比143号员工多的员工姓名，job_id 和工资
+SELECT last_name,job_id,salary FROM employees
+WHERE job_id &#x3D; (SELECT job_id FROM employees WHERE employee_id &#x3D; 141) 
+     AND salary &gt; (SELECT salary FROM employees WHERE employee_id &#x3D; 143);
+     
+# 案例3：返回公司工资最少的员工的last_name,job_id和salary
+SELECT last_name, job_id, salary FROM employees WHERE salary &#x3D; (SELECT MIN(salary) FROM employees);
+
+# 案例4：查询最低工资大于50号部门最低工资的部门id和其最低工资
+# ① 查询50号部门最低工资  ② 查询各部门的最低工资，然后再筛选
+SELECT department_id,MIN(salary) FROM employees GROUP BY department_id
+WHERE MIN(salary) &gt; (SELECT MIN(salary) FROM employees WHERE department_id &#x3D; 50)
+
+# 多行子查询
+&#x2F;*
+	in:判断某字段是否在指定列表内   x in(10,30,50)
+	any&#x2F;some:判断某字段的值是否满足其中任意一个   x&gt;any(10,30,50)   x&gt;min()
+	all:判断某字段的值是否满足里面所有的  x &gt;all(10,30,50)       x&gt;max()
+	*&#x2F;
+# 案例1：返回location_id是1400或1700的部门中的所有员工姓名
+SELECT last_name FROM employees WHERE department_id IN (
+       SELECT department_id FROM departments WHERE location_id IN (1400,1700));
+       
+# 案例2：返回其它部门中比job_id为‘IT_PROG’部门任一工资低的员工的员工号、姓名、job_id 以及salary
+SELECT employee_id,last_name,job_id,salary FROM employees WHERE job_id &lt;&gt; &#39;IT_PROG&#39; AND 
+				salary &lt; ANY(SELECT DISTINCT salary FROM employees WHERE job_id &#x3D; &#39;IT_PROG&#39;);
+SELECT employee_id,last_name,job_id,salary FROM employees WHERE job_id &lt;&gt; &#39;IT_PROG&#39; AND 
+				salary &lt; (SELECT MAX(salary) FROM employees WHERE job_id &#x3D; &#39;IT_PROG&#39;);	
+                
+#案例3：返回其它部门中比job_id为‘IT_PROG’部门所有工资都低的员工 的员工号、姓名、job_id 以及salary
+SELECT employee_id,last_name,job_id,salary FROM employees WHERE job_id &lt;&gt; &#39;IT_PROG&#39; AND 
+salary &lt; ALL(SELECT DISTINCT salary FROM employees WHERE job_id &#x3D; &#39;IT_PROG&#39;);
+
+SELECT employee_id,last_name,job_id,salary FROM employees WHERE job_id &lt;&gt; &#39;IT_PROG&#39; AND 
+salary &lt; (SELECT MIN(salary) FROM employees WHERE job_id &#x3D; &#39;IT_PROG&#39;);	</code></pre>
+<h3 id="（2）放在select后面"><a href="#（2）放在select后面" class="headerlink" title="（2）放在select后面"></a>（2）放在select后面</h3><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 案例；查询部门编号是50的员工个数
+SELECT (SELECT COUNT(*) FROM employees WHERE department_id &#x3D; 50) 个数</code></pre>
+<h3 id="（3）放在from后面"><a href="#（3）放在from后面" class="headerlink" title="（3）放在from后面"></a>（3）放在from后面</h3><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 案例：查询每个部门的平均工资的工资级别 ---&gt; 先查询平均工资，再查询级别
+# 此处，两表连接的条件为 表1的某个属性在表2的某个区间内
+SELECT Avg_S_dep_id.department_id, Avg_S_dep_id.Avg_S, sal_grade.grade FROM sal_grade 
+		JOIN  (SELECT AVG(salary) Avg_S, department_id FROM employees GROUP BY department_id)  Avg_S_dep_id
+ON  Avg_S_dep_id.Avg_S BETWEEN sal_grade.min_salary AND sal_grade.max_salary;	</code></pre>
+<h3 id="（4）放在exists后面"><a href="#（4）放在exists后面" class="headerlink" title="（4）放在exists后面"></a>（4）放在exists后面</h3><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 案例1 ：查询有无名字叫“张三丰”的员工信息   有，返回1；无，返回0
+SELECT EXISTS (	SELECT * FROM employees WHERE last_name &#x3D; &quot;张三丰&quot;)；
+
+# 案例2：查询没有女朋友的男神信息
+USE girls;
+SELECT boys.* FROM boys WHERE NOT EXISTS (
+		SELECT boyfriend_id FROM beauty g,boys b WHERE b.id &#x3D; g.boyfriend_id);
+		
+SELECT b.* FROM boys b LEFT JOIN beauty g ON b.id &#x3D; g.boyfriend_id WHERE b.boyName IS NULL;
+
+# 案例3：查询没有男朋友的女生信息		
+SELECT g.* FROM beauty g WHERE g.boyfriend_id NOT IN (
+		SELECT boyfriend_id FROM beauty g,boys b WHERE g.boyfriend_id &#x3D; b.id);
+
+SELECT g.* FROM beauty g LEFT JOIN boys b ON b.id &#x3D; g.boyfriend_id WHERE b.boyName IS NULL;		</code></pre>
+<h3 id="（5）作业"><a href="#（5）作业" class="headerlink" title="（5）作业"></a>（5）作业</h3><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 1. 查询和Zlotkey相同部门的员工姓名和工资
+USE myemployees;
+SELECT last_name,salary FROM employees WHERE department_id &#x3D; (
+			SELECT department_id FROM employees WHERE last_name &#x3D; &quot;Zlotkey&quot;);
+# 2. 查询工资比公司平均工资高的员工的员工号，姓名和工资。
+SELECT employee_id,last_name,salary FROM employees WHERE salary &gt; (
+			SELECT MIN(salary) FROM employees);
+			
+# 3. 查询各部门中工资比本部门平均工资高的员工的员工号, 姓名和工资
+
+SELECT employee_id,last_name,salary ,aaa.department_id, aaa.min__salary
+FROM employees JOIN (SELECT department_id,MIN(salary) min__salary FROM employees GROUP BY department_id) aaa ON employees.department_id &#x3D; aaa.department_id WHERE salary&gt;min__salary ORDER BY employee_id;
+			
+# 4. 查询和姓名中包含字母u的员工在相同部门的员工的员工号和姓名
+SELECT employee_id,last_name FROM employees WHERE department_id IN (
+			SELECT department_id FROM employees WHERE last_name LIKE &#39;%u%&#39;);
+# 5. 查询在部门的location_id为1700的部门工作的员工的员工号
+SELECT employee_id FROM employees WHERE department_id &#x3D; (
+			SELECT department_id FROM departments WHERE location_id &#x3D; 1700);
+# 6. 查询管理者是King的员工姓名和工资
+SELECT last_name,salary FROM employees WHERE manager_id &#x3D; (
+			SELECT employee_id FROM employees WHERE last_name &#x3D; &quot;king&quot;); 
+# 7. 查询工资最高的员工的姓名，要求first_name和last_name显示为一列，列名为 姓.名
+SELECT CONCAT(first_name, last_name) 姓名 FROM employees WHERE salary IN (
+   SELECT MAX(salary) FROM employees );</code></pre>
+<h2 id="11-分页查询-LIMIT"><a href="#11-分页查询-LIMIT" class="headerlink" title="11.分页查询 LIMIT"></a>11.分页查询 LIMIT</h2><blockquote>
+<p>应用场景：当页面上的数据，一页显示不全，则需要分页显示</p>
+<p>分页查询的sql命令请求数据库服务器—-&gt;服务器响应查询到的多条数据—-&gt;前台页面</p>
+<p>语法：<br>        select 查询列表    from 表1 别名        join 表2 别名            on 连接条件<br>        where 筛选条件<br>        group by 分组            having 分组后筛选<br>        order by 排序列表<br>        <strong>limit</strong> 起始条目索引,显示的条目数</p>
+<p>执行顺序：<br>        1》from子句        2》join子句        3》on子句<br>        4》where子句        5》group by子句        6》having子句<br>        7》select子句        8》order by子句<br>        9》limit子句</p>
+<p>特点：<br>    ①起始条目索引如果不写，默认是0 !!!!<br>    ②limit后面支持两个参数<br>        参数1：显示的起始条目索引<br>        参数2：条目数</p>
+<p>公式：<br>    假如要显示的页数是page，每页显示的条目数为size，则<br>        select <em>from employees limit (page-1)</em>size,size;<br>​                page    size=10<br>​                1            limit 0,10<br>​                2            limit 10,10<br>​                3            limit 20,10<br>​                4            limit 30,10</p>
+</blockquote>
+<pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 案例1：查询员工信息表的前5条
+SELECT * FROM employees LIMIT 0,5;
+SELECT * FROM employees LIMIT 5;
+
+#案例2：查询有奖金的，且工资较高的第11名到第20名
+SELECT * FROM employees WHERE commission_pct IS NOT NULL ORDER BY salary LIMIT 10,10;
+
+# 练习：查询年薪最高的前10名
+SELECT *,salary*12*(1+IFNULL(commission_pct,0)) 年薪 FROM employees ORDER BY 年薪 DESC LIMIT 10;</code></pre>
+<h2 id="12-联合查询-UNION"><a href="#12-联合查询-UNION" class="headerlink" title="12.联合查询 UNION"></a>12.联合查询 UNION</h2><blockquote>
+<p>说明：当 查询结果 来自于 <strong>多张表</strong> ，但『<strong>多张表之间没有关联</strong>』，这个时候往往使用联合查询，也称为 union查询</p>
+<p>语法：<br>        select 查询列表 from 表1  where 筛选条件<br>        union<br>        select 查询列表 from 表2  where 筛选条件  </p>
+<p>特点：<br>    1、多条待联合的查询语句的<strong>查询列数必须一致</strong>，查询类型、字段意义最好一致<br>    2、<strong>union</strong>实现<strong>去重</strong>查询<br>          union all 实现全部查询，包含重复项</p>
+</blockquote>
+<pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 案例1：查询所有国家的年龄&gt;20岁的用户信息
+SELECT * FROM usa WHERE uage &gt;20 UNION 	SELECT * FROM chinese WHERE age &gt;20 ; 
+# 案例2：查询所有国家的用户姓名和年龄
+SELECT uname,uage FROM usa UNION  SELECT age,&#96;name&#96; FROM chinese;	 
+# 案例3：union自动去重 &#x2F; union all 可以支持重复项
+SELECT 1,&#39;范冰冰&#39;;
+SELECT 1,&#39;范冰冰&#39; UNION SELECT 1,&#39;范冰冰&#39;;
+SELECT 1,&#39;范冰冰&#39; UNION ALL SELECT 1,&#39;范冰冰&#39; UNION  ALL SELECT 1,&#39;范冰冰&#39; UNION  ALL SELECT 1,&#39;范冰冰&#39; ;</code></pre>
+<h2 id="13-DDL-库和表的管理"><a href="#13-DDL-库和表的管理" class="headerlink" title="13.DDL-库和表的管理"></a>13.DDL-库和表的管理</h2><p>DDL语言，即Data Define Language数据定义语言，用于对数据库和表的管理和操作</p>
+<h3 id="（1）库的管理"><a href="#（1）库的管理" class="headerlink" title="（1）库的管理"></a>（1）库的管理</h3><h4 id="创建数据库-CREATE"><a href="#创建数据库-CREATE" class="headerlink" title="创建数据库 CREATE"></a>创建数据库 CREATE</h4><pre class="language-mysql" data-language="mysql"><code class="language-mysql">CREATE DATABASE stuDB;
+CREATE DATABASE IF NOT EXISTS stuDB;</code></pre>
+<h4 id="删除数据库-DROP"><a href="#删除数据库-DROP" class="headerlink" title="删除数据库 DROP"></a>删除数据库 DROP</h4><pre class="language-mysql" data-language="mysql"><code class="language-mysql">DROP DATABASE stuDB;
+DROP DATABASE IF EXISTS stuDB;</code></pre>
+<h3 id="（2）表的管理"><a href="#（2）表的管理" class="headerlink" title="（2）表的管理"></a>（2）表的管理</h3><h4 id="创建表-CREATE"><a href="#创建表-CREATE" class="headerlink" title="创建表 CREATE"></a>创建表 CREATE</h4><blockquote>
+<p><strong>语法：</strong><br>        CREATE TABLE [IF NOT EXISTS] 表名(<br>                字段名  字段类型  【字段约束】,<br>                字段名  字段类型  【字段约束】,<br>                字段名  字段类型  【字段约束】,<br>                字段名  字段类型  【字段约束】,<br>                字段名  字段类型  【字段约束】);</p>
+<p><strong>数据类型：</strong><br>        1、整型：<br>                TINYINT SMALLINT  INT  BIGINT<br>        2、浮点型：<br>                FLOAT(m,n)  DOUBLE(m,n)  DECIMAL(m,n)  m和n可选<br>        3、字符型：<br>                CHAR(n):n可选； VARCHAR(n)：n必选；         TEXT<br>                其中，n表示最多字符个数<br>        4、日期型：<br>              DATE TIME     DATETIME     TIMESTAMP<br>        5、二进制型：<br>                BLOB 存储图片数据</p>
+<p><strong>常见约束：</strong></p>
+<p>​        1、NOT NULL 非空：用于限制该字段为必填项<br>​        2、DEFAULT 默认：用于限制该字段没有显式插入值，则直接显式默认值<br>​        3、PRIMARY KEY 主键：用于限制该字段值不能重复，设置为主键列的字段<strong>默认不能为空</strong>；<strong>一个表只能有一个主键</strong>，当然可以是组合主键<br>​        4、UNIQUE 唯一：用于限制该字段值不能重复<br>​                        字段是否可以为空        一个表可以有几个<br>​                                        主键    ×                                1个<br>​                                        唯一  √                                n个<br>​        5、CHECK检查：用于限制该字段值必须满足指定条件<br>​                    CHECK(age BETWEEN 1 AND 100)<br>​        6、FOREIGN KEY 外键:用于限制两个表的关系,要求『外键列的值』必须来自于『主表的关联列』<br>​        ① 主表的关联列 和 从表的关联列的类型必须一致，意思一样，名称无要求<br>​        ② 主表的关联列 要求必须是 主键</p>
+</blockquote>
+<pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 案例1：没有添加约束
+CREATE TABLE IF NOT EXISTS stuinfo(
+	stu_id INT,
+	stu_gender CHAR(1),
+	stu_name VARCHAR(20),
+	email VARCHAR(20),
+	borndtae DATETIME
+);
+# 案例2：添加约束
+DROP TABLE IF EXISTS stuinfo;
+CREATE TABLE IF NOT EXISTS stuinfo(
+	stu_id INT PRIMARY KEY,   # 添加了『主键约束』
+	stu_name VARCHAR(20) UNIQUE NOT NULL,   # 添加了『唯一约束』+ 非空
+	stu_gender CHAR(1) DEFAULT &#39;男&#39;,  # 添加了『默认约束』
+	email VARCHAR(20) NOT NULL,  # 非空
+	age INT CHECK (age BETWEEN 0 AND 100)   # 添加了检测约束
+)</code></pre>
+<h4 id="修改表-ALTER"><a href="#修改表-ALTER" class="headerlink" title="修改表 ALTER"></a>修改表 ALTER</h4><blockquote>
+<p><strong>ALTER</strong> TABLE 表名  ADD/MODIFY/CHANGE/DROP COLUMN 字段名 字段类型 【字段约束】</p>
+</blockquote>
+<pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 1.修改表名 RENAME TO
+ALTER TABLE stuinfo RENAME TO students;
+# 2.添加字段 ADD 
+ALTER TABLE students ADD COLUMN borndate TIMESTAMP NOT NULL;
+DESC students;
+# 3.修改字段名 CHANGE
+ALTER TABLE students CHANGE COLUMN borndate birthday DATETIME NULL;
+# 4.修改字段类型 MODIFY
+ALTER TABLE students MODIFY COLUMN birthday TIMESTAMP ;
+# 5.删除字段 DROP
+ALTER TABLE students DROP COLUMN birthday;
+
+DESC students;</code></pre>
+<h4 id="复制表-LIKE-SELECT"><a href="#复制表-LIKE-SELECT" class="headerlink" title="复制表 LIKE/SELECT"></a>复制表 LIKE/SELECT</h4><blockquote>
+<p>通过 LIKE 可以仅复制表的结构；</p>
+<p>通过 SELECT 可以结构和数据一起复制，也可仅复制结构（WHERE筛选下即可）</p>
+</blockquote>
+<pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 仅仅复制表的结构
+CREATE TABLE newTable2 LIKE major;
+# 复制表的结构+数据
+CREATE TABLE newTable3 SELECT * FROM girls.&#96;beauty&#96;;
+
+# 案例：复制employees表中的last_name,department_id,salary字段到新表 emp表，但不复制数据
+CREATE TABLE emp 
+	SELECT last_name,department_id,salary FROM myemployees.&#96;employees&#96; WHERE 1&#x3D;2;</code></pre>
+<h4 id="删除表-DROP-TRUNCATE-DELETE"><a href="#删除表-DROP-TRUNCATE-DELETE" class="headerlink" title="删除表 DROP/TRUNCATE/DELETE"></a>删除表 DROP/TRUNCATE/DELETE</h4><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 删除表的结构、数据，释放内存空间，删的一干二净
+DROP TABLE IF EXISTS students;
+
+# TRUNCATE 删除表的数据，并释放空间（不可以回滚恢复），但表的定义还在，即表的结构还在
+TRUNCATE test;
+
+# DELETE 可以删除指定数据，也可仅删除表的数据，保留表的结构,不释放空间（可以回滚恢复）
+DELETE FROM test WHERE age&#x3D;30 AND country&#x3D;&#39;US&#39;;
+DELETE * FROM test 或者 DELETE * FROM test;
+DELETE FROM test</code></pre>
+<h3 id="（3）作业"><a href="#（3）作业" class="headerlink" title="（3）作业"></a>（3）作业</h3><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 【作业-创建和管理表】
+# 1.创建表dep1
+CREATE TABLE IF NOT EXISTS dept1(
+	id INT(7),
+	name VARCHAR(25));
+DESC dept1;
+DROP table IF EXISTS dept1;
+# 2.将表departments中的数据插入到新表dept2
+CREATE TABLE dept2 SELECT * FROM departments;
+# 3.创建表emp5
+CREATE TABLE IF NOT EXISTS emp5(
+	id INT(7),
+	First_name VARCHAR(25),
+	Last_name VARCHAR(25),
+	Dept_id INT(7)
+);
+DESC emp5;
+# 4. 将列Last_name的长度增加到50
+ALTER TABLE emp5 MODIFY COLUMN Last_name VARCHAR(50);
+DESC emp5;
+# 5. 根据表employees创建employees2
+CREATE TABLE employees2 SELECT * FROM employees WHERE 1&#x3D;2;
+# 6. 删除表emp5
+DROP TABLE IF EXISTS emp5;
+# 7. 将表employees2重命名为emp5
+ALTER TABLE employees2 RENAME TO emp5;
+# 8.在表dept1和emp5中添加新列test_column，并检查所作的操作
+ALTER TABLE dept1 ADD COLUMN test_cOLUMN VARCHAR(20);
+
+ALTER TABLE dept1 DROP COLUMN test_column;
+ALTER TABLE dept1,emp5 ADD COLUMN test_COLUMN VARCHAR(20);  # 会报错
+
+# 9.直接删除表emp5中的列 dept_id
+ALTER TABLE emp5 DROP COLUMN dept_id;
+
+
+# 【作业-约束】
+# 1. 向表emp2的id列中添加PRIMARY KEY约束（my_emp_id_pk）
+ALTER TABLE emp2 ADD CONSISTENT my_emp_id_pk PRIMARY KEY(id);
+# 2. 向表dept2的id列中添加PRIMARY KEY约束（my_dept_id_pk）
+ALTER TABLE dept2 ADD CONSISTENT my_dept_id_pk PRIMARY KEY(id);;
+DESC dept2;
+# 3. 向表emp2中添加列dept_id，并在其中定义FOREIGN KEY约束，与之相关联的列是dept2表中的id列。
+ALTER TABLE emp2 ADD (dep_id number(10) CONSISTENT emp2_dept_id_fk REFERENCES dept2(id));</code></pre>
+<h2 id="14-DML数据操纵语言"><a href="#14-DML数据操纵语言" class="headerlink" title="14.DML数据操纵语言"></a>14.DML数据操纵语言</h2><h3 id="（1）数据插入-INSERT"><a href="#（1）数据插入-INSERT" class="headerlink" title="（1）数据插入 INSERT"></a>（1）数据插入 INSERT</h3><blockquote>
+<p>语法：<br>        插入单行：<br>                insert into 表名(字段名1,字段名2 ,…) values (值1，值2,…);<br>        插入多行：<br>                insert into 表名(字段名1,字段名2 ,…) values (值1，值2,…),(值1，值2,…);</p>
+<p>特点：<br>    ①字段和值列表一一对应,包含类型、约束等必须匹配</p>
+<p>​    ②<strong>数值型的值，不用单引号</strong>;<strong>非数值型的值，必须使用单引号</strong></p>
+<p>​    ③字段顺序无要求</p>
+</blockquote>
+<pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 案例1：要求字段和值列表一一对应，且遵循类型和约束的限制
+INSERT INTO stuinfo(stuid, stuname, stugender, email, age) VALUES(1,&#39;吴倩&#39;,&#39;男&#39;,&#39;wuqian@qq.com&#39;,12); 
+INSERT INTO stuinfo(stuid, stuname, stugender, email, age) VALUES(6,&#39;李宗盛&#39;,&#39;女&#39;,&#39;wuqian@qq.com&#39;,45); 
+
+# 案例2：插入空字段
+# 1.字段名和值都不写
+INSERT INTO stuinfo(stuid, stuname, email) VALUES(5,&#39;齐鱼&#39;,&#39;qiqin@qq.com&#39;); 
+# 2.字段名写上，值使用null
+DELETE FROM stuinfo WHERE stuname LIKE &#39;齐%&#39;;
+INSERT INTO stuinfo(stuid, stuname, email, age) VALUES(5,&#39;齐鱼&#39;,&#39;qiqin@qq.com&#39;, NULL); 
+
+# 案例3：默认字段如何插入
+# 1.字段名写上，值使用default
+INSERT INTO stuinfo(stuid,stuname,email,stugender) VALUES(7,&#39;齐小鱼&#39;,&#39;qiqin@qq.com&#39;,DEFAULT);   # 性别在创建表格时，默认default为男
+# 2.字段名和值都不写
+INSERT INTO stuinfo(stuid,stuname,email,majorid) VALUES(7,&#39;齐小鱼&#39;,&#39;qiqin@qq.com&#39;,2); 
+
+# 案例4：可以省略字段列表，默认所有字段
+INSERT INTO stuinfo VALUES(8,&#39;林忆莲&#39;,&#39;女&#39;,&#39;lin@126.com&#39;,12);
+INSERT INTO stuinfo VALUES(NULL,&#39;小黄&#39;,&#39;男&#39;,&#39;dd@12.com&#39;,12);</code></pre>
+<h3 id="（2）数据修改-UPDATE"><a href="#（2）数据修改-UPDATE" class="headerlink" title="（2）数据修改 UPDATE"></a>（2）数据修改 UPDATE</h3><blockquote>
+<p><strong>update</strong> 表名 <strong>set</strong> 字段名 = 新值,字段名=新值,…     where 筛选条件;</p>
+</blockquote>
+<pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 案例1：修改年龄&lt;20的专业编号为3号，且邮箱更改为 xx@qq.com
+UPDATE stuinfo SET majorid &#x3D; 3,email&#x3D;&#39;xx@qq.com&#39; WHERE age&lt;20;</code></pre>
+<h3 id="（3）数据-的删除-DELETE-TRUNCATE"><a href="#（3）数据-的删除-DELETE-TRUNCATE" class="headerlink" title="（3）数据 的删除 DELETE/TRUNCATE"></a>（3）数据 的删除 DELETE/TRUNCATE</h3><blockquote>
+<p>方式1：delete from 表名 where 筛选条件;<br>方式2：truncate table 表名;</p>
+</blockquote>
+<pre class="language-mysql" data-language="mysql"><code class="language-mysql">#案例1：删除姓李所有信息
+DELETE FROM stuinfo WHERE stuname LIKE &#39;李%&#39;;
+
+#案例2：删除表中所有数据
+TRUNCATE TABLE stuinfo ;
+DELETE * FROM stuinfo;
+
+&#x2F;*
+【面试题】delete和truncate的区别
+	1.delete可以添加WHERE条件
+  		TRUNCATE不能添加WHERE条件，一次性清除所有数据
+	2.truncate的效率较高
+	3.如果删除带自增长列的表，
+  		使用DELETE删除后，重新插入数据，记录从断点处开始
+  		使用TRUNCATE删除后，重新插入数据，记录从1开始
+  
+  		SELECT * FROM gradeinfo;
+  		TRUNCATE TABLE gradeinfo;
+  		INSERT INTO gradeinfo(gradename)VALUES(&#39;一年级&#39;),(&#39;2年级&#39;),(&#39;3年级&#39;);
+  
+	4.delete 删除数据，会返回受影响的行数
+  	  TRUNCATE删除数据，不返回受影响的行数
+  
+	5.delete删除数据，可以支持事务回滚
+  	  TRUNCATE删除数据，不支持事务回滚	
+*&#x2F;</code></pre>
+<h3 id="（4）作业"><a href="#（4）作业" class="headerlink" title="（4）作业"></a>（4）作业</h3><pre class="language-mysql" data-language="mysql"><code class="language-mysql">Create table my_employees(
+		Id int(10),
+		First_name varchar(10),
+		Last_name varchar(10),
+		Userid varchar(10),
+		Salary double(10,2));
+Create table users(
+		id int,
+		userid varchar(10),
+		department_id int);
+# 显示表my_employees的结构
+DESC my_employees;
+# 向my_employees表中插入数据
+INSERT INTO my_employees VALUES(1,&#39;patel&#39;,&#39;Ralph&#39;,&#39;Rpatel&#39;,895);
+INSERT INTO my_employees VALUES(2,&#39;Dancs&#39;,&#39;Betty&#39;,&#39;Bdancs&#39;,860);
+INSERT INTO my_employees VALUES(3,&#39;Biri&#39;,&#39;Ben&#39;,&#39;Bbiri&#39;,1100);
+INSERT INTO my_employees VALUES(4,&#39;Newman&#39;,&#39;Chad&#39;,&#39;Cnewman&#39;,750);
+INSERT INTO my_employees VALUES(5,&#39;Ropeburn&#39;,&#39;Audrey&#39;,&#39;Aropebur&#39;,1550);
+# 向User中插入数据
+INSERT INTO users VALUES(1,&#39;Rpatl&#39;,10);
+INSERT INTO users VALUES(2,&#39;Bdnacs&#39;,10);
+INSERT INTO users VALUES(3,&#39;Bbiri&#39;,20);
+INSERT INTO users VALUES(4,&#39;Cnewman&#39;,30);
+INSERT INTO users VALUES(5,&#39;Aropebur&#39;,40);
+# 将3号员工的last_name修改为“drelxer”
+UPDATE my_employees SET last_name &#x3D; &#39;drelxer&#39; WHERE ID &#x3D; 3;
+# 将所有工资少于900的员工的工资修改为1000
+UPDATE my_employees SET salary &#x3D; 1000 WHERE salary &lt; 1000;
+# 将userid 为Bbiri的user表和my_employees表的记录全部删除
+DELETE FROM my_employees,users WHERE users.userid &#x3D; &#39;Bbiri&#39; AND my_employees.Id &#x3D; users.id;
+DELETE FROM users WHERE users.userid &#x3D; &#39;Bbiri&#39;;
+DELETE FROM my_employees WHERE Userid &#x3D; &#39;Bbiri&#39;;
+
+# 删除所有数据
+DELETE FROM users;
+# 检查所作的修正
+
+# 清空表my_employees
+TRUNCATE my_employees;</code></pre>
+<h2 id="15-设置自增长列-AUTO-INCREMENT"><a href="#15-设置自增长列-AUTO-INCREMENT" class="headerlink" title="15.设置自增长列 AUTO_INCREMENT"></a>15.设置自增长列 AUTO_INCREMENT</h2><blockquote>
+<p>1、自增长列要求必须设置在一个键上，比如 主键或唯一键<br>2、自增长列要求数据类型为 数值型<br>3、一个表 至多 有一个自增长列</p>
+</blockquote>
+<pre class="language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE gradeinfo(
+	gradeID INT PRIMARY KEY AUTO_INCREMENT,
+	gradeName VARCHAR(20)
+);
+
+SELECT * FROM gradeinfo;
+
+INSERT INTO gradeinfo VALUES(NULL,&#39;一年级&#39;),(NULL,&#39;2年级&#39;),(NULL,&#39;3年级&#39;);
+INSERT INTO gradeinfo(gradename)VALUES(&#39;一年级&#39;),(&#39;2年级&#39;),(&#39;3年级&#39;);</code></pre>
+<h2 id="16-事务"><a href="#16-事务" class="headerlink" title="16.事务"></a>16.事务</h2><blockquote>
+<p>概念：<br>        由一条或多条sql语句组成，要么都成功，要么都失败</p>
+<p>特性：ACID，即原子性、一致性、隔离性、持久性</p>
+<p>分类：<br>        隐式事务：没有明显的开启和结束标记<br>                比如dml语句的insert、update、delete语句本身就是一条事务<br>                insert into stuinfo values(1,’john’,’男’,’ert@dd.com’,12);<br>        显式事务：具有明显的开启和结束标记<br>                一般由多条sql语句组成，必须具有明显的开启和结束标记</p>
+<p><strong>步骤：</strong><br>    取消隐式事务自动开启的功能<br>    1、开启事务<br>    2、编写事务需要的sql语句（1条或多条）<br>        insert into stuinfo values(1,’john’,’男’,’ert@dd.com’,12);<br>        insert into stuinfo values(1,’john’,’男’,’ert@dd.com’,12);<br>    3、结束事务</p>
+</blockquote>
+<pre class="language-mysql" data-language="mysql"><code class="language-mysql">SHOW VARIABLES LIKE &#39;%auto%&#39;
+
+# 演示事务的使用步骤
+# 1、取消事务自动开启
+SET autocommit &#x3D; 0;
+# 2、开启事务
+START TRANSACTION;
+# 3、编写事务的sql语句
+# 将张三丰的钱-5000、灭绝的钱+5000
+UPDATE stuinfo SET balance&#x3D;balance-5000 WHERE stuid &#x3D; 1;
+UPDATE stuinfo SET balance&#x3D;balance+5000 WHERE stuid &#x3D; 2;
+# 4、结束事务
+
+#提交
+commit;
+#回滚
+ROLLBACK;
+SELECT * FROM stuinfo;</code></pre>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/MySQL/">MySQL</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/e1fa0be1/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java基础自查手册</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/22f7db08/">
+                        <span class="hidden-mobile">懒狗必备--检测服务器空卡并邮件告知用户</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "ViwB1XmjsmmXpFx2gikUmM5V-gzGzoHsz",
+          app_key: "7r6Y8CzBkl8MJwPNmCqSdLWW",
+          placeholder: "来都来了，不说点什么吗⊙(・◇・)？",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <i class="iconfont icon-tags-fill"></i>&nbsp;<a href="http://www.beian.miit.gov.cn/" target="_blank">鲁ICP备19062448号</a>&nbsp&nbsp;| &nbsp&nbsp <i class="iconfont icon-addrcard"></i>&nbsp; 2018~2022<a href="https://www.jngwl.top/" target="_blank"> 清风与归_G</a>&nbsp&nbsp;|&nbsp&nbsp;  <i class="iconfont icon-docker"></i> <a href="https://hexo.io/" target="_blank">&nbsp Hexo</a>&nbsp & &nbsp <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank">Fluid</a><br> 你的骄傲多半来自于自己的无知，共勉之
+
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

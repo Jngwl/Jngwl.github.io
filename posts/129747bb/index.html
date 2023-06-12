@@ -1,0 +1,823 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" type="image/png" href="/img/favicon.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="清风与归_G">
+  <meta name="keywords" content="">
+  <title>MySQL进阶 - 清风与归_G</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://cdn.staticfile.org/prism/1.22.0/themes/prism-tomorrow.min.css" />
+      
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.jngwl.top","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"ViwB1XmjsmmXpFx2gikUmM5V-gzGzoHsz","app_key":"7r6Y8CzBkl8MJwPNmCqSdLWW","server_url":"https://viwb1xmj.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>清风与归_G</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201121211851.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="MySQL进阶">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-06-21 22:38" pubdate>
+        2021年6月21日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      43
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">MySQL进阶</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年11月2日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="一、MySql中常用工具"><a href="#一、MySql中常用工具" class="headerlink" title="一、MySql中常用工具"></a>一、MySql中常用工具</h2><h3 id="（1）-mysql"><a href="#（1）-mysql" class="headerlink" title="（1） mysql"></a>（1） mysql</h3><p>该mysql不是指mysql服务，而是指<strong>mysql的客户端工具</strong>。</p>
+<p>语法 ：</p>
+<pre class="language-none"><code class="language-none">mysql [options] [database]</code></pre>
+<h5 id="⚡-连接选项"><a href="#⚡-连接选项" class="headerlink" title="⚡ 连接选项"></a>⚡ 连接选项</h5><pre class="language-none"><code class="language-none">参数 ： 
+	-h, --host&#x3D;addr			指定服务器IP或域名
+	-P, --port&#x3D;3306			指定连接端口
+	-u, --user&#x3D;name			指定用户名
+	-p, --password[&#x3D;name]	指定密码
+
+示例 ：
+	mysql -h 127.0.0.1 -P 3306 -u root -p
+	
+	mysql -h127.0.0.1 -P3306 -uroot -p2143
+	</code></pre>
+<h5 id="⚡-执行选项"><a href="#⚡-执行选项" class="headerlink" title="⚡ 执行选项"></a>⚡ 执行选项</h5><pre class="language-none"><code class="language-none">-e, --execute&#x3D;name		执行SQL语句并退出</code></pre>
+<p>此选项可以在Mysql客户端执行SQL语句，而不用连接到MySQL数据库再执行，对于一些批处理脚本，这种方式尤其方便。</p>
+<pre class="language-none"><code class="language-none">示例：
+	mysql -uroot -p2143 db01 -e &quot;select * from tb_book&quot;;</code></pre>
+<h3 id="（2）mysqladmin"><a href="#（2）mysqladmin" class="headerlink" title="（2）mysqladmin"></a>（2）mysqladmin</h3><p>mysqladmin 是一个<strong>执行管理操作</strong>的客户端程序。可以用它来检查服务器的配置和当前状态、创建并删除数据库等。</p>
+<p>可以通过 ： mysqladmin —help  指令查看帮助文档</p>
+<pre class="language-none"><code class="language-none">示例 ：
+	mysqladmin -uroot -proot create &#39;test01&#39;;  
+	mysqladmin -uroot -proot drop &#39;test01&#39;;
+	mysqladmin -uroot -proot version;
+	</code></pre>
+<h3 id="（3）-mysqlbinlog"><a href="#（3）-mysqlbinlog" class="headerlink" title="（3） mysqlbinlog"></a>（3） mysqlbinlog</h3><p>由于服务器生成的二进制日志文件以二进制格式保存，所以如果想要检查这些文本的文本格式，就会使用到mysqlbinlog 日志管理工具。</p>
+<p>语法 ：</p>
+<pre class="language-none"><code class="language-none">mysqlbinlog [options]  log-files1 log-files2 ...
+
+选项：
+	
+	-d, --database&#x3D;name : 指定数据库名称，只列出指定的数据库相关操作。
+	
+	-o, --offset&#x3D;# : 忽略掉日志中的前n行命令。
+	
+	-r,--result-file&#x3D;name : 将输出的文本格式日志输出到指定文件。
+	
+	-s, --short-form : 显示简单格式， 省略掉一些信息。
+	
+	--start-datatime&#x3D;date1  --stop-datetime&#x3D;date2 : 指定日期间隔内的所有日志。
+	
+	--start-position&#x3D;pos1 --stop-position&#x3D;pos2 : 指定位置间隔内的所有日志。</code></pre>
+<h3 id="（4）-mysqldump"><a href="#（4）-mysqldump" class="headerlink" title="（4） mysqldump"></a>（4） mysqldump</h3><p>mysqldump 客户端工具用来备份数据库或在不同数据库之间进行数据迁移。备份内容包含创建表，及插入表的SQL语句。</p>
+<pre class="language-none"><code class="language-none">mysqldump [options] db_name [tables]
+
+mysqldump [options] --database&#x2F;-B db1 [db2 db3...]
+
+mysqldump [options] --all-databases&#x2F;-A</code></pre>
+<h5 id="1-4-1-连接选项"><a href="#1-4-1-连接选项" class="headerlink" title="1.4.1 连接选项"></a>1.4.1 连接选项</h5><pre class="language-none"><code class="language-none">参数 ： 
+	-u, --user&#x3D;name			指定用户名
+	-p, --password[&#x3D;name]	指定密码
+	-h, --host&#x3D;name			指定服务器IP或域名
+	-P, --port&#x3D;#			指定连接端口</code></pre>
+<h5 id="1-4-2-输出内容选项"><a href="#1-4-2-输出内容选项" class="headerlink" title="1.4.2 输出内容选项"></a>1.4.2 输出内容选项</h5><pre class="language-none"><code class="language-none">参数：
+	--add-drop-database		在每个数据库创建语句前加上 Drop database 语句
+	--add-drop-table		在每个表创建语句前加上 Drop table 语句 , 默认开启 ; 不开启 (--skip-add-drop-table)
+	
+	-n, --no-create-db		不包含数据库的创建语句
+	-t, --no-create-info	不包含数据表的创建语句
+	-d --no-data			不包含数据
+	
+	 -T, --tab&#x3D;name			自动生成两个文件：一个.sql文件，创建表结构的语句；
+	 						一个.txt文件，数据文件，相当于select into outfile  </code></pre>
+<pre class="language-mysql" data-language="mysql"><code class="language-mysql">示例 ： 
+	mysqldump -uroot -p2143 db01 tb_book --add-drop-database --add-drop-table &gt; db01_book.sql
+	
+	mysqldump -uroot -p2143 -T &#x2F;tmp db01 tb_book</code></pre>
+<h3 id="（5）mysqlimport-source"><a href="#（5）mysqlimport-source" class="headerlink" title="（5）mysqlimport/source"></a>（5）mysqlimport/source</h3><p>mysqlimport 是客户端数据导入工具，用来导入mysqldump 加 -T 参数后导出的文本文件。</p>
+<p>语法：</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql">mysqlimport <span class="token punctuation">[</span>options<span class="token punctuation">]</span>  db_name  textfile1  <span class="token punctuation">[</span>textfile2<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span>
+
+mysqlimport <span class="token operator">-</span>uroot <span class="token operator">-</span>p2143 test <span class="token operator">/</span>tmp<span class="token operator">/</span>city<span class="token punctuation">.</span>txt</code></pre>
+<p>如果需要导入sql文件,可以使用mysql中的source 指令 : </p>
+<pre class="language-sql" data-language="sql"><code class="language-sql">source <span class="token operator">/</span>root<span class="token operator">/</span>tb_book<span class="token punctuation">.</span><span class="token keyword">sql</span></code></pre>
+<h4 id="（6）mysqlshow"><a href="#（6）mysqlshow" class="headerlink" title="（6）mysqlshow"></a>（6）mysqlshow</h4><p>mysqlshow 客户端对象查找工具，用来很快地查找存在哪些数据库、数据库中的表、表中的列或者索引。</p>
+<p>语法：</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql">mysqlshow <span class="token punctuation">[</span>options<span class="token punctuation">]</span> <span class="token punctuation">[</span>db_name <span class="token punctuation">[</span>table_name <span class="token punctuation">[</span>col_name<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+
+<span class="token comment">--count		显示数据库及表的统计信息（数据库，表 均可以不指定）</span>
+<span class="token operator">-</span>i			显示指定数据库或者指定表的状态信息</code></pre>
+<p>示例：</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token comment">#查询每个数据库的表的数量及表中记录的数量</span>
+mysqlshow <span class="token operator">-</span>uroot <span class="token operator">-</span>p2143 <span class="token comment">--count</span>
+
+<span class="token comment">#查询test库中每个表中的字段书，及行数</span>
+mysqlshow <span class="token operator">-</span>uroot <span class="token operator">-</span>p2143 test <span class="token comment">--count</span>
+
+<span class="token comment">#查询test库中book表的详细情况</span>
+mysqlshow <span class="token operator">-</span>uroot <span class="token operator">-</span>p2143 test book <span class="token comment">--count</span></code></pre>
+<h2 id="二、-Mysql-日志"><a href="#二、-Mysql-日志" class="headerlink" title="二、 Mysql 日志"></a>二、 Mysql 日志</h2><p>在任何一种数据库中，都会有各种各样的日志，记录着数据库工作的方方面面，以帮助数据库管理员追踪数据库曾经发生过的各种事件。MySQL 也不例外，在 MySQL 中，有 4 种不同的日志，分别是错误日志、二进制日志（BINLOG 日志）、查询日志和慢查询日志，这些日志记录着数据库在不同方面的踪迹。</p>
+<h3 id="1-错误日志"><a href="#1-错误日志" class="headerlink" title="1. 错误日志"></a>1. 错误日志</h3><p>错误日志是 MySQL 中最重要的日志之一，它记录了当 mysqld 启动和停止时，以及服务器在运行过程中发生任何严重错误时的相关信息。当数据库出现任何故障导致无法正常使用时，可以首先查看此日志。</p>
+<ul>
+<li><p>该日志是默认开启的 ， 默认存放目录为 mysql 的数据目录（<code>var/lib/mysql</code>）, 默认的日志文件名为  <code>hostname.err</code>（hostname是主机名）。</p>
+</li>
+<li><p>查看日志位置指令 ： <code>show variables like &#39;log_error%&#39;;</code></p>
+</li>
+<li><p>查看日志内容 ： <code>tail -f /var/lib/mysql/xaxh-server.err</code></p>
+</li>
+</ul>
+<h3 id="2-二进制日志"><a href="#2-二进制日志" class="headerlink" title="2. 二进制日志"></a>2. 二进制日志</h3><h4 id="（1）概述"><a href="#（1）概述" class="headerlink" title="（1）概述"></a>（1）概述</h4><p>二进制日志（BINLOG）记录了<strong>所有的 DDL（数据定义语言）语句和 DML（数据操纵语言）语句</strong>，但是不包括数据查询语句。此日志对于灾难时的数据恢复起着极其重要的作用，<strong>MySQL的主从复制</strong>， 就是通过该binlog实现的。</p>
+<p>二进制日志，默认情况下是没有开启的，需要到MySQL的配置文件中开启，并配置MySQL日志的格式。 </p>
+<p>配置文件位置 : <code>/etc/mysql/my.cnf</code></p>
+<p>日志存放位置 : 配置时，给定了文件名但是没有指定路径，日志默认写入Mysql的数据目录。</p>
+<pre class="language-none"><code class="language-none">#配置开启binlog日志， 日志的文件前缀为 mysqlbin -----&gt; 生成的文件名如 : mysqlbin.000001,mysqlbin.000002
+log_bin&#x3D;mysqlbin
+
+#配置二进制日志的格式
+binlog_format&#x3D;STATEMENT</code></pre>
+<h4 id="（2）-binlog日志格式"><a href="#（2）-binlog日志格式" class="headerlink" title="（2） binlog日志格式"></a>（2） binlog日志格式</h4><ul>
+<li><p><strong>STATEMENT</strong></p>
+<p>该日志格式在日志文件中记录的都是<strong>SQL语句（statement）</strong>，每一条对数据进行修改的SQL都会记录在日志文件中，通过Mysql提供的mysqlbinlog工具，可以清晰的查看到每条语句的文本。主从复制的时候，从库（slave）会将日志解析为原文本，并在从库重新执行一次。</p>
+</li>
+<li><p><strong>ROW</strong></p>
+<p>该日志格式在日志文件中记录的是<strong>每一行的数据变更</strong>，而不是记录SQL语句。比如，执行SQL语句 ： update tb_book set status=’1’ , 如果是STATEMENT 日志格式，在日志中会记录一行SQL文件； 如果是ROW，由于是对全表进行更新，也就是每一行记录都会发生变更，ROW 格式的日志中会记录每一行的数据变更。</p>
+</li>
+<li><p><strong>MIXED</strong></p>
+<p>这是<strong>目前MySQL默认的日志格式</strong>，即混合了STATEMENT 和 ROW两种格式。</p>
+<p>默认情况下采用STATEMENT，但是在一些特殊情况下(比如now函数)采用ROW来进行记录。MIXED 格式能尽量利用两种模式的优点，而避开他们的缺点。</p>
+</li>
+</ul>
+<h4 id="（3）读取binlog日志"><a href="#（3）读取binlog日志" class="headerlink" title="（3）读取binlog日志"></a>（3）读取binlog日志</h4><p>由于日志以二进制方式存储，不能直接读取，需要用mysqlbinlog工具来查看，语法如下 ：</p>
+<pre class="language-none"><code class="language-none">mysqlbinlog log-file；</code></pre>
+<p>⚡<strong>查看STATEMENT格式日志</strong> </p>
+<p>执行插入语句 ：</p>
+<pre class="language-SQL" data-language="SQL"><code class="language-SQL">insert into tb_book values(null,&#39;Lucene&#39;,&#39;2088-05-01&#39;,&#39;0&#39;);</code></pre>
+<p> 查看日志文件 ：</p>
+<p><img src="D:\资料\数据库\黑马--数据库高级\MySQL 高级 - day-04\文档\assets\1554079717375.png" srcset="/img/loading.gif" alt="1554079717375"> </p>
+<p>mysqlbin.index : 该文件是日志索引文件 ， 记录日志的文件名；</p>
+<p>mysqlbing.000001 ：日志文件</p>
+<p>查看日志内容 ：</p>
+<pre class="language-none"><code class="language-none">mysqlbinlog mysqlbing.000001；</code></pre>
+<p><img src="D:\资料\数据库\黑马--数据库高级\MySQL 高级 - day-04\文档\assets\1554080016778.png" srcset="/img/loading.gif" alt="1554080016778"> </p>
+<p>⚡<strong>查看ROW格式日志</strong></p>
+<p>配置 :</p>
+<pre class="language-none"><code class="language-none">#配置开启binlog日志， 日志的文件前缀为 mysqlbin -----&gt; 生成的文件名如 : mysqlbin.000001,mysqlbin.000002
+log_bin&#x3D;mysqlbin
+
+#配置二进制日志的格式
+binlog_format&#x3D;ROW</code></pre>
+<p>插入数据 :</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">insert</span> <span class="token keyword">into</span> tb_book <span class="token keyword">values</span><span class="token punctuation">(</span><span class="token boolean">null</span><span class="token punctuation">,</span><span class="token string">'SpringCloud实战'</span><span class="token punctuation">,</span><span class="token string">'2088-05-05'</span><span class="token punctuation">,</span><span class="token string">'0'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>如果日志格式是 ROW , 直接查看数据 , 是查看不懂的 ; 可以在mysqlbinlog 后面加上参数 -vv  </p>
+<pre class="language-SQL" data-language="SQL"><code class="language-SQL">mysqlbinlog -vv mysqlbin.000002 </code></pre>
+<p><img src="D:\资料\数据库\黑马--数据库高级\MySQL 高级 - day-04\文档\assets\1554095452022.png" srcset="/img/loading.gif" alt="1554095452022"> </p>
+<h4 id="（4）删除binlog"><a href="#（4）删除binlog" class="headerlink" title="（4）删除binlog"></a>（4）删除binlog</h4><p>对于比较繁忙的系统，由于每天生成日志量大 ，这些日志如果长时间不清楚，将会占用大量的磁盘空间。下面我们将会讲解几种删除日志的常见方法 ：</p>
+<p><strong>方式一</strong> </p>
+<p>通过 Reset Master 指令删除全部 binlog 日志，删除之后，日志编号，将从 xxxx.000001重新开始 。</p>
+<p>查询之前 ，先查询下日志文件 ： </p>
+<p><img src="D:\资料\数据库\黑马--数据库高级\MySQL 高级 - day-04\文档\assets\1554118609489.png" srcset="/img/loading.gif" alt="1554118609489">   </p>
+<p>执行删除日志指令： </p>
+<pre class="language-none"><code class="language-none">Reset Master</code></pre>
+<p>执行之后， 查看日志文件 ：</p>
+<p><img src="D:\资料\数据库\黑马--数据库高级\MySQL 高级 - day-04\文档\assets\1554118675264.png" srcset="/img/loading.gif" alt="1554118675264"> </p>
+<p><strong>方式二</strong>：执行指令 <code>purge  master logs to &#39;mysqlbin.******&#39;</code> ，该命令将删除  <code>******</code> 编号之前的所有日志。 </p>
+<p><strong>方式三</strong>：执行指令 <code>purge master logs before &#39;yyyy-mm-dd hh24:mi:ss&#39;</code> ，该命令将删除日志为 “yyyy-mm-dd hh24:mi:ss” 之前产生的所有日志 。</p>
+<p><strong>方式四</strong>：设置参数 —expire_logs_days=# ，此参数的含义是设置日志的过期天数， 过了指定的天数后日志将会被自动删除，这样将有利于减少DBA 管理日志的工作量。</p>
+<p><img src="D:\资料\数据库\黑马--数据库高级\MySQL 高级 - day-04\文档\assets\1554125506938.png" srcset="/img/loading.gif" alt="1554125506938"> </p>
+<h3 id="3-查询日志"><a href="#3-查询日志" class="headerlink" title="3. 查询日志"></a>3. 查询日志</h3><p>查询日志中记录了客户端的所有操作语句，而二进制日志不包含查询数据的SQL语句。</p>
+<p>默认情况下， 查询日志是未开启的。如果需要开启查询日志，可以设置以下配置 ：</p>
+<pre class="language-none"><code class="language-none">#该选项用来开启查询日志 ， 可选值 ： 0 或者 1 ； 0 代表关闭， 1 代表开启 
+general_log&#x3D;1
+
+#设置日志的文件名 ， 如果没有指定， 默认的文件名为 host_name.log 
+general_log_file&#x3D;file_name</code></pre>
+<p>在 mysql 的配置文件 /etc/mysql/my.cnf 中配置如下内容 ： </p>
+<p><img src="D:\资料\数据库\黑马--数据库高级\MySQL 高级 - day-04\文档\assets\1554128184632.png" srcset="/img/loading.gif" alt="1554128184632"> </p>
+<p>配置完毕之后，在数据库执行以下操作 ：</p>
+<pre class="language-none"><code class="language-none">select * from tb_book;
+select * from tb_book where id &#x3D; 1;
+update tb_book set name &#x3D; &#39;lucene入门指南&#39; where id &#x3D; 5;
+select * from tb_book where id &lt; 8;</code></pre>
+<p>执行完毕之后， 再次来查询日志文件 ： </p>
+<p><img src="D:\资料\数据库\黑马--数据库高级\MySQL 高级 - day-04\文档\assets\1554128089851.png" srcset="/img/loading.gif" alt="1554128089851"> </p>
+<h3 id="4-慢查询日志"><a href="#4-慢查询日志" class="headerlink" title="4. 慢查询日志"></a>4. 慢查询日志</h3><p>慢查询日志记录了所有执行时间超过参数 long_query_time 设置值并且扫描记录数不小于 min_examined_row_limit 的所有的SQL语句的日志。long_query_time 默认为 10 秒，最小为 0， 精度可以到微秒。</p>
+<h4 id="（1）慢查询日志-文件位置和格式"><a href="#（1）慢查询日志-文件位置和格式" class="headerlink" title="（1）慢查询日志 文件位置和格式"></a>（1）慢查询日志 文件位置和格式</h4><p>慢查询日志默认是关闭的 。可以通过两个参数来控制慢查询日志 ：</p>
+<pre class="language-none"><code class="language-none"># 该参数用来控制慢查询日志是否开启， 可取值： 1 和 0 ， 1 代表开启， 0 代表关闭
+slow_query_log&#x3D;1 
+
+# 该参数用来指定慢查询日志的文件名
+slow_query_log_file&#x3D;slow_query.log
+
+# 该选项用来配置查询的时间限制， 超过这个时间将认为值慢查询， 将需要进行日志记录， 默认10s
+long_query_time&#x3D;10</code></pre>
+<h4 id="（2）慢查询日志的读取"><a href="#（2）慢查询日志的读取" class="headerlink" title="（2）慢查询日志的读取"></a>（2）慢查询日志的读取</h4><p>和错误日志、查询日志一样，慢查询日志记录的格式也是<strong>纯文本</strong>，可以被直接读取。</p>
+<p>1） 查询long_query_time 的值。</p>
+<p><img src="D:\资料\数据库\黑马--数据库高级\MySQL 高级 - day-04\文档\assets\1554130333472.png" srcset="/img/loading.gif" alt="1554130333472"> </p>
+<p>2） 执行查询操作</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">select</span> id<span class="token punctuation">,</span> title<span class="token punctuation">,</span>price<span class="token punctuation">,</span>num <span class="token punctuation">,</span><span class="token keyword">status</span> <span class="token keyword">from</span> tb_item <span class="token keyword">where</span> id <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span></code></pre>
+<p><img src="D:\资料\数据库\黑马--数据库高级\MySQL 高级 - day-04\文档\assets\1554130448709.png" srcset="/img/loading.gif" alt="1554130448709"></p>
+<p>由于该语句执行时间很短，为0s ， 所以不会记录在慢查询日志中。</p>
+<pre class="language-none"><code class="language-none">select * from tb_item where title like &#39;%阿尔卡特 (OT-927) 炭黑 联通3G手机 双卡双待165454%&#39; ;</code></pre>
+<p><img src="D:\资料\数据库\黑马--数据库高级\MySQL 高级 - day-04\文档\assets\1554130532577.png" srcset="/img/loading.gif" alt="1554130532577"> </p>
+<p>该SQL语句 ， 执行时长为 26.77s ，超过10s ， 所以会记录在慢查询日志文件中。</p>
+<p>3） 查看慢查询日志文件</p>
+<p>直接通过cat 指令查询该日志文件 ： </p>
+<p><img src="D:\资料\数据库\黑马--数据库高级\MySQL 高级 - day-04\文档\assets\1554130669360.png" srcset="/img/loading.gif" alt="1554130669360"> </p>
+<p>如果慢查询日志内容很多， 直接查看文件，比较麻烦， 这个时候可以借助于mysql自带的 mysqldumpslow 工具， 来对慢查询日志进行分类汇总。 </p>
+<p><img src="D:\资料\数据库\黑马--数据库高级\MySQL 高级 - day-04\文档\assets\1554130856485.png" srcset="/img/loading.gif" alt="1554130856485"> </p>
+<h2 id="三、-Mysql主从复制"><a href="#三、-Mysql主从复制" class="headerlink" title="三、 Mysql主从复制"></a>三、 Mysql主从复制</h2><h3 id="（1）复制概述"><a href="#（1）复制概述" class="headerlink" title="（1）复制概述"></a>（1）复制概述</h3><p>复制是指将主数据库的DDL 和 DML 操作通过二进制日志binlog传到从库服务器中，然后在从库上对这些日志重新执行，从而使得从库和主库的数据保持同步。</p>
+<blockquote>
+<p> MySQL支持<strong>一台主库</strong>同时向多台从库进行复制， 从库同时也可以作为其他从服务器的主库，实现链状复制。</p>
+</blockquote>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/202109051642991.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><strong>从上层来看，主从复制分成三步：</strong></p>
+<ul>
+<li>Master 主库在事务提交时，会把数据变更作为时间 Events 记录在二进制日志文件 Binlog 中。</li>
+<li><p>主库推送二进制日志文件 Binlog 中的日志事件到从库的中继日志 Relay Log 。</p>
+</li>
+<li><p>slave重做中继日志中的事件，将改变反映它自己的数据。</p>
+</li>
+</ul>
+<p><strong>MySQL 主从复制的优点主要包含以下三个方面：</strong></p>
+<ul>
+<li><p>主库出现问题，可以快速切换到从库提供服务。</p>
+</li>
+<li><p>可以在从库上执行查询操作，从主库中更新，实现读写分离，降低主库的访问压力。</p>
+</li>
+<li><p>可以在从库中执行备份，以避免备份期间影响主库的服务。</p>
+</li>
+</ul>
+<h3 id="（2）主从库-搭建步骤"><a href="#（2）主从库-搭建步骤" class="headerlink" title="（2）主从库 搭建步骤"></a>（2）主从库 搭建步骤</h3><h4 id="⚡-master-主库"><a href="#⚡-master-主库" class="headerlink" title="⚡ master 主库"></a>⚡ master 主库</h4><p>1） 在master 的配置文件（/etc/mysql/my.cnf）中，配置如下内容：</p>
+<pre class="language-properties" data-language="properties"><code class="language-properties"><span class="token comment">#mysql 服务ID,保证整个集群环境中唯一</span>
+<span class="token attr-name">server-id</span><span class="token punctuation">=</span><span class="token attr-value">1</span>
+
+<span class="token comment">#mysql binlog 日志的存储路径和文件名,需先chmod 777 /var/log/mysql赋予权限</span>
+<span class="token comment">#创建容器时，/mydata/mysql/log已和/var/log/mysql进行了关联</span>
+<span class="token attr-name">log-bin</span><span class="token punctuation">=</span><span class="token attr-value">/var/log/mysql/mysqlbin</span>
+
+<span class="token comment">#是否只读,1 代表只读, 0 代表读写</span>
+<span class="token attr-name">read-only</span><span class="token punctuation">=</span><span class="token attr-value">0</span>
+
+<span class="token comment">#忽略的数据, 指不需要同步的数据库</span>
+<span class="token attr-name">binlog-ignore-db</span><span class="token punctuation">=</span><span class="token attr-value">mysql</span>
+
+<span class="token comment">#指定同步的数据库</span>
+<span class="token comment">#binlog-do-db=db01</span></code></pre>
+<p>2） 执行完毕之后，需要重启Mysql：</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql">docker restart mysql</code></pre>
+<p>3） 创建同步数据的账户，并且进行授权操作：</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">grant</span> <span class="token keyword">replication</span> slave <span class="token keyword">on</span> <span class="token operator">*</span><span class="token punctuation">.</span><span class="token operator">*</span> <span class="token keyword">to</span> <span class="token string">'root'</span><span class="token variable">@'192.168.56.11'</span> identified <span class="token keyword">by</span> <span class="token string">'root'</span><span class="token punctuation">;</span>	
+
+flush <span class="token keyword">privileges</span><span class="token punctuation">;</span></code></pre>
+<p>4） 查看master状态：</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">show</span> master <span class="token keyword">status</span><span class="token punctuation">;</span></code></pre>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/202109051642036.png" srcset="/img/loading.gif" alt=""></p>
+<p>字段含义：</p>
+<pre class="language-none"><code class="language-none">File : 从哪个日志文件开始推送日志文件 
+Position ： 从哪个位置开始推送日志
+Binlog_Ignore_DB : 指定不需要同步的数据库</code></pre>
+<h4 id="⚡-slave-从库"><a href="#⚡-slave-从库" class="headerlink" title="⚡ slave 从库"></a>⚡ slave 从库</h4><p>1） 在 slave 端配置文件中，配置如下内容：</p>
+<pre class="language-properties" data-language="properties"><code class="language-properties"><span class="token comment">#mysql服务端ID,唯一</span>
+<span class="token attr-name">server-id</span><span class="token punctuation">=</span><span class="token attr-value">2</span>
+
+<span class="token comment">#指定binlog日志</span>
+<span class="token attr-name">log-bin</span><span class="token punctuation">=</span><span class="token attr-value">/var/log/mysql/mysqlbin</span></code></pre>
+<p>2）  执行完毕之后，需要重启Mysql：</p>
+<pre class="language-none"><code class="language-none">service mysql restart；</code></pre>
+<p>3） 执行如下指令 ：</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql">change master <span class="token keyword">to</span> master_host<span class="token operator">=</span> <span class="token string">'192.168.56.10'</span><span class="token punctuation">,</span> master_user<span class="token operator">=</span><span class="token string">'root'</span><span class="token punctuation">,</span> master_password<span class="token operator">=</span><span class="token string">'root'</span><span class="token punctuation">,</span> master_log_file<span class="token operator">=</span><span class="token string">'mysqlbin.000001'</span><span class="token punctuation">,</span> master_log_pos<span class="token operator">=</span><span class="token number">154</span><span class="token punctuation">;</span></code></pre>
+<p>指定当前从库对应的主库的IP地址，用户名，密码，从哪个日志文件开始的那个位置开始同步推送日志。</p>
+<p>4） 开启同步操作</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">start</span> slave<span class="token punctuation">;</span>
+<span class="token keyword">show</span> slave <span class="token keyword">status</span><span class="token punctuation">;</span></code></pre>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/202109051645196.png" srcset="/img/loading.gif" alt=""></p>
+<p>5） 停止同步操作</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql">stop slave<span class="token punctuation">;</span></code></pre>
+<h4 id="⚡-验证同步操作"><a href="#⚡-验证同步操作" class="headerlink" title="⚡ 验证同步操作"></a>⚡ 验证同步操作</h4><p>1） 在主库中创建数据库，创建表，并插入数据 ：</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">database</span> db01<span class="token punctuation">;</span>
+
+<span class="token keyword">user</span> db01<span class="token punctuation">;</span>
+
+<span class="token keyword">create</span> <span class="token keyword">table</span> <span class="token keyword">user</span><span class="token punctuation">(</span>
+	id <span class="token keyword">int</span><span class="token punctuation">(</span><span class="token number">11</span><span class="token punctuation">)</span> <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">auto_increment</span><span class="token punctuation">,</span>
+	name <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span> <span class="token operator">not</span> <span class="token boolean">null</span><span class="token punctuation">,</span>
+	sex <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+	<span class="token keyword">primary</span> <span class="token keyword">key</span> <span class="token punctuation">(</span>id<span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token keyword">engine</span><span class="token operator">=</span><span class="token keyword">innodb</span> <span class="token keyword">default</span> <span class="token keyword">charset</span><span class="token operator">=</span>utf8<span class="token punctuation">;</span>
+
+<span class="token keyword">insert</span> <span class="token keyword">into</span> <span class="token keyword">user</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span>name<span class="token punctuation">,</span>sex<span class="token punctuation">)</span> <span class="token keyword">values</span><span class="token punctuation">(</span><span class="token boolean">null</span><span class="token punctuation">,</span><span class="token string">'Tom'</span><span class="token punctuation">,</span><span class="token string">'1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">insert</span> <span class="token keyword">into</span> <span class="token keyword">user</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span>name<span class="token punctuation">,</span>sex<span class="token punctuation">)</span> <span class="token keyword">values</span><span class="token punctuation">(</span><span class="token boolean">null</span><span class="token punctuation">,</span><span class="token string">'Trigger'</span><span class="token punctuation">,</span><span class="token string">'0'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">insert</span> <span class="token keyword">into</span> <span class="token keyword">user</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span>name<span class="token punctuation">,</span>sex<span class="token punctuation">)</span> <span class="token keyword">values</span><span class="token punctuation">(</span><span class="token boolean">null</span><span class="token punctuation">,</span><span class="token string">'Dawn'</span><span class="token punctuation">,</span><span class="token string">'1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>2） 在从库中查询数据，进行验证 ：</p>
+<p>在从库中，可以查看到刚才创建的数据库：</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/202109051643696.png" srcset="/img/loading.gif" alt=""></p>
+<p>在该数据库中，查询user表中的数据：</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/202109051643019.png" srcset="/img/loading.gif" alt=""></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/MySQL/">MySQL</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/8e9506f1/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Docker使用指北</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/c32dd7ad/">
+                        <span class="hidden-mobile">Nginx使用手册</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "ViwB1XmjsmmXpFx2gikUmM5V-gzGzoHsz",
+          app_key: "7r6Y8CzBkl8MJwPNmCqSdLWW",
+          placeholder: "来都来了，不说点什么吗⊙(・◇・)？",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <i class="iconfont icon-tags-fill"></i>&nbsp;<a href="http://www.beian.miit.gov.cn/" target="_blank">鲁ICP备19062448号</a>&nbsp&nbsp;| &nbsp&nbsp <i class="iconfont icon-addrcard"></i>&nbsp; 2018~2022<a href="https://www.jngwl.top/" target="_blank"> 清风与归_G</a>&nbsp&nbsp;|&nbsp&nbsp;  <i class="iconfont icon-docker"></i> <a href="https://hexo.io/" target="_blank">&nbsp Hexo</a>&nbsp & &nbsp <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank">Fluid</a><br> 你的骄傲多半来自于自己的无知，共勉之
+
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

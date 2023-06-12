@@ -1,0 +1,830 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" type="image/png" href="/img/favicon.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="清风与归_G">
+  <meta name="keywords" content="">
+  <title>Python 各类图像库的读取方式 - 清风与归_G</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://cdn.staticfile.org/prism/1.22.0/themes/prism-tomorrow.min.css" />
+      
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.jngwl.top","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"ViwB1XmjsmmXpFx2gikUmM5V-gzGzoHsz","app_key":"7r6Y8CzBkl8MJwPNmCqSdLWW","server_url":"https://viwb1xmj.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>清风与归_G</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201121211851.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Python 各类图像库的读取方式">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-05-08 10:18" pubdate>
+        2020年5月8日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      31
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Python 各类图像库的读取方式</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年1月8日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p> 最近在搞爱奇艺的卡通人物检测比赛，刚开始就被卡在图像读取阶段了。我发现大部分图像读取后shape为(3,H,W)，但有一部分图像为（4，H，W）。经同学提醒，有的图像还有衡量一个像素或者图像透明度的alpha通道。</p>
+</blockquote>
+<p>本文转载自<a target="_blank" rel="noopener" href="https://www.cnblogs.com/skyfsm/p/8276501.html">冠军的试炼</a>，这篇文章主要总结了以下主流Python图像库的一些基本使用方法和需要注意的地方：</p>
+<ol>
+<li>OpenCV</li>
+<li>PIL(pillow)</li>
+<li>matplotlib.image</li>
+<li>scipy.misc</li>
+<li>skimage</li>
+</ol>
+<h2 id="🔎-OpenCV"><a href="#🔎-OpenCV" class="headerlink" title="🔎 OpenCV"></a>🔎 OpenCV</h2><p>OpenCV作为我最常用的图像处理库，当然第一个介绍，并且介绍得比较全面。毋庸置疑，opencv是今天介绍得所有图像库中最全面也最强大的库，如果我们只想掌握一个图像库，我觉得opencv库肯定是最适合不过了。</p>
+<h3 id="图片读取操作"><a href="#图片读取操作" class="headerlink" title="图片读取操作"></a>图片读取操作</h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> cv2
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+
+<span class="token comment">#读入图片：默认彩色图，cv2.IMREAD_GRAYSCALE灰度图，cv2.IMREAD_UNCHANGED包含alpha通道</span>
+img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'1.jpg'</span><span class="token punctuation">)</span>
+cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">'src'</span><span class="token punctuation">,</span>img<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>img<span class="token punctuation">.</span>shape<span class="token punctuation">)</span> <span class="token comment"># (h,w,c)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>img<span class="token punctuation">.</span>size<span class="token punctuation">)</span> <span class="token comment"># 像素总数目</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>img<span class="token punctuation">.</span>dtype<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>img<span class="token punctuation">)</span>
+cv2<span class="token punctuation">.</span>waitKey<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p><img src="https://images2017.cnblogs.com/blog/1093303/201801/1093303-20180112162416597-1187071438.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="https://images2017.cnblogs.com/blog/1093303/201801/1093303-20180112162428332-1552270406.png" srcset="/img/loading.gif" alt=""></p>
+<p>值得注意的是，opencv读进来的图片已经是一个numpy矩阵了，彩色图片维度是（高度，宽度，通道数）。数据类型是uint8。</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#gray = cv2.imread('1.jpg',cv2.IMREAD_GRAYSCALE) #灰度图</span>
+<span class="token comment">#cv2.imshow('gray',gray)</span>
+<span class="token comment">#也可以这么写，先读入彩色图，再转灰度图</span>
+src <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'1.jpg'</span><span class="token punctuation">)</span>
+gray <span class="token operator">=</span> cv2<span class="token punctuation">.</span>cvtColor<span class="token punctuation">(</span>src<span class="token punctuation">,</span>cv2<span class="token punctuation">.</span>COLOR_BGR2GRAY<span class="token punctuation">)</span>
+cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">'gray'</span><span class="token punctuation">,</span>gray<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>gray<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>gray<span class="token punctuation">.</span>size<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>gray<span class="token punctuation">)</span>
+cv2<span class="token punctuation">.</span>waitKey<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p><img src="https://images2017.cnblogs.com/blog/1093303/201801/1093303-20180112162441879-1940687059.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="https://images2017.cnblogs.com/blog/1093303/201801/1093303-20180112162451551-496685557.png" srcset="/img/loading.gif" alt=""></p>
+<p>上面提到了两种获取灰度图的方式，读进来的灰度图的矩阵格式是（高度，宽度）。</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#注意，计算图片路径是错的，Opencv也不会提醒你，但print img时得到的结果是None</span>
+img2 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'2.jpg'</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>img2<span class="token punctuation">)</span></code></pre>
+<ul>
+<li>打印 None</li>
+</ul>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#如何解决“读到的图片不存在的问题”？ #加入判断语句，如果为空，做异常处理</span>
+img2 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'2.jpg'</span><span class="token punctuation">)</span>
+<span class="token keyword">if</span> img2 <span class="token operator">==</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'fail to load image!'</span><span class="token punctuation">)</span></code></pre>
+<ul>
+<li>fail to load image</li>
+</ul>
+<h3 id="图片矩阵变换"><a href="#图片矩阵变换" class="headerlink" title="图片矩阵变换"></a>图片矩阵变换</h3><p>opencv读入图片的矩阵格式是：（height,width,channels）。而在深度学习中，因为要对不同通道应用卷积，所以会采取另一种方式：（channels,height,width）。为了应对该要求，我们可以这么做</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#注意到，opencv读入的图片的彩色图是一个channel last的三维矩阵（h,w,c），即（高度，宽度，通道）</span>
+<span class="token comment">#有时候在深度学习中用到的的图片矩阵形式可能是channel first，那我们可以这样转一下</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>img<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>
+img <span class="token operator">=</span> img<span class="token punctuation">.</span>transpose<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>img<span class="token punctuation">.</span>shape<span class="token punctuation">)</span></code></pre>
+<p><img src="https://images2017.cnblogs.com/blog/1093303/201801/1093303-20180112162526176-336774898.png" srcset="/img/loading.gif" alt=""></p>
+<p>在深度学习搭建CNN时，往往要做相应的图像数据处理，比如图像要扩展维度，比如扩展成（batch_size,channels,height,width）。</p>
+<p>对于这种要求，我们可以这么做。</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#有时候还要扩展维度，比如有时候我们需要预测单张图片，要在要加一列做图片的个数，可以这么做</span>
+img <span class="token operator">=</span> np<span class="token punctuation">.</span>expand_dims<span class="token punctuation">(</span>img<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>img<span class="token punctuation">.</span>shape<span class="token punctuation">)</span></code></pre>
+<p><img src="https://images2017.cnblogs.com/blog/1093303/201801/1093303-20180112162537254-34582152.png" srcset="/img/loading.gif" alt=""></p>
+<p>上面提到的是预测阶段时预测单张图片的扩展维度的操作，如果是训练阶段，构建batch，即得到这种形式：（batch_size,channels,height,width）。我一般喜欢这么做</p>
+<pre class="language-python" data-language="python"><code class="language-python">data_list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> 
+loop<span class="token punctuation">:</span>
+    im <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'xxx.png'</span><span class="token punctuation">)</span>
+    data_list<span class="token punctuation">.</span>append<span class="token punctuation">(</span>im<span class="token punctuation">)</span>
+data_arr <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>data_list<span class="token punctuation">)</span></code></pre>
+<p>这样子就能构造成我们想要的形式了。</p>
+<h3 id="图片归一化"><a href="#图片归一化" class="headerlink" title="图片归一化"></a>图片归一化</h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#因为opencv读入的图片矩阵数值是0到255，有时我们需要对其进行归一化为0~1</span>
+img3 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'1.jpg'</span><span class="token punctuation">)</span>
+img3 <span class="token operator">=</span> img3<span class="token punctuation">.</span>astype<span class="token punctuation">(</span><span class="token string">"float"</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">255.0</span>  <span class="token comment">#注意需要先转化数据类型为float</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>img3<span class="token punctuation">.</span>dtype<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>img3<span class="token punctuation">)</span></code></pre>
+<p><img src="https://images2017.cnblogs.com/blog/1093303/201801/1093303-20180112162551894-707266354.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="存储图片"><a href="#存储图片" class="headerlink" title="存储图片"></a>存储图片</h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#存储图片</span>
+cv2<span class="token punctuation">.</span>imwrite<span class="token punctuation">(</span><span class="token string">'test1.jpg'</span><span class="token punctuation">,</span>img3<span class="token punctuation">)</span> <span class="token comment">#得到的是全黑的图片，因为我们把它归一化了</span>
+<span class="token comment">#所以要得到可视化的图，需要先*255还原</span>
+img3 <span class="token operator">=</span> img3 <span class="token operator">*</span> <span class="token number">255</span>
+cv2<span class="token punctuation">.</span>imwrite<span class="token punctuation">(</span><span class="token string">'test2.jpg'</span><span class="token punctuation">,</span>img3<span class="token punctuation">)</span>  <span class="token comment">#这样就可以看到彩色原图了</span></code></pre>
+<h3 id="OpenCV大坑之BGR"><a href="#OpenCV大坑之BGR" class="headerlink" title="OpenCV大坑之BGR"></a>OpenCV大坑之BGR</h3><p>opencv对于读进来的图片的通道排列是BGR，而不是主流的RGB！谨记！</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#opencv读入的矩阵是BGR，如果想转为RGB，可以这么转</span>
+img4 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'1.jpg'</span><span class="token punctuation">)</span>
+img4 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>cvtColor<span class="token punctuation">(</span>img4<span class="token punctuation">,</span>cv2<span class="token punctuation">.</span>COLOR_BGR2RGB<span class="token punctuation">)</span></code></pre>
+<h3 id="访问像素"><a href="#访问像素" class="headerlink" title="访问像素"></a>访问像素</h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#访问像素</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>img4<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">)</span>  <span class="token comment">#3channels</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>gray<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">#1channel</span>
+img4<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">255</span><span class="token punctuation">,</span><span class="token number">255</span><span class="token punctuation">,</span><span class="token number">255</span><span class="token punctuation">]</span>
+gray<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">255</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>img4<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">)</span>  <span class="token comment">#3channels</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>gray<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">#1channel</span></code></pre>
+<p><img src="https://images2017.cnblogs.com/blog/1093303/201801/1093303-20180112162605457-639220205.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="ROI操作"><a href="#ROI操作" class="headerlink" title="ROI操作"></a>ROI操作</h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#roi操作</span>
+roi <span class="token operator">=</span> img4<span class="token punctuation">[</span><span class="token number">200</span><span class="token punctuation">:</span><span class="token number">550</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">:</span><span class="token number">450</span><span class="token punctuation">,</span><span class="token punctuation">:</span><span class="token punctuation">]</span>
+cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">'roi'</span><span class="token punctuation">,</span>roi<span class="token punctuation">)</span>
+cv2<span class="token punctuation">.</span>waitKey<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p><img src="https://images2017.cnblogs.com/blog/1093303/201801/1093303-20180112162617707-1094393133.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="通道操作"><a href="#通道操作" class="headerlink" title="通道操作"></a>通道操作</h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#分离通道</span>
+img5 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'1.jpg'</span><span class="token punctuation">)</span>
+b<span class="token punctuation">,</span>g<span class="token punctuation">,</span>r <span class="token operator">=</span> cv2<span class="token punctuation">.</span>split<span class="token punctuation">(</span>img5<span class="token punctuation">)</span>
+<span class="token comment">#合并通道</span>
+img5 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>merge<span class="token punctuation">(</span><span class="token punctuation">(</span>b<span class="token punctuation">,</span>g<span class="token punctuation">,</span>r<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">#也可以不拆分</span>
+img5<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span><span class="token punctuation">:</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span>  <span class="token comment">#将红色通道值全部设0</span></code></pre>
+<h2 id="🍥-PIL"><a href="#🍥-PIL" class="headerlink" title="🍥 PIL"></a>🍥 PIL</h2><h3 id="图片读取"><a href="#图片读取" class="headerlink" title="图片读取"></a>图片读取</h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> PIL <span class="token keyword">import</span> Image
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np</code></pre>
+<p>PIL即Python Imaging Library，也即为我们所称的Pillow，是一个很流行的图像库，它比opencv更为轻巧，正因如此，它深受大众的喜爱。</p>
+<h3 id="图像读写"><a href="#图像读写" class="headerlink" title="图像读写"></a>图像读写</h3><p>PIL读进来的图像是一个对象，而不是我们所熟知的numpy 矩阵。</p>
+<pre class="language-python" data-language="python"><code class="language-python">img <span class="token operator">=</span> Image<span class="token punctuation">.</span><span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'1.jpg'</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>img<span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">)</span> 
+<span class="token keyword">print</span><span class="token punctuation">(</span>img<span class="token punctuation">.</span>size<span class="token punctuation">)</span> <span class="token comment">#注意，省略了通道 (w，h)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>img<span class="token punctuation">.</span>mode<span class="token punctuation">)</span>  <span class="token comment">#L为灰度图，RGB为真彩色,RGBA为加了透明通道</span>
+img<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># 显示图片</span></code></pre>
+<p><img src="https://images2017.cnblogs.com/blog/1093303/201801/1093303-20180112162629754-688516019.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="https://images2017.cnblogs.com/blog/1093303/201801/1093303-20180112162639988-1912686683.png" srcset="/img/loading.gif" alt=""></p>
+<p>灰度图的获取</p>
+<pre class="language-python" data-language="python"><code class="language-python">gray <span class="token operator">=</span> Image<span class="token punctuation">.</span><span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'1.jpg'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>convert<span class="token punctuation">(</span><span class="token string">'L'</span><span class="token punctuation">)</span>
+gray<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p><img src="https://images2017.cnblogs.com/blog/1093303/201801/1093303-20180112162650613-1055743686.png" srcset="/img/loading.gif" alt=""></p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#读取不到图片会抛出异常IOError，我们可以捕捉它，做异常处理</span>
+<span class="token keyword">try</span><span class="token punctuation">:</span>
+    img2 <span class="token operator">=</span> Image<span class="token punctuation">.</span><span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'2.jpg'</span><span class="token punctuation">)</span>
+<span class="token keyword">except</span> IOError<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'fail to load image!'</span><span class="token punctuation">)</span></code></pre>
+<p><img src="https://images2017.cnblogs.com/blog/1093303/201801/1093303-20180112162700816-1964050198.png" srcset="/img/loading.gif" alt=""></p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#pillow读进来的图片不是矩阵，我们将图片转矩阵,channel last</span>
+arr <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>img3<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>arr<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>arr<span class="token punctuation">.</span>dtype<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span></code></pre>
+<p><img src="https://images2017.cnblogs.com/blog/1093303/201801/1093303-20180112162712097-1627266466.png" srcset="/img/loading.gif" alt=""></p>
+<p>灰度图的转化与彩图转化一样</p>
+<pre class="language-python" data-language="python"><code class="language-python">arr_gray <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>gray<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>arr_gray<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>arr_gray<span class="token punctuation">.</span>dtype<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>arr_gray<span class="token punctuation">)</span></code></pre>
+<p><img src="https://images2017.cnblogs.com/blog/1093303/201801/1093303-20180112162722801-446892141.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="存储图片-1"><a href="#存储图片-1" class="headerlink" title="存储图片"></a>存储图片</h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#矩阵再转为图像</span>
+new_im <span class="token operator">=</span> Image<span class="token punctuation">.</span>fromarray<span class="token punctuation">(</span>arr<span class="token punctuation">)</span>
+new_im<span class="token punctuation">.</span>save<span class="token punctuation">(</span><span class="token string">'3.png'</span><span class="token punctuation">)</span></code></pre>
+<h3 id="图像操作"><a href="#图像操作" class="headerlink" title="图像操作"></a>图像操作</h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#分离合并通道</span>
+r<span class="token punctuation">,</span> g<span class="token punctuation">,</span> b <span class="token operator">=</span> img<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span>
+img <span class="token operator">=</span> Image<span class="token punctuation">.</span>merge<span class="token punctuation">(</span><span class="token string">"RGB"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>b<span class="token punctuation">,</span> g<span class="token punctuation">,</span> r<span class="token punctuation">)</span><span class="token punctuation">)</span>
+img <span class="token operator">=</span> img<span class="token punctuation">.</span>copy<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">#复制图像</span></code></pre>
+<h3 id="ROI获取"><a href="#ROI获取" class="headerlink" title="ROI获取"></a>ROI获取</h3><pre class="language-python" data-language="python"><code class="language-python">img3 <span class="token operator">=</span> Image<span class="token punctuation">.</span><span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'1.jpg'</span><span class="token punctuation">)</span>
+roi <span class="token operator">=</span> img3<span class="token punctuation">.</span>crop<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">300</span><span class="token punctuation">,</span><span class="token number">300</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">#(左上x，左上y，右下x，右下y)坐标</span>
+roi<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<h2 id="📟-matplotlib"><a href="#📟-matplotlib" class="headerlink" title="📟 matplotlib"></a>📟 matplotlib</h2><p>matplotlib是一个科学绘图神器，用的人非常多。</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+image <span class="token operator">=</span> plt<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'1.jpg'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>image<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p><img src="https://images2017.cnblogs.com/blog/1093303/201801/1093303-20180112162758504-112628206.png" srcset="/img/loading.gif" alt=""></p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#也可以关闭显示x，y轴上的数字</span>
+image <span class="token operator">=</span> plt<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'1.jpg'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>image<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>axis<span class="token punctuation">(</span><span class="token string">'off'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p><img src="https://images2017.cnblogs.com/blog/1093303/201801/1093303-20180112162809410-23169087.png" srcset="/img/loading.gif" alt=""></p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#plt.imread读入的就是一个矩阵，跟opencv一样，但彩图读进的是RGB，与opencv有区别</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>image<span class="token punctuation">.</span>shape<span class="token punctuation">)</span> <span class="token comment"># (h,w,c)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>image<span class="token punctuation">.</span>size<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>image<span class="token punctuation">.</span>dtype<span class="token punctuation">)</span> 
+<span class="token keyword">print</span><span class="token punctuation">(</span>image<span class="token punctuation">)</span></code></pre>
+<p><img src="https://images2017.cnblogs.com/blog/1093303/201801/1093303-20180112162818301-2014383322.png" srcset="/img/loading.gif" alt=""></p>
+<pre class="language-python" data-language="python"><code class="language-python">im_r <span class="token operator">=</span> image<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span><span class="token punctuation">:</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token comment">#红色通道</span>
+plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>im_r<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment">#此时会发现显示的是热量图，不是我们预想的灰度图，可以添加 cmap 参数解决</span>
+plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>im_r<span class="token punctuation">,</span>cmap<span class="token operator">=</span><span class="token string">'Greys_r'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p><img src="https://images2017.cnblogs.com/blog/1093303/201801/1093303-20180112162827957-1687928630.png" srcset="/img/loading.gif" alt=""></p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#与opencv结合使用</span>
+<span class="token keyword">import</span> cv2
+im2 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'1.jpg'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>im2<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>axis<span class="token punctuation">(</span><span class="token string">'off'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment">#发现图像颜色怪怪的，原因当然是我们前面提到的RGB顺序不同的原因啦,转一下就好</span>
+im2 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>cvtColor<span class="token punctuation">(</span>im2<span class="token punctuation">,</span>cv2<span class="token punctuation">.</span>COLOR_BGR2RGB<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>im2<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>axis<span class="token punctuation">(</span><span class="token string">'off'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment">#所以无论用什么库读进图片，只要把图片改为矩阵，那么matplotlib就可以处理了</span></code></pre>
+<p><img src="https://images2017.cnblogs.com/blog/1093303/201801/1093303-20180112162839097-782167147.png" srcset="/img/loading.gif" alt=""></p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#再试一试pillow和matplotlib结合</span>
+<span class="token keyword">from</span> PIL <span class="token keyword">import</span> Image
+im3 <span class="token operator">=</span> Image<span class="token punctuation">.</span><span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'1.jpg'</span><span class="token punctuation">)</span>
+im3 <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>im3<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>im3<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>axis<span class="token punctuation">(</span><span class="token string">'off'</span><span class="token punctuation">)</span>
+<span class="token comment">#存储图像，注意，必须在show之前savefig，否则存储的图片一片空白</span>
+plt<span class="token punctuation">.</span>savefig<span class="token punctuation">(</span><span class="token string">'timo.jpg'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p><img src="https://images2017.cnblogs.com/blog/1093303/201801/1093303-20180112162850207-1091029005.png" srcset="/img/loading.gif" alt=""></p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#最后以一个综合例子总结matplotlib最基本的图片显示技巧吧</span>
+im_lol1 <span class="token operator">=</span>  plt<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'lol.jpg'</span><span class="token punctuation">)</span>
+im_lol2 <span class="token operator">=</span>  plt<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'1.jpg'</span><span class="token punctuation">)</span>
+figure <span class="token operator">=</span> plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment"># 调整显示图片的大小</span>
+<span class="token triple-quoted-string string">'''
+figsize参数：指定绘图对象的宽度和高度，单位为英寸；dpi参数指定绘图对象的分辨率，
+即每英寸多少个像素，缺省值为80。因此本例中所创建的图表窗口的宽度为8*80 = 640像素
+'''</span>
+plt<span class="token punctuation">.</span>axis<span class="token punctuation">(</span><span class="token string">"off"</span><span class="token punctuation">)</span><span class="token comment">#不显示刻度 </span>
+ax <span class="token operator">=</span> figure<span class="token punctuation">.</span>add_subplot<span class="token punctuation">(</span><span class="token number">121</span><span class="token punctuation">)</span> <span class="token comment"># 图片以1行2列的形式显示</span>
+plt<span class="token punctuation">.</span>axis<span class="token punctuation">(</span><span class="token string">'off'</span><span class="token punctuation">)</span>
+ax<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>im_lol1<span class="token punctuation">)</span> <span class="token comment">#第一张图</span>
+ax<span class="token punctuation">.</span>set_title<span class="token punctuation">(</span><span class="token string">'lol image 1'</span><span class="token punctuation">)</span><span class="token comment">#给图片加titile </span>
+ax <span class="token operator">=</span> figure<span class="token punctuation">.</span>add_subplot<span class="token punctuation">(</span><span class="token number">122</span><span class="token punctuation">)</span> 
+plt<span class="token punctuation">.</span>axis<span class="token punctuation">(</span><span class="token string">'off'</span><span class="token punctuation">)</span>
+ax<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>im_lol2<span class="token punctuation">)</span> 
+ax<span class="token punctuation">.</span>set_title<span class="token punctuation">(</span><span class="token string">'lol image 2'</span><span class="token punctuation">)</span><span class="token comment">#给图片加titile </span>
+
+plt<span class="token punctuation">.</span>savefig<span class="token punctuation">(</span><span class="token string">'twp.jpg'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p><img src="https://images2017.cnblogs.com/blog/1093303/201801/1093303-20180112162902097-653779743.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="🎫-scipy-misc"><a href="#🎫-scipy-misc" class="headerlink" title="🎫 scipy.misc"></a>🎫 scipy.misc</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> scipy <span class="token keyword">import</span> misc
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+im <span class="token operator">=</span> misc<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'1.jpg'</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>im<span class="token punctuation">.</span>dtype<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>im<span class="token punctuation">.</span>size<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>im<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>
+misc<span class="token punctuation">.</span>imsave<span class="token punctuation">(</span><span class="token string">'misc1.png'</span><span class="token punctuation">,</span>im<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>im<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>im<span class="token punctuation">)</span></code></pre>
+<p><img src="https://images2017.cnblogs.com/blog/1093303/201801/1093303-20180112162917176-371969416.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="https://images2017.cnblogs.com/blog/1093303/201801/1093303-20180112162926707-895974117.png" srcset="/img/loading.gif" alt=""></p>
+<p>可以看到，有warining，提示我们imread和imsave在后来的版本将会被弃用，叫我们使用imageio.imread和imageio.imwrite。</p>
+<p>我们根据她的提示，使用imageio模块进行图片读写，warning也就没有了。</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> imageio
+im2 <span class="token operator">=</span> imageio<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'1.jpg'</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>im2<span class="token punctuation">.</span>dtype<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>im2<span class="token punctuation">.</span>size<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>im2<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>im<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>im2<span class="token punctuation">)</span>
+imageio<span class="token punctuation">.</span>imsave<span class="token punctuation">(</span><span class="token string">'imageio.png'</span><span class="token punctuation">,</span>im2<span class="token punctuation">)</span></code></pre>
+<p><img src="https://images2017.cnblogs.com/blog/1093303/201801/1093303-20180112162938926-321008588.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="🎨-skimage"><a href="#🎨-skimage" class="headerlink" title="🎨 skimage"></a>🎨 skimage</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> skimage <span class="token keyword">import</span> io
+
+im <span class="token operator">=</span> io<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'1.jpg'</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>im<span class="token punctuation">.</span>shape<span class="token punctuation">)</span> <span class="token comment"># numpy矩阵，(h,w,c)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>im<span class="token punctuation">.</span>dtype<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>im<span class="token punctuation">.</span>size<span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>im<span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>imsave<span class="token punctuation">(</span><span class="token string">'sk.png'</span><span class="token punctuation">,</span>im<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>im<span class="token punctuation">)</span></code></pre>
+<p><img src="https://images2017.cnblogs.com/blog/1093303/201801/1093303-20180112162950613-1562833314.png" srcset="/img/loading.gif" alt=""></p>
+<p>图像也是以numpy array形式读入。</p>
+<p>灰度图的获取方式：</p>
+<pre class="language-python" data-language="python"><code class="language-python">im2 <span class="token operator">=</span> io<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'1.jpg'</span><span class="token punctuation">,</span>as_grey<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>  <span class="token comment">#读入灰度图</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>im2<span class="token punctuation">.</span>dtype<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>im2<span class="token punctuation">.</span>size<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>im2<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>im2<span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>imsave<span class="token punctuation">(</span><span class="token string">'sk_gray.png'</span><span class="token punctuation">,</span>im2<span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>im2<span class="token punctuation">)</span></code></pre>
+<p><img src="https://images2017.cnblogs.com/blog/1093303/201801/1093303-20180112163001644-1622144466.png" srcset="/img/loading.gif" alt=""></p>
+<p>可以看到，灰度图像的矩阵的值被归一化了，注意注意！</p>
+<p>也可以以这种方式获得灰度图：</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> skimage <span class="token keyword">import</span> color
+im3 <span class="token operator">=</span> io<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'1.jpg'</span><span class="token punctuation">)</span>
+im3 <span class="token operator">=</span> color<span class="token punctuation">.</span>rgb2grey<span class="token punctuation">(</span>im3<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>im3<span class="token punctuation">.</span>dtype<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>im3<span class="token punctuation">.</span>size<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>im3<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>im3<span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token triple-quoted-string string">'''
+skimage.color.rgb2grey(rgb)
+skimage.color.rgb2hsv(rgb)
+skimage.color.rgb2lab(rgb)
+skimage.color.gray2rgb(image)
+skimage.color.hsv2rgb(hsv)
+skimage.color.lab2rgb(lab)
+
+'''</span></code></pre>
+<p><img src="https://images2017.cnblogs.com/blog/1093303/201801/1093303-20180112163013301-1065514242.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="📚-总结"><a href="#📚-总结" class="headerlink" title="📚 总结"></a>📚 总结</h2><ol>
+<li>除了<code>opencv</code>读入的彩色图片以<code>BGR</code>顺序存储外，其他所有图像库读入彩色图片都以<code>RGB</code>存储。</li>
+<li>除了<code>PIL</code>读入的图片是<code>img类</code>之外，其他库读进来的图片都是以<code>numpy</code> 矩阵。</li>
+<li>各大图像库的性能，老大哥当属opencv，无论是速度还是图片操作的全面性，都属于碾压的存在，毕竟他是一个巨大的cv专用库。下面那张图就是我从知乎盗来的一张关于各个主流图像库的一些性能比较图，从测试结果看来，opencv确实胜出太多了。</li>
+</ol>
+<p><img src="https://images2017.cnblogs.com/blog/1093303/201801/1093303-20180112163030926-747111239.jpg" srcset="/img/loading.gif" alt="img"></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Python/">Python</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/21ad9564/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Ubuntu使用过程中遇到的问题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/e638570a/">
+                        <span class="hidden-mobile">PyTorch常用代码段整理</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "ViwB1XmjsmmXpFx2gikUmM5V-gzGzoHsz",
+          app_key: "7r6Y8CzBkl8MJwPNmCqSdLWW",
+          placeholder: "来都来了，不说点什么吗⊙(・◇・)？",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <i class="iconfont icon-tags-fill"></i>&nbsp;<a href="http://www.beian.miit.gov.cn/" target="_blank">鲁ICP备19062448号</a>&nbsp&nbsp;| &nbsp&nbsp <i class="iconfont icon-addrcard"></i>&nbsp; 2018~2022<a href="https://www.jngwl.top/" target="_blank"> 清风与归_G</a>&nbsp&nbsp;|&nbsp&nbsp;  <i class="iconfont icon-docker"></i> <a href="https://hexo.io/" target="_blank">&nbsp Hexo</a>&nbsp & &nbsp <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank">Fluid</a><br> 你的骄傲多半来自于自己的无知，共勉之
+
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

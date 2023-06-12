@@ -1,0 +1,714 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" type="image/png" href="/img/favicon.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="清风与归_G">
+  <meta name="keywords" content="">
+  <title>OpenCV学习笔记 - 清风与归_G</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://cdn.staticfile.org/prism/1.22.0/themes/prism-tomorrow.min.css" />
+      
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.jngwl.top","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"ViwB1XmjsmmXpFx2gikUmM5V-gzGzoHsz","app_key":"7r6Y8CzBkl8MJwPNmCqSdLWW","server_url":"https://viwb1xmj.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>清风与归_G</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201121211851.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="OpenCV学习笔记">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-11-16 15:31" pubdate>
+        2019年11月16日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      22
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">OpenCV学习笔记</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年1月8日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>由于图像分析大作业用到了Opencv，临时学了一点点，特此记录</p>
+</blockquote>
+<h3 id="一-获取轮廓"><a href="#一-获取轮廓" class="headerlink" title="一.获取轮廓"></a>一.获取轮廓</h3><pre class="language-python" data-language="python"><code class="language-python">image <span class="token punctuation">,</span> contours <span class="token punctuation">,</span> hierarchy <span class="token operator">=</span> cv2<span class="token punctuation">.</span>findContours <span class="token punctuation">(</span> binary <span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>RETR_EXTERNAL <span class="token punctuation">,</span> cv<span class="token punctuation">.</span>CHAIN_APPROX_SIMPLE <span class="token punctuation">)</span></code></pre>
+<ul>
+<li><code>binary</code>：寻找轮廓的图像（二值图像）</li>
+<li><p><code>mode</code>：轮廓的检索模式，如<code>cv2.RETR_EXTERNAL</code>表示只检测外轮廓</p>
+</li>
+<li><p><code>method</code>：轮廓的近似方法，如<code>cv2.CHAIN_APPROX_SIMPLE</code>压缩水平方向，垂直方向，对角线方向的元素，只保留该方向的终点坐标，例如一个矩形轮廓只需4个点来保存轮廓信息</p>
+</li>
+</ul>
+<blockquote>
+<p>返回值contour是list类型；返回值hierarchy表示每条轮廓对应的属性</p>
+</blockquote>
+<h3 id="二-生成最小外接矩形"><a href="#二-生成最小外接矩形" class="headerlink" title="二.生成最小外接矩形"></a>二.生成最小外接矩形</h3><pre class="language-python" data-language="python"><code class="language-python">cnt <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span>x1<span class="token punctuation">,</span>y1<span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span>x2<span class="token punctuation">,</span>y2<span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span>x3<span class="token punctuation">,</span>y3<span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span>x4<span class="token punctuation">,</span>y4<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment"># 必须是array数组的形式</span>
+rect <span class="token operator">=</span> cv2<span class="token punctuation">.</span>minAreaRect<span class="token punctuation">(</span>cnt<span class="token punctuation">)</span> 
+box <span class="token operator">=</span> cv2<span class="token punctuation">.</span>BoxPoints<span class="token punctuation">(</span>rect<span class="token punctuation">)</span>  <span class="token comment"># 获取最小外接矩形的4个顶点坐标</span></code></pre>
+<blockquote>
+<p>返回值为最小外接矩形的 （中心点坐标（x,y）,(矩形宽度、矩形高度)，矩形旋转角度）</p>
+</blockquote>
+<h3 id="三-腐蚀"><a href="#三-腐蚀" class="headerlink" title="三.腐蚀"></a>三.腐蚀</h3><pre class="language-python" data-language="python"><code class="language-python">dst<span class="token operator">=</span>cv2<span class="token punctuation">.</span>erode<span class="token punctuation">(</span>src<span class="token punctuation">,</span>kernel<span class="token punctuation">,</span>anchor<span class="token punctuation">,</span>iterations<span class="token punctuation">,</span>borderType<span class="token punctuation">,</span>borderValue<span class="token punctuation">)</span><span class="token punctuation">:</span>       
+
+kernel<span class="token operator">=</span>cv2<span class="token punctuation">.</span>getStructuringElement<span class="token punctuation">(</span>shape<span class="token punctuation">,</span>ksize<span class="token punctuation">,</span>anchor<span class="token punctuation">)</span>
+        <span class="token comment"># shape:核的形状</span>
+                <span class="token comment">#cv2.MORPH_RECT: 矩形</span>
+                <span class="token comment">#cv2.MORPH_CROSS: 十字形(以矩形的锚点为中心的十字架)</span>
+                <span class="token comment">#cv2.MORPH_ELLIPSE:椭圆(矩形的内切椭圆）</span>
+                
+        <span class="token comment"># ksize: 核的大小，矩形的宽，高格式为(width,height)</span>
+        <span class="token comment"># anchor: 核的锚点，默认值为(-1,-1),即核的中心点</span></code></pre>
+<ul>
+<li><code>src</code>: 输入图像对象矩阵,为二值化图像</li>
+<li><code>kernel</code>：进行腐蚀操作的核，可以通过函数getStructuringElement()获得</li>
+<li><code>anchor</code>：锚点，默认为(-1,-1)</li>
+<li><code>iterations</code>：腐蚀操作的次数，默认为1</li>
+<li><code>borderType</code>：边界种类，有默认值</li>
+<li><code>borderValue</code>：边界值，有默认值</li>
+</ul>
+<h3 id="四-膨胀"><a href="#四-膨胀" class="headerlink" title="四.膨胀"></a>四.膨胀</h3><pre class="language-python" data-language="python"><code class="language-python">dst <span class="token operator">=</span> cv2<span class="token punctuation">.</span>dilate<span class="token punctuation">(</span>src<span class="token punctuation">,</span>kernel<span class="token punctuation">,</span>anchor<span class="token punctuation">,</span>iterations<span class="token punctuation">,</span>borderType<span class="token punctuation">,</span>borderValue<span class="token punctuation">)</span>       </code></pre>
+<ul>
+<li><code>src</code>： 输入图像对象矩阵,为二值化图像</li>
+<li><code>kernel</code>：进行腐蚀操作的核，可以通过函数getStructuringElement()获得</li>
+<li><code>anchor</code>：锚点，默认为(-1,-1)</li>
+<li><code>iterations</code>：腐蚀操作的次数，默认为1</li>
+<li><code>borderType</code>：边界种类</li>
+<li><code>borderValue</code>：边界值</li>
+</ul>
+<h3 id="五-开运算、闭运算等"><a href="#五-开运算、闭运算等" class="headerlink" title="五.开运算、闭运算等"></a>五.开运算、闭运算等</h3><pre class="language-python" data-language="python"><code class="language-python">dst <span class="token operator">=</span> cv2<span class="token punctuation">.</span>morphologyEx<span class="token punctuation">(</span>src<span class="token punctuation">,</span>op<span class="token punctuation">,</span>kernel<span class="token punctuation">,</span>anchor<span class="token punctuation">,</span>iterations<span class="token punctuation">,</span>borderType<span class="token punctuation">,</span>borderValue<span class="token punctuation">)</span></code></pre>
+<ul>
+<li><code>src</code>: 输入图像对象矩阵,为二值化图像</li>
+<li><code>op</code>: 形态学操作类型<ul>
+<li>cv2.MORPH_OPEN    开运算，先腐蚀后膨胀，去除一些较亮的部分</li>
+<li>cv2.MORPH_CLOSE   闭运算，先膨胀后腐蚀，去除一些较暗的部分</li>
+<li>cv2.MORPH_GRADIENT 形态梯度，膨胀运算结果减去腐蚀运算结果，获得轮廓信息</li>
+<li>cv2.MORPH_TOPHAT   顶帽运算，原图像减去开运算</li>
+<li>cv2.MORPH_BLACKHAT  底帽运算，原图像减去闭运算</li>
+</ul>
+</li>
+<li><code>kernel</code>:进行腐蚀操作的核，可以通过函数<code>getStructuringElement()</code>获得</li>
+<li><code>anchor</code>:锚点，默认为(-1,-1)</li>
+<li><code>iterations</code>:腐蚀操作的次数，默认为1</li>
+<li><code>borderType</code>: 边界种类</li>
+<li><code>borderValue</code>:边界值</li>
+</ul>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> cv2 <span class="token keyword">as</span> cv
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+
+src <span class="token operator">=</span> cv<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">"C:/Users/GWL/Desktop/Final project/Final project_CE&amp;M/Switch.png"</span><span class="token punctuation">)</span>
+cv<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">"input"</span><span class="token punctuation">,</span> src<span class="token punctuation">)</span>
+src_height<span class="token punctuation">,</span> src_width <span class="token operator">=</span> src<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">]</span>       <span class="token comment"># 高度*宽度*维度</span>
+
+<span class="token comment"># 图像二值化</span>
+
+gray <span class="token operator">=</span> cv<span class="token punctuation">.</span>cvtColor<span class="token punctuation">(</span>src<span class="token punctuation">,</span> cv<span class="token punctuation">.</span>COLOR_BGR2GRAY<span class="token punctuation">)</span>
+ret<span class="token punctuation">,</span> binary <span class="token operator">=</span> cv<span class="token punctuation">.</span>threshold<span class="token punctuation">(</span>gray<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> cv<span class="token punctuation">.</span>THRESH_BINARY <span class="token operator">|</span> cv<span class="token punctuation">.</span>THRESH_OTSU<span class="token punctuation">)</span>
+cv<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">"binary"</span><span class="token punctuation">,</span> binary<span class="token punctuation">)</span>
+
+<span class="token comment"># 轮廓提取, 发现最大轮廓</span>
+
+_<span class="token punctuation">,</span>contours<span class="token punctuation">,</span> _ <span class="token operator">=</span> cv<span class="token punctuation">.</span>findContours<span class="token punctuation">(</span>binary<span class="token punctuation">,</span> cv<span class="token punctuation">.</span>RETR_EXTERNAL<span class="token punctuation">,</span> cv<span class="token punctuation">.</span>CHAIN_APPROX_SIMPLE<span class="token punctuation">)</span>  <span class="token comment">#返回 图像，轮廓，轮廓间的关系</span>
+index <span class="token operator">=</span> <span class="token number">0</span>
+area_max <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token keyword">for</span> c <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>contours<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    area <span class="token operator">=</span> cv<span class="token punctuation">.</span>contourArea<span class="token punctuation">(</span>contours<span class="token punctuation">[</span>c<span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> area <span class="token operator">></span> area_max<span class="token punctuation">:</span>
+        area_max <span class="token operator">=</span> area     <span class="token comment">#得到最大轮廓所包含的面积</span>
+        index <span class="token operator">=</span> c           <span class="token comment">#得到最大轮廓的索引</span>
+
+<span class="token comment"># 寻找最小外接矩形</span>
+rect <span class="token operator">=</span> cv<span class="token punctuation">.</span>minAreaRect<span class="token punctuation">(</span>contours<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">)</span>     <span class="token comment"># 获取最小外接矩形的 （中心点坐标（x,y）,(矩形宽度、矩形高度)，矩形旋转角度）</span>
+width<span class="token punctuation">,</span> height <span class="token operator">=</span> rect<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>                <span class="token comment">#获取最小外接矩形的宽度和高度</span>
+src_pts <span class="token operator">=</span> cv<span class="token punctuation">.</span>boxPoints<span class="token punctuation">(</span>rect<span class="token punctuation">)</span>      <span class="token comment"># 获取最小外接矩形的4个顶点坐标</span>
+
+<span class="token comment"># print('Minimum circumscribed rectangle vertex coordinates:\n',np.array(src_pts),'\n')</span>
+
+<span class="token comment">#进行投影变换，矫正畸变图像</span>
+dst_pts <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> height<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>width<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>width<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> height<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>float32<span class="token punctuation">)</span>
+M <span class="token operator">=</span> cv<span class="token punctuation">.</span>getPerspectiveTransform<span class="token punctuation">(</span>np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>src_pts<span class="token punctuation">)</span><span class="token punctuation">,</span> dst_pts<span class="token punctuation">)</span>  <span class="token comment"># 获取 原来四个点(src_pts)到现在四个点(dst_pts) 的变换矩阵M</span>
+warpPerspective_result <span class="token operator">=</span> cv<span class="token punctuation">.</span>warpPerspective<span class="token punctuation">(</span>src<span class="token punctuation">,</span> M<span class="token punctuation">,</span> <span class="token punctuation">(</span>np<span class="token punctuation">.</span>int32<span class="token punctuation">(</span>width<span class="token punctuation">)</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>int32<span class="token punctuation">(</span>height<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>    <span class="token comment"># 投影变换，将图片中的ROI区域单独透视变换成输出result</span>
+<span class="token keyword">if</span> height <span class="token operator">></span> width<span class="token punctuation">:</span>
+    warpPerspective_result <span class="token operator">=</span> cv<span class="token punctuation">.</span>rotate<span class="token punctuation">(</span>warpPerspective_result<span class="token punctuation">,</span> cv<span class="token punctuation">.</span>ROTATE_90_CLOCKWISE<span class="token punctuation">)</span>
+cv<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">"warpPerspective_result"</span><span class="token punctuation">,</span> warpPerspective_result<span class="token punctuation">)</span>
+
+<span class="token comment"># 将矫正后的图像进行二值化</span>
+
+_<span class="token punctuation">,</span> binary2 <span class="token operator">=</span> cv<span class="token punctuation">.</span>threshold<span class="token punctuation">(</span>warpPerspective_result<span class="token punctuation">,</span> <span class="token number">210</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> cv<span class="token punctuation">.</span>THRESH_BINARY<span class="token punctuation">)</span>
+cv<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">"warpPerspective_result_binary"</span><span class="token punctuation">,</span> binary2<span class="token punctuation">)</span>
+
+<span class="token comment"># 对二值化的图像进行开运算，去除小团块目标（一般比背景亮）</span>
+
+kernel <span class="token operator">=</span> cv<span class="token punctuation">.</span>getStructuringElement<span class="token punctuation">(</span>cv<span class="token punctuation">.</span>MORPH_RECT<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment">#shape，核的形状；ksize，核的大小，(width,height)；anchor，核的锚点，默认值为(-1,-1),即核的中心点</span>
+open_result <span class="token operator">=</span> cv<span class="token punctuation">.</span>morphologyEx<span class="token punctuation">(</span>binary2<span class="token punctuation">,</span> cv<span class="token punctuation">.</span>MORPH_OPEN<span class="token punctuation">,</span> kernel<span class="token punctuation">)</span>   <span class="token comment">#宽度*高度*维度，已经不再是单纯的二值图像了</span>
+cv<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">"open_result"</span><span class="token punctuation">,</span> open_result<span class="token punctuation">)</span>
+
+<span class="token comment"># 转为二值图像,便于后续输入到cv.findContours中</span>
+
+open_gray <span class="token operator">=</span> cv<span class="token punctuation">.</span>cvtColor<span class="token punctuation">(</span>open_result<span class="token punctuation">,</span> cv<span class="token punctuation">.</span>COLOR_BGR2GRAY<span class="token punctuation">)</span>
+_<span class="token punctuation">,</span> open_binary <span class="token operator">=</span> cv<span class="token punctuation">.</span>threshold<span class="token punctuation">(</span>open_gray<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> cv<span class="token punctuation">.</span>THRESH_BINARY <span class="token operator">|</span> cv<span class="token punctuation">.</span>THRESH_OTSU<span class="token punctuation">)</span>
+
+<span class="token comment"># 轮廓发现</span>
+
+_<span class="token punctuation">,</span> contours2<span class="token punctuation">,</span> _ <span class="token operator">=</span> cv<span class="token punctuation">.</span>findContours<span class="token punctuation">(</span>open_binary<span class="token punctuation">,</span> cv<span class="token punctuation">.</span>RETR_EXTERNAL<span class="token punctuation">,</span> cv<span class="token punctuation">.</span>CHAIN_APPROX_SIMPLE<span class="token punctuation">)</span>  <span class="token comment">#只检测外轮廓，输出终点坐标</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token builtin">len</span><span class="token punctuation">(</span>contours2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+  x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> w<span class="token punctuation">,</span> h <span class="token operator">=</span> cv<span class="token punctuation">.</span>boundingRect<span class="token punctuation">(</span>contours2<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+  cv<span class="token punctuation">.</span>rectangle<span class="token punctuation">(</span>open_binary<span class="token punctuation">,</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>x<span class="token operator">+</span>w<span class="token punctuation">,</span>y<span class="token operator">+</span>h<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">153</span><span class="token punctuation">,</span><span class="token number">153</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>  <span class="token comment">#绘制轮廓</span>
+
+<span class="token comment"># 获取各个轮廓的质心坐标</span>
+
+dict1 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+dict2 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<span class="token keyword">for</span> c <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>contours2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    mm <span class="token operator">=</span> cv<span class="token punctuation">.</span>moments<span class="token punctuation">(</span>contours2<span class="token punctuation">[</span>c<span class="token punctuation">]</span><span class="token punctuation">)</span>  <span class="token comment"># 获取轮廓的特征矩，mm类型为dict</span>
+    m00 <span class="token operator">=</span> mm<span class="token punctuation">[</span><span class="token string">'m00'</span><span class="token punctuation">]</span>
+    m10 <span class="token operator">=</span> mm<span class="token punctuation">[</span><span class="token string">'m10'</span><span class="token punctuation">]</span>
+    m01 <span class="token operator">=</span> mm<span class="token punctuation">[</span><span class="token string">'m01'</span><span class="token punctuation">]</span>
+    cx <span class="token operator">=</span> np<span class="token punctuation">.</span><span class="token builtin">int</span><span class="token punctuation">(</span>m10 <span class="token operator">/</span> m00<span class="token punctuation">)</span>
+    cy <span class="token operator">=</span> np<span class="token punctuation">.</span><span class="token builtin">int</span><span class="token punctuation">(</span>m01 <span class="token operator">/</span> m00<span class="token punctuation">)</span>
+    cv<span class="token punctuation">.</span>circle<span class="token punctuation">(</span>open_binary<span class="token punctuation">,</span> <span class="token punctuation">(</span>cx<span class="token punctuation">,</span> cy<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>  <span class="token comment">#绘制质心</span>
+
+cx1 <span class="token operator">=</span> <span class="token punctuation">&#123;</span>c<span class="token punctuation">:</span> cx<span class="token punctuation">&#125;</span>  <span class="token comment"># key为轮廓索引，value为质心横/纵坐标</span>
+cy1 <span class="token operator">=</span> <span class="token punctuation">&#123;</span>c<span class="token punctuation">:</span> cy<span class="token punctuation">&#125;</span>
+dict1<span class="token punctuation">.</span>update<span class="token punctuation">(</span>cx1<span class="token punctuation">)</span>   <span class="token comment"># 横坐标</span>
+dict2<span class="token punctuation">.</span>update<span class="token punctuation">(</span>cy1<span class="token punctuation">)</span>   <span class="token comment"># 纵坐标</span>
+
+<span class="token comment"># cv.circle(open_binary, (0, 0), 1, (255,255,255), 2)  # 水平为x，竖直为y，因此可以按照质心的纵坐标确定开关码为0还是1</span>
+
+<span class="token comment"># cv.circle(open_binary, (0, 20), 1, (255,255,255), 2)</span>
+
+cv<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">"open_binary_contours"</span><span class="token punctuation">,</span> open_binary<span class="token punctuation">)</span>
+
+<span class="token comment"># 按照 横坐标大小 对质心坐标进行排序,确定轮廓的左右顺序，从而便于输出开关码</span>
+
+cor <span class="token operator">=</span> <span class="token builtin">sorted</span><span class="token punctuation">(</span>dict1<span class="token punctuation">.</span>items<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> key <span class="token operator">=</span> <span class="token keyword">lambda</span> d<span class="token punctuation">:</span>d<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'按照横坐标大小排序后的质心横坐标:'</span><span class="token punctuation">,</span>cor<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'质心纵坐标及其索引:'</span><span class="token punctuation">,</span>dict2<span class="token punctuation">)</span>
+
+cv<span class="token punctuation">.</span>putText<span class="token punctuation">(</span>src<span class="token punctuation">,</span> <span class="token string">"Switch code:"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>int32<span class="token punctuation">(</span>src_height <span class="token operator">-</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>cv<span class="token punctuation">.</span>FONT_HERSHEY_SIMPLEX<span class="token punctuation">,</span> <span class="token number">.5</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">55</span><span class="token punctuation">,</span><span class="token number">255</span><span class="token punctuation">,</span><span class="token number">155</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment"># 通过质心的纵坐标确定开关码为0还是1</span>
+
+<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>contours2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    code <span class="token operator">=</span> dict2<span class="token punctuation">[</span>cor<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span>   <span class="token comment">#通过key来寻址，找到对应的纵坐标</span>
+    <span class="token keyword">if</span> <span class="token number">50</span> <span class="token operator">&lt;</span> code <span class="token operator">&lt;</span> <span class="token number">70</span><span class="token punctuation">:</span>
+        cv<span class="token punctuation">.</span>putText<span class="token punctuation">(</span>src<span class="token punctuation">,</span> <span class="token string">"0"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>np<span class="token punctuation">.</span>int32<span class="token punctuation">(</span><span class="token number">120</span> <span class="token operator">+</span> i<span class="token operator">*</span><span class="token number">11</span><span class="token punctuation">)</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>int32<span class="token punctuation">(</span>src_height <span class="token operator">-</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>cv<span class="token punctuation">.</span>FONT_HERSHEY_SIMPLEX<span class="token punctuation">,</span> <span class="token number">.5</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">55</span><span class="token punctuation">,</span><span class="token number">255</span><span class="token punctuation">,</span><span class="token number">155</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">elif</span> <span class="token number">40</span> <span class="token operator">&lt;</span> code <span class="token operator">&lt;</span> <span class="token number">50</span><span class="token punctuation">:</span>
+        cv<span class="token punctuation">.</span>putText<span class="token punctuation">(</span>src<span class="token punctuation">,</span> <span class="token string">"1"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>np<span class="token punctuation">.</span>int32<span class="token punctuation">(</span><span class="token number">120</span> <span class="token operator">+</span> i<span class="token operator">*</span><span class="token number">11</span><span class="token punctuation">)</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>int32<span class="token punctuation">(</span>src_height <span class="token operator">-</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>cv<span class="token punctuation">.</span>FONT_HERSHEY_SIMPLEX<span class="token punctuation">,</span> <span class="token number">.5</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">55</span><span class="token punctuation">,</span><span class="token number">255</span><span class="token punctuation">,</span><span class="token number">155</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment"># 绘制转换码表的最大外接矩形</span>
+x1<span class="token punctuation">,</span> y1<span class="token punctuation">,</span> w1<span class="token punctuation">,</span> h1 <span class="token operator">=</span> cv<span class="token punctuation">.</span>boundingRect<span class="token punctuation">(</span>contours<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">)</span>
+cv<span class="token punctuation">.</span>rectangle<span class="token punctuation">(</span>src<span class="token punctuation">,</span> <span class="token punctuation">(</span>x1<span class="token punctuation">,</span> y1<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>x1 <span class="token operator">+</span> w1<span class="token punctuation">,</span> y1 <span class="token operator">+</span> h1<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">55</span><span class="token punctuation">,</span><span class="token number">255</span><span class="token punctuation">,</span><span class="token number">155</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+cv<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">"final_result"</span><span class="token punctuation">,</span> src<span class="token punctuation">)</span>
+cv<span class="token punctuation">.</span>waitKey<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+cv<span class="token punctuation">.</span>destroyAllWindows<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p>【1】<a target="_blank" rel="noopener" href="https://blog.csdn.net/sunny2038/article/details/12889059">OpenCV-Python教程（11、轮廓检测）</a></p>
+<p>【2】<a target="_blank" rel="noopener" href="https://www.cnblogs.com/silence-cho/p/11069903.html">OpenCV-Python学习—形态学处理</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Python/">Python</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/OpenCV/">OpenCV</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/c6da8de6/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">信息检索技巧整理</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/74db10cc/">
+                        <span class="hidden-mobile">Python中dict的打印</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "ViwB1XmjsmmXpFx2gikUmM5V-gzGzoHsz",
+          app_key: "7r6Y8CzBkl8MJwPNmCqSdLWW",
+          placeholder: "来都来了，不说点什么吗⊙(・◇・)？",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <i class="iconfont icon-tags-fill"></i>&nbsp;<a href="http://www.beian.miit.gov.cn/" target="_blank">鲁ICP备19062448号</a>&nbsp&nbsp;| &nbsp&nbsp <i class="iconfont icon-addrcard"></i>&nbsp; 2018~2022<a href="https://www.jngwl.top/" target="_blank"> 清风与归_G</a>&nbsp&nbsp;|&nbsp&nbsp;  <i class="iconfont icon-docker"></i> <a href="https://hexo.io/" target="_blank">&nbsp Hexo</a>&nbsp & &nbsp <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank">Fluid</a><br> 你的骄傲多半来自于自己的无知，共勉之
+
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,899 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" type="image/png" href="/img/favicon.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="清风与归_G">
+  <meta name="keywords" content="">
+  <title>Maven的使用 - 清风与归_G</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://cdn.staticfile.org/prism/1.22.0/themes/prism-tomorrow.min.css" />
+      
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.jngwl.top","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"ViwB1XmjsmmXpFx2gikUmM5V-gzGzoHsz","app_key":"7r6Y8CzBkl8MJwPNmCqSdLWW","server_url":"https://viwb1xmj.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>清风与归_G</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201121211851.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Maven的使用">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-11-24 10:13" pubdate>
+        2020年11月24日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      61
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Maven的使用</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2022年4月27日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>整理自<a target="_blank" rel="noopener" href="https://www.cnblogs.com/tanghaorong">唐浩荣</a>，感谢分享:)</p>
+</blockquote>
+<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h2><p>Maven的英文翻译为“专家”，“内行”。Maven是Apache下一个纯Java开发的开源项目，它是一个跨平台的项目管理工具，即针对Java平台的项目构建和依赖的管理。Maven提供了开发人员构建一个完整的生命周期框架，从清理、编译、测试、报告、打包、再到最后的部署。简单来说Maven就方便Java项目的构建，同时也方便开发者对项目的管理。</p>
+<p>​    Maven在企业中使用非常的广泛，虽然用的很多，但是有些人对于Maven的发音任然不标准。Maven 读音是 [ˈmeɪvn]。可以读作“霉文”或者”麦文”，但是不能读成”妈文”、”某文”等。</p>
+<p>（1）项目构建</p>
+<p>​    我们首先要区别的是，项目构建并不是项目创建的意思，项目创建只是一个工程的创建过程，而项目构建过程包括：【<strong>清理→编译→测试→报告→打包→部署</strong>】这几个步骤，这六个步骤就是一个项目的完整构建过程。</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124102831.png" srcset="/img/loading.gif" alt=""></p>
+<p>（2）依赖管理</p>
+<p>​    依赖指的是<strong>项目与jar包之间的相互依赖</strong>，比如我们在使用Spring框架的时候，需要用到Spring依赖的jar包。而依赖管理指的就是使用Maven来管理项目中使用到的jar包，Maven管理的方式就是“<strong>自动下载项目所需要的jar包，统一管理jar包之间的依赖关系</strong>”。比如在文件上传的时候，光光有common-fileupload这个jar包是不行的，common-fileupload还依赖于common-io这个包jar包，此时由于Maven的依赖管理机制，都会帮我们自动下载这些包，我们并不需要管。</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124102837.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="2-下载"><a href="#2-下载" class="headerlink" title="2.下载"></a>2.下载</h2><p>下载地址：<a target="_blank" rel="noopener" href="https://maven.apache.org/download.cgi">https://maven.apache.org/download.cgi</a></p>
+<p>下载的zip文件夹目录分别为：</p>
+<ul>
+<li><code>bin</code>目录：包含 maven运行时的脚本，这些脚本用来配置Java命令，准备好classpath和相关的java系统属性。其中：mvn是UNIX平台的shell脚本， mvn.cmd 是Windows平台的 bat脚本， mvcDebug 是UNIX的调试脚本， mvcDebug.cmd 是Windows平台的 调试脚本。</li>
+<li><code>boot</code>目录：包含类加载器框架plexus-classworlds-2.6.0.jar及其软件许可证。Maven可以使用它，来加载自己的类库。</li>
+<li><code>conf</code>目录：是配置文件目录，其中有一个<strong>settings.xml</strong> 文件，用来配置maven。还有一个 <strong>logging</strong>文件,日志记录，来配置日志的相关信息。</li>
+<li><code>lib</code>目录：maven运行时，所需要的类库。里面放置了大量的 <code>.jar</code> 类库及对应的软件许可证 .license.</li>
+<li><code>LICENSE</code>：Maven使用的软件许可证。</li>
+<li><code>NOTICE</code>：Maven包含的第三方软件</li>
+<li><code>README.txt</code>：Maven的简单介绍，包括安装需求和安装的简要指令。</li>
+</ul>
+<h2 id="3-配置"><a href="#3-配置" class="headerlink" title="3.配置"></a>3.配置</h2><blockquote>
+<p>需先按照好对应版本的JDK，可采用java —version查看自己的jdk版本，也可通过IDEA查看。</p>
+</blockquote>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124090315.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="（1）maven环境变量"><a href="#（1）maven环境变量" class="headerlink" title="（1）maven环境变量"></a>（1）maven环境变量</h3><p>首先右击此电脑—&gt;属性—&gt;高级系统设置—&gt;高级—&gt;环境变量。</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124102944.png" srcset="/img/loading.gif" alt=""></p>
+<p>①、新建系统变量：MAVEN_HOME。变量值：D:\Maven\apache-maven-3.6.3（这是你Maven的存储路径）</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124102954.png" srcset="/img/loading.gif" alt=""></p>
+<p>②、编辑系统变量：Path。添加变量值：%MAVEN_HOME%\bin。其中“%MAVEN_HOME%\bin”代表的就是”D:\Maven\apache-maven-3.6.3\bin“目录。</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124103028.png" srcset="/img/loading.gif" alt=""></p>
+<p>③、检验配置是否成功：用win键+R，输入cmd进入dos命令，输入mvn -v，出现如下信息则表明成功！</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124103034.png" srcset="/img/loading.gif" alt=""></p>
+<p>④、配置运行参数环境变量（可选配置）：MAVEN_OPTS。变量值：-Xms128m -Xmx512m。</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124103041.png" srcset="/img/loading.gif" alt=""></p>
+<p>因为Maven使用来Java来启动的，所以依赖于JVM。所以可以通过JAVA命令参数的方式来设置MAVEN运行参数。</p>
+<h3 id="（2）自定义"><a href="#（2）自定义" class="headerlink" title="（2）自定义"></a>（2）自定义</h3><h4 id="🔎-修改本地仓库位置"><a href="#🔎-修改本地仓库位置" class="headerlink" title="🔎 修改本地仓库位置"></a>🔎 修改本地仓库位置</h4><p>  Maven管理的jar包默认是存储在C盘用户目录下的 .m2 下的repository中。</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124103050.png" srcset="/img/loading.gif" alt=""></p>
+<p>  如果你和我一样有强迫症的话（不喜欢把无关系统的东西放在C盘），可以更改Maven的存储位置。</p>
+<p>  首先我们找到解压的Maven文件，然后打开conf目录下的setting.xml。</p>
+<p>  大概在55行左右我们加入如下配置文件：</p>
+<pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>localRepository</span><span class="token punctuation">></span></span>D:/Maven/maven-repository<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>localRepository</span><span class="token punctuation">></span></span></code></pre>
+<p>  我把它存放在D盘下。</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124103056.png" srcset="/img/loading.gif" alt=""></p>
+<h4 id="🔎-修改镜像源"><a href="#🔎-修改镜像源" class="headerlink" title="🔎 修改镜像源"></a>🔎 修改镜像源</h4><p>  Maven默认下载jar包是从中央仓库下载的，所以我们在国内下载jar包是非常非常的慢，所以我们需要改一下，这里推荐阿里云的仓库。</p>
+<p>  大概在setting.xml中的第159行左右我们加入如下配置文件：</p>
+<pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mirror</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">></span></span>nexus-aliyun<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>nexus-aliyun<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>url</span><span class="token punctuation">></span></span>http://maven.aliyun.com/nexus/content/groups/public<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>url</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mirrorOf</span><span class="token punctuation">></span></span>central<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mirrorOf</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mirror</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mirror</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">></span></span>aliyun<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mirrorOf</span><span class="token punctuation">></span></span>*<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mirrorOf</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>aliyun-public<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>url</span><span class="token punctuation">></span></span>https://maven.aliyun.com/repository/public<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>url</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mirror</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mirror</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">></span></span>aliyun-center<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mirrorOf</span><span class="token punctuation">></span></span>central<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mirrorOf</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>aliyun-central<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>url</span><span class="token punctuation">></span></span>https://maven.aliyun.com/repository/central<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>url</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mirror</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mirror</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">></span></span>aliyun-spring<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mirrorOf</span><span class="token punctuation">></span></span>spring<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mirrorOf</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>aliyun-spring<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>url</span><span class="token punctuation">></span></span>https://maven.aliyun.com/repository/spring<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>url</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mirror</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124103104.png" srcset="/img/loading.gif" alt=""></p>
+<h4 id="🔎-修改Maven默认的JDK版本"><a href="#🔎-修改Maven默认的JDK版本" class="headerlink" title="🔎 修改Maven默认的JDK版本"></a>🔎 修改Maven默认的JDK版本</h4><p>  我们在使用编辑软件开发时，编辑软件总是默认给我们设置奇奇怪怪的JDK版本，导致程序总是莫名的报错，这一点我是采过坑的。自己电脑上安装的什么版本的JDK我们就设置对应的JDK版本就可以了。</p>
+<p>  大概在setting.xml中的第218行左右我们加入如下配置文件：</p>
+<pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>profile</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">></span></span>jdk-1.8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>activation</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>jdk</span><span class="token punctuation">></span></span>1.8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>jdk</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>activeByDefault</span><span class="token punctuation">></span></span>true<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>activeByDefault</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>activation</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>properties</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>maven.compiler.source</span><span class="token punctuation">></span></span>1.8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>maven.compiler.source</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>maven.compiler.target</span><span class="token punctuation">></span></span>1.8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>maven.compiler.target</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>maven.compiler.compilerVersion</span><span class="token punctuation">></span></span>1.8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>maven.compiler.compilerVersion</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>properties</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>profile</span><span class="token punctuation">></span></span></code></pre>
+<p>  我的是JDK1.8版本。</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124091126.png" srcset="/img/loading.gif" alt=""></p>
+<ul>
+<li>版本不匹配会报错：<code>java: 错误: 不支持发行版本 5</code></li>
+</ul>
+<h2 id="4-在IDEA中集成Maven"><a href="#4-在IDEA中集成Maven" class="headerlink" title="4.在IDEA中集成Maven"></a>4.在IDEA中集成Maven</h2><p>首先【File—&gt;Settings—&gt;Build,Execution,Deployment—&gt;Build Tools—&gt;Maven】。按照如下图操作：</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124091118.png" srcset="/img/loading.gif" alt=""></p>
+<p>  然后我们再勾选一个地方。此处勾选的作用是，当修改pom文件时，Maven就会自动帮我们导包了。</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124091115.png" srcset="/img/loading.gif" alt=""></p>
+<p>  这样IDEA中配置Maven就成功啦，然后下面我们用IDEA来创建Maven项目。</p>
+<p>  注意：上面这种方式设置的Maven是相对于当前项目而言的，如果再创建一个Maven项目可能又要配置Maven，所以我们要配置IDEA全局的Maven。（这个配置是可选，如果不嫌麻烦倒是可以设置一下）</p>
+<p>  ①、【File—&gt;Close Project】，我们找到界面右下角的Configure。然后【Project Defualt—&gt;Settings】。</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124091103.png" srcset="/img/loading.gif" alt=""></p>
+<p>  ②、然后其它配置就是一样的了。</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124091639.png" srcset="/img/loading.gif" alt=""></p>
+<ul>
+<li><p>在IDEA创建的Maven目录结构如下：</p>
+<p>　　hellomaven           ——项目名称<br>  　　　　| –src            ——源文件<br>  　　　　| ——-main        ——存放主程序<br>  　　　　| —————java     ——存放项目的.java文件<br>  　　　　| —————resources ——存放项目资源文件，如spring, hibernate配置文件<br>  　　　　| ——-test         ——存放测试程序<br>  　　　　| ————-java      ——存放所有单元测试.java文件，如JUnit测试类<br>  　　　　| ————-resources  ——测试资源文件</p>
+<p>  　　　　| —target          ——项目输出位置，编译后的class文件会输出到此目录<br>  　　　　| —pom.xml        ——maven项目核心配置文件</p>
+</li>
+<li><p>我们使用maven项目来管理所依赖的jar包，就不需要手动向工程添加jar包，只需要在<code>pom.xml</code>文件（maven工程的配置文件Project Object Model）添加<strong>jar包的坐标</strong>即可，它就会自动从maven仓库中下载jar包、运行。</p>
+</li>
+</ul>
+<h2 id="5-Maven的依赖管理"><a href="#5-Maven的依赖管理" class="headerlink" title="5.Maven的依赖管理"></a>5.Maven的依赖管理</h2><h3 id="（1）Maven的坐标"><a href="#（1）Maven的坐标" class="headerlink" title="（1）Maven的坐标"></a>（1）Maven的坐标</h3><p>我们知道，Maven的核心概念是依赖的管理，那么Maven是如果来引入jar包的呢？答：通过坐标。</p>
+<p>在Maven中是，坐标是Jar包的唯一标识，然后Maven通过坐标在仓库中找到项目所需的Jar包。</p>
+<p>如下代码中，groupId、artifactId和version构成了一个Jar包的坐标（简称gav）。</p>
+<pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>junit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>junit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>4.11<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>scope</span><span class="token punctuation">></span></span>test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>scope</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
+<p>  Maven坐标主要组成：</p>
+<ul>
+<li><code>groupId</code>：组织标识（包名）</li>
+<li><code>artifactId</code>：项目名称</li>
+<li><code>version</code>：项目的当前版本</li>
+</ul>
+<h3 id="（2）Maven的仓库"><a href="#（2）Maven的仓库" class="headerlink" title="（2）Maven的仓库"></a>（2）Maven的仓库</h3><p>Maven的仓库，指的就是<strong>存放jar包</strong>的地方。 在Maven中的仓库分为三个类型:</p>
+<ol>
+<li>本地仓库：就是用来存储从远程仓库或中央仓库下载的插件和jar包，项目使用一些插件或jar包，优先从本地仓库查找。默认本地仓库位置在 <code>$&#123;user.dir&#125;/.m2/repository</code>，<code>$&#123;user.dir&#125;</code>表示windows用户目录。修改地址可参考前面</li>
+<li>远程仓库：就是当本地仓库没有相应的插件和jar包，maven会去远程仓库下载，默认回去中央仓库。远程仓库可以在互联网内也可以在局域网内。</li>
+<li>中央仓库 ：就是Maven团队自己维护的仓库，它服务于整个互联网，里面几乎存储了世界上大部分流行的开源项目构件，在maven软件中内置一个远程仓库地址。由于不在国内，所以我们从中央仓库下载jar包非常慢，所以国内推荐使用阿里巴巴维护的那个远程仓库。</li>
+</ol>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124094035.png" srcset="/img/loading.gif" alt="image"></p>
+<p> Maven的各个仓库的优先级是：<code>本地仓库 &gt; 私服 &gt; 远程仓库</code></p>
+<h3 id="（3）依赖的管理"><a href="#（3）依赖的管理" class="headerlink" title="（3）依赖的管理"></a>（3）依赖的管理</h3><p>​    依赖指的是项目与jar包之间的相互依赖，比如我们在使用Spring框架的时候，需要用到Spring依赖的jar包。而依赖管理指的就是使用Maven来管理项目中使用到的jar包，Maven管理的方式就是“自动下载项目所需要的jar包，统一管理jar包之间的依赖关系”。比如在文件上传的时候，光光有common-fileupload这个jar包是不行的，common-fileupload还依赖于common-io这个包jar包，此时由于Maven的依赖管理机制，都会帮我们自动下载这些包，我们并不需要管。</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124094118.png" srcset="/img/loading.gif" alt="image"></p>
+<p>我们一般添加依赖都会去Maven的仓库去查找，网站为：<a target="_blank" rel="noopener" href="https://mvnrepository.com/">https://mvnrepository.com/</a></p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124094121.png" srcset="/img/loading.gif" alt="image"></p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124100438.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="（4）依赖的配置"><a href="#（4）依赖的配置" class="headerlink" title="（4）依赖的配置"></a>（4）依赖的配置</h3><p>   依赖的配置就是我们在Maven的项目中的<code>pom.xml</code>中来配置我们的依赖。这一步大家都知道，但是对于Maven坐标中的其它属性可能并不认识，下面介绍一下：</p>
+<pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>junit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>     
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>junit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>     
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>4.11<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>package</span><span class="token punctuation">></span></span>...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>package</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>type</span><span class="token punctuation">></span></span>...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>type</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>scope</span><span class="token punctuation">></span></span>...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>scope</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>optional</span><span class="token punctuation">></span></span>...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>optional</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>exclusions</span><span class="token punctuation">></span></span>     
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>exclusion</span><span class="token punctuation">></span></span>     
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>     
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>     
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>exclusion</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>exclusions</span><span class="token punctuation">></span></span>     
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>        
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
+<p>  这些元素标签的详细介绍：</p>
+<ol>
+<li><code>dependencies</code>：用来管理依赖的总标签，一个 <code>pom.xml</code> 文件中只能存在一个这样的标签。</li>
+<li><code>dependency</code>：包含在dependencies标签中，可以有无数个，<strong>每一个表示一个依赖</strong>。</li>
+<li><code>groupId</code>,<code>artifactId</code>和<code>version</code>：依赖的基本坐标，对于任何一个依赖来说，基本坐标是最重要的，Maven根据坐标才能找到需要的依赖。</li>
+<li><code>package</code>：依赖的打包类型。普通项目为jar包，Web项目为war包。</li>
+<li><code>type</code>：依赖的类型，对应于项目坐标定义的packaging。大部分情况下，该元素不必声明，其默认值是jar。</li>
+<li><code>scope</code>：依赖的范围，默认值是 compile。后面会进行详解。</li>
+<li><code>optional</code>：标记依赖是否可选。</li>
+<li><code>exclusions</code>：用来排除传递性依赖，后面会进行详细介绍。</li>
+</ol>
+<h3 id="（5）依赖的范围"><a href="#（5）依赖的范围" class="headerlink" title="（5）依赖的范围"></a>（5）依赖的范围</h3><p>依赖的范围：就是该依赖在各种环境下是否还可以使用。比如测试的jar包 <code>junit4.11</code>,，我们只希望在代码测试的时候使用，不希望在布署项目的时候把这个jar包放置上去，所以我们可以将Junit依赖设置为test范围的依赖。 还有<code>server-api.jar</code>, <code>jsp-api.jar</code> 是在代码编译的时候有用，但在布署项目的时候，是没有的用的，并且是不能把这个两个 jar包放置到tomcat里面的，因为tomcat里面有这两个jar包，会造成冲突， 所以一定要把这两个jar包给去掉，所以此时我们就要将它们设置为provided范围的依赖。这就是依赖的范围。</p>
+<p>  maven的依赖范围用 <code>&lt;scope&gt;</code>元素表示，其依赖范围有六种: compile、test、provided、runtime、import和system，其中import和system不常用，使用就不介绍了。</p>
+<ol>
+<li><code>complie</code>：编译依赖，是默认的依赖范围。在<code>main</code>和<code>test</code>目录下的代码均可以访问这个范围下的依赖。布署到 tomcat下时，要把这个依赖放置在<code>WEB-INF</code>下的<code>lib</code>文件夹里面。</li>
+<li><code>test</code>：测试依赖，仅仅是测试使用的。在<code>main</code>目录下的代码不能访问这个依赖，<code>test</code>目录下的代码可以访问这个依赖，布署到tomcat下时，不会把这个依赖放置在 WEB-INF下的lib文件夹里面。 如 junit 4.11这个依赖。</li>
+<li><code>provided</code>：提供依赖。在<code>main</code>和<code>test</code>目录下的代码均可以访问这个依赖，但在布署到tomcat下时，不会把这个依赖放置在<code>WEB-INF</code>下的<code>lib</code>文件夹里面。 如 servlet-api, jsp-api</li>
+<li><p><code>runtime</code>：运行依赖。<code>main</code>目录下的代码不能访问这个依赖， <code>test</code>目录下的代码可以访问这个依赖，布署到tomcat下时，会把这个依赖放置在<code>WEB-INF</code>下的<code>lib</code>文件夹里面。 如 jdbc 驱动</p>
+<p>总结成一张表就可以知道依赖范围表示的作用域如下：</p>
+</li>
+</ol>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>依赖范围</th>
+<th>对于编译执行环境有效</th>
+<th>对于测试执行环境有效</th>
+<th>对于运行时执行环境有效</th>
+<th>例 子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>compile</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>spring-core</td>
+</tr>
+<tr>
+<td>test</td>
+<td>—</td>
+<td>√</td>
+<td>—</td>
+<td>junit</td>
+</tr>
+<tr>
+<td>provided</td>
+<td>√</td>
+<td>√</td>
+<td>—</td>
+<td>servlet-api</td>
+</tr>
+<tr>
+<td>runtime</td>
+<td>—</td>
+<td>√</td>
+<td>√</td>
+<td>jdbc</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="（6）依赖的传递"><a href="#（6）依赖的传递" class="headerlink" title="（6）依赖的传递"></a>（6）依赖的传递</h3><p>  依赖的传递：如果我们的项目引用了一个Jar包，而该Jar包又引用了其它Jar包，那么此时的项目与引入的其它jar包就是传递依赖，但是在默认情况下项目编译时，Maven会把直接引用和间接引用的Jar包都下载到本地。</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124094307.png" srcset="/img/loading.gif" alt=""></p>
+<p>  其中项目A直接依赖于B，而B也直接依赖于C，那么A就是间接依赖于C的，这就是<strong>传递性依赖</strong>。但是传递性依赖可能会产生依赖冲突。</p>
+<p>  如：项目A需要引入依赖包B，依赖包B又引入了依赖包C，那么B是A的直接依赖，C是A的传递依赖。如果项目A还需要引入依赖包D，依赖包D也引用了依赖包C，当依赖包B引用的C和依赖包D引用的C版本不同时，则发生了依赖冲突。</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124094302.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="（7）依赖的冲突"><a href="#（7）依赖的冲突" class="headerlink" title="（7）依赖的冲突"></a>（7）依赖的冲突</h3><p>   刚刚在上面说了，如果项目中引入了多个相同的jar，而jar包的版本不同就会产生依赖冲突。但是Maven才不会这么蠢，Maven中采用了两种避免冲突的策略：①、短路径优先；②、声明优先。因此在Maven中实际上是不存在依赖冲突的。</p>
+<p>  ①、短路优先：就是哪个传递依赖离它最近则就优先选择它。</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124094320.png" srcset="/img/loading.gif" alt=""></p>
+<p>通过上面的图片我们可以分析出：</p>
+<ul>
+<li>项目A——&gt;B——&gt;C——&gt;D</li>
+<li>项目A——&gt;B——&gt;D</li>
+</ul>
+<p>第二条路径是离项目A最近的，也就是路径最短的。所以<strong>项目A最后用的是B依赖的D的jar包</strong>。</p>
+<p>但是我们思考一下，如果传递依赖的路径相同那么它们会怎么选择呢？我们接着往下看。</p>
+<p>  ②、声明优先：就是谁先声明的就先选择谁呗。</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124094328.png" srcset="/img/loading.gif" alt=""></p>
+<p>通过上面的图片我们可以分析出：</p>
+<ul>
+<li>项目A——&gt;B——&gt;C</li>
+<li>项目A——&gt;D——&gt;C</li>
+</ul>
+<p>可以发现它们的路径是一样的，那此时就是按照<strong>谁先声明的就选择谁</strong>。在pom.xml的依赖 <code>&lt;dependencies &gt; &lt;/dependencies &gt;</code> 里面， 先放置哪一个，就用哪一个。你先放置B, 那么C就是 B里面的，你先放置D，那么C就是D里面的。 所以<strong>在放置依赖时，有一定的顺序</strong>。</p>
+<h3 id="（8）依赖的排除"><a href="#（8）依赖的排除" class="headerlink" title="（8）依赖的排除"></a>（8）依赖的排除</h3><p>依赖的排除：就是<strong>排除掉我们不想要的依赖</strong>。比如：项目A依赖于B，B依赖于C，但有可能C依赖是不兼容的，会对项目造成一定的影响。此时，我们可以使用关键字<code>exclusion</code>排除C依赖。我们以spring-aop依赖为例：spring-aop是依赖于spring-beans和spring-core的。</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124103145.png" srcset="/img/loading.gif" alt=""></p>
+<p>假如我们需要排除掉spring-beans：</p>
+<pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-aop<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>5.2.6.RELEASE<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>exclusions</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>exclusion</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-beans<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>exclusion</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>exclusions</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
+<p>排除后的结果为；</p>
+<p><img src="https://hexo-blog-1254804803.cos.ap-shanghai.myqcloud.com/img/20201124103150.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="（9）版本的管理"><a href="#（9）版本的管理" class="headerlink" title="（9）版本的管理"></a>（9）版本的管理</h3><p>我们对版本的管理暂且有两种方式：①、版本锁定；②、版本常量。</p>
+<p>  <strong>①、版本锁定</strong></p>
+<p>  版本锁定：指的是锁定项目中依赖的版本。这种是目前实际项目中使用的最多的。版本锁定需要使用到dependencyManagement元素。需要说明的是dependencyManagement仅仅起到指锁定依赖版本的作用，其它的作用它什么都没有。而真正依赖包的下载任然要定义在dependencie元素中。</p>
+<pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token comment">&lt;!--锁定依赖的版本，它仅仅是起到锁定作用，不下载依赖包--></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencyManagement</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>junit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>junit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>4.11<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>scope</span><span class="token punctuation">></span></span>test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>scope</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+ 
+    <span class="token comment">&lt;!-- https://mvnrepository.com/artifact/org.springframework/spring-core --></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-core<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>5.2.6.RELEASE<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+ 
+    <span class="token comment">&lt;!-- https://mvnrepository.com/artifact/org.springframework/spring-context --></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-context<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>5.2.6.RELEASE<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+ 
+    <span class="token comment">&lt;!-- https://mvnrepository.com/artifact/org.springframework/spring-aop --></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-aop<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>5.2.6.RELEASE<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencyManagement</span><span class="token punctuation">></span></span>
+ 
+<span class="token comment">&lt;!--依赖包的下载仍然有dependencies管理--></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>junit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>junit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token comment">&lt;!--&lt;version>4.11&lt;/version>--></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>scope</span><span class="token punctuation">></span></span>test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>scope</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-core<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token comment">&lt;!--&lt;version>4.1.6.RELEASE&lt;/version>--></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-context<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>4.1.6.RELEASE<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-aop<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token comment">&lt;!--&lt;version>4.1.6.RELEASE&lt;/version>--></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
+<p>当我们使用dependencyManagement元素来锁定依赖版本后，dependencie元素中的依赖版本可写，也可不写，但是依赖版本引入则就有两种不同的方式了：</p>
+<ol>
+<li>在dependencies中的依赖中如果没有声明依赖的版本，就到dependenciesManage中去找，找到就使用锁定的版本号，没有就报错。</li>
+<li>在dependencies中声明了依赖的版本，则使用该依赖的版本，不管在dependenciesManage中有没有声明依赖的版本，都以dependencies中声明的版本为主。</li>
+</ol>
+<p>  dependencies和dependencyManagement的区别：</p>
+<ul>
+<li>dependencies是真正引入依赖的元素。而且在子项目中不写该依赖项，那么子项目仍然会从父项目中继承该依赖项（全部继承）。</li>
+<li>dependencyManagement里只是声明依赖，并不实现引入，因此子项目需要显示的在dependencies中声明需要用的依赖。如果不在子项目中声明依赖，是不会从父项目中继承下来的；只有在子项目中写了该依赖项，并且没有指定具体版本，才会从父项目中继承该项，并且version和scope都读取自父pom;另外如果子项目中指定了版本号，那么会使用子项目中指定的依赖版本。</li>
+</ul>
+<p><strong>②、版本常量</strong></p>
+<p>  首先我们在pom.xml文件中提取出各自依赖的版本常量。封装至properties元素中，然后在依赖的version元素中用OGNL表达式获取即可，版本常量方式用的也很多。</p>
+<p>  这种方式方便了项目版本依赖管理的统一和后面的升级，而且它还具有继承性，在父项目pom.xml文件中定义的版本常量，在子模块中的pom.xml文件也能使用。</p>
+<pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token comment">&lt;!--定义版本常量--></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>properties</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>spring.version</span><span class="token punctuation">></span></span>5.2.6.RELEASE<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>spring.version</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>junit.version</span><span class="token punctuation">></span></span>4.11<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>junit.version</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>properties</span><span class="token punctuation">></span></span>
+ 
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>junit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>junit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token comment">&lt;!--使用版本常量--></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>$&#123;junit.version&#125;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>scope</span><span class="token punctuation">></span></span>test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>scope</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+ 
+  <span class="token comment">&lt;!-- https://mvnrepository.com/artifact/org.springframework/spring-context --></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-context<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>$&#123;spring.version&#125;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+  <span class="token comment">&lt;!-- https://mvnrepository.com/artifact/org.springframework/spring-core --></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-core<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>$&#123;spring.version&#125;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/SSM%E6%A1%86%E6%9E%B6/">SSM框架</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Maven/">Maven</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/4ccc97e8/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">SpringBoot快速入门</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/a644fae9/">
+                        <span class="hidden-mobile">玩转Spring</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "ViwB1XmjsmmXpFx2gikUmM5V-gzGzoHsz",
+          app_key: "7r6Y8CzBkl8MJwPNmCqSdLWW",
+          placeholder: "来都来了，不说点什么吗⊙(・◇・)？",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <i class="iconfont icon-tags-fill"></i>&nbsp;<a href="http://www.beian.miit.gov.cn/" target="_blank">鲁ICP备19062448号</a>&nbsp&nbsp;| &nbsp&nbsp <i class="iconfont icon-addrcard"></i>&nbsp; 2018~2022<a href="https://www.jngwl.top/" target="_blank"> 清风与归_G</a>&nbsp&nbsp;|&nbsp&nbsp;  <i class="iconfont icon-docker"></i> <a href="https://hexo.io/" target="_blank">&nbsp Hexo</a>&nbsp & &nbsp <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank">Fluid</a><br> 你的骄傲多半来自于自己的无知，共勉之
+
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
